@@ -67,79 +67,100 @@ export async function getFormations(): Promise<Formation[]> {
   const token = import.meta.env.NOTION_TOKEN;
   const dbId = import.meta.env.NOTION_FORMATIONS_DB_ID;
   if (!token || !dbId) return [];
-  const notion = new Client({ auth: token });
-  const response = await notion.databases.query({
-    database_id: dbId,
-    filter: { property: 'Active', checkbox: { equals: true } },
-  });
-  return response.results.map((page: any) => {
-    const p = page.properties;
-    return {
-      id: page.id,
-      slug: getPropertyText(p.Slug) || page.id,
-      title: getPropertyText(p.Nom) || 'Formation sans titre',
-      subtitle: getPropertyText(p.Sous_titre),
-      description: getPropertyText(p.Description),
-      duration: getPropertyText(p.Duree),
-      format: getPropertyText(p.Format),
-      audience: getPropertyText(p.Public_vise),
-      objectives: getPropertyText(p.Objectifs_pedagogiques),
-      prerequisites: getPropertyText(p.Prerequis),
-      image: getPropertyText(p.Image),
-      active: getCheckbox(p.Active),
-      online: getCheckbox(p.En_ligne),
-      price: Number(getPropertyText(p.Prix)) || undefined,
-      fundingActive: getCheckbox(p.Financement_actif),
-    };
-  });
+  try {
+    const notion = new Client({ auth: token });
+    const response = await notion.databases.query({
+      database_id: dbId,
+      filter: { property: 'Active', checkbox: { equals: true } },
+    });
+    return response.results.map(mapFormation);
+  } catch (err) {
+    console.warn('Notion getFormations error:', (err as Error).message);
+    return [];
+  }
 }
 
 export async function getCaseStudies(): Promise<CaseStudy[]> {
   const token = import.meta.env.NOTION_TOKEN;
   const dbId = import.meta.env.NOTION_CASE_STUDIES_DB_ID;
   if (!token || !dbId) return [];
-  const notion = new Client({ auth: token });
-  const response = await notion.databases.query({
-    database_id: dbId,
-    filter: { property: 'Publié', checkbox: { equals: true } },
-  });
-  return response.results.map((page: any) => {
-    const p = page.properties;
-    return {
-      id: page.id,
-      slug: getPropertyText(p.Slug) || page.id,
-      title: getPropertyText(p.Titre) || 'Étude de cas',
-      client: getPropertyText(p.Client),
-      anonymized: getCheckbox(p.Anonymise),
-      sector: getPropertyText(p.Secteur),
-      problem: getPropertyText(p.Probleme),
-      solution: getPropertyText(p.Solution),
-      result: getPropertyText(p.Resultat_chiffre),
-      image: getPropertyText(p.Visuel),
-      videoUrl: getPropertyText(p.Video_preuve),
-      published: getCheckbox(p.Publie),
-    };
-  });
+  try {
+    const notion = new Client({ auth: token });
+    const response = await notion.databases.query({
+      database_id: dbId,
+      filter: { property: 'Publié', checkbox: { equals: true } },
+    });
+    return response.results.map(mapCaseStudy);
+  } catch (err) {
+    console.warn('Notion getCaseStudies error:', (err as Error).message);
+    return [];
+  }
 }
 
 export async function getResources(): Promise<Resource[]> {
   const token = import.meta.env.NOTION_TOKEN;
   const dbId = import.meta.env.NOTION_RESOURCES_DB_ID;
   if (!token || !dbId) return [];
-  const notion = new Client({ auth: token });
-  const response = await notion.databases.query({
-    database_id: dbId,
-    filter: { property: 'Publié', checkbox: { equals: true } },
-  });
-  return response.results.map((page: any) => {
-    const p = page.properties;
-    return {
-      id: page.id,
-      slug: getPropertyText(p.Slug) || page.id,
-      title: getPropertyText(p.Titre) || 'Ressource',
-      description: getPropertyText(p.Description),
-      content: '',
-      published: getCheckbox(p.Publie),
-    };
-  });
+  try {
+    const notion = new Client({ auth: token });
+    const response = await notion.databases.query({
+      database_id: dbId,
+      filter: { property: 'Publié', checkbox: { equals: true } },
+    });
+    return response.results.map(mapResource);
+  } catch (err) {
+    console.warn('Notion getResources error:', (err as Error).message);
+    return [];
+  }
+}
+
+function mapFormation(page: any): Formation {
+  const p = page.properties;
+  return {
+    id: page.id,
+    slug: getPropertyText(p.Slug) || page.id,
+    title: getPropertyText(p.Nom) || 'Formation sans titre',
+    subtitle: getPropertyText(p.Sous_titre),
+    description: getPropertyText(p.Description),
+    duration: getPropertyText(p.Duree),
+    format: getPropertyText(p.Format),
+    audience: getPropertyText(p.Public_vise),
+    objectives: getPropertyText(p.Objectifs_pedagogiques),
+    prerequisites: getPropertyText(p.Prerequis),
+    image: getPropertyText(p.Image),
+    active: getCheckbox(p.Active),
+    online: getCheckbox(p.En_ligne),
+    price: Number(getPropertyText(p.Prix)) || undefined,
+    fundingActive: getCheckbox(p.Financement_actif),
+  };
+}
+
+function mapCaseStudy(page: any): CaseStudy {
+  const p = page.properties;
+  return {
+    id: page.id,
+    slug: getPropertyText(p.Slug) || page.id,
+    title: getPropertyText(p.Titre) || 'Étude de cas',
+    client: getPropertyText(p.Client),
+    anonymized: getCheckbox(p.Anonymise),
+    sector: getPropertyText(p.Secteur),
+    problem: getPropertyText(p.Probleme),
+    solution: getPropertyText(p.Solution),
+    result: getPropertyText(p.Resultat_chiffre),
+    image: getPropertyText(p.Visuel),
+    videoUrl: getPropertyText(p.Video_preuve),
+    published: getCheckbox(p.Publie),
+  };
+}
+
+function mapResource(page: any): Resource {
+  const p = page.properties;
+  return {
+    id: page.id,
+    slug: getPropertyText(p.Slug) || page.id,
+    title: getPropertyText(p.Titre) || 'Ressource',
+    description: getPropertyText(p.Description),
+    content: '',
+    published: getCheckbox(p.Publie),
+  };
 }
