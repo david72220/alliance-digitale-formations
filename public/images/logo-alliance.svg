@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" role="img" aria-label="Alliance Digitale">
+  <defs>
+    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#F59E0B" />
+      <stop offset="50%" style="stop-color:#ffffff" />
+      <stop offset="100%" style="stop-color:#F59E0B" />
+    </linearGradient>
+    <linearGradient id="topGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b97d3" />
+      <stop offset="100%" style="stop-color:#1a6fa3" />
+    </linearGradient>
+  </defs>
+
+  <!-- Emplacement pour le logo exact Alliance Digitale. -->
+  <!-- Remplacer ce groupe par le fichier SVG du logo d'origine, en appliquant : -->
+  <!-- - dégradé #3b97d3 → #1a6fa3 sur la partie supérieure (à la place du rouge) -->
+  <!-- - dégradé orange → blanc → orange sur la vague / trait inférieur -->
+
+  <g transform="translate(0, 10)">
+    <!-- Forme stylisée temporaire inspirée d'un A / vague -->
+    <path d="M10 35 L25 5 L40 35" fill="none" stroke="url(#topGradient)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M5 38 Q22 25 40 38 T75 38" fill="none" stroke="url(#waveGradient)" stroke-width="5" stroke-linecap="round" />
+  </g>
+
+  <text x="85" y="38" font-family="'Space Grotesk', system-ui, sans-serif" font-size="24" font-weight="700">
+    <tspan fill="#3b97d3">Alliance</tspan>
+    <tspan fill="#F59E0B" dx="6">Digitale</tspan>
+  </text>
+</svg>
