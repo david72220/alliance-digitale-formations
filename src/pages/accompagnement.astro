@@ -1,0 +1,139 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import { getCaseStudies } from '../lib/notion.ts';
+
+const studies = await getCaseStudies();
+---
+
+<Layout
+  title="Accompagnement IA pour PME — Alliance Digitale"
+  description="Accompagnement sur mesure : audit IA, formation des salariés, automatisation des processus. Des résultats mesurables en quelques semaines."
+>
+  <Header />
+
+  <main class="flex-1">
+    <!-- HERO -->
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Accompagnement</p>
+        
+        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">
+          L'IA, de la découverte au déploiement
+        </h1>
+        
+        <p class="text-lg text-white/70 max-w-2xl mx-auto mb-10">
+          Un accompagnement en 3 étapes pour les PME avec salariés : on audite vos usages,
+          on forme vos équipes, puis on automatise un premier processus concret et mesurable.
+        </p>
+        
+        <a href="/contact/" class="btn-primary text-base px-8 py-4">Prendre rendez-vous</a>
+      </div>
+    </section>
+
+    <!-- PROCESSUS -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="relief-panel p-8">
+            <div class="w-12 h-12 rounded-full bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-xl font-bold mb-6">1</div>
+            
+            <h2 class="font-display text-xl font-bold text-white mb-4">Audit IA express</h2>
+            
+            <p class="text-white/70">
+              Identification de vos cas d'usage prioritaires, évaluation de la conformité AI Act,
+              et estimation du gain de productivité potentiel.
+            </p>
+          </div>
+          
+          <div class="relief-panel p-8">
+            <div class="w-12 h-12 rounded-full bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-xl font-bold mb-6">2</div>
+            
+            <h2 class="font-display text-xl font-bold text-white mb-4">Formation collective</h2>
+            
+            <p class="text-white/70">
+              Session de littératie IA pour vos salariés : usages responsables, prompts efficaces,
+              sécurité des données et gain de temps immédiat.
+            </p>
+          </div>
+          
+          <div class="relief-panel p-8">
+            <div class="w-12 h-12 rounded-full bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-xl font-bold mb-6">3</div>
+            
+            <h2 class="font-display text-xl font-bold text-white mb-4">Automatisation ciblée</h2>
+            
+            <p class="text-white/70">
+              Mise en place d'un premier workflow automatisé : documents, emails, reporting,
+              ou tout processus répétitif chronophage.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RÉSULTATS -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Résultats mesurables</h2>
+          <p class="text-white/60">Exemples de gains observés sur des projets réels.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div class="text-center p-6 rounded-xl border border-white/10 bg-white/[0.03]">
+            <p class="text-4xl font-bold text-alliance-orange mb-2">-30%</p>
+            <p class="text-white/70">de temps sur la rédaction de documents récurrents</p>
+          </div>
+          
+          <div class="text-center p-6 rounded-xl border border-white/10 bg-white/[0.03]">
+            <p class="text-4xl font-bold text-alliance-orange mb-2">2h</p>
+            <p class="text-white/70">gagnées par semaine sur la gestion administrative</p>
+          </div>
+          
+          <div class="text-center p-6 rounded-xl border border-white/10 bg-white/[0.03]">
+            <p class="text-4xl font-bold text-alliance-orange mb-2">100%</p>
+            <p class="text-white/70">des salariés formés repartent avec des outils utilisables</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÉTUDES DE CAS -->
+    {studies.length > 0 && (
+      <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <p class="text-alliance-orange text-sm font-bold uppercase tracking-widest mb-3">Preuves</p>
+            
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Études de cas</h2>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {studies.map((study) => (
+              <CaseStudyCard study={study} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- CTA -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-6">
+          Parlons de vos premiers cas d'usage IA
+        </h2>
+        
+        <p class="text-white/70 text-lg mb-8">
+          30 minutes suffisent pour identifier un levier concret et évaluer la conformité AI Act de votre entreprise.
+        </p>
+        
+        <a href="/contact/" class="btn-primary text-base px-8 py-4">Réserver un créneau Cal.com</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

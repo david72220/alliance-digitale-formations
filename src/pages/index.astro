@@ -1,0 +1,188 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormationCard from '../components/FormationCard.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import { getFormations, getCaseStudies } from '../lib/notion.ts';
+
+const formations = await getFormations();
+const studies = await getCaseStudies();
+
+const heroFormations = formations.slice(0, 3);
+const heroStudies = studies.slice(0, 3);
+---
+
+<Layout
+  title="Alliance Digitale — Accompagnement IA et automatisation pour PME"
+  description="Alliance Digitale accompagne les PME avec salariés en Sarthe dans la conformité AI Act, l'adoption de l'IA générative et l'automatisation des tâches répétitives."
+>
+  <Header />
+
+  <main class="flex-1">
+    <!-- HERO -->
+    <section class="relative overflow-hidden bg-alliance-dark-2 pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-alliance-blue/10 via-transparent to-transparent"></div>
+      <div class="relative max-w-7xl mx-auto">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-alliance-orange/30 bg-alliance-orange/10 text-alliance-orange text-xs font-semibold uppercase tracking-wider mb-6">
+            AI Act · Conformité dès août 2026
+          </div>
+          
+          <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            L'IA au service de votre PME,
+            <span class="gradient-text">sans complexité technique</span>
+          </h1>
+          
+          <p class="text-lg sm:text-xl text-white/70 max-w-2xl mb-10 leading-relaxed">
+            Alliance Digitale accompagne les PME avec salariés en Sarthe dans la conformité AI Act,
+            l'adoption de l'IA générative et l'automatisation des tâches du quotidien.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row items-start gap-4">
+            <a href="/accompagnement/" class="btn-primary text-base px-8 py-4">Découvrir l'accompagnement</a>
+            <a href="/contact/" class="btn-secondary text-base px-8 py-4">Prendre rendez-vous</a>
+          </div>
+          
+          <div class="mt-12 flex flex-wrap items-center gap-6 text-sm text-white/50">
+            <span class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-alliance-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              101 sessions animées (KMC)
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-alliance-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              653 apprenants formés
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-alliance-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+              97 % de satisfaction
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCOMPAGNEMENT -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Accompagnement</p>
+            
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-6">
+              De la formation au déploiement opérationnel
+            </h2>
+            
+            <p class="text-white/70 text-lg mb-6 leading-relaxed">
+              L'IA ne se résume pas à ChatGPT. Nous auditons vos usages, formons vos équipes et mettons en place
+              des automatisations concrètes pour gagner du temps, réduire les erreurs et améliorer la qualité du service.
+            </p>
+            
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start gap-3 text-white/70">
+                <span class="w-6 h-6 rounded-full bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-sm shrink-0 mt-0.5">1</span>
+                Audit rapide de vos processus et cas d'usage IA prioritaires
+              </li>
+              <li class="flex items-start gap-3 text-white/70">
+                <span class="w-6 h-6 rounded-full bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-sm shrink-0 mt-0.5">2</span>
+                Formation collective des salariés à la littératie IA
+              </li>
+              <li class="flex items-start gap-3 text-white/70">
+                <span class="w-6 h-6 rounded-full bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-sm shrink-0 mt-0.5">3</span>
+                Automatisation d'un premier processus clé, mesurable en quelques semaines
+              </li>
+            </ul>
+            
+            <a href="/accompagnement/" class="btn-primary">Voir l'offre d'accompagnement</a>
+          </div>
+          
+          <div class="relief-panel p-8">
+            <blockquote class="text-xl text-white/90 italic leading-relaxed mb-6">
+              « Nous avons gagné l'équivalent d'une demi-journée par semaine sur la rédaction de nos comptes rendus. »
+            </blockquote>
+            <p class="text-sm text-white/50">PME industrielle, 25 salariés — étude de cas anonymisée</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREUVES -->
+    {heroStudies.length > 0 && (
+      <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12">
+            <p class="text-alliance-orange text-sm font-bold uppercase tracking-widest mb-3">Preuves</p>
+            
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+              Réalisations concrètes
+            </h2>
+            
+            <p class="text-white/60 max-w-2xl mx-auto">
+              Des résultats mesurables sur des projets réels. Les études de cas clients sont anonymisées ou publiées avec consentement écrit.
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {heroStudies.map((study) => (
+              <CaseStudyCard study={study} />
+            ))}
+          </div>
+          
+          <div class="text-center mt-12">
+            <a href="/accompagnement/" class="btn-secondary">Voir toutes les réalisations</a>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- FORMATIONS -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Formations</p>
+          
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+            Des formations appliquées aux usages métier
+          </h2>
+          
+          <p class="text-white/60 max-w-2xl mx-auto">
+            Formations courtes et concrètes pour les salariés et dirigeants de PME. Objectif : repartir avec des outils et méthodes immédiatement utilisables.
+          </p>
+        </div>
+        
+        {heroFormations.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {heroFormations.map((formation) => (
+              <FormationCard formation={formation} />
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-16 border border-white/10 rounded-2xl bg-white/[0.02]">
+            <p class="text-white/60">Catalogue en cours de construction dans Notion.</p>
+          </div>
+        )}
+        
+        <div class="text-center mt-12">
+          <a href="/formations/" class="btn-secondary">Voir toutes les formations</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-6">
+          Prêt à faire de l'IA un levier concret pour votre PME ?
+        </h2>
+        
+        <p class="text-white/70 text-lg mb-8">
+          Échangeons 30 minutes pour identifier vos premiers cas d'usage et évaluer la conformité AI Act de votre entreprise.
+        </p>
+        
+        <a href="/contact/" class="btn-primary text-base px-8 py-4">Prendre rendez-vous</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

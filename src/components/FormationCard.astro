@@ -1,0 +1,55 @@
+---
+import type { Formation } from '../lib/notion.ts';
+
+export interface Props {
+  formation: Formation;
+}
+
+const { formation } = Astro.props;
+---
+
+<a
+  href={`/formations/${formation.slug}/`}
+  class="group block relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(59,151,211,0.25)]"
+>
+  <div class="relative h-48 overflow-hidden">
+    {formation.image ? (
+      <img
+        src={formation.image}
+        alt={formation.title}
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+    ) : (
+      <div class="w-full h-full bg-gradient-to-br from-alliance-blue/30 to-alliance-orange/30"></div>
+    )}
+  </div>
+  
+  <div class="p-6">
+    <h3 class="font-display text-xl font-bold text-white mb-2 group-hover:text-alliance-blue transition-colors">
+      {formation.title}
+    </h3>
+    
+    {formation.subtitle && (
+      <p class="text-sm text-alliance-orange font-medium mb-3">{formation.subtitle}</p>
+    )}
+    
+    <p class="text-sm text-white/60 leading-relaxed line-clamp-3 mb-4">
+      {formation.description}
+    </p>
+    
+    <div class="flex items-center justify-between text-xs text-white/40">
+      <span class="flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        {formation.duration}
+      </span>
+      <span class="flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.934 12.935a4 4 0 010-5.686l.001-.001a4 4 0 015.657 0l.001.001a4 4 0 010 5.686zM15.001 15l-1.424 1.424a4 4 0 01-5.657 0l-.001-.001a4 4 0 010-5.686l.001-.001a4 4 0 015.657 0L15 11.999M15.001 15l-1.425-1.425"/>
+        </svg>
+        {formation.format}
+      </span>
+    </div>
+  </div>
+</a>

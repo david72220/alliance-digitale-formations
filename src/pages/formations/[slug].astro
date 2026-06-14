@@ -1,0 +1,99 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getFormations } from '../../lib/notion.ts';
+
+export async function getStaticPaths() {
+  const formations = await getFormations();
+  return formations.map((formation) => ({
+    params: { slug: formation.slug },
+    props: { formation },
+  }));
+}
+
+const { formation } = Astro.props;
+---
+
+<Layout
+  title={`${formation.title} — Alliance Digitale`}
+  description={formation.description}
+>
+  <Header />
+
+  <main class="flex-1">
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+          <a href="/formations/" class="text-sm text-white/50 hover:text-alliance-blue transition">← Retour aux formations</a>
+        </div>
+        
+        <div class="mb-10">
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Formation</p>
+          
+          <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-4">{formation.title}</h1>
+          
+          {formation.subtitle && (
+            <p class="text-alliance-orange text-lg font-medium">{formation.subtitle}</p>
+          )}
+        </div>
+        
+        {formation.image && (
+          <div class="mb-10 rounded-2xl overflow-hidden">
+            <img src={formation.image} alt={formation.title} class="w-full h-64 sm:h-80 object-cover" />
+          </div>
+        )}
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+          <div class="p-4 rounded-xl border border-white/10 bg-white/[0.03]">
+            <p class="text-xs text-white/40 uppercase tracking-wider mb-1">Durée</p>
+            <p class="text-white font-semibold">{formation.duration || '—'}</p>
+          </div>
+          <div class="p-4 rounded-xl border border-white/10 bg-white/[0.03]">
+            <p class="text-xs text-white/40 uppercase tracking-wider mb-1">Format</p>
+            <p class="text-white font-semibold">{formation.format || '—'}</p>
+          </div>
+          <div class="p-4 rounded-xl border border-white/10 bg-white/[0.03]">
+            <p class="text-xs text-white/40 uppercase tracking-wider mb-1">Public</p>
+            <p class="text-white font-semibold">{formation.audience || '—'}</p>
+          </div>
+          <div class="p-4 rounded-xl border border-white/10 bg-white/[0.03]">
+            <p class="text-xs text-white/40 uppercase tracking-wider mb-1">Tarif</p>
+            <p class="text-white font-semibold">{formation.price ? `${formation.price} € HT` : 'Sur demande'}</p>
+          </div>
+        </div>
+        
+        <div class="prose prose-invert max-w-none">
+          <p class="text-white/80 leading-relaxed text-lg">{formation.description}</p>
+          
+          {formation.objectives && (
+            <div class="mt-8">
+              <h2 class="text-2xl font-bold text-white mb-4">Objectifs pédagogiques</h2>
+              <p class="text-white/70">{formation.objectives}</p>
+            </div>
+          )}
+          
+          {formation.prerequisites && (
+            <div class="mt-8">
+              <h2 class="text-2xl font-bold text-white mb-4">Prérequis</h2>
+              <p class="text-white/70">{formation.prerequisites}</p>
+            </div>
+          )}
+        </div>
+        
+        {formation.fundingActive && (
+          <div class="mt-10 p-6 rounded-xl border border-alliance-blue/30 bg-alliance-blue/10">
+            <p class="text-sm text-alliance-blue font-semibold mb-2">Financement possible</p>
+            <p class="text-white/80">Cette formation est éligible au financement OPCO pour les entreprises avec salariés, dans le cadre de notre partenariat Signe+.</p>
+          </div>
+        )}
+        
+        <div class="mt-12">
+          <a href="/contact/" class="btn-primary text-base px-8 py-4">Demander un devis / Prendre RDV</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

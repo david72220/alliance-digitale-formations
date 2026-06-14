@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FormationCard from '../../components/FormationCard.astro';
+import { getFormations } from '../../lib/notion.ts';
+
+const formations = await getFormations();
+---
+
+<Layout
+  title="Nos formations — Alliance Digitale"
+  description="Catalogue des formations à l'IA et à l'automatisation pour les PME avec salariés."
+>
+  <Header />
+
+  <main class="flex-1">
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Catalogue</p>
+          
+          <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">Toutes nos formations</h1>
+          
+          <p class="text-white/60 max-w-2xl mx-auto">
+            Formations courtes, appliquées et accessibles aux salariés et dirigeants de PME. Aucune compétence technique requise.
+          </p>
+        </div>
+        
+        {formations.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {formations.map((formation) => (
+              <FormationCard formation={formation} />
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-20 border border-white/10 rounded-2xl bg-white/[0.02]">
+            <p class="text-white/60 mb-4">Aucune formation active pour le moment. Le catalogue est en cours de construction dans Notion.</p>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

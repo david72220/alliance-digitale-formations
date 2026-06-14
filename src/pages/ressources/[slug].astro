@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getResources } from '../../lib/notion.ts';
+
+export async function getStaticPaths() {
+  const resources = await getResources();
+  return resources.map((resource) => ({
+    params: { slug: resource.slug },
+    props: { resource },
+  }));
+}
+
+const { resource } = Astro.props;
+---
+
+<Layout title={`${resource.title} — Alliance Digitale`} description={resource.description}>
+  <Header />
+
+  <main class="flex-1">
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="mb-8">
+          <a href="/ressources/" class="text-sm text-white/50 hover:text-alliance-blue transition">← Retour aux ressources</a>
+        </div>
+        
+        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-6">{resource.title}</h1>
+        
+        <p class="text-white/70 text-lg mb-8">{resource.description}</p>
+        
+        <div class="prose prose-invert max-w-none">
+          <p class="text-white/60">Le contenu détaillé de cette ressource sera chargé depuis le corps de la page Notion associée.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

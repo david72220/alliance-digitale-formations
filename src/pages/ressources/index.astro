@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getResources } from '../../lib/notion.ts';
+
+const resources = await getResources();
+---
+
+<Layout
+  title="Ressources gratuites — Alliance Digitale"
+  description="Cours simples, guides et ressources gratuites sur l'IA générative et l'automatisation pour les PME."
+>
+  <Header />
+
+  <main class="flex-1">
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Ressources</p>
+          
+          <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">Guides et ressources gratuites</h1>
+          
+          <p class="text-white/60 max-w-2xl mx-auto">
+            Contenus pratiques pour démarrer avec l'IA et identifier vos premiers cas d'usage.
+          </p>
+        </div>
+        
+        {resources.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {resources.map((resource) => (
+              <a href={`/ressources/${resource.slug}/`} class="block p-6 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] transition">
+                <h2 class="font-display text-xl font-bold text-white mb-2">{resource.title}</h2>
+                <p class="text-white/60">{resource.description}</p>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-20 border border-white/10 rounded-2xl bg-white/[0.02]">
+            <p class="text-white/60">Les premières ressources seront publiées prochainement dans Notion.</p>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,36 @@
+---
+import type { CaseStudy } from '../lib/notion.ts';
+
+export interface Props {
+  study: CaseStudy;
+}
+
+const { study } = Astro.props;
+const clientLabel = study.anonymized ? 'PME anonymisée' : study.client;
+---
+
+<article class="relief-panel p-6 transition-all duration-300 hover:-translate-y-1">
+  <div class="flex items-center gap-3 mb-4">
+    {study.image && (
+      <img src={study.image} alt={study.title} class="w-12 h-12 rounded-lg object-cover" />
+    )}
+    <div>
+      <h3 class="font-display text-lg font-bold text-white">{study.title}</h3>
+      <p class="text-xs text-white/50">{clientLabel} · {study.sector}</p>
+    </div>
+  </div>
+  
+  <p class="text-sm text-white/70 mb-4 line-clamp-3">{study.problem}</p>
+  
+  <div class="border-t border-white/10 pt-4">
+    <p class="text-sm text-alliance-orange font-semibold mb-1">Résultat</p>
+    <p class="text-sm text-white/90">{study.result}</p>
+  </div>
+  
+  {study.videoUrl && (
+    <a href={study.videoUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-4 text-sm text-alliance-blue hover:text-white transition">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      Voir la vidéo-preuve
+    </a>
+  )}
+</article>
