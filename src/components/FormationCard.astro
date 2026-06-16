@@ -13,7 +13,13 @@ const { formation } = Astro.props;
   class="group block relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-12px_rgba(59,151,211,0.25)]"
 >
   <div class="relative h-48 overflow-hidden">
-    {formation.image ? (
+    {formation.photo ? (
+      <img
+        src={formation.photo}
+        alt={formation.title}
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+    ) : formation.image ? (
       <img
         src={formation.image}
         alt={formation.title}

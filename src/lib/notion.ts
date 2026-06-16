@@ -62,6 +62,7 @@ export interface Formation {
   assessment: string;
   attendanceSheets: string;
   active: boolean;
+  photo?: string;
   subtitle?: string;
   description?: string;
   format?: string;
@@ -147,10 +148,7 @@ export async function getFormations(): Promise<Formation[]> {
       filter: { property: 'Active', checkbox: { equals: true } },
     });
     const notionFormations = response.results.map(mapFormation);
-    // Fusion : Notion écrase les champs des formations locales en cas de conflit
-    const merged = new Map<string, Formation>();
-    [...LOCAL_FORMATIONS, ...notionFormations].forEach((f) => merged.set(f.slug, { ...merged.get(f.slug), ...f }));
-    return Array.from(merged.values());
+    return notionFormations;
   } catch (err) {
     console.warn('Notion getFormations error:', (err as Error).message);
     return LOCAL_FORMATIONS;
@@ -217,6 +215,7 @@ function mapFormation(page: any): Formation {
     assessment: getPropertyText(p["bilan pédagogique"]),
     attendanceSheets: getPropertyText(p["Les feuilles d'émargement"]),
     active: getCheckbox(p.Active),
+    photo: getFileUrl(p.photo),
     subtitle: '',
     description: getPropertyText(p['Objectif général']),
     format: '',

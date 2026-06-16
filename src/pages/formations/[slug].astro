@@ -57,6 +57,16 @@ const { formation } = Astro.props;
           </div>
         </div>
 
+        {formation.photo ? (
+          <div class="mb-10 rounded-2xl overflow-hidden">
+            <img src={formation.photo} alt={formation.title} class="w-full h-64 sm:h-80 object-cover" />
+          </div>
+        ) : formation.image ? (
+          <div class="mb-10 rounded-2xl overflow-hidden">
+            <img src={formation.image} alt={formation.title} class="w-full h-64 sm:h-80 object-cover" />
+          </div>
+        ) : null}
+
         <div class="prose prose-invert max-w-none space-y-8">
           {formation.program && (
             <div>
