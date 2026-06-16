@@ -3,16 +3,16 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "dotenv-cli -- astro dev",
-    "start": "dotenv-cli -- astro dev",
-    "build": "dotenv-cli -- astro build",
-    "preview": "dotenv-cli -- astro preview",
+    "dev": "npx dotenv-cli -- astro dev",
+    "start": "npx dotenv-cli -- astro dev",
+    "build": "npx dotenv-cli -- astro build",
+    "preview": "npx dotenv-cli -- astro preview",
     "astro": "astro",
-    "setup:notion": "dotenv-cli -- node scripts/create_notion_dbs.mjs",
-    "import:resource": "dotenv-cli -- node scripts/import_resource.mjs",
-    "import:all": "dotenv-cli -- node scripts/import_all_resources.mjs",
-    "build:pdf": "dotenv-cli -- node scripts/build_pdf.mjs",
-    "notion:diagnose": "dotenv-cli -- node scripts/diagnose_notion.mjs"
+    "setup:notion": "npx dotenv-cli -- node scripts/create_notion_dbs.mjs",
+    "import:resource": "npx dotenv-cli -- node scripts/import_resource.mjs",
+    "import:all": "npx dotenv-cli -- node scripts/import_all_resources.mjs",
+    "build:pdf": "npx dotenv-cli -- node scripts/build_pdf.mjs",
+    "notion:diagnose": "npx dotenv-cli -- node scripts/diagnose_notion.mjs"
   },
   "dependencies": {
     "@notionhq/client": "^2.3.0",
