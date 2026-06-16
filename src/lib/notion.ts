@@ -5,15 +5,25 @@ const LOCAL_FORMATIONS: Formation[] = [
     id: 'litteratie-ia-salaries',
     slug: 'litteratie-ia-salaries',
     title: "Littératie IA pour les salariés",
+    generalObjective: "Aider les salariés à utiliser l'IA dans leur travail quotidien.",
+    program: "Rédaction, recherche, organisation, sécurité des données et automatisation simple.",
+    duration: "1/2 journée",
+    audience: "Salariés de PME et dirigeants",
+    methods: "Présentiel ou distanciel, exercices pratiques, démonstrations.",
+    outcomes: "Maîtriser les outils IA les plus utiles au poste de travail ; identifier les cas d'automatisation simples ; adopter les bonnes pratiques de sécurité des données.",
+    competencies: "Utilisation de l'IA, prompts, sécurité des données.",
+    schedule: "Matinée ou après-midi.",
+    materials: "Supports numériques, accès aux outils.",
+    evaluationTools: "QCM et exercice pratique.",
+    assessment: "Auto-évaluation.",
+    attendanceSheets: "Feuilles d'émargement signées.",
+    active: true,
     subtitle: "Comprendre et utiliser l'IA au quotidien",
     description: "Formation collective pour aider les salariés à utiliser l'IA dans leur travail quotidien : rédaction, recherche, organisation, sécurité des données et automatisation simple.",
-    duration: "1/2 journée",
     format: "Présentiel ou distanciel",
-    audience: "Salariés de PME et dirigeants",
     objectives: "Maîtriser les outils IA les plus utiles au poste de travail ; identifier les cas d'automatisation simples ; adopter les bonnes pratiques de sécurité des données.",
     prerequisites: "Aucune compétence technique requise. Apportez simplement votre ordinateur et vos questions.",
     image: "/images/hero-formation-ia.png",
-    active: true,
     online: false,
     price: undefined,
     fundingActive: true,
@@ -39,18 +49,28 @@ export interface Formation {
   id: string;
   slug: string;
   title: string;
-  subtitle: string;
-  description: string;
+  generalObjective: string;
+  program: string;
   duration: string;
-  format: string;
   audience: string;
-  objectives: string;
-  prerequisites: string;
-  image?: string;
+  methods: string;
+  outcomes: string;
+  competencies: string;
+  schedule: string;
+  materials: string;
+  evaluationTools: string;
+  assessment: string;
+  attendanceSheets: string;
   active: boolean;
-  online: boolean;
+  subtitle?: string;
+  description?: string;
+  format?: string;
+  objectives?: string;
+  prerequisites?: string;
+  image?: string;
+  online?: boolean;
   price?: number;
-  fundingActive: boolean;
+  fundingActive?: boolean;
 }
 
 export interface CaseStudy {
@@ -178,22 +198,34 @@ export async function getResources(): Promise<Resource[]> {
 
 function mapFormation(page: any): Formation {
   const p = page.properties;
+  const title = getPropertyText(p.Nom) || 'Formation sans titre';
+  const slug = getPropertyText(p.Slug) || page.id;
   return {
     id: page.id,
-    slug: getPropertyText(p.Slug) || page.id,
-    title: getPropertyText(p.Nom) || 'Formation sans titre',
-    subtitle: getPropertyText(p.Sous_titre),
-    description: getPropertyText(p.Description),
-    duration: getPropertyText(p.Duree),
-    format: getPropertyText(p.Format),
-    audience: getPropertyText(p.Public_vise),
-    objectives: getPropertyText(p.Objectifs_pedagogiques),
-    prerequisites: getPropertyText(p.Prerequis),
-    image: getPropertyText(p.Image),
+    slug,
+    title,
+    generalObjective: getPropertyText(p['Objectif général']),
+    program: getPropertyText(p["Le programme de formation détaillé"]),
+    duration: getPropertyText(p["durée (H)"]),
+    audience: getPropertyText(p.Public),
+    methods: getPropertyText(p["Méthodes pédagogiques"]),
+    outcomes: getPropertyText(p["Résultats pedagogiques"]),
+    competencies: getPropertyText(p["Compétences visées"]),
+    schedule: getPropertyText(p.Déroulé),
+    materials: getPropertyText(p["Les supports de cours"]),
+    evaluationTools: getPropertyText(p["Les outils d'évaluation"]),
+    assessment: getPropertyText(p["bilan pédagogique"]),
+    attendanceSheets: getPropertyText(p["Les feuilles d'émargement"]),
     active: getCheckbox(p.Active),
-    online: getCheckbox(p.En_ligne),
-    price: Number(getPropertyText(p.Prix)) || undefined,
-    fundingActive: getCheckbox(p.Financement_actif),
+    subtitle: '',
+    description: getPropertyText(p['Objectif général']),
+    format: '',
+    objectives: getPropertyText(p["Résultats pedagogiques"]),
+    prerequisites: '',
+    image: '',
+    online: false,
+    price: undefined,
+    fundingActive: false,
   };
 }
 

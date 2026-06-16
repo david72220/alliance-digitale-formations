@@ -34,7 +34,7 @@ const { formation } = Astro.props;
     )}
     
     <p class="text-sm text-white/60 leading-relaxed line-clamp-3 mb-4">
-      {formation.description}
+      {formation.generalObjective || formation.description}
     </p>
     
     <div class="flex items-center justify-between text-xs text-white/40">
