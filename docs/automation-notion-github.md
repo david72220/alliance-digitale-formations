@@ -26,12 +26,9 @@ Site mis à jour en production
 
 ### Dans n8n
 - Instance accessible : `https://n8n.srv1179315.hstgr.cloud`.
-- Variables d’environnement configurées :
-  - `NOTION_TOKEN`
-  - `GITHUB_TOKEN`
-  - `GITHUB_OWNER` (optionnel, défaut `david72220`)
-  - `GITHUB_REPO` (optionnel, défaut `alliance-digitale-formations`)
-  - `ALLIANCE_WEBHOOK_SECRET` (clé secrète pour sécuriser le webhook)
+- **Credential Notion** déjà configuré dans N8N, ayant accès à toutes les bases.
+- **Token GitHub** : à renseigner en dur dans le nœud HTTP Request (pas de variables d’environnement disponibles sur ton N8N).
+- **Secret webhook** : idéalement `ALLIANCE_WEBHOOK_SECRET` via variable d’environnement. Sinon, voir §5 pour les alternatives.
 
 ### Dans GitHub
 - Secrets dans `Settings > Secrets and variables > Actions` :
@@ -54,24 +51,32 @@ Site mis à jour en production
 
 ## 3. Importer le workflow dans n8n
 
-### Option A — Import JSON
+### Option A — Import JSON (recommandé)
 1. Se connecter à l’instance n8n : `https://n8n.srv1179315.hstgr.cloud`.
 2. Aller dans **Workflows > Import from File**.
 3. Sélectionner `n8n/workflows/alliance-notion-publish.json`.
-4. Sauvegarder et activer le workflow.
+4. **Configurer le credential Notion** sur le nœud **Notion — Get Page**.
+5. **Configurer le token GitHub** dans le nœud **HTTP — GitHub Actions** :\
+   Header `Authorization: Bearer ghp_xx...xxxx`\
+   (obligatoire car ton N8N n’accepte pas les variables d’environnement).
+6. **Configurer le secret webhook** si possible, sinon voir §5.
+7. Sauvegarder et activer le workflow.
 
 ### Option B — Créer manuellement
 1. Créer un nouveau workflow.
 2. Ajouter un nœud **Webhook** configuré en `POST` avec le path `alliance-notion-publish`.
 3. Ajouter un nœud **Code** pour vérifier la clé secrète et extraire `pageId`.
-4. Ajouter un nœud **Code** pour appeler l’API Notion et récupérer la page.
-5. Ajouter un nœud **Code** pour formater le payload (slug, vérifier `Publié`).
-6. Ajouter un nœud **Code** pour déclencher GitHub Actions via l’API REST.
-7. Connecter les nœuds et activer.
+4. Ajouter un nœud **Notion** (Get Page) connecté au credential Notion existant.
+5. Ajouter un nœud **Code** pour formater le payload.
+6. Ajouter un nœud **IF** pour vérifier que `Publié` est coché.
+7. Ajouter un nœud **HTTP Request** pour déclencher GitHub Actions (token GitHub en dur dans le header).
+8. Connecter les nœuds et activer.
 
 ## 4. URL du webhook
 
-Une fois le workflow activé, l’URL du webhook sera :```
+Une fois le workflow activé, l’URL du webhook sera :
+
+```
 https://n8n.srv1179315.hstgr.cloud/webhook/alliance-notion-publish
 ```
 
@@ -80,6 +85,21 @@ Cette URL doit être configurée dans l’automation Notion.
 ## 5. Sécuriser le webhook
 
 Le workflow n8n vérifie l’en-tête `X-Alliance-Secret`. La valeur doit correspondre à la variable d’environnement `ALLIANCE_WEBHOOK_SECRET`.
+
+Si tu ne peux pas définir de variables d’environnement dans ton N8N, tu as deux options :
+
+### Option A — Définir le secret en dur dans le nœud Code (moins sécurisé)
+Dans le nœud **Vérifier secret + extraire ID**, remplace :
+```js
+const secret = $getEnvironmentVariable('ALLIANCE_WEBHOOK_SECRET');
+```
+par :
+```js
+const secret = 'ton_secret_a_inventer';
+```
+
+### Option B — Désactiver la vérification (à éviter en production)
+Supprime ou commente le bloc de vérification dans le nœud **Vérifier secret + extraire ID**. Dans ce cas, n’importe qui connaissant l’URL du webhook pourrait déclencher le workflow.
 
 Dans l’automation Notion :
 - URL : `https://n8n.srv1179315.hstgr.cloud/webhook/alliance-notion-publish`
@@ -92,7 +112,8 @@ Dans l’automation Notion :
 3. Créer une nouvelle automation :
    - **Trigger** : `When a page is edited` → filtre `Publié` devient `Checked`.
    - **Action** : `Send a webhook`.
-   - URL : voir §5.
+   - URL : voir §4.
+   - Headers : voir §5.
    - Payload : par défaut, Notion envoie les données de la page. S’assurer que `pageId` est transmis.
 
 ## 7. Tester le workflow
@@ -109,7 +130,7 @@ curl -X POST https://n8n.srv1179315.hstgr.cloud/webhook/alliance-notion-publish 
 ```bash
 curl -X POST \
   -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer <GITHUB_TOKEN>" \
+  -H "Authorization: Bearer ghp_xx...xxxx" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   https://api.github.com/repos/david72220/alliance-digitale-formations/actions/workflows/notion-publish.yml/dispatches \
   -d '{"ref":"main","inputs":{"page_id":"38196280-38de-81de-b04c-d36610e50cbd","slug":"rgpd-pme-10-points-controle"}}'
@@ -130,9 +151,10 @@ curl -X POST \
 | Problème | Cause probable | Solution |
 |---|---|---|
 | Webhook n8n non déclenché | Automation Notion mal configurée | Vérifier le trigger et l’URL |
-| `Clé secrète invalide` | Header `X-Alliance-Secret` incorrect | Vérifier la variable `ALLIANCE_WEBHOOK_SECRET` |
+| `Clé secrète invalide` | Header `X-Alliance-Secret` incorrect | Vérifier la valeur dans le nœud Code |
+| Page Notion non trouvée | Credential Notion mal configuré | Vérifier le credential dans le nœud Notion |
 | `La ressource n'est pas publiée` | Case `Publié` non cochée ou non synchronisée | Attendre 30s et re-cocher |
-| GitHub Actions ne se lance pas | `GITHUB_TOKEN` invalide ou droits insuffisants | Vérifier le PAT et les droits `repo` + `workflow` |
+| GitHub Actions ne se lance pas | Token GitHub invalide ou droits insuffisants | Vérifier le PAT et les droits `repo` + `workflow` |
 | Téléchargement des fichiers échoue | URLs des fichiers Notion expirées ou privées | Vérifier que l’intégration a accès à la base |
 | Déploiement Vercel échoue | `VERCEL_TOKEN` ou IDs incorrects | Vérifier dans le dashboard Vercel |
 
