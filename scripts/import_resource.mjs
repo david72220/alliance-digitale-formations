@@ -7,6 +7,7 @@ import { Client } from '@notionhq/client';
 import fs from 'node:fs';
 import path from 'node:path';
 import { mdToPdf } from 'md-to-pdf';
+import { marked } from 'marked';
 
 const TOKEN = process.env.NOTION_TOKEN;
 const DB_ID = process.env.NOTION_RESOURCES_DB_ID;
@@ -25,37 +26,47 @@ if (!filePath) {
 
 const notion = new Client({ auth: TOKEN });
 
+function parseMd(text) {
+  return marked.parse(text, { gfm: true });
+}
+
 async function main() {
   const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
   const slug = data.slug;
   const dir = path.resolve('public/ressources', slug);
 
-  // Créer le dossier de la ressource
   fs.mkdirSync(dir, { recursive: true });
 
-  // Écrire les fichiers Markdown
   const coursPath = path.join(dir, 'cours.md');
   const exercicePath = path.join(dir, 'exercice.md');
   const solutionMdPath = path.join(dir, 'solution.md');
   const solutionPdfPath = path.join(dir, 'solution.pdf');
+  const dataJsonPath = path.join(dir, 'data.json');
 
   fs.writeFileSync(coursPath, data.content, 'utf-8');
   fs.writeFileSync(exercicePath, data.exercice || exerciceParDefaut(data.title), 'utf-8');
   fs.writeFileSync(solutionMdPath, data.solution || solutionParDefaut(data.title), 'utf-8');
 
-  // Générer le PDF solution
   await mdToPdf({ path: solutionMdPath }, { dest: solutionPdfPath });
   console.log(`PDF solution généré : ${solutionPdfPath}`);
 
-  // URLs publiques pour Notion (fichier externe)
   const resourceUrl = `${SITE_URL}/ressources/${slug}/cours.md`;
   const exerciceUrl = `${SITE_URL}/ressources/${slug}/exercice.md`;
   const solutionUrl = `${SITE_URL}/ressources/${slug}/solution.pdf`;
 
-  // Chemin local utilisé par le site Astro
-  const resourcePath = `ressources/${slug}/cours.md`;
-  const exercicePath = `ressources/${slug}/exercice.md`;
-  const solutionPath = `ressources/${slug}/solution.pdf`;
+  // Génère le data.json pour Astro
+  const resourceData = {
+    title: data.title,
+    slug,
+    module: data.module || 'Autres',
+    description: data.description,
+    contentHtml: parseMd(fs.readFileSync(coursPath, 'utf-8')),
+    exerciseHtml: parseMd(fs.readFileSync(exercicePath, 'utf-8')),
+    solutionUrl,
+    published: data.published ?? false,
+  };
+  fs.writeFileSync(dataJsonPath, JSON.stringify(resourceData, null, 2), 'utf-8');
+  console.log(`Data JSON généré : ${dataJsonPath}`);
 
   // Créer la page dans Notion
   const page = await notion.pages.create({
@@ -64,7 +75,7 @@ async function main() {
       Titre: { title: [{ type: 'text', text: { content: data.title } }] },
       Slug: { rich_text: [{ type: 'text', text: { content: slug } }] },
       Description: { rich_text: [{ type: 'text', text: { content: data.description } }] },
-      Module: { select: { name: data.module || 'Sécurité des données' } },
+      Module: { select: { name: data.module || 'Autres' } },
       Publié: { checkbox: data.published ?? false },
       Ressource: {
         files: [{ name: 'cours.md', type: 'external', external: { url: resourceUrl } }],
@@ -75,10 +86,6 @@ async function main() {
       'Solution exercice': {
         files: [{ name: 'solution.pdf', type: 'external', external: { url: solutionUrl } }],
       },
-      // Chemin local pour le site Astro (non visible dans Notion, mais stocké temporairement)
-      Chemin: { rich_text: [{ type: 'text', text: { content: resourcePath } }] },
-      'Chemin exercice': { rich_text: [{ type: 'text', text: { content: exercicePath } }] },
-      'Chemin solution': { rich_text: [{ type: 'text', text: { content: solutionPath } }] },
     },
   });
 
@@ -87,7 +94,7 @@ async function main() {
 }
 
 function exerciceParDefaut(title) {
-  return `# Exercice — ${title}\n\n## Consigne\n\nÀ partir de votre entreprise, réalisez un inventaire rapide des 3 outils qui contiennent des données personnelles.\n\nPour chacun, notez :\n\n1. La finalité du traitement\n2. Les catégories de données stockées\n3. Les personnes qui y ont accès\n4. La durée de conservation actuelle\n\n## Livrable attendu\n\nUn tableau simple (papier, tableur ou Notion) listant ces 3 outils avec les 4 informations ci-dessus.\n\n## Question de réflexion\n\nQuelle est la base légale de chaque traitement ? Consentement, contrat, obligation légale, intérêt légitime ?\n`;
+  return `# Exercice — ${title}\n\n## Consigne\n\nRéalisez un inventaire rapide des 3 outils de votre entreprise qui contiennent des données personnelles.\n\nPour chacun, notez :\n\n1. La finalité du traitement\n2. Les catégories de données stockées\n3. Les personnes qui y ont accès\n4. La durée de conservation actuelle\n\n## Livrable attendu\n\nUn tableau simple (papier, tableur ou Notion) listant ces 3 outils avec les 4 informations ci-dessus.\n\n## Question de réflexion\n\nQuelle est la base légale de chaque traitement ? Consentement, contrat, obligation légale, intérêt légitime ?\n`;
 }
 
 function solutionParDefaut(title) {

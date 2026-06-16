@@ -3,39 +3,36 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getResources } from '../../lib/notion.ts';
-import { parseMarkdown, estimateReadTime } from '../../lib/markdown.ts';
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { estimateReadTime } from '../../lib/markdown.ts';
 
 export async function getStaticPaths() {
-  const resources = await getResources();
-  return resources.map((resource) => ({
-    params: { slug: resource.slug },
+  const notionResources = await getResources();
+  const localModule = await import('../../../public/ressources/resources.json', { assert: { type: 'json' } });
+  const localResources = localModule.default;
+
+  const all = new Map();
+  [...localResources, ...notionResources].forEach((r) => {
+    all.set(r.slug, { ...all.get(r.slug), ...r });
+  });
+
+  return Array.from(all.entries()).map(([slug, resource]) => ({
+    params: { slug },
     props: { resource },
   }));
 }
 
 const { resource } = Astro.props;
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const resourcePath = path.resolve(__dirname, '../../../public', resource.content);
-const exercisePath = path.resolve(__dirname, '../../../public', resource.exercise);
-
-const resourceMd = fs.existsSync(resourcePath) ? fs.readFileSync(resourcePath, 'utf-8') : '';
-const exerciseMd = fs.existsSync(exercisePath) ? fs.readFileSync(exercisePath, 'utf-8') : '';
-
-const resourceHtml = parseMarkdown(resourceMd);
-const exerciseHtml = parseMarkdown(exerciseMd);
-const readTime = estimateReadTime(resourceMd);
-
+const readTime = estimateReadTime(resource.contentHtml || '');
 const moduleName = resource.module || 'Ressource';
+
+const siteUrl = Astro.site ? Astro.site.toString() : 'https://alliance-digitale-formations.vercel.app';
+
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Accueil', item: Astro.site || 'https://alliance-digitale-formations.vercel.app' },
-    { '@type': 'ListItem', position: 2, name: 'Ressources', item: `${Astro.site || 'https://alliance-digitale-formations.vercel.app'}/ressources/` },
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: siteUrl },
+    { '@type': 'ListItem', position: 2, name: 'Ressources', item: `${siteUrl}/ressources/` },
     { '@type': 'ListItem', position: 3, name: resource.title },
   ],
 };
@@ -60,7 +57,7 @@ const courseJsonLd = {
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
     <script type="application/ld+json" set:html={JSON.stringify(courseJsonLd)} />
-    <link rel="canonical" href={`${Astro.site}/ressources/${resource.slug}/`} />
+    <link rel="canonical" href={`${siteUrl}/ressources/${resource.slug}/`} />
   </Fragment>
 
   <Header />
@@ -89,14 +86,14 @@ const courseJsonLd = {
         <p class="text-sm text-white/50 mb-10">Temps de lecture : environ {readTime} min</p>
 
         <article class="prose prose-invert prose-lg max-w-none mb-16">
-          <Fragment set:html={resourceHtml} />
+          <Fragment set:html={resource.contentHtml} />
         </article>
 
-        {exerciseMd && (
+        {resource.exerciseHtml && (
           <div class="border-t border-white/10 pt-12 mb-16">
             <h2 class="font-display text-2xl font-bold text-white mb-6">Exercice pratique</h2>
             <div class="prose prose-invert max-w-none">
-              <Fragment set:html={exerciseHtml} />
+              <Fragment set:html={resource.exerciseHtml} />
             </div>
 
             {resource.solutionUrl && (
