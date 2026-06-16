@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-alliance.png';
+
 const navLinks = [
   { href: '/', label: 'Accueil' },
   { href: '/accompagnement/', label: 'Accompagnement' },
@@ -9,11 +12,11 @@ const navLinks = [
 ---
 
 <header class="fixed top-0 left-0 w-full z-50">
-  <div class="relative mx-auto max-w-7xl px-4 pt-4 pb-8">
-    <nav class="relief-panel flex items-center justify-between px-5 py-3" aria-label="Menu principal">
+  <div class="relative mx-auto max-w-7xl px-4 pt-4 pb-8" style="perspective:1000px;">
+    <nav class="relief-panel relief-2 fiber-pulse flex items-center justify-between px-5 py-3" aria-label="Menu principal">
       <a href="/" class="relative z-10 flex items-center">
         <span class="bg-white/95 rounded-lg px-3 py-1.5 shadow-md">
-          <img src="/images/logo-alliance.png" alt="Alliance Digitale" class="h-10 w-auto object-contain" />
+          <Image src={logo} alt="Alliance Digitale" widths={[120, 240]} sizes="120px" formats={['avif', 'webp']} quality={85} loading="eager" decoding="async" class="h-10 w-auto object-contain" />
         </span>
       </a>
       <div class="relative z-10 hidden lg:flex items-center gap-1">
@@ -23,7 +26,7 @@ const navLinks = [
           </a>
         ))}
       </div>
-      <a href="/contact/" class="btn-primary hidden lg:inline-flex">Prendre rendez-vous</a>
+      <a href="/contact/" class="btn-primary relative z-10 hidden lg:inline-flex">Prendre rendez-vous</a>
     </nav>
   </div>
 </header>

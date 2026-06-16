@@ -1,9 +1,12 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormationCard from '../components/FormationCard.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
+import FiberFrame from '../components/FiberFrame.astro';
+import heroImage from '../assets/hero-formation-ia.png';
 import { getFormations, getCaseStudies } from '../lib/notion.ts';
 
 const formations = await getFormations();
@@ -26,50 +29,57 @@ const heroStudies = studies.slice(0, 3);
       <div class="relative max-w-7xl mx-auto">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <div class="max-w-3xl">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-alliance-orange/30 bg-alliance-orange/10 text-alliance-orange text-xs font-semibold uppercase tracking-wider mb-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-alliance-orange/30 bg-alliance-orange/10 text-alliance-orange text-xs font-semibold uppercase tracking-wider mb-6" data-hero-anim="badge">
               AI Act · Conformité dès août 2026
             </div>
-            
-            <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              L'IA au service de votre PME,
-              <span class="gradient-text">sans complexité technique</span>
+
+            <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight" data-hero-anim="title">
+              <span class="hero-line">L'IA au service de votre PME,</span>
+              <span class="gradient-text hero-line">sans complexité technique</span>
             </h1>
-            
-            <p class="text-lg sm:text-xl text-white/70 max-w-2xl mb-10 leading-relaxed">
+
+            <p class="text-lg sm:text-xl text-white/70 max-w-2xl mb-10 leading-relaxed" data-hero-anim="lead">
               Alliance Digitale accompagne les PME avec salariés en Sarthe dans la conformité AI Act,
               l'adoption de l'IA générative et l'automatisation des tâches du quotidien.
             </p>
-            
-            <div class="flex flex-col sm:flex-row items-start gap-4">
+
+            <div class="flex flex-col sm:flex-row items-start gap-4" data-hero-anim="cta">
               <a href="/accompagnement/" class="btn-primary text-base px-8 py-4">Découvrir l'accompagnement</a>
               <a href="/contact/" class="btn-secondary text-base px-8 py-4">Prendre rendez-vous</a>
             </div>
             
-            <div class="mt-12 flex flex-wrap items-center gap-6 text-sm text-white/50">
+            <div class="mt-12 flex flex-wrap items-center gap-6 text-sm text-white/50" data-hero-anim="stats">
               <span class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-alliance-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                23 sessions animées chez les clients
+                <span data-count="23">0</span>&nbsp;sessions animées chez les clients
               </span>
               <span class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-alliance-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                168 apprenants formés
+                <span data-count="168">0</span>&nbsp;apprenants formés
               </span>
               <span class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-alliance-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-                95 % de satisfaction
+                <span data-count="95" data-count-suffix=" %">0</span>&nbsp;de satisfaction
               </span>
             </div>
           </div>
 
-          <div class="relative hidden lg:block">
+          <div class="relative hidden lg:block" data-hero-parallax>
             <div class="absolute -inset-4 bg-gradient-to-br from-alliance-blue/20 to-alliance-orange/20 rounded-3xl blur-2xl"></div>
-            <img
-              src="/images/hero-formation-ia.png"
-              alt="Formation IA et automatisation en Sarthe avec Alliance Digitale"
-              class="relative rounded-2xl border border-white/10 shadow-2xl w-full object-cover"
-              loading="eager"
-              decoding="async"
-            />
+            <FiberFrame radius={16} class="relative block">
+              <Image
+                src={heroImage}
+                alt="Formation IA et automatisation en Sarthe avec Alliance Digitale"
+                widths={[480, 768, 1024, 1280]}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                formats={['avif', 'webp']}
+                quality={75}
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                class="relative rounded-2xl border border-white/10 shadow-2xl w-full object-cover"
+              />
+            </FiberFrame>
           </div>
         </div>
       </div>
@@ -123,9 +133,9 @@ const heroStudies = studies.slice(0, 3);
     {heroStudies.length > 0 && (
       <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
         <div class="max-w-7xl mx-auto">
-          <div class="text-center mb-12">
+          <div class="text-center mb-12" data-reveal>
             <p class="text-alliance-orange text-sm font-bold uppercase tracking-widest mb-3">Preuves</p>
-            
+
             <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
               Réalisations concrètes
             </h2>
@@ -136,8 +146,10 @@ const heroStudies = studies.slice(0, 3);
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {heroStudies.map((study) => (
-              <CaseStudyCard study={study} />
+            {heroStudies.map((study, i) => (
+              <div data-reveal data-reveal-delay={String(i * 0.08)}>
+                <CaseStudyCard study={study} />
+              </div>
             ))}
           </div>
           
@@ -151,9 +163,9 @@ const heroStudies = studies.slice(0, 3);
     <!-- FORMATIONS -->
     <section class="py-20 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-12">
+        <div class="text-center mb-12" data-reveal>
           <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Formations</p>
-          
+
           <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
             Des formations appliquées aux usages métier
           </h2>
@@ -165,8 +177,10 @@ const heroStudies = studies.slice(0, 3);
         
         {heroFormations.length > 0 ? (
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {heroFormations.map((formation) => (
-              <FormationCard formation={formation} />
+            {heroFormations.map((formation, i) => (
+              <div data-reveal data-reveal-delay={String(i * 0.08)}>
+                <FormationCard formation={formation} />
+              </div>
             ))}
           </div>
         ) : (

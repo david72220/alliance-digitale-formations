@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-alliance.png';
+
 const currentYear = new Date().getFullYear();
 ---
 
@@ -8,7 +11,7 @@ const currentYear = new Date().getFullYear();
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8 mb-12">
       <div>
         <a href="/" class="inline-block mb-6 bg-white/95 rounded-lg px-3 py-2 shadow-md">
-          <img src="/images/logo-alliance.png" alt="Alliance Digitale" class="h-10 w-auto object-contain" />
+          <Image src={logo} alt="Alliance Digitale" widths={[120, 240]} sizes="120px" formats={['avif', 'webp']} quality={85} loading="lazy" decoding="async" class="h-10 w-auto object-contain" />
         </a>
         <p class="text-sm text-white/50 leading-relaxed">
           Accompagnement et formations à l'IA et à l'automatisation pour les PME avec salariés en Sarthe.

@@ -1,0 +1,48 @@
+---
+interface Props {
+  radius?: number;
+  speed?: 'slow' | 'normal' | 'fast';
+  border?: boolean;
+  class?: string;
+}
+
+const {
+  radius = 16,
+  speed = 'normal',
+  border = true,
+  class: className = '',
+} = Astro.props;
+
+const speedClass = speed === 'slow' ? 'fiber-pulse--slow' : speed === 'fast' ? 'fiber-pulse--fast' : '';
+---
+
+<div
+  class:list={['fiber-frame', 'fiber-pulse', speedClass, className]}
+  style={`border-radius:${radius}px;${border ? '' : '--ff-no-border:1;'}`}
+>
+  <div class="fiber-frame__inner" style={`border-radius:${radius}px;`}>
+    <slot />
+  </div>
+</div>
+
+<style>
+  .fiber-frame {
+    position: relative;
+    display: block;
+    isolation: isolate;
+  }
+  .fiber-frame[style*="--ff-no-border"] {
+    background: transparent;
+  }
+  .fiber-frame:not([style*="--ff-no-border"]) {
+    background:
+      linear-gradient(rgba(13, 26, 46, 0.0), rgba(10, 20, 36, 0.0)) padding-box,
+      linear-gradient(100deg, #9E2114, #3b97d3) border-box;
+    border: 1px solid transparent;
+  }
+  .fiber-frame__inner {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+  }
+</style>

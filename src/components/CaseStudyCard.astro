@@ -9,10 +9,10 @@ const { study } = Astro.props;
 const clientLabel = study.anonymized ? 'PME anonymisée' : study.client;
 ---
 
-<article class="relief-panel p-6 transition-all duration-300 hover:-translate-y-1">
+<article class="relief-panel relief-1 fiber-pulse fiber-pulse--slow p-6 transition-all duration-300">
   <div class="flex items-center gap-3 mb-4">
     {study.image && (
-      <img src={study.image} alt={study.title} class="w-12 h-12 rounded-lg object-cover" />
+      <img src={study.image} alt={study.title} loading="lazy" decoding="async" class="w-12 h-12 rounded-lg object-cover" />
     )}
     <div>
       <h3 class="font-display text-lg font-bold text-white">{study.title}</h3>
@@ -34,3 +34,4 @@ const clientLabel = study.anonymized ? 'PME anonymisée' : study.client;
     </a>
   )}
 </article>
+

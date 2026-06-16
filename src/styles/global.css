@@ -15,6 +15,37 @@ html {
   scroll-behavior: smooth;
 }
 
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+[data-reveal],
+[data-hero-anim] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-hero-anim] {
+    opacity: 1 !important;
+  }
+}
+
+.hero-line {
+  display: inline-block;
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background-color: var(--color-alliance-dark);
@@ -48,11 +79,107 @@ body {
 
 .relief-panel {
   position: relative;
+  isolation: isolate;
   border-radius: 1rem;
   background: linear-gradient(135deg, rgba(28, 70, 116, 0.85), rgba(20, 52, 90, 0.88)) padding-box,
               linear-gradient(100deg, var(--color-alliance-orange), var(--color-alliance-blue)) border-box;
   border: 1px solid transparent;
   backdrop-filter: blur(12px);
+  box-shadow:
+    -16px 0 46px -14px rgba(158, 33, 20, 0.45),
+     16px 0 46px -14px rgba(59, 151, 211, 0.55),
+     0 10px 25px -12px rgba(0, 0, 0, 0.8);
+  transition: transform 0.5s cubic-bezier(0.2, 0.85, 0.25, 1), box-shadow 0.5s ease;
+}
+
+.relief-1:hover {
+  transform: translateY(-10px);
+  box-shadow:
+    -18px 4px 55px -14px rgba(158, 33, 20, 0.7),
+     18px 4px 55px -14px rgba(59, 151, 211, 0.85),
+     0 40px 60px -20px rgba(0, 0, 0, 0.9);
+}
+
+.relief-2 { transform-style: preserve-3d; }
+.relief-2:hover {
+  transform: translateY(-20px) scale(1.04) rotateX(6deg);
+  box-shadow:
+    -24px 8px 70px -12px rgba(158, 33, 20, 0.85),
+     24px 8px 70px -12px rgba(59, 151, 211, 1),
+     0 60px 80px -24px rgba(0, 0, 0, 0.95);
+}
+
+/* ============================================================
+   Fiber pulse — comète conic qui parcourt le périmètre
+   Port direct du langage visuel KMC, adapté charte Alliance
+   ============================================================ */
+@property --ad-a {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.fiber-pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  z-index: 1;
+  pointer-events: none;
+  background: conic-gradient(from var(--ad-a),
+      transparent 0deg, transparent 6deg,
+      rgba(125, 211, 252, 0.95) 14deg,
+      #ffffff 20deg,
+      rgba(158, 33, 20, 0.95) 27deg,
+      transparent 36deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  filter: drop-shadow(0 0 6px rgba(125, 211, 252, 0.9));
+  opacity: 0;
+  animation: ad-fiber 5s linear infinite;
+}
+
+@keyframes ad-fiber {
+  0%   { --ad-a: -20deg; opacity: 0; }
+  3%   { opacity: 1; }
+  45%  { --ad-a: 360deg; opacity: 1; }
+  50%  { --ad-a: 380deg; opacity: 0; }
+  100% { --ad-a: 380deg; opacity: 0; }
+}
+
+.fiber-pulse--slow::after { animation-duration: 9s; }
+.fiber-pulse--fast::after { animation-duration: 3.5s; }
+
+.fiber-flow {
+  position: relative;
+  height: 2px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: linear-gradient(90deg, transparent, rgba(59, 151, 211, 0.4), transparent);
+}
+.fiber-flow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #fff, #7dd3fc, transparent);
+  animation: ad-flow 3.2s linear infinite;
+}
+@keyframes ad-flow { to { left: 120%; } }
+
+@supports not (background: conic-gradient(from 0deg, #000, #fff)) {
+  .fiber-pulse::after { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fiber-pulse::after,
+  .fiber-flow::before { animation: none; opacity: 0; }
+  .relief-1:hover, .relief-2:hover { transform: none; }
 }
 
 .gradient-text {

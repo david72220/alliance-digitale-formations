@@ -59,11 +59,11 @@ const { formation } = Astro.props;
 
         {formation.photo ? (
           <div class="mb-10 rounded-2xl overflow-hidden">
-            <img src={formation.photo} alt={formation.title} class="w-full h-64 sm:h-80 object-cover" />
+            <img src={formation.photo} alt={formation.title} loading="eager" fetchpriority="high" decoding="async" class="w-full h-64 sm:h-80 object-cover" />
           </div>
         ) : formation.image ? (
           <div class="mb-10 rounded-2xl overflow-hidden">
-            <img src={formation.image} alt={formation.title} class="w-full h-64 sm:h-80 object-cover" />
+            <img src={formation.image} alt={formation.title} loading="eager" fetchpriority="high" decoding="async" class="w-full h-64 sm:h-80 object-cover" />
           </div>
         ) : null}
 

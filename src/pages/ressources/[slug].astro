@@ -101,7 +101,7 @@ const courseJsonLd = {
       <div class="max-w-3xl mx-auto">
         {photoUrl && (
           <div class="mb-8 rounded-2xl overflow-hidden border border-white/10">
-            <img src={photoUrl} alt={title} class="w-full h-64 sm:h-80 object-cover" />
+            <img src={photoUrl} alt={title} loading="eager" fetchpriority="high" decoding="async" class="w-full h-64 sm:h-80 object-cover" />
           </div>
         )}
 
