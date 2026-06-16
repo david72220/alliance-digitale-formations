@@ -6,6 +6,7 @@ import { getResources } from '../../lib/notion.ts';
 import { parseMarkdown, estimateReadTime } from '../../lib/markdown.ts';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 export async function getStaticPaths() {
   const resources = await getResources();
@@ -17,8 +18,9 @@ export async function getStaticPaths() {
 
 const { resource } = Astro.props;
 
-const resourcePath = path.resolve(process.cwd(), 'public', resource.content);
-const exercisePath = path.resolve(process.cwd(), 'public', resource.exercise);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const resourcePath = path.resolve(__dirname, '../../../public', resource.content);
+const exercisePath = path.resolve(__dirname, '../../../public', resource.exercise);
 
 const resourceMd = fs.existsSync(resourcePath) ? fs.readFileSync(resourcePath, 'utf-8') : '';
 const exerciseMd = fs.existsSync(exercisePath) ? fs.readFileSync(exercisePath, 'utf-8') : '';
