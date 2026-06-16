@@ -1,0 +1,56 @@
+name: Publier ressource depuis Notion
+
+on:
+  workflow_dispatch:
+    inputs:
+      page_id:
+        description: 'ID de la page Notion à publier'
+        required: true
+        type: string
+      slug:
+        description: 'Slug de la ressource'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Télécharger les fichiers Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_RESOURCES_DB_ID: ${{ vars.NOTION_RESOURCES_DB_ID }}
+          PAGE_ID: ${{ github.event.inputs.page_id }}
+          SLUG: ${{ github.event.inputs.slug }}
+        run: |
+          node scripts/download_resource.mjs "$PAGE_ID" "$SLUG"
+
+      - name: Commit et push des fichiers générés
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/ressources/ data/ressources/ public/ressources/resources.json
+          git diff --cached --quiet || (git commit -m "feat: publication auto de la ressource ${{ github.event.inputs.slug }} depuis Notion" && git push origin main)
+
+      - name: Déployer sur Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          npx vercel --prod --token "$VERCEL_TOKEN" --yes

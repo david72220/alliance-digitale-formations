@@ -1,0 +1,149 @@
+{
+  "name": "Alliance — Publier ressource Notion vers GitHub",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "alliance-notion-publish",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook",
+      "name": "Webhook Notion",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "alliance-notion-publish"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Vérifie la clé secrète passée en header X-Alliance-Secret\nconst secret = $getEnvironmentVariable('ALLIANCE_WEBHOOK_SECRET');\nconst received = $request.headers['x-alliance-secret'] || $request.headers['X-Alliance-Secret'];\nif (secret && received !== secret) {\n  throw new Error('Clé secrète invalide');\n}\n\nconst body = $input.first().json.body || $input.first().json;\nconst pageId = body.pageId || body.data?.id || body.id;\nif (!pageId) {\n  throw new Error('pageId manquant dans le webhook');\n}\nreturn [{ json: { pageId, raw: body } }];"
+      },
+      "id": "verify",
+      "name": "Vérifier secret + extraire ID",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Récupère les données de la page Notion via l'API\nconst token = $getEnvironmentVariable('NOTION_TOKEN');\nconst pageId = $input.first().json.pageId;\nconst res = await $httpRequest({\n  method: 'GET',\n  url: `https://api.notion.com/v1/pages/${pageId}`,\n  headers: {\n    'Authorization': `Bearer ${token}`,\n    'Notion-Version': '2022-06-28'\n  }\n});\nreturn [{ json: { pageId, properties: res.properties } }];"
+      },
+      "id": "notion",
+      "name": "Récupérer page Notion",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const p = $input.first().json.properties;\nconst getText = (prop) => {\n  if (!prop) return '';\n  if (prop.title) return prop.title.map(t => t.plain_text).join('');\n  if (prop.rich_text) return prop.rich_text.map(t => t.plain_text).join('');\n  return '';\n};\nconst getSelect = (prop) => prop?.select?.name || '';\nconst getCheckbox = (prop) => prop?.checkbox === true;\nconst getFileUrl = (prop) => {\n  if (!prop?.files?.length) return '';\n  const f = prop.files[0];\n  return f.external?.url || f.file?.url || '';\n};\n\nconst slug = getText(p.Slug);\nconst published = getCheckbox(p.Publié);\nif (!published) {\n  throw new Error(\"La ressource n'est pas publiée. Arrêt.\");\n}\nreturn [{\n  json: {\n    pageId: $input.first().json.pageId,\n    slug,\n    title: getText(p.Titre),\n    module: getSelect(p.Module),\n    description: getText(p.Description),\n    resourceUrl: getFileUrl(p.ressource),\n    exerciceUrl: getFileUrl(p.Exercice),\n    solutionUrl: getFileUrl(p['Solution exercice'])\n  }\n}];"
+      },
+      "id": "format",
+      "name": "Formater payload GitHub",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const token = $getEnvironmentVariable('GITHUB_TOKEN');\nconst owner = $getEnvironmentVariable('GITHUB_OWNER') || 'david72220';\nconst repo = $getEnvironmentVariable('GITHUB_REPO') || 'alliance-digitale-formations';\nconst payload = $input.first().json;\n\nconst res = await $httpRequest({\n  method: 'POST',\n  url: `https://api.github.com/repos/${owner}/${repo}/actions/workflows/notion-publish.yml/dispatches`,\n  headers: {\n    'Authorization': `Bearer ${token}`,\n    'Accept': 'application/vnd.github+json',\n    'X-GitHub-Api-Version': '2022-11-28'\n  },\n  body: {\n    ref: 'main',\n    inputs: {\n      page_id: payload.pageId,\n      slug: payload.slug\n    }\n  }\n});\nreturn [{ json: { triggered: true, githubResponse: res } }];"
+      },
+      "id": "github",
+      "name": "Déclencher GitHub Actions",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1050,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { status: 'ok', message: 'Publication déclenchée sur GitHub' } }];"
+      },
+      "id": "response",
+      "name": "Réponse webhook",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1250,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Notion": {
+      "main": [
+        [
+          {
+            "node": "Vérifier secret + extraire ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vérifier secret + extraire ID": {
+      "main": [
+        [
+          {
+            "node": "Récupérer page Notion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Récupérer page Notion": {
+      "main": [
+        [
+          {
+            "node": "Formater payload GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formater payload GitHub": {
+      "main": [
+        [
+          {
+            "node": "Déclencher GitHub Actions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Déclencher GitHub Actions": {
+      "main": [
+        [
+          {
+            "node": "Réponse webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": []
+}
