@@ -10,7 +10,9 @@
     "astro": "astro",
     "setup:notion": "node scripts/create_notion_dbs.mjs",
     "import:resource": "node scripts/import_resource.mjs",
-    "build:pdf": "node scripts/build_pdf.mjs"
+    "import:all": "node scripts/import_all_resources.mjs",
+    "build:pdf": "node scripts/build_pdf.mjs",
+    "notion:diagnose": "node scripts/diagnose_notion.mjs"
   },
   "dependencies": {
     "@notionhq/client": "^2.3.0",

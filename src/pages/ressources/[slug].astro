@@ -8,7 +8,16 @@ import { estimateReadTime } from '../../lib/markdown.ts';
 export async function getStaticPaths() {
   const notionResources = await getResources();
   const localModule = await import('../../../public/ressources/resources.json', { assert: { type: 'json' } });
-  const localResources = localModule.default;
+  const localResources = localModule.default || [];
+
+  // Ignorer l'import si le JSON est vide ou mal formé
+  if (!Array.isArray(localResources)) {
+    console.warn('public/ressources/resources.json n\'est pas un tableau valide');
+    return notionResources.map((r) => ({
+      params: { slug: r.slug },
+      props: { resource: r },
+    }));
+  }
 
   const all = new Map();
   [...localResources, ...notionResources].forEach((r) => {
