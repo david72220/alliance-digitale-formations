@@ -12,7 +12,9 @@ export async function getStaticPaths() {
 
   const all = new Map();
   [...localResources, ...notionResources].forEach((r) => {
-    all.set(r.slug, { ...all.get(r.slug), ...r });
+    const slug = (r.slug || '').trim();
+    if (!slug || slug.includes(' ')) return; // ignore les slugs invalides
+    all.set(slug, { ...all.get(slug), ...r, slug });
   });
 
   return Array.from(all.entries()).map(([slug, resource]) => ({
