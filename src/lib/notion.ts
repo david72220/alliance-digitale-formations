@@ -171,7 +171,7 @@ function mapCaseStudy(page: any): CaseStudy {
 
 function mapResource(page: any): Resource {
   const p = page.properties;
-  const resourceUrl = getFileUrl(p.Ressource);
+  const resourceUrl = getFileUrl(p.ressource);
   const exerciceUrl = getFileUrl(p.Exercice);
   const solutionUrl = getFileUrl(p['Solution exercice']);
   // Dérive le chemin local à partir de l’URL publique si disponible
@@ -186,6 +186,6 @@ function mapResource(page: any): Resource {
     module: getSelect(p.Module),
     exercise: exercicePath,
     solutionUrl: solutionUrl || `/ressources/${getPropertyText(p.Slug) || page.id}/solution.pdf`,
-    published: getCheckbox(p.Publie),
+    published: getCheckbox(p.Publié),
   };
 }

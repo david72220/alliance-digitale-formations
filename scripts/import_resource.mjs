@@ -77,7 +77,7 @@ async function main() {
       Description: { rich_text: [{ type: 'text', text: { content: data.description } }] },
       Module: { select: { name: data.module || 'Autres' } },
       Publié: { checkbox: data.published ?? false },
-      Ressources: {
+      ressource: {
         files: [{ name: 'cours.md', type: 'external', external: { url: resourceUrl } }],
       },
       Exercice: {
