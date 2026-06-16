@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "setup:notion": "node scripts/create_notion_dbs.mjs",
+    "import:resource": "node scripts/import_resource.mjs",
     "test:notion": "node scripts/test_notion.mjs"
   },
   "dependencies": {
