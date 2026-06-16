@@ -4,20 +4,8 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getResources, type Resource } from '../../lib/notion.ts';
 import { estimateReadTime } from '../../lib/markdown.ts';
-
-async function loadDataJson(resource: Resource) {
-  if (!resource.content) return null;
-  try {
-    const url = resource.content.startsWith('http')
-      ? resource.content
-      : new URL(resource.content, Astro.url.origin).toString();
-    const res = await fetch(url);
-    if (!res.ok) return null;
-    return await res.json();
-  } catch {
-    return null;
-  }
-}
+import fs from 'node:fs';
+import path from 'node:path';
 
 export async function getStaticPaths() {
   const notionResources = await getResources();
@@ -40,21 +28,33 @@ export async function getStaticPaths() {
     all.set(slug, { ...all.get(slug), ...r, slug });
   });
 
-  return Array.from(all.entries()).map(([slug, resource]) => ({
-    params: { slug },
-    props: { resource },
-  }));
+  return Array.from(all.entries()).map(([slug, resource]) => {
+    let dataJson: any = null;
+    if (resource.contentJson) {
+      try {
+        const filePath = path.join(process.cwd(), 'public', resource.contentJson.replace(/^\//, ''));
+        dataJson = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+      } catch (err) {
+        console.warn(`Impossible de charger ${resource.contentJson}:`, (err as Error).message);
+      }
+    }
+
+    return {
+      params: { slug },
+      props: {
+        resource,
+        contentHtml: dataJson?.contentHtml || '',
+        exerciseHtml: dataJson?.exerciseHtml || '',
+        title: dataJson?.title || resource.title,
+        description: dataJson?.description || resource.description,
+        moduleName: dataJson?.module || resource.module || 'Ressource',
+        solutionUrl: dataJson?.solutionUrl || resource.solutionUrl,
+      },
+    };
+  });
 }
 
-const { resource } = Astro.props;
-const dataJson = await loadDataJson(resource);
-
-const contentHtml = dataJson?.contentHtml || '';
-const exerciseHtml = dataJson?.exerciseHtml || '';
-const title = dataJson?.title || resource.title;
-const description = dataJson?.description || resource.description;
-const moduleName = dataJson?.module || resource.module || 'Ressource';
-const solutionUrl = dataJson?.solutionUrl || resource.solutionUrl;
+const { resource, contentHtml, exerciseHtml, title, description, moduleName, solutionUrl } = Astro.props;
 
 const readTime = estimateReadTime(contentHtml);
 const siteUrl = Astro.site ? Astro.site.toString() : 'https://alliance-digitale-formations.vercel.app';

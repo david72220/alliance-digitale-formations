@@ -26,9 +26,10 @@ const LOCAL_RESOURCES: Resource[] = [
     slug: 'rgpd-pme-10-points-controle',
     title: "RGPD en PME : les 10 points de contrôle essentiels",
     description: "Un micro-cours concret pour identifier les risques RGPD réels dans une PME et appliquer des solutions immédiatement opérationnelles.",
-    content: '/ressources/rgpd-pme-10-points-controle/data.json',
+    content: '/ressources/rgpd-pme-10-points-controle/cours.md',
+    contentJson: '/ressources/rgpd-pme-10-points-controle/data.json',
     module: "Sécurité des données",
-    exercise: '',
+    exercise: '/ressources/rgpd-pme-10-points-controle/exercice.md',
     solutionUrl: '/ressources/rgpd-pme-10-points-controle/solution.pdf',
     published: true,
   },
@@ -73,6 +74,7 @@ export interface Resource {
   title: string;
   description: string;
   content: string;
+  contentJson?: string;
   module: string;
   exercise: string;
   solutionUrl: string;
@@ -227,6 +229,7 @@ function mapResource(page: any): Resource {
     title: getPropertyText(p.Titre) || 'Ressource',
     description: getPropertyText(p.Description),
     content: resourcePath,
+    contentJson: `/ressources/${getPropertyText(p.Slug) || page.id}/data.json`,
     module: getSelect(p.Module),
     exercise: exercicePath,
     solutionUrl: solutionUrl || `/ressources/${getPropertyText(p.Slug) || page.id}/solution.pdf`,
