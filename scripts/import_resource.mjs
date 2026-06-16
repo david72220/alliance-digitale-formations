@@ -1,12 +1,16 @@
 /**
  * Importe une ressource complète dans la base Notion Ressources.
- * Usage : npm run import:resource -- data/ressources/rgpd-pme.json
+ * Génère 3 fichiers : cours.md, exercice.md, solution.md → solution.pdf
+ * Usage : npm run import:resource -- data/ressources/rgpd-pme-10-points-controle.json
  */
 import { Client } from '@notionhq/client';
 import fs from 'node:fs';
+import path from 'node:path';
+import { mdToPdf } from 'md-to-pdf';
 
 const TOKEN = process.env.NOTION_TOKEN;
 const DB_ID = process.env.NOTION_RESOURCES_DB_ID;
+const SITE_URL = process.env.SITE_URL || 'https://alliance-digitale-formations.vercel.app';
 
 if (!TOKEN || !DB_ID) {
   console.error('ERREUR : définissez NOTION_TOKEN et NOTION_RESOURCES_DB_ID');
@@ -21,59 +25,76 @@ if (!filePath) {
 
 const notion = new Client({ auth: TOKEN });
 
-function toBlocks(content) {
-  return content.split('\n\n').map((paragraph) => {
-    const trimmed = paragraph.trim();
-    if (!trimmed) return null;
-
-    // Heading 2
-    if (trimmed.startsWith('## ')) {
-      return { object: 'block', type: 'heading_2', heading_2: { rich_text: [{ type: 'text', text: { content: trimmed.replace('## ', '') } }] } };
-    }
-    // Heading 3
-    if (trimmed.startsWith('### ')) {
-      return { object: 'block', type: 'heading_3', heading_3: { rich_text: [{ type: 'text', text: { content: trimmed.replace('### ', '') } }] } };
-    }
-    // Numbered list
-    if (/^\d+\.\s/.test(trimmed)) {
-      return { object: 'block', type: 'numbered_list_item', numbered_list_item: { rich_text: [{ type: 'text', text: { content: trimmed.replace(/^\d+\.\s/, '') } }] } };
-    }
-    // Bullet list
-    if (trimmed.startsWith('- ')) {
-      return { object: 'block', type: 'bulleted_list_item', bulleted_list_item: { rich_text: [{ type: 'text', text: { content: trimmed.replace('- ', '') } }] } };
-    }
-    // Callout (security emphasis)
-    if (trimmed.startsWith('! ')) {
-      return { object: 'block', type: 'callout', callout: { rich_text: [{ type: 'text', text: { content: trimmed.replace('! ', '') } }], icon: { emoji: '🔒' } } };
-    }
-    // Paragraph
-    return { object: 'block', type: 'paragraph', paragraph: { rich_text: [{ type: 'text', text: { content: trimmed } }] } };
-  }).filter(Boolean);
-}
-
 async function main() {
   const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  const slug = data.slug;
+  const dir = path.resolve('public/ressources', slug);
 
+  // Créer le dossier de la ressource
+  fs.mkdirSync(dir, { recursive: true });
+
+  // Écrire les fichiers Markdown
+  const coursPath = path.join(dir, 'cours.md');
+  const exercicePath = path.join(dir, 'exercice.md');
+  const solutionMdPath = path.join(dir, 'solution.md');
+  const solutionPdfPath = path.join(dir, 'solution.pdf');
+
+  fs.writeFileSync(coursPath, data.content, 'utf-8');
+  fs.writeFileSync(exercicePath, data.exercice || exerciceParDefaut(data.title), 'utf-8');
+  fs.writeFileSync(solutionMdPath, data.solution || solutionParDefaut(data.title), 'utf-8');
+
+  // Générer le PDF solution
+  await mdToPdf({ path: solutionMdPath }, { dest: solutionPdfPath });
+  console.log(`PDF solution généré : ${solutionPdfPath}`);
+
+  // URLs publiques pour Notion (fichier externe)
+  const resourceUrl = `${SITE_URL}/ressources/${slug}/cours.md`;
+  const exerciceUrl = `${SITE_URL}/ressources/${slug}/exercice.md`;
+  const solutionUrl = `${SITE_URL}/ressources/${slug}/solution.pdf`;
+
+  // Chemin local utilisé par le site Astro
+  const resourcePath = `ressources/${slug}/cours.md`;
+  const exercicePath = `ressources/${slug}/exercice.md`;
+  const solutionPath = `ressources/${slug}/solution.pdf`;
+
+  // Créer la page dans Notion
   const page = await notion.pages.create({
     parent: { database_id: DB_ID },
     properties: {
       Titre: { title: [{ type: 'text', text: { content: data.title } }] },
-      Slug: { rich_text: [{ type: 'text', text: { content: data.slug } }] },
+      Slug: { rich_text: [{ type: 'text', text: { content: slug } }] },
       Description: { rich_text: [{ type: 'text', text: { content: data.description } }] },
+      Module: { select: { name: data.module || 'Sécurité des données' } },
       Publié: { checkbox: data.published ?? false },
+      Ressource: {
+        files: [{ name: 'cours.md', type: 'external', external: { url: resourceUrl } }],
+      },
+      Exercice: {
+        files: [{ name: 'exercice.md', type: 'external', external: { url: exerciceUrl } }],
+      },
+      'Solution exercice': {
+        files: [{ name: 'solution.pdf', type: 'external', external: { url: solutionUrl } }],
+      },
+      // Chemin local pour le site Astro (non visible dans Notion, mais stocké temporairement)
+      Chemin: { rich_text: [{ type: 'text', text: { content: resourcePath } }] },
+      'Chemin exercice': { rich_text: [{ type: 'text', text: { content: exercicePath } }] },
+      'Chemin solution': { rich_text: [{ type: 'text', text: { content: solutionPath } }] },
     },
-    children: [
-      { object: 'block', type: 'heading_1', heading_1: { rich_text: [{ type: 'text', text: { content: data.title } }] } },
-      { object: 'block', type: 'paragraph', paragraph: { rich_text: [{ type: 'text', text: { content: data.description } }] } },
-      ...toBlocks(data.content),
-    ],
   });
 
-  console.log(`Ressource créée : ${page.id}`);
+  console.log(`Page Notion créée : ${page.id}`);
   console.log(`URL : https://www.notion.so/${page.id.replace(/-/g, '')}`);
 }
 
+function exerciceParDefaut(title) {
+  return `# Exercice — ${title}\n\n## Consigne\n\nÀ partir de votre entreprise, réalisez un inventaire rapide des 3 outils qui contiennent des données personnelles.\n\nPour chacun, notez :\n\n1. La finalité du traitement\n2. Les catégories de données stockées\n3. Les personnes qui y ont accès\n4. La durée de conservation actuelle\n\n## Livrable attendu\n\nUn tableau simple (papier, tableur ou Notion) listant ces 3 outils avec les 4 informations ci-dessus.\n\n## Question de réflexion\n\nQuelle est la base légale de chaque traitement ? Consentement, contrat, obligation légale, intérêt légitime ?\n`;
+}
+
+function solutionParDefaut(title) {
+  return `# Solution de l'exercice — ${title}\n\n## Exemple de tableau\n\n| Outil | Finalité | Données | Accès | Conservation | Base légale |\n|---|---|---|---|---|---|\n| CRM | Suivi commercial | Coordonnées clients, historique | Commercial, dirigeant | 3 ans après dernier contact | Contrat / intérêt légitime |\n| Paie | Gestion salariale | RIB, fiches de paie, contrats | Comptable, RH | 5 ans après départ | Obligation légale |\n| Email professionnel | Communication interne/externe | Échanges, pièces jointes | Employé concerné | Variable selon nature | Contrat / intérêt légitime |\n\n## Points de vigilance\n\n- Un outil sans finalité claire doit être arrêté ou réduit.\n- Les durées de conservation doivent être justifiées.\n- L’accès doit être limité au strict nécessaire (principe de minimisation).\n- Le consentement n’est pas la base légale par défaut : il faut choisir la base la plus adaptée.\n`;
+}
+
 main().catch((err) => {
-  console.error('Erreur :', err.message);
+  console.error('Erreur :', err);
   process.exit(1);
 });

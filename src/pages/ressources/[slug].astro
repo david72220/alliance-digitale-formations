@@ -3,6 +3,9 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getResources } from '../../lib/notion.ts';
+import { parseMarkdown, estimateReadTime } from '../../lib/markdown.ts';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export async function getStaticPaths() {
   const resources = await getResources();
@@ -13,25 +16,103 @@ export async function getStaticPaths() {
 }
 
 const { resource } = Astro.props;
+
+const resourcePath = path.resolve(process.cwd(), 'public', resource.content);
+const exercisePath = path.resolve(process.cwd(), 'public', resource.exercise);
+
+const resourceMd = fs.existsSync(resourcePath) ? fs.readFileSync(resourcePath, 'utf-8') : '';
+const exerciseMd = fs.existsSync(exercisePath) ? fs.readFileSync(exercisePath, 'utf-8') : '';
+
+const resourceHtml = parseMarkdown(resourceMd);
+const exerciseHtml = parseMarkdown(exerciseMd);
+const readTime = estimateReadTime(resourceMd);
+
+const moduleName = resource.module || 'Ressource';
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: Astro.site || 'https://alliance-digitale-formations.vercel.app' },
+    { '@type': 'ListItem', position: 2, name: 'Ressources', item: `${Astro.site || 'https://alliance-digitale-formations.vercel.app'}/ressources/` },
+    { '@type': 'ListItem', position: 3, name: resource.title },
+  ],
+};
+
+const courseJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LearningResource',
+  name: resource.title,
+  description: resource.description,
+  learningResourceType: 'article',
+  educationalLevel: 'Beginner to intermediate',
+  inLanguage: 'fr-FR',
+  isPartOf: {
+    '@type': 'Course',
+    name: `Module ${moduleName}`,
+    provider: { '@type': 'Organization', name: 'Alliance Digitale' },
+  },
+};
 ---
 
 <Layout title={`${resource.title} — Alliance Digitale`} description={resource.description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(courseJsonLd)} />
+    <link rel="canonical" href={`${Astro.site}/ressources/${resource.slug}/`} />
+  </Fragment>
+
   <Header />
 
   <main class="flex-1">
     <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
-        <div class="mb-8">
-          <a href="/ressources/" class="text-sm text-white/50 hover:text-alliance-blue transition">← Retour aux ressources</a>
+        <nav aria-label="Fil d'ariane" class="text-sm text-white/50 mb-6">
+          <a href="/" class="hover:text-alliance-blue transition">Accueil</a>
+          <span class="mx-2">/</span>
+          <a href="/ressources/" class="hover:text-alliance-blue transition">Ressources</a>
+          <span class="mx-2">/</span>
+          <span class="text-white/80">{resource.title}</span>
+        </nav>
+
+        <div class="mb-2">
+          <span class="inline-block px-3 py-1 rounded-full bg-alliance-blue/10 text-alliance-blue text-xs font-bold uppercase tracking-wider">
+            {moduleName}
+          </span>
         </div>
-        
-        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-6">{resource.title}</h1>
-        
-        <p class="text-white/70 text-lg mb-8">{resource.description}</p>
-        
-        <div class="prose prose-invert max-w-none">
-          <p class="text-white/60">Le contenu détaillé de cette ressource sera chargé depuis le corps de la page Notion associée.</p>
-        </div>
+
+        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-4">{resource.title}</h1>
+
+        <p class="text-white/70 text-lg mb-4">{resource.description}</p>
+
+        <p class="text-sm text-white/50 mb-10">Temps de lecture : environ {readTime} min</p>
+
+        <article class="prose prose-invert prose-lg max-w-none mb-16">
+          <Fragment set:html={resourceHtml} />
+        </article>
+
+        {exerciseMd && (
+          <div class="border-t border-white/10 pt-12 mb-16">
+            <h2 class="font-display text-2xl font-bold text-white mb-6">Exercice pratique</h2>
+            <div class="prose prose-invert max-w-none">
+              <Fragment set:html={exerciseHtml} />
+            </div>
+
+            {resource.solutionUrl && (
+              <div class="mt-8">
+                <a
+                  href={resource.solutionUrl}
+                  download
+                  class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-alliance-blue text-white font-semibold hover:bg-alliance-blue/90 transition"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Télécharger la solution (PDF)
+                </a>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </section>
   </main>

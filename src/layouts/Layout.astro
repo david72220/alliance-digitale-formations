@@ -8,29 +8,31 @@ export interface Props {
   noindex?: boolean;
 }
 
-const { title, description = "Accompagnement et formations IA pour PME avec salariés en Sarthe.", image = "/og-image.jpg", noindex = true } = Astro.props;
+const { title, description = "Accompagnement et formations IA pour PME avec salariés en Sarthe.", image = "/og-image.jpg", noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr-FR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  {!noindex && <meta name="robots" content="index, follow" />}
   {noindex && <meta name="robots" content="noindex, nofollow" />}
   <link rel="canonical" href={canonical.toString()} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={image} />
+  <meta property="og:image" content={new URL(image, Astro.site).toString()} />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="fr_FR" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={image} />
+  <meta name="twitter:image" content={new URL(image, Astro.site).toString()} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <slot name="head" />
 </head>
 <body class="min-h-screen flex flex-col bg-alliance-dark text-white">
   <slot />

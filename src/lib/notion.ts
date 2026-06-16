@@ -39,6 +39,9 @@ export interface Resource {
   title: string;
   description: string;
   content: string;
+  module: string;
+  exercise: string;
+  solutionUrl: string;
   published: boolean;
 }
 
@@ -61,6 +64,19 @@ function getPropertyText(property: any): string {
 
 function getCheckbox(property: any): boolean {
   return property?.type === 'checkbox' && property.checkbox === true;
+}
+
+function getSelect(property: any): string {
+  return property?.select?.name || '';
+}
+
+function getFileUrl(property: any): string {
+  if (property?.type !== 'files' || !Array.isArray(property.files)) return '';
+  const file = property.files[0];
+  if (!file) return '';
+  if (file.type === 'external') return file.external.url;
+  if (file.type === 'file') return file.file.url;
+  return '';
 }
 
 export async function getFormations(): Promise<Formation[]> {
@@ -155,12 +171,21 @@ function mapCaseStudy(page: any): CaseStudy {
 
 function mapResource(page: any): Resource {
   const p = page.properties;
+  const resourceUrl = getFileUrl(p.Ressource);
+  const exerciceUrl = getFileUrl(p.Exercice);
+  const solutionUrl = getFileUrl(p['Solution exercice']);
+  // Dérive le chemin local à partir de l’URL publique si disponible
+  const resourcePath = resourceUrl ? resourceUrl.replace(/^https?:\/\/[^/]+\//, '') : `ressources/${page.id}/cours.md`;
+  const exercicePath = exerciceUrl ? exerciceUrl.replace(/^https?:\/\/[^/]+\//, '') : `ressources/${page.id}/exercice.md`;
   return {
     id: page.id,
     slug: getPropertyText(p.Slug) || page.id,
     title: getPropertyText(p.Titre) || 'Ressource',
     description: getPropertyText(p.Description),
-    content: '',
+    content: resourcePath,
+    module: getSelect(p.Module),
+    exercise: exercicePath,
+    solutionUrl: solutionUrl || `/ressources/${getPropertyText(p.Slug) || page.id}/solution.pdf`,
     published: getCheckbox(p.Publie),
   };
 }
