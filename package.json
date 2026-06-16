@@ -3,16 +3,16 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
+    "dev": "dotenv-cli -- astro dev",
+    "start": "dotenv-cli -- astro dev",
+    "build": "dotenv-cli -- astro build",
+    "preview": "dotenv-cli -- astro preview",
     "astro": "astro",
-    "setup:notion": "node scripts/create_notion_dbs.mjs",
-    "import:resource": "node scripts/import_resource.mjs",
-    "import:all": "node scripts/import_all_resources.mjs",
-    "build:pdf": "node scripts/build_pdf.mjs",
-    "notion:diagnose": "node scripts/diagnose_notion.mjs"
+    "setup:notion": "dotenv-cli -- node scripts/create_notion_dbs.mjs",
+    "import:resource": "dotenv-cli -- node scripts/import_resource.mjs",
+    "import:all": "dotenv-cli -- node scripts/import_all_resources.mjs",
+    "build:pdf": "dotenv-cli -- node scripts/build_pdf.mjs",
+    "notion:diagnose": "dotenv-cli -- node scripts/diagnose_notion.mjs"
   },
   "dependencies": {
     "@notionhq/client": "^2.3.0",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
     "@tailwindcss/typography": "^0.5.15",
+    "dotenv-cli": "^11.0.0",
     "md-to-pdf": "^5.2.5",
     "tailwindcss": "^4.0.0"
   }
