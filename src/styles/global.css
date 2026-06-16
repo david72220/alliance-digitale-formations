@@ -7,8 +7,8 @@
   --color-alliance-blue: #3b97d3;
   --color-alliance-blue-light: #1e9ad7;
   --color-alliance-blue-dark: #1a6fa3;
-  --color-alliance-orange: #F59E0B;
-  --color-alliance-orange-bright: #FF6B35;
+  --color-alliance-orange: #9E2114;
+  --color-alliance-orange-bright: #9E2114;
 }
 
 html {
@@ -25,14 +25,14 @@ body {
 
 .btn-primary {
   @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 font-bold text-sm transition-all duration-300;
-  background: linear-gradient(135deg, var(--color-alliance-orange) 0%, #f97316 100%);
-  color: #06121f;
+  background: linear-gradient(135deg, var(--color-alliance-orange) 0%, #7a190f 100%);
+  color: #ffffff;
 }
 
 .btn-primary:hover {
   opacity: 0.92;
   transform: translateY(-1px);
-  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(158, 33, 20, 0.4);
 }
 
 .btn-secondary {
