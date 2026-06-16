@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "setup:notion": "node scripts/create_notion_dbs.mjs"
+    "setup:notion": "node scripts/create_notion_dbs.mjs",
+    "test:notion": "node scripts/test_notion.mjs"
   },
   "dependencies": {
     "astro": "^6.4.6",
