@@ -49,12 +49,13 @@ export async function getStaticPaths() {
         description: dataJson?.description || resource.description,
         moduleName: dataJson?.module || resource.module || 'Ressource',
         solutionUrl: dataJson?.solutionUrl || resource.solutionUrl,
+        photoUrl: dataJson?.photo || resource.photo || null,
       },
     };
   });
 }
 
-const { resource, contentHtml, exerciseHtml, title, description, moduleName, solutionUrl } = Astro.props;
+const { resource, contentHtml, exerciseHtml, title, description, moduleName, solutionUrl, photoUrl } = Astro.props;
 
 const readTime = estimateReadTime(contentHtml);
 const siteUrl = Astro.site ? Astro.site.toString() : 'https://alliance-digitale-formations.vercel.app';
@@ -81,6 +82,7 @@ const courseJsonLd = {
     '@type': 'Course',
     name: `Module ${moduleName}`,
     provider: { '@type': 'Organization', name: 'Alliance Digitale' },
+    image: photoUrl ? { '@type': 'ImageObject', url: photoUrl } : undefined,
   },
 };
 ---
@@ -97,6 +99,12 @@ const courseJsonLd = {
   <main class="flex-1">
     <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
+        {photoUrl && (
+          <div class="mb-8 rounded-2xl overflow-hidden border border-white/10">
+            <img src={photoUrl} alt={title} class="w-full h-64 sm:h-80 object-cover" />
+          </div>
+        )}
+
         <nav aria-label="Fil d'ariane" class="text-sm text-white/50 mb-6">
           <a href="/" class="hover:text-alliance-blue transition">Accueil</a>
           <span class="mx-2">/</span>

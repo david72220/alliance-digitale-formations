@@ -42,6 +42,7 @@ const LOCAL_RESOURCES: Resource[] = [
     exercise: '/ressources/rgpd-pme-10-points-controle/exercice.md',
     solutionUrl: '/ressources/rgpd-pme-10-points-controle/solution.pdf',
     published: true,
+    photo: '/images/hero-formation-ia.png',
   },
 ];
 
@@ -100,6 +101,7 @@ export interface Resource {
   exercise: string;
   solutionUrl: string;
   published: boolean;
+  photo?: string;
 }
 
 function getPropertyText(property: any): string {
@@ -265,5 +267,6 @@ function mapResource(page: any): Resource {
     exercise: exercicePath,
     solutionUrl: solutionUrl || `/ressources/${getPropertyText(p.Slug) || page.id}/solution.pdf`,
     published: getCheckbox(p.Publié),
+    photo: getFileUrl(p.photo),
   };
 }

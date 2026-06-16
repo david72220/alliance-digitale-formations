@@ -64,9 +64,16 @@ async function main() {
     exerciseHtml: parseMd(fs.readFileSync(exercicePath, 'utf-8')),
     solutionUrl,
     published: data.published ?? false,
+    photo: data.photo || null,
   };
   fs.writeFileSync(dataJsonPath, JSON.stringify(resourceData, null, 2), 'utf-8');
   console.log(`Data JSON généré : ${dataJsonPath}`);
+
+  // Construit la liste des fichiers Notion
+  const notionFiles = [];
+  if (data.photo) {
+    notionFiles.push({ name: 'photo.jpg', type: 'external', external: { url: data.photo } });
+  }
 
   // Créer la page dans Notion
   const page = await notion.pages.create({
@@ -86,6 +93,7 @@ async function main() {
       'Solution exercice': {
         files: [{ name: 'solution.pdf', type: 'external', external: { url: solutionUrl } }],
       },
+      ...(notionFiles.length > 0 ? { photo: { files: notionFiles } } : {}),
     },
   });
 
