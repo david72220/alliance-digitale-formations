@@ -15,12 +15,12 @@
   "dependencies": {
     "@notionhq/client": "^2.3.0",
     "astro": "^6.4.6",
-    "marked": "^18.0.5",
-    "md-to-pdf": "^5.2.5"
+    "marked": "^18.0.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
     "@tailwindcss/typography": "^0.5.15",
+    "md-to-pdf": "^5.2.5",
     "tailwindcss": "^4.0.0"
   }
 }
