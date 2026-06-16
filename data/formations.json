@@ -1,0 +1,19 @@
+[
+  {
+    "id": "litteratie-ia-salaries",
+    "slug": "litteratie-ia-salaries",
+    "title": "Littératie IA pour les salariés",
+    "subtitle": "Comprendre et utiliser l'IA au quotidien",
+    "description": "Formation collective pour aider les salariés à utiliser l'IA dans leur travail quotidien : rédaction, recherche, organisation, sécurité des données et automatisation simple.",
+    "duration": "1/2 journée",
+    "format": "Présentiel ou distanciel",
+    "audience": "Salariés de PME et dirigeants",
+    "objectives": "Maîtriser les outils IA les plus utiles au poste de travail ; identifier les cas d'automatisation simples ; adopter les bonnes pratiques de sécurité des données.",
+    "prerequisites": "Aucune compétence technique requise. Apportez simplement votre ordinateur et vos questions.",
+    "image": "/images/hero-formation-ia.png",
+    "active": true,
+    "online": false,
+    "price": null,
+    "fundingActive": true
+  }
+]
