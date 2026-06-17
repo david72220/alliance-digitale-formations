@@ -9,7 +9,7 @@ export interface Props {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description = "Accompagnement et formations IA pour PME avec salariés en Sarthe.", image = "/og-image.png", noindex = false, jsonLd } = Astro.props;
+const { title, description = "Accompagnement et formations IA pour PME avec salariés en Sarthe.", image = "/og-image.webp", noindex = false, jsonLd } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const siteUrl = Astro.site!.toString().replace(/\/$/, '');
 
