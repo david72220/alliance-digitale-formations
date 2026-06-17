@@ -293,6 +293,9 @@ function getPropertyText(property: any): string {
   if (property.type === 'number' && typeof property.number === 'number') {
     return String(property.number);
   }
+  if (property.type === 'url' && typeof property.url === 'string') {
+    return property.url;
+  }
   return '';
 }
 
@@ -419,12 +422,12 @@ function mapCaseStudy(page: any): CaseStudy {
     client: getPropertyText(p.Client),
     anonymized: getCheckbox(p.Anonymise),
     sector: getPropertyText(p.Secteur),
-    problem: getPropertyText(p.Probleme),
+    problem: getPropertyText(p.Problème) || getPropertyText(p.Probleme),
     solution: getPropertyText(p.Solution),
-    result: getPropertyText(p.Resultat_chiffre),
-    image: getPropertyText(p.Visuel),
-    videoUrl: getPropertyText(p.Video_preuve),
-    published: getCheckbox(p.Publie),
+    result: getPropertyText(p['Résultat chiffré']) || getPropertyText(p.Resultat_chiffre),
+    image: getPropertyText(p.Visuel) || getFileUrl(p.Visuel),
+    videoUrl: getPropertyText(p['Vidéo preuve']) || getPropertyText(p.Video_preuve),
+    published: getCheckbox(p.Publié) || getCheckbox(p.Publie),
   };
 }
 
