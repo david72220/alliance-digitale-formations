@@ -95,29 +95,57 @@ async function main() {
     notionFiles.push({ name: 'photo.jpg', type: 'external', external: { url: data.photo } });
   }
 
-  // Créer la page dans Notion
-  const page = await notion.pages.create({
-    parent: { database_id: DB_ID },
-    properties: {
-      Titre: { title: [{ type: 'text', text: { content: data.title } }] },
-      Slug: { rich_text: [{ type: 'text', text: { content: slug } }] },
-      Description: { rich_text: [{ type: 'text', text: { content: data.description } }] },
-      Module: { select: { name: data.module || 'Autres' } },
-      Publié: { checkbox: data.published ?? false },
-      ressource: {
-        files: [{ name: 'cours.md', type: 'external', external: { url: resourceUrl } }],
+  // Cherche une page existante avec le même Slug dans la base Notion
+  let existingPageId = null;
+  try {
+    const query = await notion.databases.query({
+      database_id: DB_ID,
+      filter: {
+        property: 'Slug',
+        rich_text: { equals: slug },
       },
-      Exercice: {
-        files: [{ name: 'exercice.md', type: 'external', external: { url: exerciceUrl } }],
-      },
-      'Solution exercice': {
-        files: [{ name: 'solution.pdf', type: 'external', external: { url: solutionUrl } }],
-      },
-      ...(notionFiles.length > 0 ? { photo: { files: notionFiles } } : {}),
-    },
-  });
+    });
+    if (query.results.length > 0) {
+      existingPageId = query.results[0].id;
+    }
+  } catch (err) {
+    console.warn(`Impossible de chercher le slug ${slug} dans Notion :`, err.message);
+  }
 
-  console.log(`Page Notion créée : ${page.id}`);
+  // Propriétés Notion communes (création ou mise à jour)
+  const notionProperties = {
+    Titre: { title: [{ type: 'text', text: { content: data.title } }] },
+    Slug: { rich_text: [{ type: 'text', text: { content: slug } }] },
+    Description: { rich_text: [{ type: 'text', text: { content: data.description } }] },
+    Module: { select: { name: data.module || 'Autres' } },
+    Publié: { checkbox: data.published ?? false },
+    ressource: {
+      files: [{ name: 'cours.md', type: 'external', external: { url: resourceUrl } }],
+    },
+    Exercice: {
+      files: [{ name: 'exercice.md', type: 'external', external: { url: exerciceUrl } }],
+    },
+    'Solution exercice': {
+      files: [{ name: 'solution.pdf', type: 'external', external: { url: solutionUrl } }],
+    },
+    ...(notionFiles.length > 0 ? { photo: { files: notionFiles } } : {}),
+  };
+
+  let page;
+  if (existingPageId) {
+    page = await notion.pages.update({
+      page_id: existingPageId,
+      properties: notionProperties,
+    });
+    console.log(`Page mise à jour : ${page.id}`);
+  } else {
+    page = await notion.pages.create({
+      parent: { database_id: DB_ID },
+      properties: notionProperties,
+    });
+    console.log(`Page créée : ${page.id}`);
+  }
+
   console.log(`URL : https://www.notion.so/${page.id.replace(/-/g, '')}`);
 }
 
