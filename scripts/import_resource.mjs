@@ -69,6 +69,26 @@ async function main() {
   fs.writeFileSync(dataJsonPath, JSON.stringify(resourceData, null, 2), 'utf-8');
   console.log(`Data JSON généré : ${dataJsonPath}`);
 
+  // Met à jour le registre global resources.json
+  const registryPath = path.resolve('public/ressources/resources.json');
+  let registry = [];
+  if (fs.existsSync(registryPath)) {
+    try {
+      registry = JSON.parse(fs.readFileSync(registryPath, 'utf-8'));
+      if (!Array.isArray(registry)) registry = [];
+    } catch {
+      registry = [];
+    }
+  }
+  const existingIndex = registry.findIndex((r) => r.slug === slug);
+  if (existingIndex >= 0) {
+    registry[existingIndex] = resourceData;
+  } else {
+    registry.push(resourceData);
+  }
+  fs.writeFileSync(registryPath, JSON.stringify(registry, null, 2), 'utf-8');
+  console.log(`Registre mis à jour : ${registryPath}`);
+
   // Construit la liste des fichiers Notion
   const notionFiles = [];
   if (data.photo) {
