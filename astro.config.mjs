@@ -1,8 +1,10 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://formations.alliance-digitale.fr',
+  site: 'https://alliance-digitale.fr',
   output: 'static',
   trailingSlash: 'always',
+  integrations: [sitemap()],
 });

@@ -13,11 +13,34 @@ export async function getStaticPaths() {
 }
 
 const { formation } = Astro.props;
+
+const courseLd = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": formation.title,
+  "description": formation.generalObjective || `Formation ${formation.title} par Alliance Digitale`,
+  "provider": {
+    "@type": "Organization",
+    "name": "Alliance Digitale",
+    "sameAs": Astro.site!.toString().replace(/\/$/, '')
+  },
+  "url": new URL(Astro.url.pathname, Astro.site).toString(),
+  ...(formation.price && { "offers": { "@type": "Offer", "price": String(formation.price), "priceCurrency": "EUR", "category": "Formation professionnelle" } }),
+  ...(formation.duration && { "timeRequired": formation.duration }),
+  ...(formation.audience && { "audience": { "@type": "EducationalAudience", "audienceType": formation.audience } }),
+  "inLanguage": "fr-FR",
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": "onsite",
+    "courseWorkload": formation.duration || "PT7H"
+  }
+};
 ---
 
 <Layout
   title={`${formation.title} — Alliance Digitale`}
   description={formation.generalObjective}
+  jsonLd={courseLd}
 >
   <Header />
 

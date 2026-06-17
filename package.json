@@ -15,6 +15,7 @@
     "notion:diagnose": "npx dotenv-cli -- node scripts/diagnose_notion.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "@notionhq/client": "^2.3.0",
     "astro": "^6.4.6",
     "gsap": "^3.15.0",

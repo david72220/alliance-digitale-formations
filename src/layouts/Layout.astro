@@ -6,10 +6,33 @@ export interface Props {
   description?: string;
   image?: string;
   noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description = "Accompagnement et formations IA pour PME avec salariés en Sarthe.", image = "/og-image.jpg", noindex = false } = Astro.props;
+const { title, description = "Accompagnement et formations IA pour PME avec salariés en Sarthe.", image = "/og-image.png", noindex = false, jsonLd } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const siteUrl = Astro.site!.toString().replace(/\/$/, '');
+
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Alliance Digitale",
+  "url": siteUrl,
+  "logo": `${siteUrl}/LOGO%20alliance-Digitale%20blanc.png`,
+  "description": "Accompagnement IA et automatisation pour PME avec salariés en Sarthe.",
+  "areaServed": { "@type": "AdministrativeArea", "name": "Sarthe" },
+  "address": { "@type": "PostalAddress", "addressCountry": "FR", "addressRegion": "Pays de la Loire" }
+};
+
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Alliance Digitale",
+  "url": siteUrl
+};
+
+const extraLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const allLd = [organizationLd, websiteLd, ...extraLd];
 ---
 
 <!DOCTYPE html>
@@ -35,6 +58,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+  {allLd.map((ld) => (
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+  ))}
   <slot name="head" />
 </head>
 <body class="min-h-screen flex flex-col bg-alliance-dark text-white">
