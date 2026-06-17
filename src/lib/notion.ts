@@ -46,6 +46,23 @@ const LOCAL_RESOURCES: Resource[] = [
   },
 ];
 
+const LOCAL_CASE_STUDIES: CaseStudy[] = [
+  {
+    id: 'comptes-rendus-pme-industrielle',
+    slug: 'comptes-rendus-pme-industrielle',
+    title: "Automatisation des comptes rendus clients",
+    client: "PME industrielle",
+    anonymized: true,
+    sector: "Industrie",
+    problem: "Un responsable commercial passait 4 à 5 heures par semaine à rédiger des comptes rendus de visite et à les retranscrire dans le CRM.",
+    solution: "Mise en place d'un workflow de dictée vocale + IA locale qui génère un compte rendu structuré et l'enregistre automatiquement dans le CRM en respectant la confidentialité client.",
+    result: "Gain de 2h30 par semaine, amélioration de la qualité des suivis et réduction des oublis.",
+    image: "/images/hero-formation-ia.png",
+    videoUrl: "",
+    published: true,
+  },
+];
+
 export interface Formation {
   id: string;
   slug: string;
@@ -160,17 +177,22 @@ export async function getFormations(): Promise<Formation[]> {
 export async function getCaseStudies(): Promise<CaseStudy[]> {
   const token = import.meta.env.NOTION_TOKEN;
   const dbId = import.meta.env.NOTION_CASE_STUDIES_DB_ID;
-  if (!token || !dbId) return [];
+  if (!token || !dbId) return LOCAL_CASE_STUDIES;
+
   try {
     const notion = new Client({ auth: token });
     const response = await notion.databases.query({
       database_id: dbId,
       filter: { property: 'Publié', checkbox: { equals: true } },
     });
-    return response.results.map(mapCaseStudy);
+    const notionStudies = response.results.map(mapCaseStudy);
+    // Fusion : Notion écrase les champs des études locales en cas de conflit
+    const merged = new Map<string, CaseStudy>();
+    [...LOCAL_CASE_STUDIES, ...notionStudies].forEach((s) => merged.set(s.slug, { ...merged.get(s.slug), ...s }));
+    return Array.from(merged.values());
   } catch (err) {
     console.warn('Notion getCaseStudies error:', (err as Error).message);
-    return [];
+    return LOCAL_CASE_STUDIES;
   }
 }
 
