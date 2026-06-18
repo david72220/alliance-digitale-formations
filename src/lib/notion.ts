@@ -379,6 +379,46 @@ export async function getResources(): Promise<Resource[]> {
   }
 }
 
+function getNumber(property: any): number | undefined {
+  if (property?.type === 'number' && typeof property.number === 'number') {
+    return property.number;
+  }
+  if (property?.type === 'rich_text' && property.rich_text?.[0]?.plain_text) {
+    const parsed = parseFloat(property.rich_text[0].plain_text.replace(/\s|€|HT|TTC/g, '').replace(',', '.'));
+    if (!isNaN(parsed)) return parsed;
+  }
+  if (property?.type === 'select' && property.select?.name) {
+    const parsed = parseFloat(property.select.name.replace(/\s|€|HT|TTC/g, '').replace(',', '.'));
+    if (!isNaN(parsed)) return parsed;
+  }
+  return undefined;
+}
+
+function getCheckboxFromProperties(properties: any, names: string[]): boolean {
+  for (const name of names) {
+    const prop = properties[name];
+    if (prop?.type === 'checkbox') return prop.checkbox === true;
+  }
+  return false;
+}
+
+function getPrice(properties: any): number | undefined {
+  const names = ['Prix', 'Tarif', 'prix', 'tarif', 'Prix HT', 'Tarif HT'];
+  for (const name of names) {
+    const val = getNumber(properties[name]);
+    if (val !== undefined) return val;
+  }
+  return undefined;
+}
+
+function getFundingActive(properties: any): boolean {
+  return getCheckboxFromProperties(properties, [
+    'OPCO', 'opco', 'Financement OPCO', 'Éligible OPCO', 'Eligible OPCO',
+    'Éligible opco', 'Eligible opco', 'Financement Opérateur de Compétences',
+    'Finançable OPCO', 'Financement CPF'
+  ]);
+}
+
 function mapFormation(page: any): Formation {
   const p = page.properties;
   const title = getPropertyText(p.Nom) || 'Formation sans titre';
@@ -408,8 +448,8 @@ function mapFormation(page: any): Formation {
     prerequisites: '',
     image: '',
     online: false,
-    price: undefined,
-    fundingActive: false,
+    price: getPrice(p),
+    fundingActive: getFundingActive(p),
   };
 }
 
