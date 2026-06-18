@@ -20,6 +20,7 @@ const navLinks = [
           <Image src={logo} alt="Alliance Digitale" widths={[120, 240]} sizes="120px" formats={['avif', 'webp']} quality={85} loading="eager" decoding="async" class="h-10 w-auto object-contain" />
         </span>
       </a>
+
       <div class="relative z-10 hidden lg:flex items-center gap-1">
         {navLinks.map((link) => (
           <a href={link.href} class="px-3 py-2 rounded-lg text-sm font-medium text-white/75 hover:text-white hover:bg-white/10 transition">
@@ -27,9 +28,79 @@ const navLinks = [
           </a>
         ))}
       </div>
+
       <a href="/contact/" class="btn-primary relative z-10 hidden lg:inline-flex">Prendre rendez-vous</a>
+
+      <button
+        type="button"
+        id="mobile-menu-toggle"
+        class="relative z-10 lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+        </svg>
+        <svg id="icon-close" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
     </nav>
+
+    <div
+      id="mobile-menu"
+      class="lg:hidden hidden mt-3 relief-panel relief-1 p-4 flex-col gap-1"
+    >
+      {navLinks.map((link) => (
+        <a href={link.href} class="block px-4 py-3 rounded-lg text-base font-medium text-white/85 hover:text-white hover:bg-white/10 transition">
+          {link.label}
+        </a>
+      ))}
+      <a href="/contact/" class="btn-primary mt-3 justify-center text-center">Prendre rendez-vous</a>
+    </div>
   </div>
 </header>
 
 <div class="h-24"></div>
+
+<script>
+  const btn = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+
+  if (btn && menu && iconOpen && iconClose) {
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('hidden') === false;
+      menu.classList.toggle('flex', open);
+      iconOpen.classList.toggle('hidden', open);
+      iconClose.classList.toggle('hidden', !open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+
+    // Close on link click
+    menu.querySelectorAll('a').forEach((a) =>
+      a.addEventListener('click', () => {
+        menu.classList.add('hidden');
+        menu.classList.remove('flex');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Ouvrir le menu');
+      })
+    );
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        menu.classList.remove('flex');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+</script>

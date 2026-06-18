@@ -54,7 +54,7 @@ PAGE_QUERY_OVERRIDES = {
     "38296280-38de-81c4-bd78-c6c59e2c70e6": "administrative paperwork desk",   # 4. productivité admin
     "38296280-38de-8178-808d-e4657977245b": "hands typing keyboard close",     # 2. Prompts
     "38296280-38de-8158-8a65-fb1d17e78f4b": "marketing whiteboard brainstorm", # 3. comm marketing
-    "37f96280-38de-80c8-b4c2-c3625f194d7b": "small business team meeting",     # 9. IA Express Sarthe
+    "37f96280-38de-80c8-b4c2-c3625f194d7b": "team training workshop laptop",   # 9. IA Express Sarthe
     "37d96280-38de-808a-b60e-ccc844577b67": "freelancer laptop cafe",          # A. autoentrepreneurs
 }
 
