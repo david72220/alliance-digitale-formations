@@ -1,23 +1,23 @@
-## Objectifs du cours
+# Automatiser la saisie et l'export de données : finir la copie manuelle
 
-À l'issue de ce micro-cours, vous serez capable de :
+## Qu’est-ce que la saisie automatique ?
 
-- Repérer les tâches de saisie répétitives et sources d'erreur.
-- Automatiser le transfert de données entre formulaires, tableurs et applications.
-- Nettoyer et transformer des données avant export.
-- Choisir le bon outil selon le volume et la complexité.
-- Sécuriser les exports sensibles (RGPD, accès restreints).
+La saisie automatique, c’est le fait de faire circuler des informations d’un outil à l’autre sans avoir à les recopier. Elle concerne aussi bien la collecte de données (formulaire, email) que leur transformation et leur export vers un autre logiciel.
 
-## Pourquoi automatiser la saisie ?
+::: retenir L’idée centrale
+Dans une PME, la saisie manuelle représente souvent 2 à 4 heures par semaine et par collaborateur. L’automatisation réduit les erreurs, libère du temps et améliore la réactivité.
+:::
 
-Dans une PME, la saisie manuelle représente souvent 2 à 4 heures par semaine et par collaborateur :
+### Pourquoi cela concerne une PME en Sarthe ?
 
-- Recopier des commandes dans un tableau.
-- Reporter des heures, des notes de frais, des contacts.
-- Fusionner plusieurs fichiers Excel avant un reporting.
-- Mettre à jour un CRM à partir d'une liste de prospects.
+- Un artisan remplit des rapports d’intervention papier puis les recopie le soir.
+- Un commerçant reçoit des commandes sur son site puis les saisit dans son logiciel comptable.
+- Un consultant collecte des notes de frais par email, WhatsApp et photo.
+- Toutes ces doubles saisies peuvent être éliminées ou réduites.
 
-L'automatisation réduit les erreurs, libère du temps et améliore la réactivité.
+::: card Exemple 1 : le technicien en Sarthe
+Un technicien en maintenance remplit un formulaire sur son téléphone à chaque intervention. Les données arrivent automatiquement dans un Google Sheets, puis génèrent un PDF envoyé au client. Fini la retranscription le soir au bureau.
+:::
 
 ## Exemples par rôle
 
@@ -35,85 +35,49 @@ L'automatisation réduit les erreurs, libère du temps et améliore la réactivi
 
 ### Comptable / Administratif
 - **Problème** : à la fin du mois, il faut consolider 5 fichiers Excel de dépenses envoyés par email.
-- **Scénario** : Emails avec pièce jointe → extraction des CSV/Excel → consolidation dans un Google Sheets unique → alerte si doublon ou montant anormal.
+- **Scénario** : Emails avec pièce jointe → extraction des CSV/Excel → consolidation dans un Google Sheets unique → alerte si doublon.
 
-## Le flux type : saisie → nettoyage → stockage → export
+::: tip Conseil pratique
+Avant d’automatiser, commencez par centraliser. Un formulaire unique vaut mieux que trois canaux de collecte différents.
+:::
 
-```
-Source (formulaire, email, fichier)
-        │
-        ▼
-Nettoyage (suppression doublons, formats uniformes, validation)
-        │
-        ▼
-Stockage centralisé (Google Sheets, Airtable, Notion, CRM)
-        │
-        ▼
-Export / Synchronisation vers outil métier ou rapport
-```
+## Les 4 étapes d’un flux de saisie automatisé
 
-## Les règles de qualité des données
+| Étape | Question | Exemple |
+|---|---|---|
+| 1. Collecte | D’où viennent les données ? | Formulaire, email, fichier CSV |
+| 2. Stockage | Où les données sont-elles centralisées ? | Google Sheets, Airtable, Notion |
+| 3. Validation | Quelles règles vérifient la qualité ? | Montant > 0, date cohérente, catégorie connue |
+| 4. Export | Où les données doivent-elles aller ? | Logiciel comptable, CRM, outil de paie |
 
-1. **Un seul point d'entrée** : évitez les doubles saisies.
-2. **Validation en amont** : champs obligatoires, listes déroulantes, formats de date.
-3. **Normalisation** : prénom/nom en capitales, emails en minuscules, téléphone au format international.
-4. **Détection des doublons** : comparer email ou numéro de téléphone avant création.
-5. **Traçabilité** : conserver la date de saisie, la source et l'auteur.
+## Exemple de prompt IA pour nettoyer des données
 
-## Outils gratuits et payants
+> Tu es développeur n8n. J'ai un formulaire de notes de frais qui alimente un Google Sheets. Avant l'export mensuel, je veux nettoyer les données et détecter les anomalies. Donne-moi un workflow n8n avec : 1) lecture des nouvelles lignes, 2) transformation des montants au format nombre avec 2 décimales, 3) normalisation des catégories, 4) détection des doublons, 5) envoi d’une alerte si une ligne est rejetée. Ne cite aucune donnée client réelle.
 
-| Outil | Type | Idéal pour | Prix indicatif |
-|---|---|---|---|
-| **n8n** | No-code/low-code | Workflows complexes, multi-applications | Gratuit (self-hosted) |
-| **Zapier** | SaaS no-code | Connexions rapides sans technique | Gratuit limité, puis payant |
-| **Make (ex-Integromat)** | SaaS no-code | Transformations visuelles avancées | Gratuit limité, puis ~9 €/mois |
-| **Google Apps Script** | Code léger | Écosystème Google uniquement | Gratuit |
-| **Microsoft Power Automate** | Microsoft 365 | Entreprises équipées Microsoft | Inclus / licences |
-| **Airtable Automations** | Base de données + automation | Consolidation et logique métier | Gratuit limité, puis ~20 €/utilisateur |
-| **Notion + Make** | Base de données + connecteurs | Gestion de connaissances et suivi | Selon plan Make |
+::: card Exemple 2 : la PME de nettoyage du Mans
+Une PME collecte les heures de travail via un formulaire. Chaque semaine, un script vérifie que les heures sont cohérentes et génère un export pour la paie. L’administratif gagne 2 heures par semaine.
+:::
 
-> **Conseil Alliance Digitale** : si 80 % de vos données sont dans Google Sheets et Gmail, commencez par **Google Apps Script** ou **n8n** gratuit. Si vous avez besoin de règles métier complexes (validation, multi-étapes, rapports), envisagez **Airtable** ou **n8n self-hosted**.
+## Données sensibles et sécurité
 
-## Prompt IA sécurisé pour créer un workflow de saisie
+- Ne jamais faire circuler des données clients, salariés ou financières sans contrôle d’accès.
+- Limiter les permissions des outils interconnectés.
+- Anonymiser les données de test.
+- Documenter chaque flux (voir le micro-cours « Documenter son workflow automatique »).
 
-```
-Tu es expert en automatisation de données pour une PME de [secteur].
-Je veux automatiser la saisie de [type de données : commandes, heures, dépenses, contacts] provenant de [source : formulaire, email, fichier].
-Donne-moi :
-1. L'architecture du workflow (trigger, transformations, stockage, export).
-2. Les règles de validation et de nettoyage indispensables.
-3. Une méthode de détection des doublons.
-4. Les permissions minimales nécessaires.
-5. Les risques RGPD à anticiper.
-N'utilise pas de données réelles dans ta réponse.
-```
+::: attention Point de vigilance
+Un flux mal configuré peut créer des doublons, supprimer des données ou envoyer des informations à la mauvaise personne. Testez toujours avec des données fictives avant de passer en production.
+:::
 
-## Exemple de nettoyage automatique
+## Plan d’action cette semaine
 
-Avant export, un workflow peut :
+1. **Identifier la tâche de copie** la plus chronophage de votre activité.
+2. **Lister les outils impliqués** (source, stockage, destination).
+3. **Créer un formulaire unique** de collecte si les données arrivent par plusieurs canaux.
+4. **Dessiner le flux** sur papier ou dans un outil de diagramme.
+5. **Choisir un outil d’automatisation** adapté à votre niveau technique.
+6. **Tester avec des données fictives** avant de connecter de vraies données.
 
-- Supprimer les lignes vides.
-- Convertir les virgules en points pour les montants.
-- Uniformiser les formats de date (YYYY-MM-DD).
-- Vérifier qu'un email contient « @ » et un domaine valide.
-- Marquer les anomalies (montant > 1 000 €, champ manquant) pour contrôle humain.
-
-## Sécuriser les exports
-
-- **Limiter l'accès** : partagez les Google Sheets / Airtable uniquement avec les personnes concernées.
-- **Anonymiser** : exportez les données personnelles uniquement si nécessaire.
-- **Chiffrer** : utilisez des liens de partage sécurisés avec expiration pour les exports sensibles.
-- **Journaliser** : gardez une trace des exports effectués (qui, quand, quoi).
-- **RGPD** : effacez ou anonymisez les données des contacts inactifs après la durée légale.
-
-## Astuces opérationnelles
-
-- Commencez par cartographier les 3 tâches de saisie les plus chronophages.
-- Automatisez d'abord un cas simple à 80 %, puis itérez.
-- Prévoyez toujours une « file de rejet » pour les données non conformes.
-- Testez avec un échantillon de 20 lignes avant généralisation.
-- Documentez le workflow et nommez les champs de manière cohérente.
-
-## Pour aller plus loin
-
-Alliance Digitale aide les PME sarthoises à auditer leurs processus de saisie, à choisir l'outil adapté et à former les équipes. Un atelier de 2 heures suffit souvent pour identifier les 2 à 3 workflows les plus rentables.
+::: retenir En résumé
+Automatiser la saisie, c’est surtout éliminer les doubles recopies et les erreurs humaines. Un flux bien pensé commence par une collecte propre, une validation des données et un export fiable.
+:::

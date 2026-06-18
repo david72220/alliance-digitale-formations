@@ -2,7 +2,7 @@
 
 ## Exemple de prompt validé
 
-> *Post Instagram carré pour un artisan plombier en Sarthe. Style épuré et professionnel. Couleurs bleu marine et orange. Titre : "Un dépannage en 24h, c’est possible". Image d’une salle de bain moderne, sans personne. Mention discrète : "Devis gratuit".*
+> Post Instagram carré pour un artisan plombier en Sarthe. Style épuré et professionnel. Couleurs bleu marine et orange. Titre : « Un dépannage en 24 h, c’est possible ». Image d’une salle de bain moderne, sans personne. Mention discrète : « Devis gratuit ».
 
 ## Critères d’évaluation du résultat
 
@@ -23,3 +23,12 @@
 ## Axe d’amélioration prioritaire
 
 Ne demandez pas à l’IA de gérer le texte intégré dans l’image. Générez d’abord l’image, puis ajoutez le texte dans un outil de design.
+
+## Grille d’évaluation du livrable
+
+| Critère | 1 point | 2 points | 3 points |
+|---|---|---|---|
+| Prompt | Vague ou incomplet | Quelques détails | Format, style, couleurs, ambiance et exclusions précisés |
+| Variantes | Moins de 3 visuels | 3 visuels mais mal évalués | 3 visuels évalués avec critères clairs |
+| Sélection | Sélection sans justification | Sélection justifiée superficiellement | Sélection justifiée avec axes d’amélioration |
+| Finalisation | Texte ou logo manquant | Texte et logo présents mais mal placés | Visuel lisible, cohérent et prêt à publier |

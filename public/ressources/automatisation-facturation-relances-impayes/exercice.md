@@ -12,8 +12,17 @@ Concevoir un scénario de relance simple et applicable dans votre entreprise.
 4. Indiquez l’outil qui enverra la relance (logiciel de comptabilité, n8n, email manuel).
 5. Prévoyez une action si le client ne paie pas au bout de 30 jours.
 
-## Livrable attendu
+## Tableau du scénario à compléter
 
-- Un tableau avec les 3 étapes, le délai, le canal et le ton.
-- Les 3 brouillons de relance.
-- Un critère de mesure du résultat.
+| Étape | Délai | Canal | Ton | Action attendue |
+|---|---|---|---|---|
+| Rappel amical | | | | |
+| Relance ferme | | | | |
+| Dernière relance | | | | |
+| Action en cas de non-paiement | | | | |
+
+## Questions de réflexion
+
+- Pourquoi un client régulier mérite-t-il un ton plus doux qu’un nouveau client ?
+- Quelle donnée doit impérativement apparaître dans chaque relance ?
+- Quels sont les risques d’une relance trop fréquente ou trop agressive ?

@@ -1,10 +1,10 @@
-## Solution indicative
+# Corrigé de l’exercice — Séquence de relance de devis
 
-### 1. Outil choisi
+## 1. Outil choisi
 
 **n8n + Gmail + Google Sheets** en phase de test (coût nul), puis éventuellement **Brevo** ou **HubSpot** si le volume dépasse 200 relances/mois.
 
-### 2. Étapes de la séquence
+## 2. Étapes de la séquence
 
 | Étape | Déclencheur | Délai | Canal | Ton |
 |---|---|---|---|---|
@@ -12,7 +12,7 @@
 | 2 | Statut toujours « Envoyé » | J+3 | Email | Aide + questions |
 | 3 | Statut toujours « Envoyé » | J+7 | Email | Délai de validité |
 
-### 3. Exemples d'emails
+## 3. Exemples d'emails
 
 **Email 1 — Confirmation (J0)**
 - **Objet** : Votre devis [REF] est prêt — voici le récapitulatif
@@ -26,24 +26,27 @@
 - **Objet** : Votre devis [REF] expire bientôt
 - **Corps** : Bonjour, votre devis [REF] reste valide jusqu'au [date]. Pour sécuriser votre créneau, vous pouvez le signer en ligne. [CTA : Signer le devis]
 
-### 4. Conditions d'arrêt
+## 4. Conditions d'arrêt
 
 1. Le client clique sur « Signer le devis » ou le statut passe à « Signé ».
 2. Le client répond à l'un des emails (détection de réponse dans Gmail).
 
-### 5. Indicateurs de succès
+## 5. Indicateurs de succès
 
 - **Taux de conversion** : % de devis signés après la séquence.
 - **Temps moyen de signature** : nombre de jours entre envoi et signature.
 
-### 6. Prompt IA sécurisé
+## 6. Prompt IA sécurisé
 
-```
-Relis et améliore 3 emails de relance de devis pour une PME B2B.
-Contraintes : ton chaleureux, un seul CTA par email, 80-120 mots, objet accrocheur, opt-out visible.
-Ne mentionne aucune donnée réelle : remplace les références par [REF], les noms par [Prénom] et les montants par [MONTANT].
-```
+> Relis et améliore 3 emails de relance de devis pour une PME B2B. Contraintes : ton chaleureux, un seul CTA par email, 80-120 mots, objet accrocheur, opt-out visible. Ne mentionne aucune donnée réelle : remplace les références par [REF], les noms par [Prénom] et les montants par [Montant].
 
-### Point de vigilance
+## Grille d’évaluation du livrable
 
-Avant d'activer la séquence, testez-la sur votre propre adresse email et celle d'un collègue pendant 1 semaine. Vérifiez que l'opt-out fonctionne et que les conditions d'arrêt s'exécutent correctement.
+| Critère | 1 point | 2 points | 3 points |
+|---|---|---|---|
+| Choix d’outil | Outil inadapté | Outil adapté mais mal justifié | Outil adapté avec justification gratuit/payant |
+| Séquence | Moins de 3 étapes | 3 étapes mais mal définies | 3 étapes avec déclencheur, délai, canal, ton |
+| Rédaction des emails | Emails confus ou trop longs | Emails corrects mais génériques | Emails clairs, ton adapté, un seul CTA, 80-120 mots |
+| Conditions d’arrêt | Aucune condition | Une seule condition | Deux conditions claires (statut, réponse) |
+| Indicateurs | Indicateurs flous | Indicateurs présents mais non mesurables | 2 indicateurs chiffrés et faciles à suivre |
+| Prompt IA | Données réelles incluses | Correct mais peu structuré | Sécurisé, structuré, avec contraintes claires |

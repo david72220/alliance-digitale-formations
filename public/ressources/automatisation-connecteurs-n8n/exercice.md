@@ -1,10 +1,10 @@
-## Exercice pratique : dessiner votre premier scénario n8n
+# Exercice pratique — Dessiner votre premier scénario n8n
 
-### Contexte
+## Contexte
 
 Vous gérez une PME qui reçoit des demandes de devis via un formulaire Typeform (ou Google Forms). Actuellement, vous copiez-collez chaque réponse dans un tableau Google Sheets, puis vous envoyez un email de confirmation manuellement.
 
-### Travail demandé
+## Travail demandé
 
 1. **Listez vos applications** : identifiez les 3 outils impliqués dans ce processus (formulaire, stockage, email).
 2. **Dessinez le workflow** sur papier ou dans un outil de diagramme (draw.io, Miro, Excalidraw) avec :
@@ -14,3 +14,18 @@ Vous gérez une PME qui reçoit des demandes de devis via un formulaire Typeform
 3. **Identifiez les permissions API** nécessaires pour chaque outil.
 4. **Rédigez le prompt IA** que vous enverriez à un assistant pour affiner ce scénario, sans inclure de données clients réelles.
 5. **Préparez 3 questions** à poser à l'équipe Alliance Digitale lors d'un atelier de cadrage.
+
+## Tableau des applications
+
+| Rôle | Outil | Données échangées | Permission nécessaire |
+|---|---|---|---|
+| Trigger | | | |
+| Action 1 | | | |
+| Action 2 | | | |
+| Condition / Alerte | | | |
+
+## Questions de réflexion
+
+- Quelle est la première donnée qui doit circuler entre vos outils ?
+- Quelle condition mérite une alerte particulière ?
+- Quels sont les risques si le workflow envoie des données à la mauvaise personne ?

@@ -1,4 +1,4 @@
-# Solution de l’exercice — Analyse Excel
+# Corrigé de l’exercice — Analyse Excel
 
 ## Exemple de questions
 
@@ -19,3 +19,12 @@
 - Ne pas envoyer de données brutes sensibles.
 - Préférer des tableaux agrégés.
 - L’IA peut interpréter une colonne de date ou de montant de façon erronée.
+
+## Grille d’évaluation du livrable
+
+| Critère | 1 point | 2 points | 3 points |
+|---|---|---|---|
+| Anonymisation | Données sensibles toujours présentes | Quelques données sensibles oubliées | Fichier anonymisé avant envoi |
+| Questions | Questions vagues ou trop larges | Questions pertinentes mais mal ciblées | 3 questions précises et actionnables |
+| Résultats | Résultats non évalués | Évaluation superficielle | Comparaison avec analyse personnelle et identification d’actions |
+| Sécurité | Utilisation d’un outil en ligne pour données sensibles | Anonymisation partielle | Choix adapté entre outil en ligne anonymisé ou modèle local |

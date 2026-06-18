@@ -1,14 +1,14 @@
-# Solution de l’exercice — Prospection IA
+# Corrigé de l’exercice — Prospection IA
 
 ## Client idéal type
 
-- Dirigeant de PME de 5 à 50 salariés
-- Basé en Sarthe ou région Pays de la Loire
-- Cherche à gagner du temps sur des tâches administratives ou commerciales
+- Dirigeant de PME de 5 à 50 salariés.
+- Basé en Sarthe ou région Pays de la Loire.
+- Cherche à gagner du temps sur des tâches administratives ou commerciales.
 
 ## Email profil A : dirigeant industriel
 
-> Objet : Gagner du temps sur vos devis et relances clients
+> **Objet** : Gagner du temps sur vos devis et relances clients
 
 Bonjour [Prénom],
 
@@ -20,7 +20,7 @@ Cordialement, [Signature]
 
 ## Email profil B : dirigeant de bureau d’études
 
-> Objet : Moins d’administratif, plus de projets
+> **Objet** : Moins d’administratif, plus de projets
 
 Bonjour [Prénom],
 
@@ -30,7 +30,7 @@ Pourrions-nous échanger 15 minutes sur les points qui ralentissent le plus vos 
 
 Cordialement, [Signature]
 
-## 3 relances
+## 3 relances adaptées
 
 1. **Non ouvert** : reformuler l’objet avec un bénéfice chiffré ou une question.
 2. **Ouvert sans réponse** : courte relance avec témoignage ou cas concret.
@@ -39,5 +39,15 @@ Cordialement, [Signature]
 ## Points de vigilance
 
 - Toujours personnaliser le nom, l’entreprise et le contexte.
-- Respecter le consentement et la Loi Sapin.
+- Respecter le consentement et la Loi Sapin 2.
 - Tester plusieurs objets pour améliorer le taux d’ouverture.
+- Ne jamais envoyer de données sensibles dans les prompts.
+
+## Grille d’évaluation du livrable
+
+| Critère | 1 point | 2 points | 3 points |
+|---|---|---|---|
+| Client idéal | Critères vagues | 3 critères mais peu ciblés | 3 critères précis (taille, localisation, besoin) |
+| Emails personnalisés | Messages génériques | Messages sectorisés mais sans détail local | Messages avec secteur, enjeu concret et question personnalisée |
+| Relances | Relances identiques | Relances différenciées mais peu adaptées | 3 relances adaptées au comportement du prospect |
+| Conformité | Aucune mention | Mention partielle | Désinscription et base légale identifiées |

@@ -8,7 +8,19 @@ Automatiser, c'est confier à un outil la répétition de tâches sensibles : en
 - tomber en panne silencieusement pendant des semaines ;
 - devenir une porte d'entrée pour une attaque.
 
-Ce micro-cours vous donne les bonnes pratiques pour automatiser sans prendre de risques inutiles.
+::: retenir L’idée centrale
+Un workflow automatique doit être traité comme un outil critique : comptes dédiés, permissions limitées, surveillance régulière et documentation à jour.
+:::
+
+### Pourquoi cela concerne une PME en Sarthe ?
+
+- Les PME sont de plus en plus ciblées par les cyberattaques car elles sont souvent moins protégées.
+- Un workflow mal configuré peut exposer des données clients, des factures ou des données salariales.
+- Un workflow en panne sans alerte peut perturber la relation client sans que personne ne s’en aperçoive.
+
+::: card Exemple 1 : la PME de conseil du Mans
+Un workflow envoie chaque vendredi soir un email récapitulatif avec le chiffre d’affaires de la semaine et un lien vers un tableau de bord Notion. L’email part depuis le compte Gmail personnel du fondateur. C’est une faille : si le fondateur part, le workflow tombe en panne.
+:::
 
 ## Les 5 piliers de la sécurité d'un workflow
 
@@ -36,48 +48,43 @@ Ce micro-cours vous donne les bonnes pratiques pour automatiser sans prendre de 
 ### 5. Maintenir et réviser régulièrement
 - Relisez vos workflows tous les 3 à 6 mois.
 - Supprimez les automatisations devenues inutiles.
-- Documentez chaque scénario : objectif, déclencheur, outils, propriétaire.
+- Documentez chaque scénario (voir le micro-cours « Documenter son workflow automatique »).
 
-## Exemples concrets par rôle
+::: tip Conseil pratique
+Créez un email dédié aux automatisations, par exemple `automation@votreentreprise.fr`. Ainsi, les envois ne dépendent pas d’un seul individu et sont traçables.
+:::
 
-**Dirigeant(e)**
-- Un workflow envoie chaque lundi le chiffre d'affaires de la semaine par email. On limite le destinataire au dirigeant et à l'associé. Le mot de passe du compte email est stocké dans un gestionnaire sécurisé, jamais dans le code.
+## Exemple de règle de diffusion sécurisée
 
-**Commercial(e)**
-- Un scénario relance automatiquement les prospects. On ajoute une règle de plafond : maximum 3 relances, avec un délai minimum de 5 jours entre chaque, et une option de désinscription conforme au RGPD.
+> Les emails récapitulatifs hebdomadaires ne peuvent être envoyés qu'aux personnes identifiées dans la liste de diffusion validée par le dirigeant. Toute demande d'ajout doit faire l'objet d'une validation écrite. Les données chiffrées sensibles (CA détaillé, marges, données clients nominatives) ne sont pas incluses dans le corps de l'email.
 
-**Comptable / Gestionnaire**
-- Un workflow récupère les factures fournisseurs. On le configure pour refuser les pièces-jointes exécutables (.exe, .zip suspects) et scanner automatiquement les fichiers PDF.
+::: card Exemple 2 : le commerce en ligne de Sablé-sur-Sarthe
+Un site e-commerce envoie automatiquement des notifications Slack à chaque commande. Le webhook Slack était stocké dans un fichier texte partagé. Après un audit, le webhook est déplacé dans un gestionnaire de mots de passe et les accès sont limités.
+:::
 
-**Responsable production / Atelier**
-- Un capteur envoie une alerte si une machine dépasse une température. On s'assure que l'alerte ne part pas vers un téléphone personnel, mais vers un canal professionnel monitoré.
+## Fréquence de maintenance recommandée
 
-## Outils adaptés à une PME
-
-| Besoin | Gratuit / abordable | Payant / plus complet |
+| Type de contrôle | Fréquence | Action |
 |---|---|---|
-| Gestionnaire de mots de passe | Bitwarden, KeePass | 1Password, Dashlane |
-| Surveillance des workflows | Logs natifs (Zapier, Make, n8n) | Better Uptime, UptimeRobot |
-| Stockage sécurisé de tokens | .env local + gestionnaire de mots de passe | HashiCorp Vault, 1Password Secrets Automation |
-| Audit et contrôle d'accès | Google Workspace Admin, Microsoft 365 Admin | JumpCloud, Okta |
+| Logs d’envoi | Mensuelle | Vérifier le nombre d’envois et les erreurs |
+| Liste des destinataires | Trimestrielle | Réviser les accès et retirer les inactifs |
+| Permissions API | Trimestrielle | Vérifier que les droits sont au minimum nécessaire |
+| Test avec données fictives | Semestrielle | Valider le comportement en cas d’anomalie |
+| Documentation | À chaque modification | Mettre à jour la fiche workflow |
 
-## Prompt IA sécurisé pour auditer un workflow existant
+::: attention Point de vigilance
+Une baisse inattendue du nombre d’envois peut indiquer une panne silencieuse. Surveillez les logs chaque semaine, pas seulement en cas de problème.
+:::
 
-> Rôle : consultant cybersécurité pour PME.
-> Contexte : j'ai un workflow qui [décrivez le scénario : envoie des emails, met à jour Notion, génère des PDF, etc.]. Les outils utilisés sont [outil 1, outil 2].
-> Consignes :
-> - Identifie les 5 risques principaux de sécurité.
-> - Pour chaque risque, propose une action concrète et priorisée.
-> - Ne me demande jamais mes identifiants, tokens ou mots de passe.
-> - Propose une checklist de maintenance mensuelle et trimestrielle.
-> - Donne un exemple de phrase à ajouter dans la documentation du workflow pour le reste de l'équipe.
+## Plan d’action cette semaine
 
-## Accompagnement Alliance Digitale
+1. **Identifier les workflows critiques** de votre entreprise.
+2. **Vérifier que chaque workflow utilise un compte dédié**, pas un compte personnel.
+3. **Activer la 2FA** sur tous les outils connectés.
+4. **Déplacer les tokens et mots de passe** dans un gestionnaire de mots de passe.
+5. **Créer une alerte** en cas d’échec d’un workflow critique.
+6. **Planifier une révision** tous les 3 mois.
 
-Alliance Digitale accompagne les PME de la Sarthe dans la sécurisation et la maintenance de leurs workflows. Nous réalisons un audit rapide de vos automatisations existantes, rédigeons la documentation et formons vos équipes aux bonnes pratiques.
-
-## À retenir
-
-1. Un workflow utile aujourd'hui peut devenir un risque demain s'il n'est pas maintenu.
-2. Limitez toujours les permissions au strict nécessaire.
-3. Documentez, surveillez et révisez vos scénarios régulièrement.
+::: retenir En résumé
+La sécurité d’un workflow, ce sont des comptes dédiés, des droits limités, des logs surveillés et une maintenance régulière. Un workflow bien sécurisé est un workflow fiable dans la durée.
+:::

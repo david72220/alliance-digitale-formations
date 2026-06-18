@@ -1,18 +1,34 @@
-## Objectifs du cours
+# Connecteurs et scénarios avec n8n : relier vos outils du quotidien
 
-À l'issue de ce micro-cours, vous serez capable de :
+## Qu’est-ce qu’un connecteur ?
 
-- Identifier les connecteurs utiles dans votre pile logicielle.
-- Construire un premier workflow dans n8n en mode no-code/low-code.
-- Comprendre la différence entre déclencheurs (triggers), actions et conditions.
-- Sécuriser les accès API et gérer les erreurs.
-- Savoir quand opter pour un outil gratuit ou un plan payant.
+Un **connecteur** est une passerelle qui permet à deux applications d’échanger des données automatiquement. Il se matérialise souvent par une clé API, un webhook ou une intégration native.
 
-## Pourquoi les connecteurs changent la donne
+::: retenir L’idée centrale
+Sans connecteur, vos outils ne parlent pas entre eux. Résultat : recopie manuelle, oublis, perte de temps. Un connecteur permet de créer des flux automatisés entre vos applications.
+:::
 
-Une PME manipule des données dans Gmail, Google Sheets, Notion, Airtable, HubSpot, Shopify, Stripe, Slack, Calendly… Sans connecteur, ces outils ne parlent pas entre eux. Résultat : recopie manuelle, oublis, perte de temps.
+### Pourquoi cela concerne une PME en Sarthe ?
 
-Un connecteur est une passerelle qui permet à deux applications d'échanger des données automatiquement. Il se matérialise souvent par une clé API, un webhook ou une intégration native.
+- Une PME utilise Gmail, Google Sheets, Notion, Airtable, HubSpot, Shopify, Stripe, Slack, Calendly…
+- Chaque outil a ses données. Les connecter évite les doubles saisies.
+- n8n est un outil open source qui permet de créer ces connexions sans coder, ou presque.
+
+::: card Exemple 1 : le restaurant du Mans
+Un restaurant utilise Shopify pour les commandes en ligne, Google Sheets pour le suivi des ventes et Gmail pour les confirmations. Avec n8n, une nouvelle commande Shopify alimente automatiquement le tableur et envoie un email au client.
+:::
+
+## Les 3 briques d'un workflow n8n
+
+| Brique | Rôle | Exemple |
+|---|---|---|
+| **Trigger** | Déclencheur qui lance le scénario | Nouvelle ligne Google Sheets, nouvel email |
+| **Node** | Action réalisée par le workflow | Envoyer un email, créer une fiche |
+| **Condition** | Logique de décision | Si montant > 5 000 €, alerter le commercial |
+
+::: tip Conseil pratique
+Avant d’ouvrir n8n, dessinez votre workflow sur papier. Un schéma simple avec des boîtes et des flèches aide à ne pas se perdre dans les nœuds.
+:::
 
 ## Exemples par rôle
 
@@ -32,59 +48,36 @@ Un connecteur est une passerelle qui permet à deux applications d'échanger des
 - **Problème** : synchroniser les tâches entre un formulaire Typeform et un tableau Airtable.
 - **Scénario n8n** : Typeform (nouvelle réponse) → Airtable (nouvel enregistrement) → Slack (alerte équipe).
 
-## Les 3 briques d'un workflow n8n
+::: card Exemple 2 : le bureau d’études de La Flèche
+Un bureau d’études connecte son formulaire de demande de devis à un Google Sheets, puis à un email de confirmation, puis à une alerte Slack si le budget dépasse 10 000 €. Le temps de traitement des demandes est divisé par deux.
+:::
 
-1. **Trigger (déclencheur)** : l'événement qui lance le scénario.
-   - Exemples : nouvel email, nouvelle ligne Sheets, webhook, planification horaire.
-2. **Action (nœud)** : l'opération réalisée sur une autre application.
-   - Exemples : créer une fiche, envoyer un message, mettre à jour un statut.
-3. **Condition / Logique** : filtre, boucle, branchement IF, fonction JavaScript.
-   - Exemples : si le montant > 500 €, alerter le commercial ; sinon, traitement standard.
+## Choisir entre hébergement gratuit et payant
 
-## Outils gratuits et payants
-
-| Outil | Type | Avantage | Prix indicatif |
+| Option | Avantage | Inconvénient | Pour qui ? |
 |---|---|---|---|
-| **n8n Cloud** | Hébergé par n8n | Facile à démarrer, sauvegardes incluses | Gratuit (auto-hébergement) ou à partir de ~20 €/mois/cloud |
-| **n8n Self-hosted** | Auto-hébergé | Gratuit, contrôle total des données | Gratuit (hors hébergement) |
-| **Zapier** | SaaS | Très grand catalogue d'intégrations | Gratuit limité, puis ~20–70 €/mois |
-| **Make (ex-Integromat)** | SaaS | Interface visuelle puissante | Gratuit limité, puis ~9–16 €/mois |
-| **Google Apps Script** | Code léger | Gratuit pour écosystème Google | Gratuit |
-| **Power Automate** | Microsoft | Intégration Office 365 / Dynamics | Gratuit limité, puis licences Microsoft |
+| n8n cloud (payant) | Simple, pas de serveur à gérer | Coût mensuel | PME sans compétence technique |
+| n8n self-hosted (gratuit) | Gratuit, contrôle total | Nécessite un serveur ou un NAS | PME avec un peu de technique |
 
-> **Conseil Alliance Digitale** : commencez par n8n self-hosted si vous avez un profil technique interne ; choisissez n8n Cloud ou Zapier si vous voulez démarrer en 48 h sans serveur.
+::: attention Point de vigilance
+Un connecteur mal configuré peut créer des boucles infinies (par exemple, envoyer 100 emails en 1 minute). Testez toujours avec des données fictives et surveillez les logs.
+:::
 
-## Prompt IA sécurisé pour concevoir un scénario
+## Sécurité des connecteurs
 
-Voici un prompt que vous pouvez envoyer à un assistant IA (Claude, ChatGPT, Gemini) sans exposer vos données confidentielles :
+- Utilisez des comptes dédiés (pas votre compte personnel).
+- Limitez les permissions au strict nécessaire.
+- Stockez les clés API dans un gestionnaire de mots de passe.
+- Documentez chaque workflow (voir le micro-cours « Documenter son workflow automatique »).
 
-```
-Tu es un expert en automatisation n8n pour une PME de [secteur].
-Je veux automatiser ce processus métier : [description générique du processus, sans nom de client ni données personnelles].
-Donne-moi un workflow en 3 à 5 nœuds avec :
-1. Un déclencheur adapté.
-2. Les actions principales.
-3. Une condition de contrôle qualité.
-4. Les permissions API minimales nécessaires.
-5. Les risques de sécurité à anticiper.
-N'utilise pas de données réelles dans ta réponse.
-```
+## Plan d’action cette semaine
 
-## Sécuriser les accès
+1. **Lister vos 5 outils principaux** et les données qu’ils contiennent.
+2. **Identifier une doublure** : quelle information est recopiée d’un outil à l’autre ?
+3. **Dessiner un workflow** simple avec 1 trigger, 2 actions et 1 condition.
+4. **Tester n8n** en version cloud ou auto-hébergée.
+5. **Créer un premier scénario** avec des données fictives.
 
-- Stockez les clés API dans les **credentials** de n8n, jamais en dur dans le code.
-- Utilisez des comptes de service dédiés (pas votre compte personnel).
-- Limitez les permissions au strict nécessaire (principe du moindre privilège).
-- Activez l'authentification sur votre instance n8n et changez le mot de passe par défaut.
-- Testez d'abord en mode « Execute Once » avant d'activer une planification.
-
-## Astuces opérationnelles
-
-- Nommez chaque nœud explicitement : « Créer contact HubSpot » plutôt que « HubSpot 1 ».
-- Documentez le but du workflow dans la description de l'onglet.
-- Utilisez des variables d'environnement pour les URL et IDs sensibles.
-- Programmez un réexamen mensuel : un workflow qui tourne sans surveillance peut devenir un risque.
-
-## Pour aller plus loin
-
-Alliance Digitale accompagne les PME de la Sarthe dans le choix des outils, la mise en place de workflows sécurisés et la formation des équipes. Vous pouvez réserver un atelier gratuit de 30 minutes pour auditer un processus clé.
+::: retenir En résumé
+n8n relie vos outils du quotidien pour éliminer les recopies manuelles. Le succès vient d’un bon cadrage, d’une maîtrise des permissions et de tests rigoureux.
+:::

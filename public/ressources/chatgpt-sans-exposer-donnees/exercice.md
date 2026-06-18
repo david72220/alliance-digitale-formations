@@ -1,4 +1,8 @@
-# Exercice — Anonymiser un texte pour l’IA
+# Exercice pratique — Anonymiser un texte pour l’IA
+
+## Objectif
+
+Prendre conscience des risques et apprendre à anonymiser un document interne avant de l’analyser avec un outil d’IA.
 
 ## Consigne
 
@@ -6,6 +10,36 @@ Prenez un document interne réel (email, compte rendu, fiche client) et anonymis
 
 Puis, rédigez 3 règles que tous les salariés de votre PME devraient respecter.
 
-## Livrable
+## Tableau à compléter
 
-Le texte anonymisé + la charte de 3 règles.
+| Élément | Donnée originale | Donnée anonymisée |
+|---|---|---|
+| Nom de personne | | |
+| Nom d’entreprise | | |
+| Adresse | | |
+| Email | | |
+| Téléphone | | |
+| Montant | | |
+| Date précise | | |
+
+## Charte d’usage à rédiger
+
+### 5 données interdites dans les outils d’IA publics
+
+1. 
+2. 
+3. 
+4. 
+5. 
+
+### 3 règles d’anonymisation
+
+1. 
+2. 
+3. 
+
+## Questions de réflexion
+
+- Pourquoi l’anonymisation seule ne suffit-elle pas toujours ?
+- Quels types de documents doivent impérativement passer par un modèle local ?
+- Comment sensibiliser une équipe peu familière de l’IA ?

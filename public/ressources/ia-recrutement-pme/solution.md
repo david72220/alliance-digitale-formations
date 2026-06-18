@@ -37,3 +37,13 @@
 
 - Conservez les candidatures non retenues 6 mois maximum sauf consentement explicite.
 - Ne stockez pas les pièces sensibles (carte d’identité, relevés bancaires) sans justification.
+- Supprimez les CV des candidats refusés après la durée de conservation définie.
+
+## Grille d’évaluation du livrable
+
+| Critère | 1 point | 2 points | 3 points |
+|---|---|---|---|
+| Fiche de poste | Informations manquantes | Structure correcte mais peu attractive | Structure claire, attractive et adaptée au public visé |
+| Questions d’entretien | Questions génériques | Questions pertinentes mais sans lien au poste | Questions ciblées sur les compétences et la culture d’entreprise |
+| Email non retenu | Ton froid ou impersonnel | Ton correct | Ton courtois, respectueux et personnalisé |
+| Conformité RGPD | Aucune mention | Mention partielle | Durée de conservation et données sensibles identifiées |

@@ -1,12 +1,22 @@
-## Objectifs du cours
+# Automatiser les relances clients sans être intrusif
 
-À l'issue de ce micro-cours, vous serez capable de :
+## Qu’est-ce qu’une relance automatique ?
 
-- Identifier les moments clés où une relance automatique apporte de la valeur.
-- Rédiger des messages de relance respectueux et conformes (RGPD, Loi Sapin 2).
-- Construire un scénario multi-canal (email + SMS) avec délai et condition.
-- Choisir entre outils no-code, CRM natif ou scripts maison.
-- Mesurer l'efficacité de vos relances sans spammer vos contacts.
+Une relance automatique est un message envoyé à un client ou un prospect après un événement précis : devis envoyé, facture non payée, panier abandonné, rendez-vous planifié. Elle doit être contextuelle, tempérée et facile à arrêter.
+
+::: retenir L’idée centrale
+La relance automatique fonctionne quand elle est contextuelle, tempérée et humaine. Elle ne sert pas à spammer : elle rappelle un échange en cours et propose une suite.
+:::
+
+### Pourquoi cela concerne une PME en Sarthe ?
+
+- Les dirigeants de PME n’ont pas toujours le temps de relancer chaque client manuellement.
+- Une relance structurée augmente le taux de conversion sans nuire à l’image de marque.
+- Le ton local et professionnel compte autant que la fréquence.
+
+::: card Exemple 1 : le caviste du Mans
+Un caviste envoie des relances automatiques aux clients qui ont commandé en ligne sans finaliser leur panier. Après 2 heures, un email rappelle le panier. Après 24 heures, un second email propose une suggestion de vin complémentaire. Le taux de récupération augmente de 15 %.
+:::
 
 ## Quand automatiser une relance ?
 
@@ -37,75 +47,44 @@ Les cas typiques : devis non signé après 7 jours, facture impayée à J-5 avan
 - **Problème** : relancer les factures impayées prend du temps et crée de la tension.
 - **Scénario** : Stripe / Pennylane (facture émise) → J-5 email rappel échéance → J+3 email relance amiable → J+15 email relance ferme + alerte interne.
 
-## Les 5 règles d'une relance efficace
+::: tip Conseil pratique
+Limitez-vous à 3 relances maximum pour un même sujet. Au-delà, passez à un contact personnel (téléphone) ou clôturez le dossier.
+:::
 
-1. **Un seul objectif par message** : signer, payer, confirmer, répondre.
-2. **Un objet clair** : pas de piège-clic, le destinataire doit comprendre le sujet.
-3. **Un CTA visible** : bouton unique vers l'action attendue.
-4. **Un ton progressif** : amical → neutre → ferme.
-5. **Une sortie de route** : si le client répond, arrêter immédiatement le scénario.
+## Règles de rédaction d’une bonne relance
 
-## Exemple de séquence de relance devis
+1. Rappeler le contexte (devis, facture, rendez-vous).
+2. Mentionner une date ou un délai.
+3. Proposer une action simple (signer, payer, confirmer).
+4. Adaptez le ton au client.
+5. Inclure un moyen de contacter facilement l’entreprise.
 
-| Étape | Déclencheur | Canal | Ton | Durée |
+::: attention Point de vigilance
+Respectez la Loi Sapin 2 et le RGPD : donnez toujours un moyen de se désinscrire, ne harcelez pas, et ne relancez pas un contact qui a explicitement refusé.
+:::
+
+## Exemple de séquence de relance de devis
+
+| Étape | Déclencheur | Délai | Canal | Ton |
 |---|---|---|---|---|
-| 1 | Devis envoyé | Email | Merci + récapitulatif | J0 |
-| 2 | Aucune réponse | Email | Questions ? On avance ensemble | J+3 |
-| 3 | Toujours rien | Email | Délai de validité | J+7 |
-| 4 | Dernier essai | SMS | Message court + lien devis | J+10 |
+| 1 | Devis envoyé dans le CRM | J+0 | Email | Confirmation + récap |
+| 2 | Statut toujours « Envoyé » | J+3 | Email | Aide + questions |
+| 3 | Statut toujours « Envoyé » | J+7 | Email | Délai de validité |
+| 4 | Pas de réponse | J+14 | Téléphone | Contact personnel |
 
-## Outils gratuits et payants
+::: card Exemple 2 : le consultant en RH de La Flèche
+Un consultant envoie des devis pour des missions de formation. Sa séquence automatique envoie un email de confirmation, puis une relance à J+5, puis un rappel sur la date de validité à J+10. Il gagne 2 heures par semaine et ses clients répondent plus vite.
+:::
 
-| Outil | Type | Idéal pour | Prix indicatif |
-|---|---|---|---|
-| **n8n + Gmail** | No-code/low-code | PME avec peu de volume | Gratuit (self-hosted) |
-| **Brevo (ex-Sendinblue)** | Email/SMS marketing | Séquences d'email + SMS | Gratuit jusqu'à 300 emails/jour |
-| **Mailchimp** | Email marketing | Paniers abandonnés, newsletters | Gratuit limité, puis ~13 €/mois |
-| **HubSpot Marketing** | CRM + automation | Relances B2B personnalisées | Gratuit limité, puis ~18 €/mois |
-| **Twilio** | SMS programmatique | Relances SMS fiables | Payant à l'usage |
-| **Aircall / Ringover** | Téléphonie + SMS | Relances vocales intégrées | À partir de ~20 €/utilisateur/mois |
+## Plan d’action cette semaine
 
-> **Conseil Alliance Digitale** : si vous débutez, testez Brevo + n8n gratuit pour emails et SMS ; migrez vers HubSpot ou un CRM complet quand vos volumes dépassent 200 contacts actifs par mois.
+1. **Choisir un cas de relance** dans votre activité (devis, facture, rendez-vous, panier).
+2. **Définir 3 étapes** avec déclencheur, délai, canal et ton.
+3. **Rédiger les messages** avec un seul appel à l’action par email.
+4. **Lister 2 conditions d’arrêt** (signature, paiement, réponse).
+5. **Choisir un outil** adapté à votre volume.
+6. **Mesurer** le taux de conversion et le temps gagné.
 
-## Prompt IA sécurisé pour rédiger une séquence de relance
-
-```
-Tu es un copywriter B2B pour une PME de [secteur].
-Je veux une séquence de 3 emails de relance pour [type de document : devis / facture / RDV / panier abandonné].
-Public cible : [description générique du client, sans données personnelles].
-Contraintes :
-- Ton professionnel et chaleureux, jamais agressif.
-- Chaque email a un seul appel à l'action.
-- Respect de la Loi Sapin 2 et du RGPD (opt-out visible).
-- Longueur maximale : 120 mots par email.
-- Propose un objet accrocheur pour chaque message.
-N'inclus aucun nom, entreprise, montant ou date réelle.
-```
-
-## Respecter la réglementation
-
-- **Consentement** : ne relancez que des contacts qui ont accepté d'être contactés (opt-in).
-- **Opt-out** : chaque email doit contenir un lien de désinscription ou un moyen simple de refuser.
-- **RGPD** : conservez une preuve de l'opt-in et de l'envoi.
-- **Loi Sapin 2** : pour les factures publiques, respectez les délais légaux avant relance formelle.
-- **SMS** : incluez systématiquement « STOP au 36XXX » selon l'opérateur utilisé.
-
-## Mesurer sans spammer
-
-- **Taux d'ouverture** : ciblez > 40 % en B2B.
-- **Taux de clic** : ciblez > 5 %.
-- **Taux de conversion** : devis signé, facture payée, RDV confirmé.
-- **Taux de désinscription** : si > 1 %, réduisez la fréquence.
-- **Alertes** : si un contact se plaint, arrêtez immédiatement son parcours.
-
-## Astuces opérationnelles
-
-- Personnalisez l'objet avec la référence du devis, pas seulement « Relance ».
-- Envoyez les emails en milieu de semaine, entre 9 h et 11 h.
-- Testez A/B sur l'objet avant de lancer la séquence à grande échelle.
-- Ajoutez une condition de sortie dès qu'un contact répond ou clique.
-- Créez une file d'attente (« wait ») entre chaque étape, jamais tout le même jour.
-
-## Pour aller plus loin
-
-Alliance Digitale propose un atelier dédié à la conception de séquences de relance conformes et performantes. Vous repartez avec un scénario testé, des templates validés et un tableau de bord de suivi.
+::: retenir En résumé
+Une relance automatique efficace est comme un bon commercial : elle est ponctuelle, utile et sait s’arrêter au bon moment.
+:::

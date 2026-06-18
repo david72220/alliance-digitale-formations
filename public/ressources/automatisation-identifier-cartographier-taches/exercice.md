@@ -1,6 +1,7 @@
 # Exercice pratique — Identifier et cartographier ses tâches répétitives
 
 ## Objectif
+
 Repérer les 3 tâches les plus chronophages de votre poste et évaluer leur potentiel d'automatisation.
 
 ## Consigne
@@ -29,5 +30,8 @@ Repérer les 3 tâches les plus chronophages de votre poste et évaluer leur pot
    - **Cas d'exception** : que se passe-t-il si une information manque ?
    - **Résultat attendu** : à quoi reconnaît-on que la tâche est bien faite ?
 
-## Livrable attendu
-Un document avec le tableau, le choix prioritaire et la fiche processus.
+## Questions de réflexion
+
+- Quelle tâche vous prend le plus de temps sans créer de valeur directe ?
+- Pourquoi faut-il commencer par un projet facile plutôt qu’un projet ambitieux ?
+- Quels cas d’exception doivent rester sous contrôle humain ?

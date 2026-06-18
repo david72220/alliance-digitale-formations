@@ -11,6 +11,20 @@ Une bonne documentation permet de :
 - transférer la responsabilité à un collègue ;
 - améliorer progressivement l'automatisation.
 
+::: retenir L’idée centrale
+Un workflow documenté appartient à l'entreprise. Un workflow non documenté appartient à la personne qui l'a créée.
+:::
+
+### Pourquoi cela concerne une PME en Sarthe ?
+
+- Dans une PME, une seule personne concentre souvent les compétences techniques.
+- Les congés, les départs ou les absences maladies sont des risques réels.
+- Un workflow mal compris peut générer des erreurs coûteuses : mauvais envoi de données, relances oubliées, factures en retard.
+
+::: card Exemple 1 : le cabinet comptable du Mans
+Un collaborateur a créé un workflow Google Apps Script qui envoie des alertes SMS. Il part à la retraite. Personne ne sait comment il fonctionne. Le cabinet perd 3 semaines à le redécouvrir.
+:::
+
 ## Les 7 éléments d'une fiche workflow utile
 
 ### 1. Nom explicite
@@ -48,83 +62,39 @@ Exemple : email prospect, référence devis, montant — données à protéger.
 ### 6. Outils et accès
 Quels outils sont connectés ? Qui possède les accès ? Où sont stockés les mots de passe et tokens ?
 
-### 7. Propriétaire et date de dernière révision
-Indiquez le responsable du workflow et quand la fiche a été mise à jour. Prévoyez une révision tous les 6 mois.
+### 7. Propriétaire et date de révision
+Indiquez le responsable du workflow et la fréquence de mise à jour.
 
-## Exemples concrets par rôle
+::: tip Conseil pratique
+Conservez toutes les fiches workflow dans un même endroit : Notion, Confluence, Google Drive ou un dossier partagé. Utilisez un modèle unique pour que toutes les fiches aient la même structure.
+:::
 
-**Dirigeant(e)**
-- Documentation d'un workflow de reporting hebdomadaire : qui reçoit le mail, quelles données sont incluses, qui peut modifier la liste de diffusion.
+## Exemple de fiche workflow complète
 
-**Commercial(e)**
-- Fiche de la relance automatique des devis : règles de fréquence, maximum de relances, texte des emails, conditions d'arrêt.
+| Élément | Détail |
+|---|---|
+| Nom | Relance devis non signés après 48 h |
+| Objectif | Réduire le délai de signature des devis |
+| Déclencheur | Tous les jours à 9 h |
+| Étapes | Vérifier les devis envoyés depuis +48 h → envoyer un email de relance → mettre à jour le statut |
+| Données | Email prospect, référence devis, montant |
+| Outils | HubSpot, Gmail, n8n |
+| Accès | Compte automation@monentreprise.fr, stocké dans le gestionnaire de mots de passe |
+| Propriétaire | Prénom NOM |
+| Révision | Mensuelle |
 
-**Comptable / Gestionnaire**
-- Documentation de l'export des factures fournisseurs : formats acceptés, dossier de destination, règles de nommage, procédure en cas d'erreur.
+::: card Exemple 2 : la PME de conseil de La Flèche
+Une consultante documente ses 4 workflows dans Notion. Lors de son congé maternité, une collègue reprend chaque scénario en 30 minutes grâce aux fiches. Aucun incident de production.
+:::
 
-**Responsable production / Atelier**
-- Fiche de l'alerte stock bas : seuils déclencheurs, liste des produits concernés, destinataires des alertes, fournisseurs à contacter.
+## Plan d’action cette semaine
 
-## Outils adaptés à une PME
+1. **Lister les workflows existants** dans votre entreprise.
+2. **Créer un modèle de fiche** avec les 7 éléments.
+3. **Remplir une fiche** pour le workflow le plus critique.
+4. **Désigner un propriétaire** et une fréquence de révision.
+5. **Stocker les fiches** dans un endroit accessible à toute l’équipe.
 
-| Besoin | Gratuit / abordable | Payant / plus structuré |
-|---|---|---|
-| Documentation simple | Google Docs, Notion, Obsidian | Confluence, Slite |
-| Partage interne | Notion, Google Drive, SharePoint |  |
-| Schémas visuels | Draw.io, Excalidraw | Miro, Lucidchart |
-| Suivi des versions | Historique Google Docs / Notion | Git + Markdown |
-
-## Modèle de fiche workflow à copier
-
-```
-Nom du workflow : [Nom explicite]
-
-Objectif métier :
-[Phrase simple qui explique l'intérêt]
-
-Déclencheur :
-[Quand le workflow se lance]
-
-Étapes :
-1. [...]
-2. [...]
-3. [...]
-
-Données utilisées :
-- Donnée 1 (sensible : oui / non)
-- Donnée 2 (sensible : oui / non)
-
-Outils connectés :
-- Outil 1 : [rôle dans le workflow]
-- Outil 2 : [rôle dans le workflow]
-
-Accès et sécurité :
-- Compte utilisé : [...]
-- Où sont stockés les identifiants : [...]
-- Liste des personnes habilitées : [...]
-
-Propriétaire : [Nom / rôle]
-Dernière révision : [Date]
-Prochaine révision : [Date]
-```
-
-## Prompt IA sécurisé pour rédiger une fiche workflow
-
-> Rôle : rédacteur de documentation interne pour PME.
-> Contexte : je dois documenter un workflow qui [décrivez brièvement le scénario].
-> Consignes :
-> - Rédige une fiche complète avec les 7 éléments essentiels.
-> - Utilise un ton professionnel mais simple, accessible à un non-technicien.
-> - Ne me demande pas d'identifiants, tokens, mots de passe ou données clients nominatives.
-> - Propose un schéma textuel des étapes du workflow.
-> - Suggère 3 questions qu'un nouveau collaborateur pourrait se poser, avec leurs réponses.
-
-## Accompagnement Alliance Digitale
-
-Alliance Digitale propose aux PME sarthoises un modèle de documentation de workflows adapté à leurs équipes. Nous aidons à créer la première fiche, formons vos collaborateurs, et intégrons cette documentation dans votre outil de gestion quotidien (Notion, Google Drive, SharePoint).
-
-## À retenir
-
-1. Documenter n'est pas une option : c'est l'assurance-vie de vos automatisations.
-2. Une bonne fiche répond aux questions d'un nouveau venu en 5 minutes.
-3. Revoyez la documentation à chaque modification significative du workflow.
+::: retenir En résumé
+Documenter un workflow, ce n’est pas une corvée. C’est l’assurance que l’automatisation continuera de fonctionner, même en l’absence de son créateur.
+:::

@@ -1,21 +1,28 @@
-# Solution de l’exercice — Prompts efficaces
+# Corrigé de l’exercice — Rédiger un prompt efficace
 
-## Exemples de prompts CAST
+## Exemples de prompts efficaces
 
-### Relance de devis
+### 1. Post LinkedIn
 
-> Tu es le responsable commercial d’une PME en Sarthe. Rédige un email de relance pour un client qui a reçu un devis il y a 10 jours et ne l’a pas signé. Ton : professionnel, chaleureux, pas pressant. Format : objet + 2 paragraphes + CTA.
+*Tu es un rédacteur LinkedIn spécialisé dans l’accompagnement des PME. Rédige un post de 150 mots maximum pour une entreprise sarthoise qui aide les TPE/PME à automatiser leurs tâches administratives. Objectif : rassurer un dirigeant peu à l’aise avec l’IA. Ton : professionnel, concret, accessible. Inclus un exemple de gain de temps et un appel à l’action discret.*
 
-### Résumé de réunion
+### 2. Email
 
-> Tu es assistant de direction. À partir de la transcription ci-dessous, rédige un compte rendu structuré : décisions prises, actions à venir avec responsable et échéance, points en attente. Format tableau.
+*Tu es un assistant commercial. Rédige un email de relance pour un client qui n’a pas réglé une facture de 850 € arrivée à échéance il y a 12 jours. Ton : professionnel et ferme mais courtois. Inclus un lien de paiement fictif [LIEN] et une proposition d’échéancier.*
 
-### Idées de contenu
+### 3. Explication RGPD
 
-> Tu es consultant en marketing B2B pour les PME. Propose 10 idées de posts LinkedIn sur l’automatisation pour dirigeants de PME en Sarthe. Format : accroche + 2 lignes de développement.
+*Tu es un consultant en protection des données pour PME. Explique le RGPD à un dirigeant d’auto-entreprise en Sarthe qui n’a aucune compétence juridique. Donne 3 risques concrets, 3 actions prioritaires et 1 outil simple pour démarrer. Format : liste à puces avec sous-titres clairs. Maximum 250 mots.*
 
-## Points de vigilance
+## Grille d’évaluation
 
-- Un prompt trop vague donne une réponse trop vague.
-- Spécifier le format de sortie améliore l’utilisabilité immédiate.
-- Tester plusieurs versions permet de comprendre comment l’IA interprète chaque mot.
+| Critère | 1 | 3 | 5 |
+|---|---|---|---|
+| Clarté | Le prompt est flou | Le prompt est compréhensible | Le prompt est très structuré |
+| Contexte | Aucun contexte | Contexte partiel | Contexte riche et précis |
+| Format | Format absent | Format implicite | Format explicitement demandé |
+| Résultat | Réponse générique | Réponse correcte | Réponse immédiatement utilisable |
+
+## Point clé à retenir
+
+Un prompt efficace combine toujours : rôle + tâche + contexte + format. Si vous oubliez l’un de ces éléments, l’IA devra le deviner, ce qui réduit la qualité du résultat.

@@ -41,53 +41,26 @@ Rédigez le flux automatisé sous forme de liste numérotée. Pour chaque étape
 - l'outil envisagé (gratuit ou payant),
 - la personne responsable en cas de problème.
 
-Exemple :
-
-1. Le client remplit le formulaire de contact (Tally) → données envoyées dans Google Sheets.
-2. Le commercial reçoit une notification email automatique.
-3. Le commercial crée le devis dans le CRM sous 4 heures.
-4. Le devis part par email automatiquement si validé.
-5. Si pas de réponse sous 48 h → relance automatique (Make).
-
 ### Étape 4 — Choisir sa stack (20 min)
 
 Dressez un tableau avec les outils choisis :
 
-| Besoin | Outil retenu | Coût mensuel estimé | Justification |
-|--------|--------------|---------------------|---------------|
-| Formulaire | … | … | … |
-| CRM / suivi | … | … | … |
-| Relances | … | … | … |
-| Facturation | … | … | … |
+| Besoin | Outil retenu | Coût mensuel estimé |
+|---|---|---|
+| | | |
+| | | |
+| | | |
 
-### Étape 5 — Identifier les risques et la sécurité (15 min)
+### Étape 5 — Définir les indicateurs de succès (15 min)
 
-Listez :
+Listez 3 indicateurs mesurables pour valider le succès de l'automatisation.
 
-- 2 risques métier (ex. relance trop fréquente, perte de personnalisation),
-- 2 risques données (ex. stockage hors UE, accès trop larges),
-- 2 mesures pour les limiter.
+### Étape 6 — Préparer la roadmap (15 min)
 
-### Étape 6 — Fixer un indicateur de succès (15 min)
+Planifiez les 3 premières étapes de déploiement sur 6 à 8 semaines.
 
-Choisissez UN indicateur simple à mesurer dans 30 jours :
+## Questions de réflexion
 
-- temps gagné par semaine,
-- taux de conversion amélioré,
-- délai de traitement réduit,
-- nombre d'erreurs en baisse.
-
-Indiquez comment vous le mesurerez concrètement.
-
-## Livrable attendu
-
-Un document de 1 à 2 pages comprenant :
-
-1. Présentation rapide de l'entreprise.
-2. Flux prioritaire choisi et justification.
-3. Flux cible automatisé (liste numérotée).
-4. Tableau de la stack outils.
-5. Risques et mesures de sécurité.
-6. Indicateur de succès et mode de mesure.
-
-> **Pour aller plus loin** : partagez votre livrable à un membre de votre équipe et demandez-lui de relever les points flous. L'automatisation réussie passe toujours par une phase de confrontation.
+- Quel est le flux qui, s’il était amélioré, serait le plus visible pour vos clients ?
+- Quelle est la plus grande peur de votre équipe face à l’automatisation ?
+- Quel premier gain chiffré pourriez-vous annoncer au bout d’un mois ?

@@ -9,6 +9,20 @@ Dans une PME ou chez un auto-entrepreneur, une grande partie des demandes client
 - Générer un devis ou une proposition commerciale structurée.
 - Suivre chaque demande sans oubli.
 
+::: retenir L’idée centrale
+Un formulaire bien conçu et un scénario de relance automatique peuvent transformer un processus de devis qui prend des heures en un flux fluide qui prend quelques minutes.
+:::
+
+### Pourquoi cela concerne une PME en Sarthe ?
+
+- Un artisan reçoit des demandes par téléphone, email, Facebook ou formulaire. Tout est dispersé.
+- Un consultant du Mans passe du temps à recopier des informations déjà données par le client.
+- Une PME commerciale en Pays de la Loire veut répondre plus vite que ses concurrents.
+
+::: card Exemple 1 : le menuisier de La Flèche
+Un menuisier reçoit des demandes de devis par Messenger, email et téléphone. Il met en place un formulaire en ligne. Les clients précisent leurs besoins à l’avance. Il gagne 3 heures par semaine et envoie des propositions plus rapides.
+:::
+
 ## Où commencer ?
 
 1. **Lister les 10 demandes les plus fréquentes** reçues par email, téléphone ou formulaire.
@@ -20,12 +34,16 @@ Dans une PME ou chez un auto-entrepreneur, une grande partie des demandes client
 
 Un formulaire bien construit évite les échanges inutiles. Exemple pour une PME de services :
 
-- Type de besoin (liste déroulante)
-- Description du projet (champ texte)
-- Budget approximatif (fourchette)
-- Délai souhaité (date ou urgence)
-- Coordonnées complètes
-- Pièces jointes utiles
+- Type de besoin (liste déroulante).
+- Description du projet (champ texte).
+- Budget approximatif (fourchette).
+- Délai souhaité (date ou urgence).
+- Coordonnées complètes.
+- Pièces jointes utiles.
+
+::: tip Conseil pratique
+Plus le formulaire est simple, plus les clients le remplissent. Demandez l’essentiel en première page. Les détails peuvent venir ensuite.
+:::
 
 ## Automatisation possible avec l’IA
 
@@ -38,26 +56,32 @@ L’IA peut aider à :
 
 ## Exemple de prompt IA pour rédiger une réponse client
 
-> *Rédige une réponse professionnelle à une demande de devis. Contexte : [description du service]. Informations du client : [besoin, délai, budget]. Ton : chaleureux mais professionnel. Mentionne que nous revenons avec un devis sous 24h et propose un appel de 15 minutes.*
+> Rédige une réponse professionnelle à une demande de devis. Contexte : [description du service]. Informations du client : [besoin, délai, budget]. Ton : chaleureux mais professionnel. Mentionne que nous revenons avec un devis sous 24 h et propose un appel de 15 minutes.
+
+::: card Exemple 2 : la PME de services en informatique du Mans
+Une PME de conseil informatique reçoit des demandes par email. L’IA extrait le besoin, le délai et le budget. Un brouillon de réponse est généré automatiquement. Le commercial n’a plus qu’à vérifier et personnaliser avant envoi.
+:::
 
 ## Scénario de suivi automatique
 
-1. Demande reçue → accusé de réception automatique.
-2. J+1 → relance interne si le devis n’est pas envoyé.
-3. J+3 après envoi du devis → relance client automatique.
-4. J+15 → relance téléphonique planifiée.
+1. **Demande reçue** → accusé de réception automatique.
+2. **J+1** → relance interne si le devis n’a pas été créé.
+3. **J+5** → relance client si le devis n’a pas reçu de réponse.
+4. **J+15** → proposition d’échange téléphonique.
 
-## Outils conseillés
+::: attention Point de vigilance
+Automatiser ne signifie pas déshumaniser. Prévoyez toujours une étape de vérification humaine avant l’envoi d’un devis ou d’une réponse importante.
+:::
 
-| Outil | Usage |
-|---|---|
-| Tally / Typeform / Google Forms | Formulaires de qualification |
-| Notion / Airtable | Suivi des demandes |
-| n8n / Make | Relances et emails automatiques |
-| ChatGPT / Claude | Brouillons de réponses personnalisées |
+## Plan d’action cette semaine
 
-## À ne pas automatiser
+1. **Lister les 10 demandes les plus fréquentes** de votre activité.
+2. **Créer un formulaire en ligne** avec les 5 questions essentielles.
+3. **Rédiger un email de confirmation automatique** personnalisé.
+4. **Rédiger un modèle de réponse IA** pour les demandes courantes.
+5. **Définir 2 relances automatiques** après envoi du devis.
+6. **Mesurer** le temps gagné et le taux de conversion après un mois.
 
-- Les demandes complexes ou atypiques.
-- Les réponses en cas de mécontentement.
-- Les négociations commerciales sensibles.
+::: retenir En résumé
+L’automatisation des demandes de devis commence par un formulaire clair et une réponse rapide. L’IA aide à qualifier et à rédiger. Le commercial garde le contrôle final.
+:::

@@ -1,13 +1,29 @@
-# Exercice — Rédiger un prompt efficace
+# Exercice pratique — Rédiger un prompt efficace
+
+## Objectif
+
+Transformer des prompts faibles en prompts efficaces en utilisant la méthode PASR.
 
 ## Consigne
 
-Reprenez 3 tâches que vous confiez régulièrement à l’IA (ou que vous pourriez lui confier) et rédigez pour chacune un prompt CAST complet.
+1. Reprenez les 3 prompts faibles ci-dessous.
+2. Pour chacun, réécrivez un prompt efficace en précisant :
+   - Le rôle (Persona)
+   - La tâche exacte (Action)
+   - Le contexte (Situation)
+   - Le format souhaité (Résultat)
 
-| Tâche | Contexte | Action | Style | Template |
-|---|---|---|---|---|
-| ... | ... | ... | ... | ... |
+| Prompt faible | Votre prompt efficace |
+|---|---|
+| Rédige un post LinkedIn. | |
+| Fais-moi un email. | |
+| Explique-moi le RGPD. | |
 
-## Livrable
+3. Testez chaque prompt dans un outil d’IA et notez la qualité de la réponse de 1 à 5.
+4. Améliorez le prompt qui a obtenu la note la plus basse.
 
-3 prompts testés avec un outil d’IA, avec le résultat obtenu et une note de satisfaction.
+## Questions de réflexion
+
+- Quelle information a le plus amélioré la réponse de l’IA ?
+- À quelle étape avez-vous dû itérer ?
+- Quel prompt pourriez-vous réutiliser chaque semaine dans votre activité ?

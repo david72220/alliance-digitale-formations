@@ -1,25 +1,30 @@
-# Solution de l’exercice — Rédaction avec l’IA
+# Corrigé de l’exercice — Email professionnel avec l’IA
 
-## Modèle 1 : relance client
+## Exemple de prompt efficace
 
-> Tu es commercial. Un prospect a reçu un devis il y a 10 jours. Rédige un email de relance professionnel et bref. Format : objet + 2 paragraphes + CTA.
+*Tu es un assistant commercial. Rédige un email de relance pour un client qui n’a pas payé une facture de 1 500 € arrivée à échéance il y a 8 jours. Je suis dirigeant d’une PME sarthoise spécialisée en conseil. Le client est [Entreprise X]. Le numéro de facture est [N°]. Ton professionnel, ferme mais courtois. Propose un lien de paiement [LIEN] et une échelonnement si nécessaire. Maximum 120 mots.*
 
-**À vérifier avant envoi :** nom du prospect, montant du devis, délai de réponse proposé.
+## Exemple de brouillon corrigé
 
-## Modèle 2 : compte rendu de réunion
+*Bonjour [Prénom],*
 
-> Tu es assistant de direction. Voici une prise de notes brute. Rédige un compte rendu structuré avec décisions, actions et échéances. Format tableau.
+*Je me permets de vous rappeler que notre facture n°[N°], d’un montant de 1 500 €, est arrivée à échéance le [date]. À ce jour, nous n’avons pas enregistré son règlement.*
 
-**À vérifier :** l’exactitude des échéances et des responsables.
+*Vous pouvez la régler en un clic ici : [LIEN]. Si vous préférez un échelonnement, n’hésitez pas à me le signaler.*
 
-## Modèle 3 : procédure interne
+*Cordialement,*
 
-> Tu es consultant en organisation. Rédige une procédure interne pour [sujet]. Public : salariés non techniques. Format : objectif, étapes, outils, exemple.
+## Grille d’évaluation du résultat
 
-**À vérifier :** la pertinence des étapes pour votre contexte réel.
+| Critère | Non atteint | Partiellement atteint | Atteint |
+|---|---|---|---|
+| Clarté du message | Message confus | Lisible mais perfectible | Clair et direct |
+| Tonalité | Inadaptée | Correcte mais impersonnelle | Professionnelle et adaptée |
+| Précision | Erreurs factuelles | Quelques vérifications nécessaires | Tout est exact |
+| Concision | Trop long | Quelques répétitions | Dans la limite demandée |
 
 ## Points de vigilance
 
-- Toujours relire et personnaliser avant envoi.
-- L’IA peut inventer des faits : vérifier les données chiffrées et les références.
-- Ne pas utiliser l’IA pour les documents juridiques ou financiers sensibles sans relecture humaine.
+- Toujours vérifier le montant, la date et le numéro de facture.
+- Ne jamais envoyer un email généré sans relecture.
+- Adapter le ton à la relation que vous avez avec le client.

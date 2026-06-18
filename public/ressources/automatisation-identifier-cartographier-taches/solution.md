@@ -15,13 +15,13 @@
 ## Fiche processus exemple
 
 ### Déclencheur
-Réception d'un email contenant une facture PDF dans la boîte "factures@entreprise.fr".
+Réception d'un email contenant une facture PDF dans la boîte « factures@entreprise.fr ».
 
 ### Étapes actuelles
 1. Ouvrir l'email.
 2. Télécharger la pièce jointe PDF.
-3. Renommer le fichier : "FACTURE_FOURNISSEUR_YYYY-MM.pdf".
-4. L'enregistrer dans le dossier "Comptabilité/YYYY/Fournisseurs".
+3. Renommer le fichier : « FACTURE_FOURNISSEUR_YYYY-MM.pdf ».
+4. L'enregistrer dans le dossier « Comptabilité/YYYY/Fournisseurs ».
 5. Saisir manuellement les informations dans le logiciel de comptabilité.
 
 ### Données utilisées
@@ -38,8 +38,19 @@ Réception d'un email contenant une facture PDF dans la boîte "factures@entrepr
 La facture est enregistrée, renommée et saisie dans la comptabilité dans les 24 h.
 
 ## Recommandation d'automatisation
+
 - **Étape 1** : automatiser le renommage et l'enregistrement dans le drive.
 - **Étape 2** : extraire automatiquement montant, date et fournisseur.
 - **Étape 3** : créer une écriture brouillon dans le logiciel de comptabilité.
 
 Outils suggérés : n8n (auto-hébergé) ou Make + Google Drive + logiciel comptable avec API.
+
+## Grille d’évaluation du livrable
+
+| Critère | 1 point | 2 points | 3 points |
+|---|---|---|---|
+| Liste des tâches | Moins de 5 tâches | 5 tâches mais temps absent | 5 tâches avec fréquence et temps |
+| Évaluation des scores | Scores incohérents | Scores attribués mais mal justifiés | Scores cohérents avec critères explicites |
+| Choix prioritaire | Choix peu justifié | Choix pertinent mais justification courte | Choix clair avec temps gagné, simplicité et risque |
+| Fiche processus | Champs manquants | Champs présents mais peu détaillés | Fiche complète avec déclencheur, étapes, exceptions, résultat |
+| Plan d’automatisation | Aucune étape | Étapes floues | Étapes progressives et outils suggérés |
