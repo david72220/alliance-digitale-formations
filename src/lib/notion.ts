@@ -247,6 +247,7 @@ export interface Formation {
   image?: string;
   online?: boolean;
   price?: number;
+  priceText?: string;
   fundingActive?: boolean;
 }
 
@@ -415,6 +416,19 @@ function getPrice(properties: any): number | undefined {
   return undefined;
 }
 
+function getPriceText(properties: any): string | undefined {
+  const names = [
+    'Prix de la formation', 'Prix formation',
+    'Prix', 'Tarif', 'prix', 'tarif',
+    'Prix HT', 'Tarif HT',
+  ];
+  for (const name of names) {
+    const t = getPropertyText(properties[name]);
+    if (t) return t;
+  }
+  return undefined;
+}
+
 function getFundingActive(properties: any): boolean {
   return getCheckboxFromProperties(properties, [
     'OPCO', 'opco', 'Financement OPCO', 'Éligible OPCO', 'Eligible OPCO',
@@ -453,6 +467,7 @@ function mapFormation(page: any): Formation {
     image: '',
     online: false,
     price: getPrice(p),
+    priceText: getPriceText(p),
     fundingActive: getFundingActive(p),
   };
 }
