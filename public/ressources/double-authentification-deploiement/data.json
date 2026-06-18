@@ -7,5 +7,5 @@
   "exerciseHtml": "<h1>Exercice — Déployer la 2FA</h1>\n<h2>Consigne</h2>\n<p>Planifiez le déploiement de la double authentification dans votre PME.</p>\n<ol>\n<li>Listez les 5 outils les plus sensifs.</li>\n<li>Indiquez s’ils supportent le 2FA natif.</li>\n<li>Choisissez l’application ou la méthode déployée.</li>\n<li>Rédigez un mini-guide de 5 lignes pour les salariés.</li>\n</ol>\n<h2>Livrable</h2>\n<p>Un plan de déploiement avec calendrier et outils.</p>\n",
   "solutionUrl": "https://alliance-digitale-formations.vercel.app/ressources/double-authentification-deploiement/solution.pdf",
   "published": true,
-  "photo": "/images/hero-formation-ia.png"
+  "photo": "/ressources/double-authentification-deploiement/cover.jpg"
 }

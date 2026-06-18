@@ -7,5 +7,5 @@
   "exerciseHtml": "<h1>Exercice — Gérer les droits d’accès</h1>\n<h2>Consigne</h2>\n<p>Créez une matrice simple des accès pour votre PME.</p>\n<p>Colonnes : 4 outils partagés (drive, CRM, paie, comptabilité).\nLignes : rôles (dirigeant, RH, commercial, assistant, comptable).</p>\n<p>Indiquez avec ✓ ou ✗ si le rôle doit avoir accès.</p>\n<h2>Livrable</h2>\n<p>Un tableur ou dessin avec la matrice et 3 décisions justifiées.</p>\n",
   "solutionUrl": "https://alliance-digitale-formations.vercel.app/ressources/droits-acces-outils-collaboratifs/solution.pdf",
   "published": true,
-  "photo": "/images/hero-formation-ia.png"
+  "photo": "/ressources/droits-acces-outils-collaboratifs/cover.jpg"
 }
