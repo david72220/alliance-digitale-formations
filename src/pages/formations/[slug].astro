@@ -77,14 +77,12 @@ const courseLd = {
           <div class="p-4 rounded-xl border border-white/10 bg-white/[0.03]">
             <p class="text-xs text-white/40 uppercase tracking-wider mb-1">Tarif</p>
             <p class="text-white font-semibold">{formation.price ? `${formation.price.toLocaleString('fr-FR')} € HT` : 'Sur demande'}</p>
-            {formation.fundingActive && (
-              <p class="mt-2 text-xs text-alliance-blue flex items-center gap-1">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                Éligible OPCO
-              </p>
-            )}
+            <p class="mt-2 text-xs text-alliance-blue flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              OPCO sur demande
+            </p>
           </div>
         </div>
 
@@ -142,12 +140,15 @@ const courseLd = {
           )}
         </div>
 
-        {formation.fundingActive && (
-          <div class="mt-10 p-6 rounded-xl border border-alliance-blue/30 bg-alliance-blue/10">
-            <p class="text-sm text-alliance-blue font-semibold mb-2">Financement possible</p>
-            <p class="text-white/80">Cette formation est éligible au financement OPCO pour les entreprises avec salariés, dans le cadre de notre partenariat Signe+.</p>
-          </div>
-        )}
+        <div class="mt-10 p-6 rounded-xl border border-alliance-blue/30 bg-alliance-blue/10">
+          <p class="text-sm text-alliance-blue font-semibold mb-2 flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Financement OPCO sur demande
+          </p>
+          <p class="text-white/80">Cette formation peut être prise en charge par votre OPCO pour les entreprises avec salariés (partenariat Signe+). Contactez-nous pour étudier votre éligibilité et monter le dossier.</p>
+        </div>
 
         <div class="mt-12">
           <a href="/contact/" class="btn-primary text-base px-8 py-4">Demander un devis / Prendre RDV</a>
