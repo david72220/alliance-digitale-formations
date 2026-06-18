@@ -9,7 +9,7 @@ export interface Props {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description = "Accompagnement et formations IA pour PME avec salariés en Sarthe.", image = "/og-image.webp", noindex = false, jsonLd } = Astro.props;
+const { title, description = "Accompagnement et formations IA pour PME avec salariés en Sarthe.", image = "/og-image.png", noindex = false, jsonLd } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const siteUrl = Astro.site!.toString().replace(/\/$/, '');
 
@@ -55,9 +55,6 @@ const allLd = [organizationLd, websiteLd, ...extraLd];
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={new URL(image, Astro.site).toString()} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
   {allLd.map((ld) => (
     <script type="application/ld+json" set:html={JSON.stringify(ld)} />
   ))}
@@ -67,6 +64,18 @@ const allLd = [organizationLd, websiteLd, ...extraLd];
   <slot />
 
   <script>
+    import '@fontsource/inter/300.css';
+    import '@fontsource/inter/400.css';
+    import '@fontsource/inter/500.css';
+    import '@fontsource/inter/600.css';
+    import '@fontsource/inter/700.css';
+    import '@fontsource/inter/800.css';
+    import '@fontsource/playfair-display/600.css';
+    import '@fontsource/playfair-display/700.css';
+    import '@fontsource/space-grotesk/400.css';
+    import '@fontsource/space-grotesk/500.css';
+    import '@fontsource/space-grotesk/600.css';
+    import '@fontsource/space-grotesk/700.css';
     import Lenis from 'lenis';
     import { gsap } from 'gsap';
     import { ScrollTrigger } from 'gsap/ScrollTrigger';

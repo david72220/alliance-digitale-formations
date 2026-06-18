@@ -16,6 +16,9 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/playfair-display": "^5.2.8",
+    "@fontsource/space-grotesk": "^5.2.10",
     "@notionhq/client": "^2.3.0",
     "astro": "^6.4.6",
     "gsap": "^3.15.0",
