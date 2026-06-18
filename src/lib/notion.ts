@@ -403,7 +403,11 @@ function getCheckboxFromProperties(properties: any, names: string[]): boolean {
 }
 
 function getPrice(properties: any): number | undefined {
-  const names = ['Prix', 'Tarif', 'prix', 'tarif', 'Prix HT', 'Tarif HT'];
+  const names = [
+    'Prix de la formation', 'Prix formation',
+    'Prix', 'Tarif', 'prix', 'tarif',
+    'Prix HT', 'Tarif HT',
+  ];
   for (const name of names) {
     const val = getNumber(properties[name]);
     if (val !== undefined) return val;
