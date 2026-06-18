@@ -25,3 +25,4 @@ pnpm-debug.log*
 .npm-cache/
 .vercel
 .pexels-cache
+.formation-photos.json
