@@ -46,6 +46,18 @@ THEME_RULES = [
 ]
 DEFAULT_QUERY = "professional office team"
 
+# Per-UUID overrides to avoid duplicate hero photos when multiple formations
+# share the same theme rule.
+PAGE_QUERY_OVERRIDES = {
+    "38296280-38de-81f2-986f-eba275b67046": "data privacy compliance audit",  # 8. RGPD gouvernance
+    "38296280-38de-81cb-a9bd-efd68ce4a9ea": "server hardware data center",     # 7. LLM local
+    "38296280-38de-81c4-bd78-c6c59e2c70e6": "administrative paperwork desk",   # 4. productivité admin
+    "38296280-38de-8178-808d-e4657977245b": "hands typing keyboard close",     # 2. Prompts
+    "38296280-38de-8158-8a65-fb1d17e78f4b": "marketing whiteboard brainstorm", # 3. comm marketing
+    "37f96280-38de-80c8-b4c2-c3625f194d7b": "small business team meeting",     # 9. IA Express Sarthe
+    "37d96280-38de-808a-b60e-ccc844577b67": "freelancer laptop cafe",          # A. autoentrepreneurs
+}
+
 
 def read_env(key):
     for l in open(ROOT / '.env'):
@@ -137,7 +149,7 @@ def generate():
         fid_short = page_id.replace('-', '')
         cache_jpg = CACHE_DIR / f"formation-{fid_short}.jpg"
         cache_meta = CACHE_DIR / f"formation-{fid_short}.json"
-        query = query_for_title(f['title'])
+        query = PAGE_QUERY_OVERRIDES.get(page_id) or query_for_title(f['title'])
 
         if not cache_jpg.exists() or not cache_meta.exists():
             data = pexels_search(query, pex)
