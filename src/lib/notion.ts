@@ -23,7 +23,7 @@ const LOCAL_FORMATIONS: Formation[] = [
     format: "Présentiel ou distanciel",
     objectives: "Cartographier les tâches répétitives de l'entreprise ; concevoir un premier workflow automatisé ; choisir les bons outils no-code/low-code ; sécuriser les flux de données.",
     prerequisites: "Connaissance des outils bureautiques classiques (email, tableur, CRM). Aucune compétence technique requise.",
-    image: "/images/hero-formation-ia.webp",
+    image: '/images/formations/automatisation-taches-repetitives-pme.jpg',
     online: false,
     price: undefined,
     fundingActive: true,
@@ -50,7 +50,7 @@ const LOCAL_FORMATIONS: Formation[] = [
     format: "Présentiel ou distanciel",
     objectives: "Maîtriser les prompts efficaces ; utiliser l'IA en toute sécurité ; gagner du temps sur la rédaction et l'analyse ; identifier les cas d'usage immédiats.",
     prerequisites: "Aucune compétence technique requise. Apportez simplement votre ordinateur.",
-    image: "/images/hero-formation-ia.webp",
+    image: '/images/formations/ia-productivite-quotidienne-pme.jpg',
     online: false,
     price: undefined,
     fundingActive: true,
@@ -77,7 +77,7 @@ const LOCAL_FORMATIONS: Formation[] = [
     format: "Présentiel ou distanciel",
     objectives: "Évaluer la maturité sécurité de l'entreprise ; déployer les protections essentielles ; rédiger un registre RGPD simple ; anticiper les risques liés à l'IA.",
     prerequisites: "Aucune compétence technique requise. Avoir accès à la liste des outils utilisés dans l'entreprise.",
-    image: "/images/hero-formation-ia.webp",
+    image: '/images/formations/securite-donnees-conformite-pme.jpg',
     online: false,
     price: undefined,
     fundingActive: true,
@@ -96,7 +96,7 @@ const LOCAL_RESOURCES: Resource[] = [
     exercise: '/ressources/rgpd-pme-10-points-controle/exercice.md',
     solutionUrl: '/ressources/rgpd-pme-10-points-controle/solution.pdf',
     published: true,
-    photo: '/images/hero-formation-ia.webp',
+    photo: '/ressources/rgpd-pme-10-points-controle/cover.jpg',
   },
   {
     id: 'automatisation-identifier-cartographier-taches',
@@ -109,7 +109,7 @@ const LOCAL_RESOURCES: Resource[] = [
     exercise: '/ressources/automatisation-identifier-cartographier-taches/exercice.md',
     solutionUrl: '/ressources/automatisation-identifier-cartographier-taches/solution.pdf',
     published: true,
-    photo: '/images/hero-formation-ia.webp',
+    photo: '/ressources/automatisation-identifier-cartographier-taches/cover.jpg',
   },
   {
     id: 'automatisation-connecteurs-n8n',
@@ -122,7 +122,7 @@ const LOCAL_RESOURCES: Resource[] = [
     exercise: '/ressources/automatisation-connecteurs-n8n/exercice.md',
     solutionUrl: '/ressources/automatisation-connecteurs-n8n/solution.pdf',
     published: true,
-    photo: '/images/hero-formation-ia.webp',
+    photo: '/ressources/automatisation-connecteurs-n8n/cover.jpg',
   },
   {
     id: 'automatisation-relances-clients',
@@ -135,7 +135,7 @@ const LOCAL_RESOURCES: Resource[] = [
     exercise: '/ressources/automatisation-relances-clients/exercice.md',
     solutionUrl: '/ressources/automatisation-relances-clients/solution.pdf',
     published: true,
-    photo: '/images/hero-formation-ia.webp',
+    photo: '/ressources/automatisation-relances-clients/cover.jpg',
   },
   {
     id: 'automatisation-saisie-export-donnees',
@@ -148,7 +148,7 @@ const LOCAL_RESOURCES: Resource[] = [
     exercise: '/ressources/automatisation-saisie-export-donnees/exercice.md',
     solutionUrl: '/ressources/automatisation-saisie-export-donnees/solution.pdf',
     published: true,
-    photo: '/images/hero-formation-ia.webp',
+    photo: '/ressources/automatisation-saisie-export-donnees/cover.jpg',
   },
   {
     id: 'automatisation-notifications-alertes',
@@ -161,7 +161,7 @@ const LOCAL_RESOURCES: Resource[] = [
     exercise: '/ressources/automatisation-notifications-alertes/exercice.md',
     solutionUrl: '/ressources/automatisation-notifications-alertes/solution.pdf',
     published: true,
-    photo: '/images/hero-formation-ia.webp',
+    photo: '/ressources/automatisation-notifications-alertes/cover.jpg',
   },
   {
     id: 'automatisation-securiser-maintenir-workflows',
@@ -174,7 +174,7 @@ const LOCAL_RESOURCES: Resource[] = [
     exercise: '/ressources/automatisation-securiser-maintenir-workflows/exercice.md',
     solutionUrl: '/ressources/automatisation-securiser-maintenir-workflows/solution.pdf',
     published: true,
-    photo: '/images/hero-formation-ia.webp',
+    photo: '/ressources/automatisation-securiser-maintenir-workflows/cover.jpg',
   },
   {
     id: 'automatisation-documenter-workflow',
@@ -187,7 +187,7 @@ const LOCAL_RESOURCES: Resource[] = [
     exercise: '/ressources/automatisation-documenter-workflow/exercice.md',
     solutionUrl: '/ressources/automatisation-documenter-workflow/solution.pdf',
     published: true,
-    photo: '/images/hero-formation-ia.webp',
+    photo: '/ressources/automatisation-documenter-workflow/cover.jpg',
   },
   {
     id: 'automatisation-cas-pratique-complet',
@@ -200,7 +200,7 @@ const LOCAL_RESOURCES: Resource[] = [
     exercise: '/ressources/automatisation-cas-pratique-complet/exercice.md',
     solutionUrl: '/ressources/automatisation-cas-pratique-complet/solution.pdf',
     published: true,
-    photo: '/images/hero-formation-ia.webp',
+    photo: '/ressources/automatisation-cas-pratique-complet/cover.jpg',
   },
 ];
 
