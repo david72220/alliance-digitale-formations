@@ -8,7 +8,7 @@
     "exerciseHtml": "<h1>Exercice pratique — RGPD en PME</h1>\n<h2>Objectif</h2>\n<p>Appliquer immédiatement la méthode à 3 outils de votre entreprise pour identifier vos risques RGPD prioritaires.</p>\n<h2>Consigne</h2>\n<ol>\n<li>Choisissez 3 outils qui contiennent des données personnelles dans votre PME.\nExemples : CRM, logiciel de paie, messagerie, drive partagé, formulaire de contact, tableur de candidatures.</li>\n<li>Pour chaque outil, complétez les 5 colonnes suivantes :</li>\n</ol>\n<table>\n<thead>\n<tr>\n<th>Outil</th>\n<th>Données personnelles concernées</th>\n<th>Qui y a accès ?</th>\n<th>Durée de conservation actuelle</th>\n<th>Action prioritaire cette semaine</th>\n</tr>\n</thead>\n<tbody><tr>\n<td><strong>Exemple : CRM</strong></td>\n<td>Coordonnées clients, historique d’achats</td>\n<td>Commercial + dirigeant</td>\n<td>Indéfinie</td>\n<td>Vérifier la base légale et nettoyer les inactifs</td>\n</tr>\n<tr>\n<td><strong>Outil 1</strong></td>\n<td></td>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td><strong>Outil 2</strong></td>\n<td></td>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td><strong>Outil 3</strong></td>\n<td></td>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n</tbody></table>\n<ol start=\"3\">\n<li><p>Identifiez pour chaque outil la base légale la plus adaptée :</p>\n<ul>\n<li>Contrat</li>\n<li>Obligation légale</li>\n<li>Intérêt légitime</li>\n<li>Consentement</li>\n</ul>\n</li>\n<li><p>Relevez la situation la plus risquée et définissez une action concrète à mener dans les 7 jours.</p>\n</li>\n</ol>\n<h2>Questions de réflexion</h2>\n<ul>\n<li>Un ancien salarié ou un ancien client pourrait-il demander aujourd’hui la suppression de ses données ? Pourriez-vous le faire facilement ?</li>\n<li>Vos salariés savent-ils quelles données personnelles ils ne doivent <strong>jamais</strong> coller dans ChatGPT ou Claude ?</li>\n<li>Avez-vous une procédure écrite en cas de fuite de données ?</li>\n</ul>\n",
     "solutionUrl": "https://alliance-digitale-formations.vercel.app/ressources/rgpd-pme-10-points-controle/solution.pdf",
     "published": true,
-    "photo": null
+    "photo": "/ressources/rgpd-pme-10-points-controle/cover.jpg"
   },
   {
     "title": "Cas pratique complet : automatiser une PME en 5 étapes concrètes",
@@ -196,7 +196,7 @@
     "exerciseHtml": "<h1>Exercice — Politique de mots de passe</h1>\n<h2>Consigne</h2>\n<p>Créez une politique de mots de passe adaptée à votre PME.</p>\n<p>Elle doit préciser :</p>\n<ol>\n<li>La longueur minimale recommandée.</li>\n<li>L’interdiction de réutiliser des mots de passe personnels.</li>\n<li>L’obligation de double authentification sur les outils critiques.</li>\n<li>L’usage d’un gestionnaire de mots de passe.</li>\n<li>La procédure en cas de départ d’un salarié.</li>\n</ol>\n<h2>Livrable</h2>\n<p>Un document d’une page maximum, lisible par tous.</p>\n",
     "solutionUrl": "https://alliance-digitale-formations.vercel.app/ressources/mots-de-passe-politique-outils/solution.pdf",
     "published": true,
-    "photo": "/images/hero-formation-ia.png"
+    "photo": "/ressources/mots-de-passe-politique-outils/cover.jpg"
   },
   {
     "title": "Rédiger un prompt efficace",
@@ -207,7 +207,7 @@
     "exerciseHtml": "<h1>Exercice pratique — Rédiger un prompt efficace</h1>\n<h2>Objectif</h2>\n<p>Transformer des prompts faibles en prompts efficaces en utilisant la méthode PASR.</p>\n<h2>Consigne</h2>\n<ol>\n<li>Reprenez les 3 prompts faibles ci-dessous.</li>\n<li>Pour chacun, réécrivez un prompt efficace en précisant :<ul>\n<li>Le rôle (Persona)</li>\n<li>La tâche exacte (Action)</li>\n<li>Le contexte (Situation)</li>\n<li>Le format souhaité (Résultat)</li>\n</ul>\n</li>\n</ol>\n<table>\n<thead>\n<tr>\n<th>Prompt faible</th>\n<th>Votre prompt efficace</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>Rédige un post LinkedIn.</td>\n<td></td>\n</tr>\n<tr>\n<td>Fais-moi un email.</td>\n<td></td>\n</tr>\n<tr>\n<td>Explique-moi le RGPD.</td>\n<td></td>\n</tr>\n</tbody></table>\n<ol start=\"3\">\n<li>Testez chaque prompt dans un outil d’IA et notez la qualité de la réponse de 1 à 5.</li>\n<li>Améliorez le prompt qui a obtenu la note la plus basse.</li>\n</ol>\n<h2>Questions de réflexion</h2>\n<ul>\n<li>Quelle information a le plus amélioré la réponse de l’IA ?</li>\n<li>À quelle étape avez-vous dû itérer ?</li>\n<li>Quel prompt pourriez-vous réutiliser chaque semaine dans votre activité ?</li>\n</ul>\n",
     "solutionUrl": "https://alliance-digitale-formations.vercel.app/ressources/rediger-prompt-efficace/solution.pdf",
     "published": true,
-    "photo": null
+    "photo": "/ressources/rediger-prompt-efficace/cover.jpg"
   },
   {
     "title": "Créer un registre des traitements en 30 minutes",
@@ -218,7 +218,7 @@
     "exerciseHtml": "<h1>Exercice — Créer un registre des traitements</h1>\n<h2>Consigne</h2>\n<p>Créez un registre des traitements avec au moins 5 lignes correspondant aux outils principaux de votre PME.</p>\n<p>Pour chaque ligne, remplissez :</p>\n<ul>\n<li>Nom du traitement</li>\n<li>Données personnelles concernées</li>\n<li>Personnes concernées</li>\n<li>Destinataires</li>\n<li>Durée de conservation</li>\n<li>Base légale</li>\n</ul>\n<h2>Livrable</h2>\n<p>Un tableur ou une page Notion avec ces 5 lignes minimum.</p>\n",
     "solutionUrl": "https://alliance-digitale-formations.vercel.app/ressources/registre-traitements-30-minutes/solution.pdf",
     "published": true,
-    "photo": "/images/hero-formation-ia.png"
+    "photo": "/ressources/registre-traitements-30-minutes/cover.jpg"
   },
   {
     "title": "Sécuriser ses emails et ses pièces jointes",
@@ -229,7 +229,7 @@
     "exerciseHtml": "<h1>Exercice — Sécuriser ses emails</h1>\n<h2>Consigne</h2>\n<p>Dans votre PME, identifiez :</p>\n<ol>\n<li>Les 3 types de documents les plus sensifs envoyés par email.</li>\n<li>Les risques associés à chacun.</li>\n<li>Une alternative de partage plus sécurisée.</li>\n</ol>\n<h2>Livrable</h2>\n<p>Un tableau avec ces 3 cas : document, risque, solution proposée.</p>\n",
     "solutionUrl": "https://alliance-digitale-formations.vercel.app/ressources/securiser-emails-pieces-jointes/solution.pdf",
     "published": true,
-    "photo": "/images/hero-formation-ia.png"
+    "photo": "/ressources/securiser-emails-pieces-jointes/cover.jpg"
   },
   {
     "title": "Automatiser les demandes de devis et les réponses clients",
