@@ -7,5 +7,5 @@
   "exerciseHtml": "<h1>Exercice — Politique de mots de passe</h1>\n<h2>Consigne</h2>\n<p>Créez une politique de mots de passe adaptée à votre PME.</p>\n<p>Elle doit préciser :</p>\n<ol>\n<li>La longueur minimale recommandée.</li>\n<li>L’interdiction de réutiliser des mots de passe personnels.</li>\n<li>L’obligation de double authentification sur les outils critiques.</li>\n<li>L’usage d’un gestionnaire de mots de passe.</li>\n<li>La procédure en cas de départ d’un salarié.</li>\n</ol>\n<h2>Livrable</h2>\n<p>Un document d’une page maximum, lisible par tous.</p>\n",
   "solutionUrl": "https://alliance-digitale-formations.vercel.app/ressources/mots-de-passe-politique-outils/solution.pdf",
   "published": true,
-  "photo": "/images/hero-formation-ia.png"
+  "photo": "/ressources/mots-de-passe-politique-outils/cover.jpg"
 }

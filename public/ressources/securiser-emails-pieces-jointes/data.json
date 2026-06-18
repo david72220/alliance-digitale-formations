@@ -7,5 +7,5 @@
   "exerciseHtml": "<h1>Exercice — Sécuriser ses emails</h1>\n<h2>Consigne</h2>\n<p>Dans votre PME, identifiez :</p>\n<ol>\n<li>Les 3 types de documents les plus sensifs envoyés par email.</li>\n<li>Les risques associés à chacun.</li>\n<li>Une alternative de partage plus sécurisée.</li>\n</ol>\n<h2>Livrable</h2>\n<p>Un tableau avec ces 3 cas : document, risque, solution proposée.</p>\n",
   "solutionUrl": "https://alliance-digitale-formations.vercel.app/ressources/securiser-emails-pieces-jointes/solution.pdf",
   "published": true,
-  "photo": "/images/hero-formation-ia.png"
+  "photo": "/ressources/securiser-emails-pieces-jointes/cover.jpg"
 }

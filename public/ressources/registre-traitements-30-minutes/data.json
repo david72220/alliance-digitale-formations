@@ -7,5 +7,5 @@
   "exerciseHtml": "<h1>Exercice — Créer un registre des traitements</h1>\n<h2>Consigne</h2>\n<p>Créez un registre des traitements avec au moins 5 lignes correspondant aux outils principaux de votre PME.</p>\n<p>Pour chaque ligne, remplissez :</p>\n<ul>\n<li>Nom du traitement</li>\n<li>Données personnelles concernées</li>\n<li>Personnes concernées</li>\n<li>Destinataires</li>\n<li>Durée de conservation</li>\n<li>Base légale</li>\n</ul>\n<h2>Livrable</h2>\n<p>Un tableur ou une page Notion avec ces 5 lignes minimum.</p>\n",
   "solutionUrl": "https://alliance-digitale-formations.vercel.app/ressources/registre-traitements-30-minutes/solution.pdf",
   "published": true,
-  "photo": "/images/hero-formation-ia.png"
+  "photo": "/ressources/registre-traitements-30-minutes/cover.jpg"
 }
