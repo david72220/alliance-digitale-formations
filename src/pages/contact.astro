@@ -37,23 +37,18 @@ const calendlyUrl = "https://cal.eu/alliance-digitale/decouverte-30-min";
           </div>
         </div>
 
+        <p class="text-center text-xs text-white/65 mt-4">
+          Le calendrier est fourni par Cal.com et déposera des cookies tiers nécessaires à son fonctionnement.
+        </p>
+
         <script>
           const mount = document.getElementById('cal-mount');
           const btn = document.getElementById('cal-load-btn');
           const url = mount?.dataset.calUrl;
-          const inject = () => {
+          btn?.addEventListener('click', () => {
             if (!mount || !url) return;
             mount.innerHTML = `<iframe src="${url}" width="100%" height="700" loading="lazy" frameborder="0" class="rounded-xl" title="Prise de rendez-vous Alliance Digitale"></iframe>`;
-          };
-          btn?.addEventListener('click', inject);
-          if ('IntersectionObserver' in window && mount) {
-            const io = new IntersectionObserver((entries) => {
-              for (const e of entries) {
-                if (e.isIntersecting) { setTimeout(inject, 1500); io.disconnect(); break; }
-              }
-            }, { rootMargin: '200px' });
-            io.observe(mount);
-          }
+          });
         </script>
         
         <div class="mt-12 grid sm:grid-cols-2 gap-6 text-center">
