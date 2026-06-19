@@ -27,24 +27,43 @@ const calendlyUrl = "https://cal.eu/alliance-digitale/decouverte-30-min";
         </div>
         
         <div class="relief-panel p-4 sm:p-8" data-reveal data-reveal-delay="0.1">
-          <iframe
-            src={calendlyUrl}
-            width="100%"
-            height="700"
-            frameborder="0"
-            class="rounded-xl"
-            title="Prise de rendez-vous Alliance Digitale"
-          ></iframe>
+          <div id="cal-mount" data-cal-url={calendlyUrl} class="min-h-[700px] flex items-center justify-center">
+            <button id="cal-load-btn" type="button" class="btn-primary text-base px-8 py-4">
+              Afficher le calendrier de prise de rendez-vous
+            </button>
+            <noscript>
+              <iframe src={calendlyUrl} width="100%" height="700" loading="lazy" frameborder="0" class="rounded-xl" title="Prise de rendez-vous Alliance Digitale"></iframe>
+            </noscript>
+          </div>
         </div>
+
+        <script>
+          const mount = document.getElementById('cal-mount');
+          const btn = document.getElementById('cal-load-btn');
+          const url = mount?.dataset.calUrl;
+          const inject = () => {
+            if (!mount || !url) return;
+            mount.innerHTML = `<iframe src="${url}" width="100%" height="700" loading="lazy" frameborder="0" class="rounded-xl" title="Prise de rendez-vous Alliance Digitale"></iframe>`;
+          };
+          btn?.addEventListener('click', inject);
+          if ('IntersectionObserver' in window && mount) {
+            const io = new IntersectionObserver((entries) => {
+              for (const e of entries) {
+                if (e.isIntersecting) { setTimeout(inject, 1500); io.disconnect(); break; }
+              }
+            }, { rootMargin: '200px' });
+            io.observe(mount);
+          }
+        </script>
         
         <div class="mt-12 grid sm:grid-cols-2 gap-6 text-center">
           <div class="p-6 rounded-xl border border-white/10 bg-white/[0.03]">
-            <p class="text-sm text-white/50 mb-1">Email</p>
+            <p class="text-sm text-white/65 mb-1">Email</p>
             <a href="mailto:contact@alliance-digitale.fr" class="text-white hover:text-alliance-blue transition">contact@alliance-digitale.fr</a>
           </div>
           
           <div class="p-6 rounded-xl border border-white/10 bg-white/[0.03]">
-            <p class="text-sm text-white/50 mb-1">Téléphone</p>
+            <p class="text-sm text-white/65 mb-1">Téléphone</p>
             <a href="tel:+33686943489" class="text-white hover:text-alliance-blue transition">06 86 94 34 89</a>
           </div>
         </div>

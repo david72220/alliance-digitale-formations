@@ -39,7 +39,7 @@ const courseLd = {
 
 <Layout
   title={`${formation.title} — Alliance Digitale`}
-  description={formation.generalObjective}
+  description={formation.generalObjective || `Formation ${formation.title} — Alliance Digitale, accompagnement IA et automatisation pour PME en Sarthe. Financement OPCO sur demande.`}
   jsonLd={courseLd}
 >
   <Header />
@@ -48,7 +48,7 @@ const courseLd = {
     <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
         <div class="mb-8">
-          <a href="/formations/" class="text-sm text-white/50 hover:text-alliance-blue transition">← Retour aux formations</a>
+          <a href="/formations/" class="text-sm text-white/65 hover:text-alliance-blue transition">← Retour aux formations</a>
         </div>
 
         <div class="mb-10">
@@ -63,19 +63,19 @@ const courseLd = {
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           <div class="p-4 rounded-xl border border-white/10 bg-white/[0.03]">
-            <p class="text-xs text-white/40 uppercase tracking-wider mb-1">Durée</p>
+            <p class="text-xs text-white/70 uppercase tracking-wider mb-1">Durée</p>
             <p class="text-white font-semibold">{formation.duration || '—'}</p>
           </div>
           <div class="p-4 rounded-xl border border-white/10 bg-white/[0.03]">
-            <p class="text-xs text-white/40 uppercase tracking-wider mb-1">Public</p>
+            <p class="text-xs text-white/70 uppercase tracking-wider mb-1">Public</p>
             <p class="text-white font-semibold">{formation.audience || '—'}</p>
           </div>
           <div class="p-4 rounded-xl border border-white/10 bg-white/[0.03]">
-            <p class="text-xs text-white/40 uppercase tracking-wider mb-1">Méthodes</p>
+            <p class="text-xs text-white/70 uppercase tracking-wider mb-1">Méthodes</p>
             <p class="text-white font-semibold">{formation.methods || '—'}</p>
           </div>
           <div class="p-4 rounded-xl border border-white/10 bg-white/[0.03] sm:col-span-2 lg:col-span-1">
-            <p class="text-xs text-white/40 uppercase tracking-wider mb-1">Tarif</p>
+            <p class="text-xs text-white/70 uppercase tracking-wider mb-1">Tarif</p>
             <p class="text-white font-semibold leading-snug whitespace-pre-line">{formation.priceText || (formation.price ? `${formation.price.toLocaleString('fr-FR')} € HT` : 'Sur demande')}</p>
             <p class="mt-2 text-xs text-alliance-blue flex items-center gap-1">
               <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
