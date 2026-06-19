@@ -24,7 +24,7 @@ CACHE_DIR = ROOT / '.pexels-cache'
 CACHE_DIR.mkdir(exist_ok=True)
 MAPPING_PATH = ROOT / '.formation-photos.json'
 
-VERCEL_BASE = "https://alliance-digitale-formations.vercel.app"
+VERCEL_BASE = "https://www.alliance-digitale.fr"
 W, H = 1200, 630
 UA = "Mozilla/5.0 alliance-digitale-fetch/1.0"
 
