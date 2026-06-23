@@ -1,4 +1,4 @@
-# Automatiser sa facturation et ses relances impayés
+# Automatiser sa facturation et ses relances impayées
 
 ## Pourquoi automatiser la relance client ?
 

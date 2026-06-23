@@ -140,7 +140,7 @@ const LOCAL_RESOURCES: Resource[] = [
   {
     id: 'automatisation-saisie-export-donnees',
     slug: 'automatisation-saisie-export-donnees',
-    title: "Automatiser la saisie et l'export de données : finir la copie manuelle",
+    title: "Automatiser la saisie et l'export de données : fini la copie manuelle",
     description: "Apprenez à automatiser la saisie répétitive, la consolidation de tableurs et l'export de données vers vos outils métiers.",
     content: '/ressources/automatisation-saisie-export-donnees/cours.md',
     contentJson: '/ressources/automatisation-saisie-export-donnees/data.json',

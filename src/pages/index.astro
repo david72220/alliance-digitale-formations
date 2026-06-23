@@ -7,13 +7,15 @@ import FormationCard from '../components/FormationCard.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import FiberFrame from '../components/FiberFrame.astro';
 import heroImage from '../assets/hero-formation-ia.png';
-import { getFormations, getCaseStudies } from '../lib/notion.ts';
+import { getFormations, getCaseStudies, getResources } from '../lib/notion.ts';
 
 const formations = await getFormations();
 const studies = await getCaseStudies();
+const resources = await getResources();
 
 const heroFormations = formations.slice(0, 3);
 const heroStudies = studies.slice(0, 3);
+const heroResources = resources.slice(0, 6);
 ---
 
 <Layout
@@ -230,6 +232,54 @@ const heroStudies = studies.slice(0, 3);
         </div>
       </div>
     </section>
+
+    <!-- RESSOURCES GRATUITES -->
+    {heroResources.length > 0 && (
+      <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-12" data-reveal>
+            <p class="text-alliance-orange text-sm font-bold uppercase tracking-widest mb-3">Ressources gratuites</p>
+
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+              Cours gratuits pour démarrer avec l'IA
+            </h2>
+
+            <p class="text-white/60 max-w-2xl mx-auto">
+              Des micro-cours concrets et accessibles pour vous initier à l'IA générative, à l'automatisation
+              et à la sécurité des données. Chaque cours inclut un exercice pratique et un corrigé PDF.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {heroResources.map((resource, i) => (
+              <a
+                href={`/ressources/${resource.slug}/`}
+                data-reveal
+                data-reveal-delay={String(Math.min(i, 5) * 0.06)}
+                class="group block rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] transition overflow-hidden"
+              >
+                {resource.photo && (
+                  <div class="h-36 overflow-hidden">
+                    <img src={resource.photo} alt={resource.title} loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  </div>
+                )}
+                <div class="p-5">
+                  <span class="inline-block px-2 py-0.5 rounded bg-alliance-blue/10 text-alliance-blue text-xs font-semibold mb-3">
+                    {resource.module}
+                  </span>
+                  <h3 class="font-display text-lg font-bold text-white mb-2 group-hover:text-alliance-blue transition-colors">{resource.title}</h3>
+                  <p class="text-sm text-white/60 line-clamp-2">{resource.description}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div class="text-center mt-12">
+            <a href="/ressources/" class="btn-secondary">Voir toutes les ressources</a>
+          </div>
+        </div>
+      </section>
+    )}
 
     <!-- CTA FINAL -->
     <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">

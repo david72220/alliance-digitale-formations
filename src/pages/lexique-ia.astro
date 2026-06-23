@@ -1,0 +1,183 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const lexique = [
+  {
+    terme: 'Agent IA',
+    definition: "Programme d'intelligence artificielle capable d'accomplir des tâches de manière autonome, en prenant des décisions et en exécutant des actions sans intervention humaine constante. Un agent IA peut par exemple trier des emails, répondre à des clients ou générer des rapports.",
+  },
+  {
+    terme: 'AI Act',
+    definition: "Règlement européen sur l'intelligence artificielle adopté par l'Union européenne. Il impose des obligations aux entreprises qui développent ou utilisent des systèmes d'IA, classés par niveau de risque. Les PME doivent s'y conformer progressivement à partir d'août 2026.",
+  },
+  {
+    terme: "API (Interface de Programmation d'Applications)",
+    definition: "Point de connexion qui permet à deux logiciels de communiquer entre eux. Par exemple, l'API de ChatGPT permet à un autre programme d'envoyer des requêtes et de recevoir des réponses générées par l'IA.",
+  },
+  {
+    terme: 'Automatisation',
+    definition: "Action de faire exécuter une tâche par un logiciel plutôt que par un humain. L'automatisation réduit les erreurs, gagne du temps et libère les équipes pour des tâches à plus forte valeur ajoutée.",
+  },
+  {
+    terme: 'Chatbot',
+    definition: "Programme conçu pour simuler une conversation humaine. Les chatbots modernes utilisent l'IA générative pour comprendre les questions et formuler des réponses naturelles. Ils peuvent gérer le service client, les FAQ ou la prise de rendez-vous.",
+  },
+  {
+    terme: 'Deep Learning (Apprentissage profond)',
+    definition: "Technique d'intelligence artificielle basée sur des réseaux de neurones artificiels à plusieurs couches. Le Deep Learning permet aux modèles de reconnaître des images, de comprendre le langage ou de générer du texte avec une grande précision.",
+  },
+  {
+    terme: 'Embedding',
+    definition: "Représentation mathématique d'un texte, d'une image ou d'un son sous forme de vecteur numérique. Les embeddings permettent aux systèmes d'IA de comparer et de rechercher des contenus similaires de manière efficace.",
+  },
+  {
+    terme: 'Fine-tuning (Ajustement fin)',
+    definition: "Processus qui consiste à adapter un modèle d'IA pré-entraîné à une tâche ou un domaine spécifique en l'entraînant sur des données spécialisées. Par exemple, un modèle peut être fine-tuné pour répondre aux questions juridiques.",
+  },
+  {
+    terme: 'Génération augmentée par récupération (RAG)',
+    definition: "Technique qui combine un modèle d'IA générative avec une base de connaissances externe. Au lieu de s'appuyer uniquement sur ce qu'il a appris, le modèle recherche d'abord des informations dans vos documents, puis génère une réponse basée sur ces sources. Cela réduit les hallucinations et permet d'utiliser des données internes.",
+  },
+  {
+    terme: 'Hallucination',
+    definition: "Phénomène où une IA générative produit une réponse qui semble plausible mais est factuellement fausse ou inventée. Les hallucinations sont l'un des principaux risques de l'utilisation d'IA en entreprise. Le RAG et la vérification humaine permettent de les limiter.",
+  },
+  {
+    terme: 'IA générative',
+    definition: "Branche de l'intelligence artificielle capable de créer du contenu nouveau : texte, images, audio, vidéo ou code. ChatGPT, Claude, Midjourney ou DALL-E sont des exemples d'IA générative. Contrairement à l'IA analytique qui classe ou prédit, l'IA générative produit.",
+  },
+  {
+    terme: 'Inférence',
+    definition: "Phase où un modèle d'IA entraîné est utilisé pour produire un résultat (une réponse, une image, une prédiction). L'inférence est l'équivalent de la phase d'utilisation, par opposition à la phase d'entraînement.",
+  },
+  {
+    terme: 'LLM (Large Language Model)',
+    definition: "Modèle de langage de grande taille, entraîné sur des milliards de mots pour comprendre et générer du texte. Les LLM comme GPT-4, Claude ou Mistral alimentent les chatbots, les assistants rédactionnels et de nombreux outils d'IA.",
+  },
+  {
+    terme: 'Machine Learning (Apprentissage automatique)',
+    definition: "Ensemble de techniques qui permettent à un système d'apprendre à partir de données sans être explicitement programmé pour chaque cas. Le Machine Learning est la base de l'IA moderne.",
+  },
+  {
+    terme: 'Modèle de langage',
+    definition: "Système d'IA entraîné pour comprendre, traiter et générer du langage humain. Il prédit le mot suivant le plus probable dans une phrase, ce qui lui permet de rédiger des textes, de résumer, de traduire ou de répondre à des questions.",
+  },
+  {
+    terme: 'NLP (Traitement du Langage Naturel)',
+    definition: "Domaine de l'IA qui permet aux machines de comprendre, d'interpréter et de générer du langage humain. La traduction automatique, l'analyse de sentiments et les chatbots reposent sur le NLP.",
+  },
+  {
+    terme: 'No-code / Low-code',
+    definition: "Approche qui permet de créer des applications ou des automatisations avec peu ou pas de programmation. Des outils comme n8n, Notion, Airtable ou Make permettent aux PME d'automatiser leurs processus sans équipe de développement.",
+  },
+  {
+    terme: 'Prompt (Invite)',
+    definition: "Texte ou instruction donné à une IA générative pour obtenir une réponse. La qualité du prompt détermine la qualité du résultat. Savoir rédiger un prompt efficace est devenu une compétence professionnelle clé (prompt engineering).",
+  },
+  {
+    terme: 'Prompt Engineering (Ingénierie de prompt)',
+    definition: "Pratique qui consiste à concevoir et optimiser les instructions données à une IA pour obtenir les meilleurs résultats. Un bon prompt engineering combine clarté, contexte, contraintes et exemples.",
+  },
+  {
+    terme: 'RGPD (Règlement Général sur la Protection des Données)',
+    definition: "Règlement européen qui encadre le traitement des données personnelles. Toute entreprise qui utilise l'IA sur des données de clients ou de salariés doit respecter le RGPD : consentement, minimisation des données, droit d'information et d'effacement.",
+  },
+  {
+    terme: 'Scénario (dans n8n)',
+    definition: "Suite d'étapes automatisées qui s'enchaînent : déclencheur (réception d'un email, formulaire), actions (transformation, enrichissement), et résultat (envoi, enregistrement). Un scénario remplace un processus manuel.",
+  },
+  {
+    terme: 'Token (Jeton)',
+    definition: "Unité de base utilisée par les modèles de langage pour traiter le texte. Un token correspond environ à 3/4 de mot en français. La consommation d'un modèle d'IA se mesure en tokens (entrée et sortie).",
+  },
+  {
+    terme: "Training data (Données d'entraînement)",
+    definition: "Ensemble de données utilisées pour entraîner un modèle d'IA. La qualité et la quantité des données d'entraînement déterminent directement la performance du modèle.",
+  },
+  {
+    terme: 'Webhook',
+    definition: "Point de connexion qui permet à une application d'en recevoir automatiquement des notifications ou des données d'une autre. Par exemple, un formulaire rempli sur votre site peut déclencher un webhook qui lance une automatisation.",
+  },
+  {
+    terme: 'Workflow',
+    definition: "Enchaînement d'actions automatisées qui relie plusieurs outils entre eux. Par exemple : un email reçu → extraction des données → enregistrement dans un tableur → envoi d'une confirmation. Un workflow bien conçu remplace une tâche répétitive effectuée manuellement.",
+  },
+];
+
+// Grouper par lettre initiale
+const grouped = lexique.reduce((acc, item) => {
+  const letter = item.terme[0].toUpperCase();
+  if (!acc[letter]) acc[letter] = [];
+  acc[letter].push(item);
+  return acc;
+}, {} as Record<string, typeof lexique>);
+
+const letters = Object.keys(grouped).sort();
+
+const pageDescription = "Lexique de l'intelligence artificielle : définitions claires et accessibles des termes liés à l'IA, à l'automatisation et aux outils no-code pour les PME.";
+---
+
+<Layout
+  title="Lexique IA — Définitions des termes de l'intelligence artificielle — Alliance Digitale"
+  description={pageDescription}
+>
+  <Header />
+
+  <main class="flex-1">
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Lexique</p>
+
+          <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">Lexique de l'IA</h1>
+
+          <p class="text-white/60 max-w-2xl mx-auto">
+            Les termes de l'intelligence artificielle et de l'automatisation expliqués simplement,
+            pour les PME qui veulent comprendre avant d'adopter.
+          </p>
+        </div>
+
+        <!-- Index alphabétique -->
+        <div class="flex flex-wrap justify-center gap-2 mb-12" data-reveal>
+          {letters.map((letter) => (
+            <a
+              href={`#${letter}`}
+              class="w-10 h-10 rounded-lg border border-white/10 bg-white/[0.03] flex items-center justify-center text-sm font-bold text-white/70 hover:text-alliance-blue hover:border-alliance-blue/30 transition"
+            >
+              {letter}
+            </a>
+          ))}
+        </div>
+
+        <!-- Définitions -->
+        <div class="space-y-12">
+          {letters.map((letter) => (
+            <div key={letter} id={letter} class="scroll-mt-32">
+              <h2 class="font-display text-2xl font-bold text-alliance-blue mb-6 border-b border-white/10 pb-3" data-reveal>
+                {letter}
+              </h2>
+              <div class="space-y-6">
+                {grouped[letter].map((item) => (
+                  <div class="relief-panel p-6" data-reveal>
+                    <h3 class="font-display text-lg font-bold text-white mb-3">{item.terme}</h3>
+                    <p class="text-white/70 leading-relaxed">{item.definition}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-16 text-center" data-reveal>
+          <p class="text-white/60 mb-6">Une question sur ces termes ou envie de mettre l'IA en pratique dans votre PME ?</p>
+          <a href="/contact/" class="btn-primary">Prendre rendez-vous</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

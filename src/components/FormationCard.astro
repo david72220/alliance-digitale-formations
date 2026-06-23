@@ -64,8 +64,14 @@ const { formation } = Astro.props;
 
     <div class="mt-4">
       <p class="text-sm font-semibold text-alliance-orange leading-snug">
-        {formation.priceText || (formation.price ? `${formation.price.toLocaleString('fr-FR')} € HT` : 'Tarif sur demande')}
+        Devis sur demande
       </p>
+      <a href="/contact/" class="mt-3 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-alliance-red/15 text-alliance-red text-xs font-semibold hover:bg-alliance-red/25 transition">
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        Demander un devis
+      </a>
       <span class="mt-2 inline-flex items-center gap-1 px-2 py-1 rounded-full bg-alliance-blue/15 text-alliance-blue text-[10px] font-semibold uppercase tracking-wide whitespace-nowrap">
         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>

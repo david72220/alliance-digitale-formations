@@ -1,4 +1,4 @@
-# Automatiser la saisie et l'export de données : finir la copie manuelle
+# Automatiser la saisie et l'export de données : fini la copie manuelle
 
 ## Qu’est-ce que la saisie automatique ?
 

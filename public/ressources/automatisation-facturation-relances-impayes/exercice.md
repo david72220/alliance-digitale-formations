@@ -1,4 +1,4 @@
-# Exercice pratique — Automatiser ses relances impayés
+# Exercice pratique — Automatiser ses relances impayées
 
 ## Objectif
 
