@@ -1,0 +1,387 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Sites web pour artisans BTP — Alliance Digitale"
+  description="Sites vitrine modernes avec chatbot IA, prise de RDV en ligne et formulaire de devis pour plombiers, électriciens, couvreurs et paysagistes en Sarthe."
+  noindex={true}
+>
+  <Header />
+
+  <main class="flex-1">
+    <!-- HERO -->
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Sites web artisans BTP</p>
+
+        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">
+          Votre site web qui travaille pendant que vous êtes sur chantier
+        </h1>
+
+        <p class="text-lg text-white/70 max-w-2xl mx-auto mb-10">
+          Plombiers, électriciens, couvreurs, paysagistes : un site vitrine moderne qui capte les demandes
+          24h/24, prend les rendez-vous automatiquement et qualifie les devis par IA.
+        </p>
+
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="#offres" class="btn-primary text-base px-8 py-4">Découvrir les offres</a>
+          <a href="#démos" class="btn-primary text-base px-8 py-4" style="background:transparent;border:1px solid rgba(59,130,246,0.4);">Voir les sites démo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLÈME / SOLUTION -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Le constat</p>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-6">
+              Vos clients vous cherchent le soir. Votre site n'est pas là.
+            </h2>
+            <ul class="space-y-4 text-white/70">
+              <li class="flex gap-3">
+                <span class="text-alliance-blue font-bold">→</span>
+                <span>Un client a une fuite à 20h. Il cherche sur Google. Il trouve vos concurrents, pas vous.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-alliance-blue font-bold">→</span>
+                <span>Pas de site ? Vous êtes invisible. Site daté ? Vous passez pour un amateur.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-alliance-blue font-bold">→</span>
+                <span>Pas de prise de RDV en ligne ? Le client appelle le prochain sur la liste.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-alliance-blue font-bold">→</span>
+                <span>Vous perdez des chantiers sans même le savoir.</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">La solution</p>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-6">
+              Un site qui capte, qualifie et convertit.
+            </h2>
+            <ul class="space-y-4 text-white/70">
+              <li class="flex gap-3">
+                <span class="text-alliance-blue font-bold">✓</span>
+                <span>Site vitrine moderne, mobile-first, optimisé pour Google (SEO local).</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-alliance-blue font-bold">✓</span>
+                <span>Prise de rendez-vous en ligne intégrée (Cal.eu).</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-alliance-blue font-bold">✓</span>
+                <span>Formulaire de devis intelligent qui arrive dans votre boîte mail.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-alliance-blue font-bold">✓</span>
+                <span>Chatbot IA qui répond aux questions, qualifie l'urgence et oriente le client.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-alliance-blue font-bold">✓</span>
+                <span>Vous modifiez vos textes et photos vous-même, depuis Notion. Sans coder.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFFRES -->
+    <section id="offres" class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Trois formules</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Choisissez selon vos besoins</h2>
+          <p class="text-white/60 max-w-2xl mx-auto">Tous nos sites sont responsive, optimisés SEO et hébergés sur infrastructure française. Paiement en 3 fois sans frais.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- P1 : Essentiel -->
+          <div class="relief-panel p-8" data-reveal>
+            <div class="mb-6">
+              <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-white/70 text-xs font-semibold uppercase tracking-wider mb-4">One-shot</span>
+              <h3 class="font-display text-2xl font-bold text-white mb-2">Essentiel</h3>
+              <p class="text-white/60 text-sm">Le site vitrine qui vous met sur Google.</p>
+            </div>
+
+            <div class="mb-6">
+              <div class="font-display text-4xl font-bold text-white">690 €</div>
+              <p class="text-white/50 text-sm mt-1">Paiement en 3 × 230 € — sans abonnement</p>
+            </div>
+
+            <ul class="space-y-3 text-white/70 text-sm mb-8">
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Site vitrine 5 pages (accueil, services, réalisations, zones, contact)</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Design moderne, mobile-first</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Formulaire de contact par email</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> SEO local (Google Maps, Schema.org)</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Photos fournies (banque d'images)</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Mise en ligne sur Vercel</li>
+              <li class="flex gap-2"><span class="text-white/30">✗</span> <span class="text-white/40">Prise de RDV en ligne</span></li>
+              <li class="flex gap-2"><span class="text-white/30">✗</span> <span class="text-white/40">Chatbot IA</span></li>
+              <li class="flex gap-2"><span class="text-white/30">✗</span> <span class="text-white/40">Modification autonome</span></li>
+            </ul>
+
+            <a href="/contact/" class="block text-center btn-primary w-full">Demander un devis</a>
+          </div>
+
+          <!-- P2 : Pro -->
+          <div class="relief-panel p-8 relative" data-reveal data-reveal-delay="0.1" style="border-color: rgba(59,130,246,0.4); box-shadow: 0 0 40px rgba(59,130,246,0.1);">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span class="inline-block px-4 py-1 rounded-full bg-alliance-blue text-white text-xs font-bold uppercase tracking-wider">Recommandé</span>
+            </div>
+
+            <div class="mb-6 mt-2">
+              <span class="inline-block px-3 py-1 rounded-full bg-alliance-blue/20 text-alliance-blue text-xs font-semibold uppercase tracking-wider mb-4">Site + RDV + Devis</span>
+              <h3 class="font-display text-2xl font-bold text-white mb-2">Pro</h3>
+              <p class="text-white/60 text-sm">Le site qui capture les demandes automatiquement.</p>
+            </div>
+
+            <div class="mb-6">
+              <div class="font-display text-4xl font-bold text-white">990 €</div>
+              <p class="text-white/50 text-sm mt-1">Paiement en 3 × 330 € — puis 20 €/mois (abonnement IA)</p>
+            </div>
+
+            <ul class="space-y-3 text-white/70 text-sm mb-8">
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Tout le palier Essentiel</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Prise de rendez-vous en ligne (Cal.eu)</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Formulaire de devis intelligent</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Galerie photos de réalisations</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Google Analytics + Vercel Analytics</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Modification de vos textes via Notion</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Photos de vos chantiers ajoutables par vous</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Section actualités / nouveautés</li>
+              <li class="flex gap-2"><span class="text-white/30">✗</span> <span class="text-white/40">Chatbot IA standardiste 24/7</span></li>
+            </ul>
+
+            <a href="/contact/" class="block text-center btn-primary w-full">Demander un devis</a>
+          </div>
+
+          <!-- P3 : Premium -->
+          <div class="relief-panel p-8" data-reveal data-reveal-delay="0.2">
+            <div class="mb-6">
+              <span class="inline-block px-3 py-1 rounded-full bg-alliance-red/20 text-alliance-red text-xs font-semibold uppercase tracking-wider mb-4">Site + IA complète</span>
+              <h3 class="font-display text-2xl font-bold text-white mb-2">Premium</h3>
+              <p class="text-white/60 text-sm">Le standardiste IA qui ne rate jamais une demande.</p>
+            </div>
+
+            <div class="mb-6">
+              <div class="font-display text-4xl font-bold text-white">1 490 €</div>
+              <p class="text-white/50 text-sm mt-1">Paiement en 3 × 497 € — puis 39 €/mois (abonnement IA)</p>
+            </div>
+
+            <ul class="space-y-3 text-white/70 text-sm mb-8">
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Tout le palier Pro</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Chatbot IA standardiste 24/7</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Qualification automatique des demandes (urgence, type, zone)</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Dashboard des leads captés (votre espace Web)</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> 1er mois chatbot IA offert</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Fallback automatique : si l'IA est indisponible, alerte SMS/email</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Rate-limit sécurisé par domaine et par IP</li>
+              <li class="flex gap-2"><span class="text-alliance-blue">✓</span> Conformité RGPD (tarteaucitron, mentions, registre)</li>
+            </ul>
+
+            <a href="/contact/" class="block text-center btn-primary w-full">Demander un devis</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DÉMOS -->
+    <section id="démos" class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Sites démo interactifs</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Voyez ce que ça donne</h2>
+          <p class="text-white/60 max-w-2xl mx-auto">
+            Cliquez sur un site pour le voir en vrai. Entrez votre email dans la bannière en haut pour activer
+            le mode démonstration : le chatbot, le formulaire de devis et la prise de RDV deviennent fonctionnels.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <a href="https://demo-plombier-ten.vercel.app" target="_blank" rel="noopener" class="relief-panel p-6 group hover:border-alliance-blue/40 transition" data-reveal>
+            <div class="w-12 h-12 rounded-xl bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-xl font-bold mb-4">P</div>
+            <h3 class="font-display text-lg font-bold text-white mb-2 group-hover:text-alliance-blue transition">Plomberie Martin</h3>
+            <p class="text-white/50 text-sm mb-4">Démo plombier-chauffagiste au Mans</p>
+            <span class="text-alliance-blue text-sm font-semibold">Voir le site →</span>
+          </a>
+
+          <a href="https://demo-electricien-alpha.vercel.app" target="_blank" rel="noopener" class="relief-panel p-6 group hover:border-alliance-blue/40 transition" data-reveal data-reveal-delay="0.1">
+            <div class="w-12 h-12 rounded-xl bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-xl font-bold mb-4">E</div>
+            <h3 class="font-display text-lg font-bold text-white mb-2 group-hover:text-alliance-blue transition">Élec Sarthe</h3>
+            <p class="text-white/50 text-sm mb-4">Démo électricien au Mans</p>
+            <span class="text-alliance-blue text-sm font-semibold">Voir le site →</span>
+          </a>
+
+          <a href="https://demo-couvreur.vercel.app" target="_blank" rel="noopener" class="relief-panel p-6 group hover:border-alliance-blue/40 transition" data-reveal data-reveal-delay="0.2">
+            <div class="w-12 h-12 rounded-xl bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-xl font-bold mb-4">C</div>
+            <h3 class="font-display text-lg font-bold text-white mb-2 group-hover:text-alliance-blue transition">Couverture Sarthe</h3>
+            <p class="text-white/50 text-sm mb-4">Démo couvreur au Mans</p>
+            <span class="text-alliance-blue text-sm font-semibold">Voir le site →</span>
+          </a>
+
+          <a href="https://demo-paysagiste-one.vercel.app" target="_blank" rel="noopener" class="relief-panel p-6 group hover:border-alliance-blue/40 transition" data-reveal data-reveal-delay="0.3">
+            <div class="w-12 h-12 rounded-xl bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-xl font-bold mb-4">J</div>
+            <h3 class="font-display text-lg font-bold text-white mb-2 group-hover:text-alliance-blue transition">Jardins Sarthe</h3>
+            <p class="text-white/50 text-sm mb-4">Démo paysagiste au Mans</p>
+            <span class="text-alliance-blue text-sm font-semibold">Voir le site →</span>
+          </a>
+        </div>
+
+        <div class="mt-8 text-center">
+          <p class="text-white/40 text-sm">
+            💡 Astuce : sur chaque site démo, entrez votre email en haut pour activer toutes les fonctionnalités
+            (chatbot, devis, RDV). Vous recevez les emails de test dans votre boîte.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMENT ÇA MARCHE -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Le processus</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">De zéro à en ligne en 7 jours</h2>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-6">
+          <div class="relief-panel p-6" data-reveal>
+            <div class="w-10 h-10 rounded-full bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-lg font-bold mb-4">1</div>
+            <h3 class="font-display text-lg font-bold text-white mb-2">On se rencontre</h3>
+            <p class="text-white/60 text-sm">Je viens au dépôt avec la démo sur tablette. 15 minutes suffisent.</p>
+          </div>
+
+          <div class="relief-panel p-6" data-reveal data-reveal-delay="0.1">
+            <div class="w-10 h-10 rounded-full bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-lg font-bold mb-4">2</div>
+            <h3 class="font-display text-lg font-bold text-white mb-2">Vous m'envoyez vos infos</h3>
+            <p class="text-white/60 text-sm">10 photos par WhatsApp, vos services, vos zones, vos horaires. C'est tout.</p>
+          </div>
+
+          <div class="relief-panel p-6" data-reveal data-reveal-delay="0.2">
+            <div class="w-10 h-10 rounded-full bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-lg font-bold mb-4">3</div>
+            <h3 class="font-display text-lg font-bold text-white mb-2">Je construis le site</h3>
+            <p class="text-white/60 text-sm">À partir du template, j'adapte à votre métier et vos infos. 3 à 5 jours.</p>
+          </div>
+
+          <div class="relief-panel p-6" data-reveal data-reveal-delay="0.3">
+            <div class="w-10 h-10 rounded-full bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-lg font-bold mb-4">4</div>
+            <h3 class="font-display text-lg font-bold text-white mb-2">C'est en ligne</h3>
+            <p class="text-white/60 text-sm">Votre domaine, votre site, vos demandes qui arrivent. Vous gérez via Notion.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTION -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Modification autonome</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-6">
+          Vous modifiez votre site depuis Notion
+        </h2>
+        <p class="text-white/70 max-w-2xl mx-auto mb-8">
+          Pas besoin de coder ni de payer un développeur pour changer un texte. Vous accédez à votre page Notion
+          dédiée, vous modifiez vos services, vos horaires, vos photos de chantiers, vos actualités.
+          Le site se met à jour automatiquement, 4 fois par jour.
+        </p>
+        <div class="grid sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+          <div class="relief-panel p-4">
+            <div class="text-alliance-blue text-2xl mb-2">📝</div>
+            <p class="text-white/60 text-sm">Textes & services</p>
+          </div>
+          <div class="relief-panel p-4">
+            <div class="text-alliance-blue text-2xl mb-2">📸</div>
+            <p class="text-white/60 text-sm">Photos de chantiers</p>
+          </div>
+          <div class="relief-panel p-4">
+            <div class="text-alliance-blue text-2xl mb-2">📰</div>
+            <p class="text-white/60 text-sm">Actualités</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Questions fréquentes</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Vous vous demandez peut-être</h2>
+        </div>
+
+        <div class="space-y-4">
+          <details class="relief-panel p-6 group">
+            <summary class="cursor-pointer font-display text-lg font-semibold text-white flex justify-between items-center">
+              Le site me appartient-il ?
+              <span class="text-alliance-blue transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="text-white/60 mt-4 text-sm">Oui. Le code source est à votre nom sur GitHub. Si vous arrêtez l'abonnement, vous récupérez le site et pouvez l'héberger où vous voulez. Les 6 premiers mois après rupture, le site reste en ligne gratuitement. Au-delà, on vous remet le code et une procédure d'auto-hébergement.</p>
+          </details>
+
+          <details class="relief-panel p-6 group">
+            <summary class="cursor-pointer font-display text-lg font-semibold text-white flex justify-between items-center">
+              Pourquoi un abonnement mensuel ?
+              <span class="text-alliance-blue transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="text-white/60 mt-4 text-sm">L'abonnement couvre le chatbot IA (serveur, modèle, maintenance), l'hébergement Vercel, le domaine, les mises à jour de sécurité, et le support. Sans abonnement, le site reste statique mais sans IA ni capture de leads.</p>
+          </details>
+
+          <details class="relief-panel p-6 group">
+            <summary class="cursor-pointer font-display text-lg font-semibold text-white flex justify-between items-center">
+              Je n'ai pas de photos de mes chantiers
+              <span class="text-alliance-blue transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="text-white/60 mt-4 text-sm">Pas de problème. Pour le lancement, on utilise des photos professionnelles adaptées à votre métier. Vous ajoutez vos vraies photos de chantiers au fur et mesure, directement depuis Notion.</p>
+          </details>
+
+          <details class="relief-panel p-6 group">
+            <summary class="cursor-pointer font-display text-lg font-semibold text-white flex justify-between items-center">
+              Et si l'IA se plante ?
+              <span class="text-alliance-blue transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="text-white/60 mt-4 text-sm">Le chatbot ne prend jamais de décision à votre place. Il qualifie la demande (urgence, type, zone) et oriente vers la prise de RDV ou le téléphone. Si l'IA est indisponible, un fallback automatique envoie une alerte par email/SMS. Le client n'attend jamais sans réponse.</p>
+          </details>
+
+          <details class="relief-panel p-6 group">
+            <summary class="cursor-pointer font-display text-lg font-semibold text-white flex justify-between items-center">
+              Je suis déjà chez Wix / WordPress
+              <span class="text-alliance-blue transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="text-white/60 mt-4 text-sm">On peut reprendre votre contenu existant et le migrer vers le nouveau site. Vous gardez votre domaine. Le gain : un site plus rapide, mieux référencé, avec IA et prise de RDV intégrées. Aucune action de votre part, on s'occupe de tout.</p>
+          </details>
+
+          <details class="relief-panel p-6 group">
+            <summary class="cursor-pointer font-display text-lg font-semibold text-white flex justify-between items-center">
+              Combien de temps pour être en ligne ?
+              <span class="text-alliance-blue transition group-open:rotate-45">+</span>
+            </summary>
+            <p class="text-white/60 mt-4 text-sm">7 jours après réception de vos informations (photos, services, zones, horaires). Le site est construit à partir d'un template éprouvé, ce qui garantit la qualité et le délai.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-6">
+          Un seul chantier signé = site amorti
+        </h2>
+        <p class="text-white/60 mb-8">
+          Prenons 15 minutes pour en parler. Je viens à votre dépôt avec la démo.
+        </p>
+        <a href="/contact/" class="btn-primary text-base px-8 py-4">Prendre rendez-vous</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

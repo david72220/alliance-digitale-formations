@@ -1,0 +1,162 @@
+[
+  {
+    "id": "38396280-38de-8111-a5d9-fe1506cfbbdb",
+    "titre": "Hermes Agent — Sécurisation VPS",
+    "probleme": "Dashboard Hermes Agent exposé en HTTP non sécurisé sur le VPS Hostinger, sans certificat ni authentification, faisant courir un risque d'accès non autorisé.",
+    "solution": "Mise en place d'un reverse proxy Traefik avec certificat HTTPS Let's Encrypt auto-renouvelé, authentification Basic Auth, service systemd avec redémarrage automatique, et fermeture du port direct au profit du seul accès via Docker bridge interne.",
+    "resultat": "Dashboard passé de HTTP non protégé à HTTPS + Basic Auth sécurisé, avec renouvellement de certificat 100% automatisé et 0 exposition directe du port applicatif",
+    "secteur": "Infrastructure IT / Hébergement"
+  },
+  {
+    "id": "38396280-38de-8113-be06-e3d834347442",
+    "titre": "Client PME — Pipeline de prospection LinkedIn automatisée",
+    "probleme": "Client de PME dans le médical avait besoin d'identifier en temps réel les professionnels de santé évoquant des problématiques de dos, posture ou rééducation sur LinkedIn, pour alerter immédiatement l'équipe commerciale sur les prospects les plus pertinents.",
+    "solution": "Pipeline de scraping LinkedIn via PhantomBuster (Sales Navigator) orchestré par N8N auto-hébergé, avec classification métier et scoring des posts par IA locale (Ollama qwen2.5:7b), alertes Telegram instantanées pour les prospects à score élevé, et respect strict des limites anti-ban LinkedIn.",
+    "resultat": "Seuil d'alerte fixé à un score de 7/10 ou plus pour déclenchement immédiat, capacité de traitement jusqu'à 80 profils et 50 posts par jour dans le respect des limites de sécurité LinkedIn",
+    "secteur": "Santé / Mobilier ergonomique"
+  },
+  {
+    "id": "38396280-38de-812b-9309-c9cf76f509e8",
+    "titre": "Application de dictée vocale macOS",
+    "probleme": "Besoin d'un outil de dictée vocale rapide, privé et fonctionnant entièrement en local sur Mac, sans dépendre d'un service cloud, déclenchable par un simple raccourci clavier depuis n'importe quelle application.",
+    "solution": "Application native macOS en menu-bar avec double-tap Ctrl/Cmd pour déclencher l'enregistrement, transcription locale via mlx-whisper (Apple Silicon), correction du texte par un LLM local (Ollama qwen2.5:3b), et injection automatique dans l'application active via Quartz CGEventPost.",
+    "resultat": "100% du traitement (transcription + correction) effectué localement sans appel cloud, double mécanisme de raccourci (pynput + fallback Carbon) garantissant 0 interruption de service",
+    "secteur": "Productivité personnelle / Accessibilité"
+  },
+  {
+    "id": "38396280-38de-8131-89bf-eb5b31020905",
+    "titre": "Agent Semi-Autonome client PME — Orchestration multi-agents",
+    "probleme": "Besoin d'un système de veille et de décision semi-autonome capable de surveiller l'environnement (FDFP, fibre optique, AEJ) et de proposer des actions sans supervision humaine constante, tout en gardant un contrôle réversible sur les décisions.",
+    "solution": "Architecture à 4 niveaux (Socle N0 à N3) avec deux bases Notion couplées (Décisions / Politique d'autonomie), un workflow N8N de veille quotidienne combinant recherche web (Serper) et synthèse LLM (Ollama llama3.2:3b), et un système d'orchestration multi-agents permettant à des LLM externes de déléguer des tâches de codage à Claude Code.",
+    "resultat": "Boucle de veille automatisée tournant toutes les 24h, base de politique d'autonomie en cours de constitution (objectif 15-20 fiches validées avant passage au niveau N1)",
+    "secteur": "Formation professionnelle / Fibre optique"
+  },
+  {
+    "id": "38396280-38de-8144-8494-e8c8e0e2b421",
+    "titre": "Car&Mans Classic — Automatisation adhérents HelloAsso → Qonto",
+    "probleme": "Saisie manuelle fastidieuse et source d'erreurs des nouveaux adhérents depuis la plateforme d'adhésion HelloAsso vers l'outil bancaire Qonto et le suivi interne, avec risque de doublons.",
+    "solution": "Workflow N8N automatisé déclenché quotidiennement : récupération du token HelloAsso, pagination complète des commandes, mapping intelligent des champs (téléphone, SIRET/SIREN, TVA, adresse) avec conversion des formats pays, détection de doublons par email avant création du client dans Qonto, et export CSV synchronisé sur iCloud.",
+    "resultat": "285 adhérents traités automatiquement lors du premier test de pagination, 0 ressaisie manuelle requise une fois le pipeline validé",
+    "secteur": "Club automobile / Association"
+  },
+  {
+    "id": "38396280-38de-816a-9056-d2408ef931c4",
+    "titre": "Hub RDV & Tâches — Centralisation calendriers multi-sources",
+    "probleme": "Quatre sources de rendez-vous et tâches dispersées (Outlook professionnel, Gmail personnel, agenda KMC, base Notion des tâches) rendaient impossible une vue d'ensemble fiable de l'agenda et généraient des oublis.",
+    "solution": "Centralisation dans un Google Calendar unifié via 4 workflows N8N : synchronisation Outlook→Google toutes les 5 minutes, bot Telegram avec compréhension du langage naturel (NLP via Ollama) pour créer/consulter des événements, briefing automatique chaque matin à 8h et briefing hebdomadaire avec détection de conflits et charge par jour.",
+    "resultat": "4 workflows actifs en production, synchronisation toutes les 5 minutes (soit 0,0016% du quota Microsoft Graph utilisé), briefings automatiques quotidiens et hebdomadaires opérationnels",
+    "secteur": "Productivité personnelle / Gestion du temps"
+  },
+  {
+    "id": "38396280-38de-816f-a58b-e5e484e3c5ca",
+    "titre": "Marketing Client autoentrepreneur — Dashboard et automatisation de contenu",
+    "probleme": "Anna avait besoin d'un outil centralisant l'analyse de ses contenus, la veille concurrentielle et la génération d'idées de posts, sans avoir à gérer elle-même des outils IA complexes ni des coûts d'API imprévisibles.",
+    "solution": "Dashboard Next.js connecté à 3 bases Notion (Analyses, Veille, Backlog) piloté par 3 modules N8N automatisés (analyse de contenu, veille concurrence via Serper, suggestions de posts), avec une cascade LLM à 3 moteurs (Claude Sonnet 4.6 → DeepSeek → Qwen) garantissant continuité de service même en cas de panne d'un fournisseur.",
+    "resultat": "Coût d'exploitation IA estimé à environ 0,10€/semaine en fonctionnement primaire (Ollama en fallback gratuit), veille hebdomadaire et suggestions de posts automatisées chaque semaine",
+    "secteur": "Psychologie / Formation en ligne"
+  },
+  {
+    "id": "38396280-38de-8195-a8ef-caf88b6e6ccb",
+    "titre": "Intranet Car&Mans Classic — Annuaire et actualités des adhérents",
+    "probleme": "L'intranet des adhérents devait migrer d'Airtable vers Notion, mais un bug critique post-migration rendait la majorité des adhérents invisibles dans l'annuaire suite à un changement de type de champ (checkbox devenu texte) mal interprété par le code.",
+    "solution": "Diagnostic précis de la cause racine (cast de chaîne de caractères manquant dans la sanitisation des données utilisateur), patch chirurgical ciblé sans modification de la base Notion, accompagné d'une refonte sécurisée de la configuration (externalisation de la clé API) et rotation complète de la clé exposée.",
+    "resultat": "100% des adhérents de nouveau visibles dans l'annuaire après correction, déploiement et validation en production le jour même",
+    "secteur": "Club automobile / Association"
+  },
+  {
+    "id": "38396280-38de-81b4-abe3-d9a74021f7d3",
+    "titre": "Audit et maintenance globale de l'infrastructure N8N",
+    "probleme": "Près de 100 workflows N8N actifs accumulés au fil du temps présentaient des erreurs de configuration latentes, des failles de sécurité (clés API en clair) et des dépendances à des modèles IA retirés du catalogue Ollama.",
+    "solution": "Audit statique complet des 98 workflows actifs, mise à jour en cascade des modèles Ollama obsolètes vers leurs remplaçants, déploiement d'une cascade LLM à 3 moteurs sur les workflows critiques, et identification priorisée des failles de sécurité (clé API exposée en URL) à corriger.",
+    "resultat": "69% des workflows (68 sur 98) présentaient au moins une erreur ; 1 faille critique de clé API en clair identifiée et priorisée pour correction immédiate",
+    "secteur": "Infrastructure IT / Automatisation"
+  },
+  {
+    "id": "38396280-38de-81bd-97c8-c496f0820243",
+    "titre": "Calcul automatisé des indicateurs de satisfaction étudiants",
+    "probleme": "Le calcul mensuel des taux de satisfaction, de réussite et d'abandon par formation nécessitait une consolidation manuelle et chronophage de données réparties dans plusieurs bases Notion (étudiants, formulaires, formations), avec un risque d'erreur élevé.",
+    "solution": "Workflow N8N mensuel automatisé calculant les 3 indicateurs sur une fenêtre glissante de 2 ans, avec un mécanisme de report (carry-forward) pour les formations sans données récentes, garantissant qu'aucune formation n'affiche de valeur manquante sans justification.",
+    "resultat": "3 indicateurs calculés automatiquement chaque 1er du mois pour l'ensemble des formations, élimination de la consolidation manuelle mensuelle",
+    "secteur": "Formation professionnelle"
+  },
+  {
+    "id": "38396280-38de-81e7-8d8f-f4d28f68bf14",
+    "titre": "Sauvegarde VPS complet — Système de backup automatisé",
+    "probleme": "Le VPS Hostinger hébergeant N8N, Traefik, Ollama et le service de génération audio n'avait aucune sauvegarde automatisée, exposant l'ensemble des workflows et données à un risque de perte totale en cas d'incident.",
+    "solution": "Mise en place de restic + rclone pour des sauvegardes chiffrées (AES-256) bi-quotidiennes vers Google Drive avec rétention 7 jours / 6 semaines / 6 mois, accompagnée d'un script de restauration natif macOS à double-clic et d'une procédure de reprise en mode rescue documentée.",
+    "resultat": "Espace disque VPS libéré de 78GB à 41GB (-37GB, -42%) lors du nettoyage initial, sauvegardes automatiques 2 fois par jour (6h et 18h)",
+    "secteur": "Infrastructure IT / Cybersécurité"
+  },
+  {
+    "id": "38396280-38de-81ee-affd-c5fdd1c54808",
+    "titre": "Conseil des 6 — Plateforme d'intelligence collective multi-IA",
+    "probleme": "Besoin d'un outil d'aide à la décision capable de challenger une idée ou un projet sous plusieurs angles complémentaires (stratégique, opérationnel, critique, créatif) plutôt que de se reposer sur l'avis d'un seul modèle IA.",
+    "solution": "Architecture orchestrée par N8N avec 6 workers IA spécialisés (Claude Sonnet, Gemini Flash, DeepSeek, Qwen, Gemma, Claude Opus) interrogés en deux boucles successives (analyse initiale puis réévaluation croisée), suivie d'une synthèse finale structurée, exportée en Markdown vers Google Drive et Notion.",
+    "resultat": "6 perspectives IA distinctes synthétisées en un rapport structuré unique, temps d'exécution cible de 3 à 4 minutes par analyse complète",
+    "secteur": "Aide à la décision / Intelligence artificielle"
+  },
+  {
+    "id": "38196280-38de-8125-86f4-d024e90025e1",
+    "titre": "Briefings quotidiens & hebdomadaires automatisés sur Telegram",
+    "probleme": "Perte de temps matinale à consulter Outlook, Gmail, agenda et tâches Notion séparément. Pas de vision consolidée de la semaine.",
+    "solution": "2 workflows N8N — quotidien 8h (agenda + mails + tâches Notion du jour) et hebdo (dim 20h + mer 12h, semaine glissante 7j). Formatage Markdown → bot Telegram dédié.",
+    "resultat": "30 min/jour de revue manuelle économisées, 100% des tâches importantes vues avant 9h.",
+    "secteur": "Productivité dirigeant"
+  },
+  {
+    "id": "38196280-38de-8137-9cf6-ccab6bed3a6b",
+    "titre": "Conseil des 8 — délibération stratégique multi-agents IA",
+    "probleme": "Décisions stratégiques prises en silo, biais cognitifs non challengés, pas de vision 360° avant de lancer un projet.",
+    "solution": "Plateforme web + workflow N8N orchestrant 8 agents IA aux rôles antagonistes (Red Teamer, CFO, Stratège, Comportementaliste, Praticien, Marketeur, Disrupteur, DRH). 2 boucles itératives → synthèse kimi-k2.6. Résultat livré en Markdown + Notion + Drive.",
+    "resultat": "Analyse stratégique complète en 8 min vs 2j de réunions, 8 perspectives garanties.",
+    "secteur": "Conseil stratégique / IA"
+  },
+  {
+    "id": "38196280-38de-8167-adb5-ec858129dc83",
+    "titre": "Automation Notion → Vercel — publication formations en 1 clic",
+    "probleme": "Chaque modification du catalogue de formations nécessitait une intervention dev (édition fichiers + redéploiement).",
+    "solution": "Pipeline Notion checkbox → webhook N8N → Vercel Deploy Hook. Le formateur coche \"Publier\" dans Notion, le site se rebuild automatiquement en ~1 min avec le nouveau contenu.",
+    "resultat": "0 intervention dev pour publier une formation, délai de mise en ligne réduit de 2 jours à 1 minute.",
+    "secteur": "Formation professionnelle"
+  },
+  {
+    "id": "38196280-38de-817b-9bc6-e2bb5e8d6930",
+    "titre": "Sécurisation infra Ollama VPS — fermeture proxy LLM ouvert",
+    "probleme": "Port Ollama 11434 du VPS exposé sur internet → n'importe qui pouvait consommer le quota cloud authentifié (deepseek, gemini, kimi) sans laisser de trace dans N8N. Webhooks N8N agissaient comme proxies LLM gratuits.",
+    "solution": "Audit complet → iptables restreint au réseau Docker + localhost, DROP public. Auth token sur tous les webhooks proxy (Ollama Proxy, Claude Proxy, Conseil Master). Workflows non sécurisés désactivés. Persistance via netfilter-persistent.",
+    "resultat": "100% du trafic LLM hors trace coupé, quota cloud préservé, 0 régression sur workflows légitimes.",
+    "secteur": "DevOps / Sécurité"
+  },
+  {
+    "id": "38196280-38de-81b4-a0f0-d54feeeb05cb",
+    "titre": "Génération automatisée de formations — pipeline 5 workflows N8N",
+    "probleme": "Création d'une formation = 3 semaines de travail (modules, cours, parties, contenu, supports). Goulot d'étranglement pour scaler le catalogue.",
+    "solution": "Cascade de 5 workflows N8N (Formation → Modules → Cours → Parties → Contenu détaillé → Speech & PowerPoint). LLM cascade deepseek-v4-pro:cloud + qwen2.5:3b fallback via VPS Ollama. Trigger sur checkbox Notion.",
+    "resultat": "Création d'une formation complète passe de 3 semaines à 45 minutes (×400 plus rapide).",
+    "secteur": "EdTech / Formation"
+  },
+  {
+    "id": "38196280-38de-81ca-9cc6-e6c401248a58",
+    "titre": "SEO automatisé hebdomadaire via GitHub Actions",
+    "probleme": "Analyse SEO manuelle chronophage, contenu blog non aligné avec les requêtes ciblées.",
+    "solution": "GitHub Actions cron lundi 9h → scripts Node analyze-seo-simple.js + generate-seo-content.js → suggestions de contenu hebdomadaires. Métadonnées et schéma générés automatiquement.",
+    "resultat": "Audit SEO hebdomadaire automatique, +30% mots-clés positionnés en 3 mois.",
+    "secteur": "Formation professionnelle"
+  },
+  {
+    "id": "38196280-38de-81f4-b891-e7d2b3d928c1",
+    "titre": "Site astro KMC — centre de formation fibre & photovoltaïque",
+    "probleme": "Site institutionnel statique, aucune narration des métiers fibre/PV, faible taux de conversion sur les demandes d'inscription.",
+    "solution": "Refonte complète en Astro v6 avec scrollytelling GSAP + ScrollTrigger, Lenis pour smooth scroll, scènes 3D Three.js (NRO/SRO/PBO/Client Final). Déploiement Vercel avec auto-deploy depuis GitHub.",
+    "resultat": "Temps moyen sur page x4, taux de demande de devis +60%, build ~1 min via deploy hook.",
+    "secteur": "Formation professionnelle / Télécoms"
+  },
+  {
+    "id": "38196280-38de-81f9-877d-e2134b74abc2",
+    "titre": "Pipeline prospection LinkedIn pour enrichir une base de prospects",
+    "probleme": "Commercial passe des heures à scroller LinkedIn pour repérer les pros de santé (kinés, ostéos, ergothérapeutes) qui parlent de douleurs dos/posture. Aucune systématisation.",
+    "solution": "5 workflows N8N — scraping PhantomBuster Sales Nav, extraction posts, classification métier IA (Ollama qwen2.5:7b local), scoring post × produit, alerte Telegram immédiate si score ≥ 7/10. Pipeline anti-ban respecté.",
+    "resultat": "Estimation : 80 leads qualifiés/jour vs 5 leads manuels. Hot leads remontés en temps réel.",
+    "secteur": "Santé / E-commerce DTC"
+  }
+]
