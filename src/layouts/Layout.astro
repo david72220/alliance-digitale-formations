@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ChatBotAD from '../components/ChatBotAD.astro';
 
 export interface Props {
   title: string;
@@ -172,5 +173,6 @@ const allLd = [organizationLd, websiteLd, ...extraLd];
       });
     });
   </script>
+  <ChatBotAD />
 </body>
 </html>
