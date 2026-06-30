@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AutomationCatalog from '../components/AutomationCatalog.jsx';
+---
+
+<Layout
+  title="Automatisations pour PME et artisans — Alliance Digitale"
+  description="Découvrez les dizaines de tâches que vous faites à la main chaque mois et qui pourraient tourner toutes seules. Artisans du bâtiment, paysagistes, santé, commerces, restauration, immobilier, professions libérales — trouvez les automatisations qui vous concernent."
+>
+  <Header />
+
+  <main class="flex-1">
+    <AutomationCatalog client:load />
+  </main>
+
+  <Footer />
+</Layout>

@@ -131,6 +131,57 @@ const heroResources = resources.slice(0, 6);
       </div>
     </section>
 
+    <!-- AUTOMATISATIONS -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12" data-reveal>
+          <p class="text-alliance-orange text-sm font-bold uppercase tracking-widest mb-3">Automatisations</p>
+
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+            Combien de temps gagnez-vous chaque mois ?
+          </h2>
+
+          <p class="text-white/60 max-w-2xl mx-auto">
+            Découvrez les tâches répétitives de votre métier qui pourraient tourner toutes seules.
+            10 secteurs, 50+ automatisations concrètes — sélectionnez le vôtre et calculez votre gain.
+          </p>
+        </div>
+
+        <!-- Aperçu gains par secteur -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
+          {[
+            { emoji: "🔧", label: "Artisans BTP", hours: "18h/mois" },
+            { emoji: "🌿", label: "Paysagistes", hours: "15h/mois" },
+            { emoji: "🩺", label: "Santé", hours: "21h/mois" },
+            { emoji: "🛍️", label: "Commerces", hours: "24h/mois" },
+            { emoji: "🍽️", label: "Restauration", hours: "19h/mois" },
+            { emoji: "🚗", label: "Garage auto", hours: "18h/mois" },
+            { emoji: "🏠", label: "Immobilier", hours: "24h/mois" },
+            { emoji: "⚖️", label: "Libérales", hours: "23h/mois" },
+            { emoji: "🚛", label: "Transport", hours: "17h/mois" },
+            { emoji: "🏢", label: "PME générale", hours: "19h/mois" },
+          ].map((sec) => (
+            <a
+              href="/automatisations/"
+              data-reveal
+              class="group flex flex-col items-center gap-2 p-5 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-alliance-orange/30 transition text-center"
+            >
+              <span class="text-3xl">{sec.emoji}</span>
+              <span class="text-sm font-semibold text-white group-hover:text-alliance-blue transition-colors">{sec.label}</span>
+              <span class="text-xs text-alliance-orange font-bold">{sec.hours}</span>
+            </a>
+          ))}
+        </div>
+
+        <div class="text-center">
+          <a href="/automatisations/" class="btn-primary text-base px-8 py-4 inline-flex items-center gap-2">
+            Voir le catalogue complet
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- PREUVES -->
     {heroStudies.length > 0 && (
       <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
