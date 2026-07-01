@@ -20,8 +20,11 @@ const clientLabel = study.anonymized ? 'PME anonymisée' : study.client;
     </div>
   </div>
   
-  <p class="text-sm text-white/70 mb-4 line-clamp-3">{study.problem}</p>
-  
+  <div class="mb-4">
+    <p class="text-sm text-white/50 font-semibold mb-1">Problème</p>
+    <p class="text-sm text-white/70 line-clamp-3">{study.problem}</p>
+  </div>
+
   <div class="border-t border-white/10 pt-4">
     <p class="text-sm text-alliance-orange font-semibold mb-1">Résultat</p>
     <p class="text-sm text-white/90">{study.result}</p>
