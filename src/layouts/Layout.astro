@@ -10,7 +10,19 @@ export interface Props {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description = "Accompagnement et formations IA pour PME avec salariés en Sarthe.", image = "/og-image.png", noindex = false, jsonLd } = Astro.props;
+const { title: rawTitle, description: rawDesc = "Accompagnement et formations IA pour PME avec salariés en Sarthe.", image = "/og-image.png", noindex = false, jsonLd } = Astro.props;
+
+// SEO length caps (Google SERP): ~60 chars title, ~155 chars description.
+function truncate(s: string, max: number): string {
+  const t = (s ?? '').replace(/\s+/g, ' ').trim();
+  if (t.length <= max) return t;
+  const cut = t.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > max * 0.6 ? cut.slice(0, lastSpace) : cut) + '…';
+}
+const title = truncate(rawTitle, 60);
+const description = truncate(rawDesc, 155);
+
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const siteUrl = Astro.site!.toString().replace(/\/$/, '');
 
