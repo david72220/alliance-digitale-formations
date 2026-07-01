@@ -8,7 +8,7 @@ const currentYear = new Date().getFullYear();
 <footer class="relative bg-alliance-dark-2 border-t border-white/[0.06] mt-auto">
   <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-alliance-blue/40 to-transparent"></div>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-12">
       <div>
         <a href="/" class="inline-block mb-6 bg-white/95 rounded-lg px-3 py-2 shadow-md">
           <Image src={logo} alt="Alliance Digitale" widths={[120, 240]} sizes="120px" formats={['avif', 'webp']} quality={85} loading="lazy" decoding="async" class="h-10 w-auto object-contain" />
@@ -23,10 +23,23 @@ const currentYear = new Date().getFullYear();
           <li><a href="/accompagnement/" class="hover:text-alliance-blue transition">Accompagnement</a></li>
           <li><a href="/automatisations/" class="hover:text-alliance-blue transition">Automatisations</a></li>
           <li><a href="/formations/" class="hover:text-alliance-blue transition">Formations</a></li>
-          <li><a href="/ressources/" class="hover:text-alliance-blue transition">Ressources</a></li>
-          <li><a href="/lexique-ia/" class="hover:text-alliance-blue transition">Lexique IA</a></li>
           <li><a href="/challenge/" class="hover:text-alliance-blue transition">Challenge</a></li>
           <li><a href="/contact/" class="hover:text-alliance-blue transition">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Ressources</h2>
+        <ul class="space-y-2 text-sm text-white/70">
+          <li><a href="/ressources/" class="hover:text-alliance-blue transition">Cours gratuits</a></li>
+          <li><a href="/lexique-ia/" class="hover:text-alliance-blue transition">Lexique IA</a></li>
+          <li>
+            <a href="https://ia-doc-security.vercel.app" target="_blank" rel="noopener noreferrer" class="hover:text-alliance-blue transition inline-flex items-center gap-1">
+              Sécurité documents IA
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+          </li>
         </ul>
       </div>
       <div>

@@ -2,13 +2,23 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/logo-alliance.png';
 
-const navLinks = [
+const navItems = [
   { href: '/', label: 'Accueil' },
-  { href: '/accompagnement/', label: 'Accompagnement' },
-  { href: '/automatisations/', label: 'Automatisations' },
-  { href: '/formations/', label: 'Formations' },
-  { href: '/ressources/', label: 'Ressources' },
-  { href: '/lexique-ia/', label: 'Lexique IA' },
+  { 
+    label: 'Services', 
+    children: [
+      { href: '/accompagnement/', label: 'Accompagnement' },
+      { href: '/automatisations/', label: 'Automatisations' },
+    ]
+  },
+  { 
+    label: 'Apprendre', 
+    children: [
+      { href: '/formations/', label: 'Formations' },
+      { href: '/ressources/', label: 'Ressources' },
+      { href: '/lexique-ia/', label: 'Lexique IA' },
+    ]
+  },
   { href: '/challenge/', label: 'Challenge' },
   { href: '/contact/', label: 'Contact' },
 ];
@@ -23,11 +33,36 @@ const navLinks = [
         </span>
       </a>
 
+      <!-- Desktop Menu -->
       <div class="relative z-10 hidden lg:flex items-center gap-1">
-        {navLinks.map((link) => (
-          <a href={link.href} class="px-3 py-2 rounded-lg text-sm font-medium text-white/75 hover:text-white hover:bg-white/10 transition">
-            {link.label}
-          </a>
+        {navItems.map((item) => (
+          item.children ? (
+            <div class="relative group">
+              <button 
+                class="px-3 py-2 rounded-lg text-sm font-medium text-white/75 hover:text-white hover:bg-white/10 transition inline-flex items-center gap-1"
+                aria-expanded="false"
+              >
+                {item.label}
+                <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="absolute top-full left-0 mt-1 py-2 min-w-[180px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 relief-panel relief-1">
+                {item.children.map((child) => (
+                  <a 
+                    href={child.href} 
+                    class="block px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10 transition"
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a href={item.href} class="px-3 py-2 rounded-lg text-sm font-medium text-white/75 hover:text-white hover:bg-white/10 transition">
+              {item.label}
+            </a>
+          )
         ))}
       </div>
 
@@ -50,14 +85,39 @@ const navLinks = [
       </button>
     </nav>
 
+    <!-- Mobile Menu -->
     <div
       id="mobile-menu"
       class="lg:hidden hidden mt-3 relief-panel relief-1 p-4 flex-col gap-1"
     >
-      {navLinks.map((link) => (
-        <a href={link.href} class="block px-4 py-3 rounded-lg text-base font-medium text-white/85 hover:text-white hover:bg-white/10 transition">
-          {link.label}
-        </a>
+      {navItems.map((item) => (
+        item.children ? (
+          <div class="mobile-submenu">
+            <button 
+              class="w-full flex items-center justify-between px-4 py-3 rounded-lg text-base font-medium text-white/85 hover:text-white hover:bg-white/10 transition"
+              onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180');"
+            >
+              {item.label}
+              <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="hidden pl-4 mt-1 space-y-1">
+              {item.children.map((child) => (
+                <a 
+                  href={child.href} 
+                  class="block px-4 py-2 rounded-lg text-sm text-white/75 hover:text-white hover:bg-white/10 transition"
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a href={item.href} class="block px-4 py-3 rounded-lg text-base font-medium text-white/85 hover:text-white hover:bg-white/10 transition">
+            {item.label}
+          </a>
+        )
       ))}
       <a href="/contact/" class="btn-primary mt-3 justify-center text-center">Prendre rendez-vous</a>
     </div>
@@ -82,7 +142,7 @@ const navLinks = [
       btn.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
     });
 
-    // Close on link click
+    // Close on link click (but not on submenu toggles)
     menu.querySelectorAll('a').forEach((a) =>
       a.addEventListener('click', () => {
         menu.classList.add('hidden');
