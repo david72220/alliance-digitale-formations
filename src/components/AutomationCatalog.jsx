@@ -22,6 +22,7 @@ const T = {
   // Violet (admin)
   purple: "#A855F7",
   purpleLight: "rgba(168,85,247,0.1)",
+  purpleText: "#C4A0FF",
   // Texte
   text: "#E8ECF4",
   textMuted: "rgba(255,255,255,0.70)",
@@ -33,7 +34,7 @@ const T = {
 
 const typeMap = {
   commercial: { label: "Commercial", color: T.blue, bg: T.blueLight },
-  admin: { label: "Administratif", color: T.purple, bg: T.purpleLight },
+  admin: { label: "Administratif", color: T.purpleText, bg: T.purpleLight },
   relation: { label: "Relation client", color: T.green, bg: T.greenLight },
 };
 
