@@ -46,6 +46,11 @@ const websiteLd = {
 
 const extraLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 const allLd = [organizationLd, websiteLd, ...extraLd];
+
+// Analytics + SEO verification (env-driven so no rebuild on token change).
+const gscToken = import.meta.env.GSC_VERIFICATION;
+const bingToken = import.meta.env.BING_VERIFICATION;
+const plausibleDomain = import.meta.env.PLAUSIBLE_DOMAIN;
 ---
 
 <!DOCTYPE html>
@@ -68,6 +73,11 @@ const allLd = [organizationLd, websiteLd, ...extraLd];
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={new URL(image, Astro.site).toString()} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  {gscToken && <meta name="google-site-verification" content={gscToken} />}
+  {bingToken && <meta name="msvalidate.01" content={bingToken} />}
+  {plausibleDomain && (
+    <script is:inline defer data-domain={plausibleDomain} src="https://plausible.io/js/script.outbound-links.js"></script>
+  )}
   {allLd.map((ld) => (
     <script type="application/ld+json" set:html={JSON.stringify(ld)} />
   ))}
