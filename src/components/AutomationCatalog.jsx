@@ -10,6 +10,8 @@ const T = {
   red: "#9E2114",
   redLight: "rgba(158,33,20,0.12)",
   redDark: "#7a190f",
+  // Texte rouge lisible sur fond sombre (WCAG AA ≥ 4.5:1)
+  redText: "#F26B5C",
   // Bleu Alliance
   blue: "#3b97d3",
   blueLight: "rgba(59,151,211,0.12)",
@@ -23,7 +25,7 @@ const T = {
   // Texte
   text: "#E8ECF4",
   textMuted: "rgba(255,255,255,0.70)",
-  textDim: "rgba(255,255,255,0.45)",
+  textDim: "rgba(255,255,255,0.70)",
   border: "rgba(255,255,255,0.06)",
   borderHover: "rgba(158,33,20,0.3)",
   white: "#FFFFFF",
@@ -128,8 +130,8 @@ export default function App(){
         @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
         .fi{animation:fadeIn .4s ease-out both}
         .pill{padding:7px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid ${T.border};background:transparent;color:${T.textMuted};transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:5px;font-family:inherit}
-        .pill:hover{border-color:${T.red};color:${T.red}}
-        .pill.on{background:${T.redLight};color:${T.red};border-color:${T.borderHover}}
+        .pill:hover{border-color:${T.red};color:${T.redText}}
+        .pill.on{background:${T.redLight};color:${T.redText};border-color:${T.borderHover}}
         .tp{padding:5px 10px;border-radius:6px;font-size:11px;font-weight:500;cursor:pointer;border:none;background:transparent;color:${T.textDim};transition:all .15s;font-family:inherit}
         .tp:hover{color:${T.textMuted}}
         .tp.on{background:${T.bgCardHover};color:${T.text}}
@@ -150,7 +152,7 @@ export default function App(){
             Des dizaines de tâches que vous faites à la main chaque mois — et qui pourraient tourner toutes seules.
           </p>
           <div className="stats" style={{display:"flex",justifyContent:"center",gap:24,flexWrap:"wrap"}}>
-            {[{v:totalH+"h",l:"gagnées / mois",c:T.red},{v:totalN,l:"automatisations",c:T.white},{v:sectors.length,l:"secteurs",c:T.white}].map((s,i)=>(
+            {[{v:totalH+"h",l:"gagnées / mois",c:T.redText},{v:totalN,l:"automatisations",c:T.white},{v:sectors.length,l:"secteurs",c:T.white}].map((s,i)=>(
               <div key={i} style={{background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:10,padding:"16px 28px",textAlign:"center",minWidth:130,backdropFilter:"blur(8px)"}}>
                 <div style={{fontFamily:"'Space Grotesk'",fontSize:36,fontWeight:700,color:s.c,lineHeight:1}}>{s.v}</div>
                 <div style={{fontSize:11,color:T.textDim,marginTop:3,fontWeight:500}}>{s.l}</div>
@@ -191,7 +193,7 @@ export default function App(){
                 </div>
                 <div style={{display:"flex",alignItems:"center",gap:6,background:T.redLight,borderRadius:16,padding:"4px 12px"}}>
                   <span style={{fontSize:11,color:T.textMuted}}>Gain :</span>
-                  <span style={{fontFamily:"'Space Grotesk'",fontSize:16,fontWeight:700,color:T.red}}>{sh}h/mois</span>
+                  <span style={{fontFamily:"'Space Grotesk'",fontSize:16,fontWeight:700,color:T.redText}}>{sh}h/mois</span>
                 </div>
               </div>
               <div className="grid">
