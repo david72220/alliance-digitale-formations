@@ -1,0 +1,216 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import sectorsData from '../../../data/securite-ia/sectors.fr.json';
+
+const { sector: sectorId } = Astro.params;
+
+const sector = sectorsData.sectors.find((s: any) => s.id === sectorId);
+
+if (!sector) {
+  return Astro.redirect('/securite-ia');
+}
+
+const sensitivityLabels: Record<string, { label: string; color: string; bg: string }> = {
+  low: { label: 'Faible', color: 'text-green-400', bg: 'bg-green-500/20' },
+  medium: { label: 'Modéré', color: 'text-yellow-400', bg: 'bg-yellow-500/20' },
+  high: { label: 'Élevé', color: 'text-orange-400', bg: 'bg-orange-500/20' },
+  critical: { label: 'Critique', color: 'text-red-400', bg: 'bg-red-500/20' }
+};
+
+const iconMap: Record<string, string> = {
+  building: '🏛️',
+  scale: '⚖️',
+  users: '👥',
+  calculator: '🧮',
+  briefcase: '💼',
+  megaphone: '📢',
+  code: '💻',
+  heart: '❤️'
+};
+
+// Group documents by sensitivity
+const groupedDocs = {
+  critical: sector.documents.filter((d: any) => d.sensitivity === 'critical'),
+  high: sector.documents.filter((d: any) => d.sensitivity === 'high'),
+  medium: sector.documents.filter((d: any) => d.sensitivity === 'medium'),
+  low: sector.documents.filter((d: any) => d.sensitivity === 'low')
+};
+
+export function getStaticPaths() {
+  const paths = sectorsData.sectors.map((sector: any) => ({
+    params: { sector: sector.id },
+  }));
+  return paths;
+}
+---
+
+<Layout title={`${sector.label} - Sécurité IA - Alliance Digitale`} description={`Quels documents du secteur ${sector.label.toLowerCase()} pouvez-vous utiliser avec l'IA ? Guide complet.`}>
+  <Header />
+  
+  <main class="min-h-screen bg-gradient-to-b from-alliance-dark via-alliance-dark-2 to-alliance-dark">
+    <!-- Breadcrumb -->
+    <nav class="pt-24 pb-4 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex items-center gap-2 text-sm text-gray-400">
+          <a href="/securite-ia" class="hover:text-alliance-accent transition-colors">Sécurité IA</a>
+          <span>/</span>
+          <span class="text-white">{sector.label}</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Sector header -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="relief-panel p-8">
+          <div class="flex items-center gap-4 mb-4">
+            <span class="text-4xl">{iconMap[sector.icon] || '📁'}</span>
+            <h1 class="text-3xl font-bold text-white">{sector.label}</h1>
+          </div>
+          <p class="text-gray-300 mb-4">
+            {sector.documents.length} documents analysés pour ce secteur. Sélectionnez un type de document pour connaître les IA utilisables en toute sécurité.
+          </p>
+          <div class="flex flex-wrap gap-4 text-sm">
+            <span class="text-red-400">🔴 {groupedDocs.critical.length} critiques</span>
+            <span class="text-orange-400">🟠 {groupedDocs.high.length} élevés</span>
+            <span class="text-yellow-400">🟡 {groupedDocs.medium.length} modérés</span>
+            <span class="text-green-400">🟢 {groupedDocs.low.length} faibles</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Critical documents -->
+    {groupedDocs.critical.length > 0 && (
+      <section class="py-6 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-xl font-bold text-red-400 mb-4 flex items-center gap-2">
+            <span>🔴</span> Documents critiques
+          </h2>
+          <p class="text-gray-400 text-sm mb-4">
+            Ces documents nécessitent une prudence extrême. Utilisez uniquement des modèles locaux (Ollama, llama.cpp).
+          </p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {groupedDocs.critical.map((doc: any) => (
+              <a href={`/securite-ia/secteur/${sector.id}/${doc.id}`} class="relief-panel p-4 hover:border-red-500/50 transition-colors">
+                <h3 class="text-white font-semibold mb-2">{doc.label}</h3>
+                <p class="text-gray-400 text-sm mb-3">{doc.description}</p>
+                <div class="flex items-center justify-between">
+                  <span class={`text-xs px-2 py-1 rounded ${sensitivityLabels.critical.bg} ${sensitivityLabels.critical.color}`}>
+                    Critique
+                  </span>
+                  {doc.rgpd_relevant && (
+                    <span class="text-xs text-orange-400">RGPD</span>
+                  )}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- High sensitivity -->
+    {groupedDocs.high.length > 0 && (
+      <section class="py-6 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-xl font-bold text-orange-400 mb-4 flex items-center gap-2">
+            <span>🟠</span> Sensibilité élevée
+          </h2>
+          <p class="text-gray-400 text-sm mb-4">
+            Préférez les IA avec hébergement EU ou local. Évitez les versions gratuites des IA cloud.
+          </p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {groupedDocs.high.map((doc: any) => (
+              <a href={`/securite-ia/secteur/${sector.id}/${doc.id}`} class="relief-panel p-4 hover:border-orange-500/50 transition-colors">
+                <h3 class="text-white font-semibold mb-2">{doc.label}</h3>
+                <p class="text-gray-400 text-sm mb-3">{doc.description}</p>
+                <div class="flex items-center justify-between">
+                  <span class={`text-xs px-2 py-1 rounded ${sensitivityLabels.high.bg} ${sensitivityLabels.high.color}`}>
+                    Élevé
+                  </span>
+                  {doc.rgpd_relevant && (
+                    <span class="text-xs text-orange-400">RGPD</span>
+                  )}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Medium sensitivity -->
+    {groupedDocs.medium.length > 0 && (
+      <section class="py-6 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-xl font-bold text-yellow-400 mb-4 flex items-center gap-2">
+            <span>🟡</span> Sensibilité modérée
+          </h2>
+          <p class="text-gray-400 text-sm mb-4">
+            Utilisables avec la plupart des IA, avec quelques précautions sur les versions gratuites.
+          </p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {groupedDocs.medium.map((doc: any) => (
+              <a href={`/securite-ia/secteur/${sector.id}/${doc.id}`} class="relief-panel p-4 hover:border-yellow-500/50 transition-colors">
+                <h3 class="text-white font-semibold mb-2">{doc.label}</h3>
+                <p class="text-gray-400 text-sm mb-3">{doc.description}</p>
+                <div class="flex items-center justify-between">
+                  <span class={`text-xs px-2 py-1 rounded ${sensitivityLabels.medium.bg} ${sensitivityLabels.medium.color}`}>
+                    Modéré
+                  </span>
+                  {doc.rgpd_relevant && (
+                    <span class="text-xs text-orange-400">RGPD</span>
+                  )}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Low sensitivity -->
+    {groupedDocs.low.length > 0 && (
+      <section class="py-6 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+          <h2 class="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
+            <span>🟢</span> Faible sensibilité
+          </h2>
+          <p class="text-gray-400 text-sm mb-4">
+            Utilisables avec toutes les IA, y compris les versions gratuites.
+          </p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {groupedDocs.low.map((doc: any) => (
+              <a href={`/securite-ia/secteur/${sector.id}/${doc.id}`} class="relief-panel p-4 hover:border-green-500/50 transition-colors">
+                <h3 class="text-white font-semibold mb-2">{doc.label}</h3>
+                <p class="text-gray-400 text-sm mb-3">{doc.description}</p>
+                <div class="flex items-center justify-between">
+                  <span class={`text-xs px-2 py-1 rounded ${sensitivityLabels.low.bg} ${sensitivityLabels.low.color}`}>
+                    Faible
+                  </span>
+                  {doc.rgpd_relevant && (
+                    <span class="text-xs text-orange-400">RGPD</span>
+                  )}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Back link -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <a href="/securite-ia" class="text-alliance-accent hover:underline flex items-center gap-2">
+          <span>←</span> Retour aux secteurs
+        </a>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

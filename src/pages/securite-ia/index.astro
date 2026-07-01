@@ -1,0 +1,173 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import sectorsData from '../../data/securite-ia/sectors.fr.json';
+
+const sectors = sectorsData.sectors;
+
+const sensitivityLabels: Record<string, { label: string; color: string; bg: string }> = {
+  low: { label: 'Faible', color: 'text-green-400', bg: 'bg-green-500/20' },
+  medium: { label: 'Modéré', color: 'text-yellow-400', bg: 'bg-yellow-500/20' },
+  high: { label: 'Élevé', color: 'text-orange-400', bg: 'bg-orange-500/20' },
+  critical: { label: 'Critique', color: 'text-red-400', bg: 'bg-red-500/20' }
+};
+
+const iconMap: Record<string, string> = {
+  building: '🏛️',
+  scale: '⚖️',
+  users: '👥',
+  calculator: '🧮',
+  briefcase: '💼',
+  megaphone: '📢',
+  code: '💻',
+  heart: '❤️'
+};
+---
+
+<Layout title="Sécurité Documents IA - Alliance Digitale" description="Vérifiez la sécurité de vos documents avant de les confier à l'IA. Guide par secteur pour les TPE, PME et auto-entrepreneurs.">
+  <Header />
+  
+  <main class="min-h-screen bg-gradient-to-b from-alliance-dark via-alliance-dark-2 to-alliance-dark">
+    <!-- Hero -->
+    <section class="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-alliance-accent/20 text-alliance-accent text-sm font-medium mb-6">
+          <span>🔒</span>
+          <span>Outil gratuit · En ligne</span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+          Vérifiez la <span class="text-alliance-accent">sécurité</span> de vos documents avant de les confier à l'<span class="text-alliance-accent">IA</span>
+        </h1>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+          ChatGPT, Claude, DeepSeek, Mistral... Chaque IA a ses propres règles de confidentialité. 
+          Découvrez quels documents vous pouvez utiliser en toute sécurité et avec quelles précautions.
+        </p>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="relief-panel p-8">
+          <h2 class="text-2xl font-bold text-white mb-6">Comment ça fonctionne ?</h2>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-alliance-accent/20 flex items-center justify-center text-alliance-accent font-bold">1</div>
+              <div>
+                <h3 class="text-white font-semibold mb-1">Choisissez votre secteur</h3>
+                <p class="text-gray-400 text-sm">15 secteurs d'activité : RH, finance, juridique, commercial...</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-alliance-accent/20 flex items-center justify-center text-alliance-accent font-bold">2</div>
+              <div>
+                <h3 class="text-white font-semibold mb-1">Sélectionnez votre document</h3>
+                <p class="text-gray-400 text-sm">Plus de 80 types de documents classés par niveau de sensibilité.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-alliance-accent/20 flex items-center justify-center text-alliance-accent font-bold">3</div>
+              <div>
+                <h3 class="text-white font-semibold mb-1">Obtenez vos recommandations</h3>
+                <p class="text-gray-400 text-sm">IA locales, cloud EU, cloud US... avec les précautions à prendre.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sectors -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-white mb-8 text-center">Choisissez votre secteur</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {sectors.map((sector: any) => (
+            <a 
+              href={`/securite-ia/secteur/${sector.id}`}
+              class="relief-panel p-6 hover:border-alliance-accent/50 transition-colors group"
+            >
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-2xl">{iconMap[sector.icon] || '📁'}</span>
+                <h3 class="text-white font-semibold group-hover:text-alliance-accent transition-colors">{sector.label}</h3>
+              </div>
+              <p class="text-gray-400 text-sm mb-3">{sector.documents.length} documents</p>
+              <div class="flex flex-wrap gap-2">
+                {sector.documents.slice(0, 3).map((doc: any) => (
+                  <span class={`text-xs px-2 py-1 rounded ${sensitivityLabels[doc.sensitivity].bg} ${sensitivityLabels[doc.sensitivity].color}`}>
+                    {sensitivityLabels[doc.sensitivity].label}
+                  </span>
+                ))}
+                {sector.documents.length > 3 && (
+                  <span class="text-xs px-2 py-1 rounded bg-gray-700 text-gray-400">+{sector.documents.length - 3}</span>
+                )}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Understanding sensitivity -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="relief-panel p-8">
+          <h2 class="text-2xl font-bold text-white mb-6">Comprendre les niveaux de sensibilité</h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <span class="text-2xl">🟢</span>
+                <div>
+                  <h3 class="text-green-400 font-semibold">Faible</h3>
+                  <p class="text-gray-400 text-sm">Documents publics ou peu sensibles : communiqués de presse, brand book, contenus réseaux sociaux...</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-2xl">🟡</span>
+                <div>
+                  <h3 class="text-yellow-400 font-semibold">Modéré</h3>
+                  <p class="text-gray-400 text-sm">Données internes mais non critiques : procédures, plans marketing, factures anonymisées...</p>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <span class="text-2xl">🟠</span>
+                <div>
+                  <h3 class="text-orange-400 font-semibold">Élevé</h3>
+                  <p class="text-gray-400 text-sm">Données confidentielles : contrats, comptes rendus de direction, données clients, stratégie...</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-2xl">🔴</span>
+                <div>
+                  <h3 class="text-red-400 font-semibold">Critique</h3>
+                  <p class="text-gray-400 text-sm">Données hautement sensibles : secrets industriels, données de santé, identité, IBAN, mots de passe...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="relief-panel p-8 bg-gradient-to-r from-alliance-accent/10 to-transparent">
+          <h2 class="text-2xl font-bold text-white mb-4">Besoin d'aide pour sécuriser vos documents ?</h2>
+          <p class="text-gray-300 mb-6">
+            Alliance Digitale vous accompagne dans la mise en place d'une stratégie IA sécurisée pour votre entreprise.
+          </p>
+          <a href="/contact" class="inline-flex items-center gap-2 px-6 py-3 bg-alliance-accent text-white font-semibold rounded-lg hover:bg-alliance-accent/90 transition-colors">
+            <span>Demander un accompagnement</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

@@ -1,0 +1,262 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Header from '../../../../components/Header.astro';
+import Footer from '../../../../components/Footer.astro';
+import sectorsData from '../../../../data/securite-ia/sectors.fr.json';
+import modelsData from '../../../../data/securite-ia/models.fr.json';
+import recommendationsData from '../../../../data/securite-ia/recommendations.json';
+
+export function getStaticPaths() {
+  const paths: { params: { sector: string; doc: string } }[] = [];
+  
+  for (const sector of sectorsData.sectors) {
+    for (const doc of sector.documents) {
+      paths.push({
+        params: { sector: sector.id, doc: doc.id },
+      });
+    }
+  }
+  
+  return paths;
+}
+
+const { sector: sectorId, doc: docId } = Astro.params;
+
+const sector = sectorsData.sectors.find((s: any) => s.id === sectorId);
+const doc = sector?.documents.find((d: any) => d.id === docId);
+
+if (!sector || !doc) {
+  return Astro.redirect('/securite-ia');
+}
+
+const models = modelsData.models;
+const recommendations = recommendationsData.matrix[doc.sensitivity];
+
+const sensitivityLabels: Record<string, { label: string; color: string; bg: string; border: string }> = {
+  low: { label: 'Faible', color: 'text-green-400', bg: 'bg-green-500/20', border: 'border-green-500/50' },
+  medium: { label: 'Modéré', color: 'text-yellow-400', bg: 'bg-yellow-500/20', border: 'border-yellow-500/50' },
+  high: { label: 'Élevé', color: 'text-orange-400', bg: 'bg-orange-500/20', border: 'border-orange-500/50' },
+  critical: { label: 'Critique', color: 'text-red-400', bg: 'bg-red-500/20', border: 'border-red-500/50' }
+};
+
+const sensitivityInfo = sensitivityLabels[doc.sensitivity];
+
+const iconMap: Record<string, string> = {
+  building: '🏛️',
+  scale: '⚖️',
+  users: '👥',
+  calculator: '🧮',
+  briefcase: '💼',
+  megaphone: '📢',
+  code: '💻',
+  heart: '❤️'
+};
+
+function getModelById(id: string) {
+  return models.find((m: any) => m.id === id);
+}
+---
+
+<Layout title={`${doc.label} - Sécurité IA - Alliance Digitale`} description={`Quelles IA utiliser pour ${doc.label.toLowerCase()} ? Niveau de sensibilité ${sensitivityInfo.label.toLowerCase()}.`}>
+  <Header />
+  
+  <main class="min-h-screen bg-gradient-to-b from-alliance-dark via-alliance-dark-2 to-alliance-dark">
+    <!-- Breadcrumb -->
+    <nav class="pt-24 pb-4 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex items-center gap-2 text-sm text-gray-400">
+          <a href="/securite-ia" class="hover:text-alliance-accent transition-colors">Sécurité IA</a>
+          <span>/</span>
+          <a href="/securite-ia" class="hover:text-alliance-accent transition-colors">Secteurs</a>
+          <span>/</span>
+          <a href={`/securite-ia/secteur/${sector.id}`} class="hover:text-alliance-accent transition-colors">{sector.label}</a>
+          <span>/</span>
+          <span class="text-white">{doc.label}</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Document header -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="relief-panel p-8">
+          <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-3xl">{iconMap[sector.icon] || '📁'}</span>
+                <h1 class="text-3xl font-bold text-white">{doc.label}</h1>
+              </div>
+              <p class="text-gray-400">{sector.label}</p>
+            </div>
+            <div class={`px-4 py-2 rounded-lg ${sensitivityInfo.bg} ${sensitivityInfo.border} border`}>
+              <span class="text-sm text-gray-400">Sensibilité</span>
+              <p class={`text-xl font-bold ${sensitivityInfo.color}`}>{sensitivityInfo.label}</p>
+            </div>
+          </div>
+
+          <p class="text-gray-300 mb-6">{doc.description}</p>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded-lg bg-alliance-dark/50">
+              <h3 class="text-white font-semibold mb-2">📋 Données sensibles identifiées</h3>
+              <div class="flex flex-wrap gap-2">
+                {doc.sensitive_data.map((data: string) => (
+                  <span class="px-2 py-1 text-sm rounded bg-gray-700 text-gray-300">{data}</span>
+                ))}
+              </div>
+            </div>
+            <div class="p-4 rounded-lg bg-alliance-dark/50">
+              <h3 class="text-white font-semibold mb-2">🔒 RGPD</h3>
+              <p class={doc.rgpd_relevant ? 'text-orange-400' : 'text-green-400'}>
+                {doc.rgpd_relevant ? '⚠️ Données personnelles concernées' : '✓ Pas de données personnelles directes'}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-white mb-6">Recommandations par modèle IA</h2>
+
+        {recommendations.local_only && (
+          <div class="mb-6 p-4 rounded-lg bg-red-500/20 border border-red-500/50">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl">🚨</span>
+              <div>
+                <h3 class="text-red-400 font-bold">Documents critiques — Modèles locaux uniquement</h3>
+                <p class="text-gray-300 text-sm">Ce type de document ne doit JAMAIS quitter votre infrastructure. Utilisez uniquement des modèles exécutés localement.</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- Recommended -->
+        {recommendations.recommended.length > 0 && (
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-green-400 mb-4 flex items-center gap-2">
+              <span>✅</span> Recommandés
+            </h3>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {recommendations.recommended.map((modelId: string) => {
+                const model = getModelById(modelId);
+                if (!model) return null;
+                return (
+                  <div class="relief-panel p-4">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-xl">{model.jurisdiction_flag}</span>
+                      <span class={`text-xs px-2 py-1 rounded ${sensitivityLabels[model.risk_level]?.bg || 'bg-gray-500/20'} ${sensitivityLabels[model.risk_level]?.color || 'text-gray-400'}`}>
+                        {model.risk_level === 'none' ? 'Aucun risque' : `Risque ${sensitivityLabels[model.risk_level]?.label || model.risk_level}`}
+                      </span>
+                    </div>
+                    <h4 class="text-white font-semibold">{model.label}</h4>
+                    <p class="text-gray-400 text-sm">{model.editor}</p>
+                    <p class="text-gray-500 text-xs mt-2">{model.data_retention}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        <!-- Caution -->
+        {recommendations.caution.length > 0 && (
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-yellow-400 mb-4 flex items-center gap-2">
+              <span>⚠️</span> Avec précautions
+            </h3>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {recommendations.caution.map((modelId: string) => {
+                const model = getModelById(modelId);
+                if (!model) return null;
+                return (
+                  <div class="relief-panel p-4">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-xl">{model.jurisdiction_flag}</span>
+                      <span class={`text-xs px-2 py-1 rounded ${sensitivityLabels[model.risk_level]?.bg || 'bg-gray-500/20'} ${sensitivityLabels[model.risk_level]?.color || 'text-gray-400'}`}>
+                        Risque {sensitivityLabels[model.risk_level]?.label || model.risk_level}
+                      </span>
+                    </div>
+                    <h4 class="text-white font-semibold">{model.label}</h4>
+                    <p class="text-gray-400 text-sm">{model.editor}</p>
+                    <p class="text-yellow-400/80 text-xs mt-2">{model.notes}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        <!-- Forbidden -->
+        {recommendations.forbidden.length > 0 && (
+          <div>
+            <h3 class="text-lg font-semibold text-red-400 mb-4 flex items-center gap-2">
+              <span>🚫</span> Non recommandés
+            </h3>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {recommendations.forbidden.map((modelId: string) => {
+                const model = getModelById(modelId);
+                if (!model) return null;
+                return (
+                  <div class="relief-panel p-4 opacity-60">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-xl">{model.jurisdiction_flag}</span>
+                      <span class={`text-xs px-2 py-1 rounded ${sensitivityLabels[model.risk_level]?.bg || 'bg-gray-500/20'} ${sensitivityLabels[model.risk_level]?.color || 'text-gray-400'}`}>
+                        Risque {sensitivityLabels[model.risk_level]?.label || model.risk_level}
+                      </span>
+                    </div>
+                    <h4 class="text-white font-semibold">{model.label}</h4>
+                    <p class="text-gray-400 text-sm">{model.editor}</p>
+                    <p class="text-red-400/80 text-xs mt-2">{model.risk_description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Other documents in sector -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-white mb-6">Autres documents dans ce secteur</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {sector.documents.filter((d: any) => d.id !== doc.id).slice(0, 6).map((otherDoc: any) => (
+            <a href={`/securite-ia/secteur/${sector.id}/${otherDoc.id}`} class="relief-panel p-4 hover:border-alliance-accent/50 transition-colors">
+              <h4 class="text-white font-semibold mb-2">{otherDoc.label}</h4>
+              <span class={`text-xs px-2 py-1 rounded ${sensitivityLabels[otherDoc.sensitivity].bg} ${sensitivityLabels[otherDoc.sensitivity].color}`}>
+                {sensitivityLabels[otherDoc.sensitivity].label}
+              </span>
+            </a>
+          ))}
+        </div>
+        {sector.documents.length > 7 && (
+          <a href={`/securite-ia/secteur/${sector.id}`} class="block mt-4 text-alliance-accent hover:underline">
+            Voir les {sector.documents.length - 1} documents de ce secteur →
+          </a>
+        )}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="relief-panel p-8 bg-gradient-to-r from-alliance-accent/10 to-transparent">
+          <h2 class="text-2xl font-bold text-white mb-4">Besoin d'aide pour sécuriser vos documents ?</h2>
+          <p class="text-gray-300 mb-6">
+            Alliance Digitale vous accompagne dans la mise en place d'une stratégie IA sécurisée pour votre entreprise.
+          </p>
+          <a href="/contact" class="inline-flex items-center gap-2 px-6 py-3 bg-alliance-accent text-white font-semibold rounded-lg hover:bg-alliance-accent/90 transition-colors">
+            <span>Demander un accompagnement</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
