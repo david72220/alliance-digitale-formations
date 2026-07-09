@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Politique de confidentialité — Alliance Digitale"
+  description="Comment Alliance Digitale collecte, utilise et protège vos données personnelles conformément au RGPD."
+  noindex={false}
+>
+  <Header />
+
+  <main class="flex-1">
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto prose prose-invert">
+        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-8">Politique de confidentialité</h1>
+        
+        <p class="text-white/70">Cette politique décrit comment sont collectées et utilisées les données personnelles des visiteurs du site Alliance Digitale.</p>
+        
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">Données collectées</h2>
+        <p class="text-white/70">Lors de la prise de rendez-vous via Cal.eu, nous collectons votre nom, votre prénom, votre adresse e-mail et votre motif de rendez-vous. Ces données sont traitées par Cal.eu conformément à leur politique de confidentialité.</p>
+        
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">Finalité et base légale</h2>
+        <p class="text-white/70">Les données sont utilisées pour prendre contact avec vous suite à votre demande de rendez-vous. La base légale est l'intérêt légitime dans le cadre d'une relation commerciale précontractuelle.</p>
+        
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">Conservation</h2>
+        <p class="text-white/70">Les données sont conservées pendant la durée nécessaire au suivi commercial, puis archivées ou supprimées sur demande.</p>
+        
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">Vos droits</h2>
+        <p class="text-white/70">Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition. Pour l'exercer, contactez contact@alliance-digitale.fr.</p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

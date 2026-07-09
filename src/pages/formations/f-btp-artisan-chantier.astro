@@ -1,0 +1,271 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FiberFrame from '../../components/FiberFrame.astro';
+
+const title = 'Formation Stack BTP — Artisan chantier — Alliance Digitale';
+const description = 'Devis, factures et rentabilité chantier avec Qonto et Obat/Trustup Pro. Formation 1 jour / 7 heures pour artisans du BTP. Individuel 890 € HT / Groupe 1 290 € HT.';
+const canonical = 'https://www.alliance-digitale.fr/formations/f-btp-artisan-chantier/';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: 'Formation Stack BTP — Artisan chantier — Qonto, Obat/Trustup Pro',
+    description,
+    provider: { '@type': 'Organization', name: 'Alliance Digitale', url: 'https://www.alliance-digitale.fr' },
+    coursePrerequisites: 'Connaître son métier et sa bibliothèque d\'ouvrages courants, avoir un catalogue de tarifs unitaires même sommaire, savoir utiliser un ordinateur et un smartphone, avoir un compte bancaire professionnel actif ou en cours d\'ouverture',
+    educationalLevel: 'Intermediate',
+    inLanguage: 'fr-FR',
+    offers: [
+      { '@type': 'Offer', price: '890', priceCurrency: 'EUR', description: 'Individuel 1 personne', availability: 'https://schema.org/InStock' },
+      { '@type': 'Offer', price: '1290', priceCurrency: 'EUR', description: 'Groupe 2-4 personnes', availability: 'https://schema.org/InStock' },
+    ],
+    timeRequired: 'PT7H',
+    courseCode: 'F-BTP',
+  },
+];
+
+const calendarUrl = 'https://cal.eu/alliance-digitale/decouverte-30-min';
+---
+
+<Layout title={title} description={description} image="/og-image.png" jsonLd={jsonLd}>
+  <Header />
+
+  <main class="flex-1">
+    <!-- Hero -->
+    <section class="relative pt-36 pb-20 px-4 sm:px-6 lg:px-8 bg-[#0F2942] text-white overflow-hidden">
+      <FiberFrame client:load />
+      <div class="relative z-10 max-w-4xl mx-auto">
+        <div class="inline-block mb-4 px-4 py-1.5 bg-[#9E2114] rounded-full text-sm font-semibold tracking-wide">Stack BTP — Artisan chantier</div>
+        <h1 class="text-4xl sm:text-5xl font-bold leading-tight mb-4" style="font-family: 'Playfair Display', serif;">Devis, factures et rentabilité chantier avec Qonto et Obat/Trustup Pro</h1>
+        <p class="text-lg text-white/80 mb-6">1 journée / 7 heures · Présentiel ou distanciel · Individuel <strong class="text-white">890 € HT</strong> · Groupe <strong class="text-white">1 290 € HT</strong></p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/audit/" class="inline-flex items-center px-6 py-3 bg-[#A63D40] hover:bg-[#9E2114] text-white font-semibold rounded-lg transition">Passer le diagnostic gratuit →</a>
+          <a href={calendarUrl} target="_blank" rel="noopener" class="inline-flex items-center px-6 py-3 border border-white/30 hover:bg-white/10 text-white font-semibold rounded-lg transition">Réserver un entretien</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Public visé -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FEFCF8]">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-4" style="font-family: 'Playfair Display', serif;">Public visé</h2>
+        <p class="text-[#1A2332] leading-relaxed">Artisans du BTP (plombiers, électriciens, maçons, menuisiers, carreleurs, peintres, chauffagistes), TPE du bâtiment jusqu'à 15 personnes, gérants de sociétés artisanales.</p>
+      </div>
+    </section>
+
+    <!-- Objectifs pédagogiques -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-6" style="font-family: 'Playfair Display', serif;">Objectifs pédagogiques</h2>
+        <p class="text-[#5B6472] mb-6">À l'issue de la formation, le stagiaire sera capable de :</p>
+        <ol class="space-y-3 text-[#1A2332]">
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#9E2114] text-white text-sm font-bold flex items-center justify-center">1</span><span><strong>Chiffrer</strong> rapidement un devis chantier avec sa bibliothèque d'ouvrages</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#9E2114] text-white text-sm font-bold flex items-center justify-center">2</span><span><strong>Faire signer</strong> un devis sur le terrain avec signature électronique tablette/mobile</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#9E2114] text-white text-sm font-bold flex items-center justify-center">3</span><span><strong>Émettre</strong> des factures de situation à l'avancement conformes aux règles BTP</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#9E2114] text-white text-sm font-bold flex items-center justify-center">4</span><span><strong>Suivre</strong> la rentabilité de chaque chantier (prévisionnel vs réel)</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#9E2114] text-white text-sm font-bold flex items-center justify-center">5</span><span><strong>Gérer</strong> les sous-traitants et les acomptes clients</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#9E2114] text-white text-sm font-bold flex items-center justify-center">6</span><span><strong>Émettre</strong> des factures électroniques conformes 2026</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Programme détaillé -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FEFCF8]">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-6" style="font-family: 'Playfair Display', serif;">Programme détaillé (7 heures)</h2>
+        <h3 class="text-lg font-semibold text-[#0F2942] mb-3">Matinée — Structuration et chiffrage (3h30)</h3>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#0F2942] text-white">
+                <th class="px-4 py-3 rounded-tl-lg">Créneau</th>
+                <th class="px-4 py-3">Durée</th>
+                <th class="px-4 py-3 rounded-tr-lg">Contenu</th>
+              </tr>
+            </thead>
+            <tbody class="text-[#1A2332]">
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">09h00-09h30</td><td class="px-4 py-3">30'</td><td class="px-4 py-3">Accueil, positionnement, spécificités BTP</td></tr>
+              <tr class="border-b border-[#F0F1F3] bg-white/50"><td class="px-4 py-3">09h30-10h30</td><td class="px-4 py-3">60'</td><td class="px-4 py-3"><strong>Bibliothèque d'ouvrages.</strong> Structuration par corps d'état, unités d'œuvre (ml, m², m³, forfait), coefficients matière/main d'œuvre, marges</td></tr>
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">10h30-11h15</td><td class="px-4 py-3">45'</td><td class="px-4 py-3"><strong>Configuration entreprise.</strong> Assurance décennale, mentions légales BTP obligatoires, TVA à 10% travaux ou 20% neuf, attestation TVA client</td></tr>
+              <tr class="border-b border-[#F0F1F3] bg-white/50"><td class="px-4 py-3">11h15-11h30</td><td class="px-4 py-3">15'</td><td class="px-4 py-3">Pause</td></tr>
+              <tr class="bg-white/50"><td class="px-4 py-3">11h30-12h30</td><td class="px-4 py-3">60'</td><td class="px-4 py-3"><strong>Devis chantier.</strong> Création d'un devis structuré par lot, métré rapide, remise commerciale, mentions obligatoires BTP</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 class="text-lg font-semibold text-[#0F2942] mb-3">Après-midi — Terrain et rentabilité (3h30)</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#0F2942] text-white">
+                <th class="px-4 py-3 rounded-tl-lg">Créneau</th>
+                <th class="px-4 py-3">Durée</th>
+                <th class="px-4 py-3 rounded-tr-lg">Contenu</th>
+              </tr>
+            </thead>
+            <tbody class="text-[#1A2332]">
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">13h30-14h15</td><td class="px-4 py-3">45'</td><td class="px-4 py-3"><strong>Signature terrain.</strong> Application mobile, signature électronique tablette, gestion hors ligne, envoi immédiat au client</td></tr>
+              <tr class="border-b border-[#F0F1F3] bg-white/50"><td class="px-4 py-3">14h15-15h15</td><td class="px-4 py-3">60'</td><td class="px-4 py-3"><strong>Factures de situation.</strong> Facturation à l'avancement (10%, 30%, 60%, solde), retenue de garantie, cautionnement, DGD</td></tr>
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">15h15-15h30</td><td class="px-4 py-3">15'</td><td class="px-4 py-3">Pause</td></tr>
+              <tr class="border-b border-[#F0F1F3] bg-white/50"><td class="px-4 py-3">15h30-16h15</td><td class="px-4 py-3">45'</td><td class="px-4 py-3"><strong>Suivi rentabilité chantier.</strong> Coûts prévisionnels vs réels, main d'œuvre pointée, achats matériaux, marge finale par chantier</td></tr>
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">16h15-16h45</td><td class="px-4 py-3">30'</td><td class="px-4 py-3"><strong>Cas pratique</strong> : chiffrage d'un chantier + signature simulée + facture de situation</td></tr>
+              <tr class="bg-white/50"><td class="px-4 py-3">16h45-17h00</td><td class="px-4 py-3">15'</td><td class="px-4 py-3">Récap, évaluation, remise attestation</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ce que vous saurez faire -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-6" style="font-family: 'Playfair Display', serif;">Ce que vous saurez faire</h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div>
+            <h3 class="font-semibold text-[#0F2942] mb-2">Devis chantier</h3>
+            <ul class="space-y-1.5 text-[#1A2332] text-sm">
+              <li>✓ Structurer une bibliothèque d'ouvrages par corps d'état</li>
+              <li>✓ Chiffrer un chantier en moins de 15 minutes avec la bibliothèque</li>
+              <li>✓ Créer un devis structuré par lot (démolition, gros œuvre, second œuvre)</li>
+              <li>✓ Utiliser les unités d'œuvre BTP (ml, m², m³, forfait, unité)</li>
+              <li>✓ Appliquer les coefficients de vente (matière + main d'œuvre + marge)</li>
+              <li>✓ Ajouter une variante ou une option chiffrée</li>
+              <li>✓ Faire signer un devis sur tablette/mobile en clientèle</li>
+              <li>✓ Recevoir la signature du client par lien email</li>
+              <li>✓ Suivre le statut du devis (envoyé, vu, signé, refusé)</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#0F2942] mb-2">Factures BTP</h3>
+            <ul class="space-y-1.5 text-[#1A2332] text-sm">
+              <li>✓ Émettre une facture d'acompte</li>
+              <li>✓ Émettre une facture de situation à l'avancement (%)</li>
+              <li>✓ Gérer la retenue de garantie de 5%</li>
+              <li>✓ Émettre le décompte général définitif (DGD)</li>
+              <li>✓ Appliquer la TVA à 10% travaux avec attestation client</li>
+              <li>✓ Émettre une facture conforme aux mentions obligatoires BTP</li>
+              <li>✓ Émettre une facture électronique via le réseau PEPPOL</li>
+              <li>✓ Convertir un devis signé en facture en un clic</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#0F2942] mb-2">Gestion chantier</h3>
+            <ul class="space-y-1.5 text-[#1A2332] text-sm">
+              <li>✓ Créer une fiche chantier liée à un devis signé</li>
+              <li>✓ Attacher des photos avant/après au dossier chantier</li>
+              <li>✓ Rédiger un compte-rendu chantier</li>
+              <li>✓ Pointer le temps de main d'œuvre par intervenant</li>
+              <li>✓ Suivre les achats de matériaux affectés au chantier</li>
+              <li>✓ Comparer le prévisionnel et le réel en temps réel</li>
+              <li>✓ Calculer la marge finale par chantier</li>
+              <li>✓ Gérer les sous-traitants et leurs factures</li>
+              <li>✓ Émettre un ordre de service ou un ordre de mission</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#0F2942] mb-2">Terrain et mobilité</h3>
+            <ul class="space-y-1.5 text-[#1A2332] text-sm">
+              <li>✓ Émettre un devis depuis le smartphone/tablette</li>
+              <li>✓ Prendre une photo et l'attacher au dossier client</li>
+              <li>✓ Consulter le planning des interventions</li>
+              <li>✓ Voir l'historique complet d'un client sur son mobile</li>
+              <li>✓ Fonctionner en mode hors ligne et synchroniser au retour de réseau</li>
+              <li>✓ Envoyer une facture immédiatement après intervention</li>
+            </ul>
+          </div>
+          <div class="sm:col-span-2">
+            <h3 class="font-semibold text-[#0F2942] mb-2">Pilotage</h3>
+            <ul class="space-y-1.5 text-[#1A2332] text-sm sm:columns-2">
+              <li>✓ Suivre le carnet de commandes (chantiers signés à venir)</li>
+              <li>✓ Consulter le CA prévisionnel des 3 prochains mois</li>
+              <li>✓ Identifier les chantiers en dépassement de budget</li>
+              <li>✓ Analyser la rentabilité moyenne par type de prestation</li>
+              <li>✓ Suivre les impayés et les DSO</li>
+              <li>✓ Recevoir des alertes sur les retards de paiement</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tarifs -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#0F2942] text-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-2xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">Tarifs</h2>
+        <div class="flex flex-wrap justify-center gap-6">
+          <div class="bg-white/10 rounded-2xl p-8 min-w-[16rem]">
+            <p class="text-4xl font-bold mb-2">890 € HT</p>
+            <p class="text-white/70">Formation individuelle</p>
+          </div>
+          <div class="bg-white/10 rounded-2xl p-8 min-w-[16rem]">
+            <p class="text-4xl font-bold mb-2">1 290 € HT</p>
+            <p class="text-white/70">Groupe 2 à 4 personnes</p>
+          </div>
+        </div>
+        <p class="text-white/60 text-sm mt-6">1 journée / 7 heures. Frais de déplacement inclus dans un rayon de 100 km autour d'Ecommoy (72220).</p>
+      </div>
+    </section>
+
+    <!-- Livrables -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FEFCF8]">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-6" style="font-family: 'Playfair Display', serif;">Livrables remis au stagiaire</h2>
+        <ul class="space-y-2 text-[#1A2332]">
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> Livret utilisateur personnalisé BTP (14-16 pages)</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> Bibliothèque d'ouvrages type importable (à personnaliser)</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> Modèles de devis et factures BTP conformes</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> 8 vidéos tutorielles workflows BTP</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> Accès Notion "Fiches réflexe BTP + veille réglementaire"</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> 30 jours de hotline mail post-formation</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Évaluation finale -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-4" style="font-family: 'Playfair Display', serif;">Évaluation finale</h2>
+        <p class="text-[#1A2332]">Cas pratique de 60 minutes : chiffrage complet d'un chantier fictif (rénovation salle de bain fournie sur plan), création du devis, simulation de signature, émission de la première facture de situation à 30%, calcul de la retenue de garantie. <strong>Réussite = 5 tâches sur 5</strong>.</p>
+      </div>
+    </section>
+
+    <!-- Prérequis & Accessibilité -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FEFCF8]">
+      <div class="max-w-4xl mx-auto grid sm:grid-cols-2 gap-8">
+        <div>
+          <h2 class="text-xl font-bold text-[#0F2942] mb-4" style="font-family: 'Playfair Display', serif;">Prérequis techniques</h2>
+          <ul class="space-y-1.5 text-sm text-[#1A2332]">
+            <li>✓ Connaître son métier et sa bibliothèque d'ouvrages courants</li>
+            <li>✓ Avoir un catalogue de tarifs unitaires même sommaire</li>
+            <li>✓ Savoir utiliser un ordinateur et un smartphone (pour la partie terrain)</li>
+            <li>✓ Avoir un compte bancaire professionnel actif ou en cours d'ouverture</li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-[#0F2942] mb-4" style="font-family: 'Playfair Display', serif;">Accessibilité handicap</h2>
+          <p class="text-sm text-[#1A2332]">Alliance Digitale s'engage à rendre ses formations accessibles à tous. Référent handicap : David Pierre Olivier — <a href="mailto:contact@alliance-digitale.fr" class="text-[#3b97d3] hover:underline">contact@alliance-digitale.fr</a>. Adaptation possible du format, du rythme et des supports selon le besoin déclaré.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#0F2942] text-white text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">Prêt à maîtriser vos devis, factures et rentabilité chantier ?</h2>
+        <p class="text-white/80 mb-8">Passez le diagnostic gratuit en 8 questions et découvrez quelle stack est faite pour vous.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/audit/" class="inline-flex items-center px-8 py-4 bg-[#A63D40] hover:bg-[#9E2114] text-white font-semibold rounded-lg transition text-lg">Passer le diagnostic gratuit →</a>
+          <a href={calendarUrl} target="_blank" rel="noopener" class="inline-flex items-center px-8 py-4 border border-white/30 hover:bg-white/10 text-white font-semibold rounded-lg transition text-lg">Réserver un entretien</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  table th, table td { font-size: 0.875rem; }
+</style>

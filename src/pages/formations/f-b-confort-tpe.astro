@@ -1,0 +1,261 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FiberFrame from '../../components/FiberFrame.astro';
+
+const title = 'Formation Stack B — Confort TPE — Alliance Digitale';
+const description = 'Gérer son cycle commercial de bout en bout avec Qonto, Pennylane et Notion. Formation 1 jour / 7 heures pour TPE de 2 à 8 personnes. Individuel 690 € HT / Groupe 990 € HT.';
+const canonical = 'https://www.alliance-digitale.fr/formations/f-b-confort-tpe/';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: 'Formation Stack B — Confort TPE — Qonto, Pennylane, Notion',
+    description,
+    provider: { '@type': 'Organization', name: 'Alliance Digitale', url: 'https://www.alliance-digitale.fr' },
+    coursePrerequisites: 'Notions de base sur la facturation (mentions légales, TVA, échéance), savoir utiliser un ordinateur, avoir un compte bancaire professionnel actif ou en cours d\'ouverture',
+    educationalLevel: 'Intermediate',
+    inLanguage: 'fr-FR',
+    offers: [
+      { '@type': 'Offer', price: '690', priceCurrency: 'EUR', description: 'Individuel 1 personne', availability: 'https://schema.org/InStock' },
+      { '@type': 'Offer', price: '990', priceCurrency: 'EUR', description: 'Groupe 2-4 personnes', availability: 'https://schema.org/InStock' },
+    ],
+    timeRequired: 'PT7H',
+    courseCode: 'F-B',
+  },
+];
+
+const calendarUrl = 'https://cal.eu/alliance-digitale/decouverte-30-min';
+---
+
+<Layout title={title} description={description} image="/og-image.png" jsonLd={jsonLd}>
+  <Header />
+
+  <main class="flex-1">
+    <!-- Hero -->
+    <section class="relative pt-36 pb-20 px-4 sm:px-6 lg:px-8 bg-[#0F2942] text-white overflow-hidden">
+      <FiberFrame client:load />
+      <div class="relative z-10 max-w-4xl mx-auto">
+        <div class="inline-block mb-4 px-4 py-1.5 bg-[#3b97d3] rounded-full text-sm font-semibold tracking-wide">Stack B — Confort TPE</div>
+        <h1 class="text-4xl sm:text-5xl font-bold leading-tight mb-4" style="font-family: 'Playfair Display', serif;">Gérer son cycle commercial de bout en bout avec Qonto, Pennylane et Notion</h1>
+        <p class="text-lg text-white/80 mb-6">1 journée / 7 heures · Présentiel ou distanciel · Individuel <strong class="text-white">690 € HT</strong> · Groupe <strong class="text-white">990 € HT</strong></p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/audit/" class="inline-flex items-center px-6 py-3 bg-[#A63D40] hover:bg-[#9E2114] text-white font-semibold rounded-lg transition">Passer le diagnostic gratuit →</a>
+          <a href={calendarUrl} target="_blank" rel="noopener" class="inline-flex items-center px-6 py-3 border border-white/30 hover:bg-white/10 text-white font-semibold rounded-lg transition">Réserver un entretien</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Public visé -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FEFCF8]">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-4" style="font-family: 'Playfair Display', serif;">Public visé</h2>
+        <p class="text-[#1A2332] leading-relaxed">Dirigeants et administratifs de TPE de 2 à 8 personnes, réalisant entre 30 et 150 factures par mois, travaillant ou souhaitant travailler avec un expert-comptable équipé Pennylane ou compatible FEC standard.</p>
+      </div>
+    </section>
+
+    <!-- Objectifs pédagogiques -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-6" style="font-family: 'Playfair Display', serif;">Objectifs pédagogiques</h2>
+        <p class="text-[#5B6472] mb-6">À l'issue de la formation, le stagiaire sera capable de :</p>
+        <ol class="space-y-3 text-[#1A2332]">
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#3b97d3] text-white text-sm font-bold flex items-center justify-center">1</span><span><strong>Structurer</strong> son catalogue produits/prestations avec les bons taux de TVA</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#3b97d3] text-white text-sm font-bold flex items-center justify-center">2</span><span><strong>Créer</strong> un devis complexe (multi-lignes, remises, acomptes) et le suivre jusqu'à signature</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#3b97d3] text-white text-sm font-bold flex items-center justify-center">3</span><span><strong>Émettre</strong> une facture électronique conforme et la transmettre via Pennylane</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#3b97d3] text-white text-sm font-bold flex items-center justify-center">4</span><span><strong>Paramétrer</strong> des relances automatiques différenciées par typologie de client</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#3b97d3] text-white text-sm font-bold flex items-center justify-center">5</span><span><strong>Rapprocher</strong> ses paiements clients avec ses factures (lettrage) en autonomie</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#3b97d3] text-white text-sm font-bold flex items-center justify-center">6</span><span><strong>Piloter</strong> sa trésorerie prévisionnelle et anticiper ses besoins de financement</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#3b97d3] text-white text-sm font-bold flex items-center justify-center">7</span><span><strong>Collaborer</strong> en temps réel avec son expert-comptable via Pennylane</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#3b97d3] text-white text-sm font-bold flex items-center justify-center">8</span><span><strong>Segmenter</strong> ses clients dans Notion et suivre son pipeline commercial</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Programme détaillé -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FEFCF8]">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-6" style="font-family: 'Playfair Display', serif;">Programme détaillé (7 heures)</h2>
+        <h3 class="text-lg font-semibold text-[#0F2942] mb-3">Matinée — 3h30</h3>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#0F2942] text-white">
+                <th class="px-4 py-3 rounded-tl-lg">Créneau</th>
+                <th class="px-4 py-3">Durée</th>
+                <th class="px-4 py-3 rounded-tr-lg">Contenu</th>
+              </tr>
+            </thead>
+            <tbody class="text-[#1A2332]">
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">09h00-09h30</td><td class="px-4 py-3">30'</td><td class="px-4 py-3"><strong>Accueil et positionnement.</strong> Tour de table, réajustement du programme selon les enjeux réels du jour, exposé des objectifs mesurables</td></tr>
+              <tr class="border-b border-[#F0F1F3] bg-white/50"><td class="px-4 py-3">09h30-10h15</td><td class="px-4 py-3">45'</td><td class="px-4 py-3"><strong>Fondamentaux réglementaires.</strong> Facture électronique 2026 : réception obligatoire au 01/09/2026, émission obligatoire au 01/09/2027. Rôle de la Plateforme Agréée. Nouvelles mentions obligatoires. Impacts sur votre entreprise</td></tr>
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">10h15-11h00</td><td class="px-4 py-3">45'</td><td class="px-4 py-3"><strong>Structuration du catalogue.</strong> Création des catégories produits/prestations, définition des tarifs, gestion des taux de TVA, unités de mesure, remises paramétrées</td></tr>
+              <tr class="border-b border-[#F0F1F3] bg-white/50"><td class="px-4 py-3">11h00-11h15</td><td class="px-4 py-3">15'</td><td class="px-4 py-3">Pause</td></tr>
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">11h15-12h00</td><td class="px-4 py-3">45'</td><td class="px-4 py-3"><strong>Modèles de documents.</strong> Personnalisation du modèle de devis et facture (logo, couleurs, mentions personnalisées), configuration de la numérotation, conditions générales de vente</td></tr>
+              <tr class="bg-white/50"><td class="px-4 py-3">12h00-12h30</td><td class="px-4 py-3">30'</td><td class="px-4 py-3"><strong>Base clients.</strong> Structuration de la base clients, distinction B2B/B2C, données obligatoires pour l'e-invoicing, import depuis Excel/CSV</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 class="text-lg font-semibold text-[#0F2942] mb-3">Après-midi — 3h30</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#0F2942] text-white">
+                <th class="px-4 py-3 rounded-tl-lg">Créneau</th>
+                <th class="px-4 py-3">Durée</th>
+                <th class="px-4 py-3 rounded-tr-lg">Contenu</th>
+              </tr>
+            </thead>
+            <tbody class="text-[#1A2332]">
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">13h30-14h15</td><td class="px-4 py-3">45'</td><td class="px-4 py-3"><strong>Cycle de vente complet.</strong> Création d'un devis, envoi client, suivi, signature électronique, transformation en facture, facturation d'acompte, factures récurrentes</td></tr>
+              <tr class="border-b border-[#F0F1F3] bg-white/50"><td class="px-4 py-3">14h15-15h00</td><td class="px-4 py-3">45'</td><td class="px-4 py-3"><strong>Relances automatiques.</strong> Configuration des scénarios de relance (7/15/30 jours), personnalisation par typologie client, gestion des exceptions, blocage temporaire</td></tr>
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">15h00-15h15</td><td class="px-4 py-3">15'</td><td class="px-4 py-3">Pause</td></tr>
+              <tr class="border-b border-[#F0F1F3] bg-white/50"><td class="px-4 py-3">15h15-16h00</td><td class="px-4 py-3">45'</td><td class="px-4 py-3"><strong>Connexion bancaire et lettrage.</strong> Configuration de la synchro Qonto ↔ Pennylane, catégorisation automatique, lettrage semi-automatique, résolution des cas complexes</td></tr>
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">16h00-16h45</td><td class="px-4 py-3">45'</td><td class="px-4 py-3"><strong>Pilotage.</strong> Lecture du tableau de bord trésorerie, DSO, forecast à 30/60 jours, indicateurs par client et par produit, alertes personnalisées</td></tr>
+              <tr class="bg-white/50"><td class="px-4 py-3">16h45-17h00</td><td class="px-4 py-3">15'</td><td class="px-4 py-3"><strong>Récapitulatif et évaluation.</strong> Cas pratique final en autonomie, réponses aux dernières questions, remise de l'attestation d'assiduité</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ce que vous saurez faire -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-6" style="font-family: 'Playfair Display', serif;">Ce que vous saurez faire</h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div>
+            <h3 class="font-semibold text-[#0F2942] mb-2">Sur Qonto</h3>
+            <ul class="space-y-1.5 text-[#1A2332] text-sm">
+              <li>✓ Émettre virements SEPA instantanés et programmés</li>
+              <li>✓ Créer et gérer des cartes physiques et virtuelles avec plafonds différenciés</li>
+              <li>✓ Suivre les dépenses par catégorie et par utilisateur</li>
+              <li>✓ Automatiser la collecte des justificatifs (photo, mail)</li>
+              <li>✓ Configurer les droits d'accès pour un salarié ou un associé</li>
+              <li>✓ Recevoir les factures électroniques via la Plateforme Agréée Qonto</li>
+              <li>✓ Extraire un IBAN virtuel dédié à un client</li>
+              <li>✓ Encaisser via lien de paiement</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#0F2942] mb-2">Sur Pennylane</h3>
+            <ul class="space-y-1.5 text-[#1A2332] text-sm">
+              <li>✓ Créer un devis multi-lignes avec remises, acomptes, conditions de règlement personnalisées</li>
+              <li>✓ Générer un devis en moins de 90 secondes à partir du catalogue</li>
+              <li>✓ Faire signer un devis électroniquement (envoi lien, notification signature)</li>
+              <li>✓ Convertir un devis accepté en facture en 1 clic sans ressaisie</li>
+              <li>✓ Émettre une facture d'acompte, de solde, un avoir</li>
+              <li>✓ Créer une facture récurrente (abonnement, honoraires mensuels)</li>
+              <li>✓ Envoyer la facture par email avec suivi (envoyée / vue / payée)</li>
+              <li>✓ Émettre une facture électronique conforme (Factur-X / UBL)</li>
+              <li>✓ Paramétrer un scénario de relance à 3 étapes</li>
+              <li>✓ Bloquer les relances pour un client en litige</li>
+              <li>✓ Lettrer automatiquement les paiements reçus avec les factures émises</li>
+              <li>✓ Traiter les cas de lettrage complexe (virements groupés, prélèvements SEPA)</li>
+              <li>✓ Consulter le tableau de bord de trésorerie temps réel</li>
+              <li>✓ Générer un prévisionnel de trésorerie à 30/60/90 jours</li>
+              <li>✓ Suivre le DSO global et par client</li>
+              <li>✓ Extraire un rapport de CA par produit ou par client</li>
+              <li>✓ Consulter le solde de TVA à décaisser</li>
+              <li>✓ Préparer et transmettre la déclaration TVA</li>
+              <li>✓ Numériser une facture d'achat via mobile (OCR automatique)</li>
+              <li>✓ Extraire un FEC ou un journal comptable</li>
+              <li>✓ Partager le portail avec l'expert-comptable en temps réel</li>
+              <li>✓ Ouvrir une conversation par facture avec l'expert-comptable</li>
+            </ul>
+          </div>
+          <div class="sm:col-span-2">
+            <h3 class="font-semibold text-[#0F2942] mb-2">Sur Notion</h3>
+            <ul class="space-y-1.5 text-[#1A2332] text-sm sm:columns-2">
+              <li>✓ Utiliser le template "Suivi commercial TPE Alliance Digitale"</li>
+              <li>✓ Structurer une base clients enrichie (contacts, historique, potentiel, statut)</li>
+              <li>✓ Suivre un pipeline commercial simple (prospect → devis → signé → livré)</li>
+              <li>✓ Gérer une base documentaire partagée (contrats, mentions légales, modèles)</li>
+              <li>✓ Créer un tableau de bord d'activité mensuel</li>
+              <li>✓ Partager un espace de travail avec un associé ou un assistant</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tarifs -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#0F2942] text-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-2xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">Tarifs</h2>
+        <div class="flex flex-wrap justify-center gap-6">
+          <div class="bg-white/10 rounded-2xl p-8 min-w-[16rem]">
+            <p class="text-4xl font-bold mb-2">690 € HT</p>
+            <p class="text-white/70">Formation individuelle</p>
+          </div>
+          <div class="bg-white/10 rounded-2xl p-8 min-w-[16rem]">
+            <p class="text-4xl font-bold mb-2">990 € HT</p>
+            <p class="text-white/70">Groupe 2 à 4 personnes</p>
+          </div>
+        </div>
+        <p class="text-white/60 text-sm mt-6">1 journée / 7 heures. Frais de déplacement inclus dans un rayon de 100 km autour d'Ecommoy (72220).</p>
+      </div>
+    </section>
+
+    <!-- Livrables -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FEFCF8]">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-6" style="font-family: 'Playfair Display', serif;">Livrables remis au stagiaire</h2>
+        <ul class="space-y-2 text-[#1A2332]">
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> Livret utilisateur personnalisé (12-14 pages) — captures d'écran de son propre environnement</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> Fichier catalogue produits/prestations structuré (Excel/CSV)</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> Template Notion "Suivi commercial TPE" configuré à ses couleurs</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> 7 vidéos tutorielles (2-4 min chacune) sur les workflows clés</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> Accès Notion "Fiches réflexe Pennylane"</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> 30 jours de hotline mail post-formation</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Évaluation finale -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-4" style="font-family: 'Playfair Display', serif;">Évaluation finale</h2>
+        <p class="text-[#1A2332]">Cas pratique de 45 minutes : à partir d'une commande fictive (fournie par le formateur), le stagiaire doit créer le devis, obtenir sa signature simulée, le transformer en facture avec acompte, paramétrer les relances, saisir un règlement partiel et lire son impact sur la trésorerie prévisionnelle. <strong>Réussite = 6 tâches sur 7</strong> sans erreur bloquante.</p>
+      </div>
+    </section>
+
+    <!-- Prérequis & Accessibilité -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FEFCF8]">
+      <div class="max-w-4xl mx-auto grid sm:grid-cols-2 gap-8">
+        <div>
+          <h2 class="text-xl font-bold text-[#0F2942] mb-4" style="font-family: 'Playfair Display', serif;">Prérequis techniques</h2>
+          <ul class="space-y-1.5 text-sm text-[#1A2332]">
+            <li>✓ Notions de base sur la facturation (mentions légales, TVA, échéance)</li>
+            <li>✓ Savoir utiliser un ordinateur (clavier, souris, navigation web, gestion des fichiers)</li>
+            <li>✓ Avoir un compte bancaire professionnel actif ou en cours d'ouverture</li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-[#0F2942] mb-4" style="font-family: 'Playfair Display', serif;">Accessibilité handicap</h2>
+          <p class="text-sm text-[#1A2332]">Alliance Digitale s'engage à rendre ses formations accessibles à tous. Référent handicap : David Pierre Olivier — <a href="mailto:contact@alliance-digitale.fr" class="text-[#3b97d3] hover:underline">contact@alliance-digitale.fr</a>. Adaptation possible du format, du rythme et des supports selon le besoin déclaré.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#0F2942] text-white text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">Prêt à piloter votre cycle commercial de bout en bout ?</h2>
+        <p class="text-white/80 mb-8">Passez le diagnostic gratuit en 8 questions et découvrez quelle stack est faite pour vous.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/audit/" class="inline-flex items-center px-8 py-4 bg-[#A63D40] hover:bg-[#9E2114] text-white font-semibold rounded-lg transition text-lg">Passer le diagnostic gratuit →</a>
+          <a href={calendarUrl} target="_blank" rel="noopener" class="inline-flex items-center px-8 py-4 border border-white/30 hover:bg-white/10 text-white font-semibold rounded-lg transition text-lg">Réserver un entretien</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  table th, table td { font-size: 0.875rem; }
+</style>

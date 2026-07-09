@@ -1,0 +1,264 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FiberFrame from '../../components/FiberFrame.astro';
+
+const title = 'Formation Stack C — Commerciale intégrée — Alliance Digitale';
+const description = 'Piloter son activité commerciale avec Axonaut. Formation 1 jour / 7 heures pour dirigeants et équipes commerciales de TPE 3-15 personnes. Individuel 890 € HT / Groupe 1 290 € HT.';
+const canonical = 'https://www.alliance-digitale.fr/formations/f-c-commerciale-integree/';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: 'Formation Stack C — Commerciale intégrée — Axonaut',
+    description,
+    provider: { '@type': 'Organization', name: 'Alliance Digitale', url: 'https://www.alliance-digitale.fr' },
+    coursePrerequisites: 'Bonnes bases informatiques (Excel intermédiaire, navigation web fluide), compréhension d\'un pipeline commercial, catalogue produits/prestations préalablement défini',
+    educationalLevel: 'Intermediate',
+    inLanguage: 'fr-FR',
+    offers: [
+      { '@type': 'Offer', price: '890', priceCurrency: 'EUR', description: 'Individuel 1 personne', availability: 'https://schema.org/InStock' },
+      { '@type': 'Offer', price: '1290', priceCurrency: 'EUR', description: 'Groupe 2-4 personnes', availability: 'https://schema.org/InStock' },
+    ],
+    timeRequired: 'PT7H',
+    courseCode: 'F-C',
+  },
+];
+
+const calendarUrl = 'https://cal.eu/alliance-digitale/decouverte-30-min';
+---
+
+<Layout title={title} description={description} image="/og-image.png" jsonLd={jsonLd}>
+  <Header />
+
+  <main class="flex-1">
+    <!-- Hero -->
+    <section class="relative pt-36 pb-20 px-4 sm:px-6 lg:px-8 bg-[#0F2942] text-white overflow-hidden">
+      <FiberFrame client:load />
+      <div class="relative z-10 max-w-4xl mx-auto">
+        <div class="inline-block mb-4 px-4 py-1.5 bg-[#A63D40] rounded-full text-sm font-semibold tracking-wide">Stack C — Commerciale intégrée</div>
+        <h1 class="text-4xl sm:text-5xl font-bold leading-tight mb-4" style="font-family: 'Playfair Display', serif;">Piloter son activité commerciale avec Axonaut</h1>
+        <p class="text-lg text-white/80 mb-6">1 journée / 7 heures · Présentiel ou distanciel · Individuel <strong class="text-white">890 € HT</strong> · Groupe <strong class="text-white">1 290 € HT</strong></p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/audit/" class="inline-flex items-center px-6 py-3 bg-[#A63D40] hover:bg-[#9E2114] text-white font-semibold rounded-lg transition">Passer le diagnostic gratuit →</a>
+          <a href={calendarUrl} target="_blank" rel="noopener" class="inline-flex items-center px-6 py-3 border border-white/30 hover:bg-white/10 text-white font-semibold rounded-lg transition">Réserver un entretien</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Public visé -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FEFCF8]">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-4" style="font-family: 'Playfair Display', serif;">Public visé</h2>
+        <p class="text-[#1A2332] leading-relaxed">Dirigeants et équipes commerciales de TPE de 3 à 15 personnes, avec un besoin fort de CRM (pipeline commercial actif, plusieurs commerciaux ou équipes), volume de facturation 80+ par mois, budget ERP acceptable (&gt;80 € par utilisateur et par mois).</p>
+      </div>
+    </section>
+
+    <!-- Objectifs pédagogiques -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-6" style="font-family: 'Playfair Display', serif;">Objectifs pédagogiques</h2>
+        <p class="text-[#5B6472] mb-6">À l'issue de la formation, le stagiaire sera capable de :</p>
+        <ol class="space-y-3 text-[#1A2332]">
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#A63D40] text-white text-sm font-bold flex items-center justify-center">1</span><span><strong>Configurer</strong> Axonaut pour son activité (droits, workflows, catalogues)</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#A63D40] text-white text-sm font-bold flex items-center justify-center">2</span><span><strong>Gérer</strong> un pipeline commercial avec ses étapes, ses taux de conversion et ses objectifs</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#A63D40] text-white text-sm font-bold flex items-center justify-center">3</span><span><strong>Émettre</strong> des devis et factures conformes 2026 avec relances automatisées</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#A63D40] text-white text-sm font-bold flex items-center justify-center">4</span><span><strong>Analyser</strong> la performance commerciale par vendeur, par produit et par période</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#A63D40] text-white text-sm font-bold flex items-center justify-center">5</span><span><strong>Coordonner</strong> l'équipe autour d'un référentiel unique (fiches clients, notes, tâches)</span></li>
+          <li class="flex gap-3"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-[#A63D40] text-white text-sm font-bold flex items-center justify-center">6</span><span><strong>Piloter</strong> la trésorerie et le prévisionnel commercial</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Programme détaillé -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FEFCF8]">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-6" style="font-family: 'Playfair Display', serif;">Programme détaillé (7 heures)</h2>
+        <h3 class="text-lg font-semibold text-[#0F2942] mb-3">Matinée — Configuration et cycle commercial (3h30)</h3>
+        <div class="overflow-x-auto mb-8">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#0F2942] text-white">
+                <th class="px-4 py-3 rounded-tl-lg">Créneau</th>
+                <th class="px-4 py-3">Durée</th>
+                <th class="px-4 py-3 rounded-tr-lg">Contenu</th>
+              </tr>
+            </thead>
+            <tbody class="text-[#1A2332]">
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">09h00-09h30</td><td class="px-4 py-3">30'</td><td class="px-4 py-3">Accueil, positionnement, tour de table</td></tr>
+              <tr class="border-b border-[#F0F1F3] bg-white/50"><td class="px-4 py-3">09h30-10h30</td><td class="px-4 py-3">60'</td><td class="px-4 py-3"><strong>Architecture Axonaut.</strong> Structuration entreprise, utilisateurs et droits, workflow d'approbation, personnalisation des modules</td></tr>
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">10h30-11h15</td><td class="px-4 py-3">45'</td><td class="px-4 py-3"><strong>Catalogue et base clients.</strong> Import du catalogue, création des familles produits, base clients enrichie, segmentation</td></tr>
+              <tr class="border-b border-[#F0F1F3] bg-white/50"><td class="px-4 py-3">11h15-11h30</td><td class="px-4 py-3">15'</td><td class="px-4 py-3">Pause</td></tr>
+              <tr class="bg-white/50"><td class="px-4 py-3">11h30-12h30</td><td class="px-4 py-3">60'</td><td class="px-4 py-3"><strong>Pipeline commercial.</strong> Configuration des étapes (prospect → contact → devis → négociation → signé), taux de conversion, actions automatisées à chaque étape</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 class="text-lg font-semibold text-[#0F2942] mb-3">Après-midi — Automatisation et pilotage (3h30)</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#0F2942] text-white">
+                <th class="px-4 py-3 rounded-tl-lg">Créneau</th>
+                <th class="px-4 py-3">Durée</th>
+                <th class="px-4 py-3 rounded-tr-lg">Contenu</th>
+              </tr>
+            </thead>
+            <tbody class="text-[#1A2332]">
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">13h30-14h30</td><td class="px-4 py-3">60'</td><td class="px-4 py-3"><strong>Cycle devis-facture.</strong> Création d'un devis structuré, signature électronique, conversion facture, facturation d'acompte, factures récurrentes, avoirs</td></tr>
+              <tr class="border-b border-[#F0F1F3] bg-white/50"><td class="px-4 py-3">14h30-15h15</td><td class="px-4 py-3">45'</td><td class="px-4 py-3"><strong>Relances et lettrage.</strong> Scénarios de relance personnalisés, gestion des exceptions, connexion bancaire, lettrage automatique</td></tr>
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">15h15-15h30</td><td class="px-4 py-3">15'</td><td class="px-4 py-3">Pause</td></tr>
+              <tr class="border-b border-[#F0F1F3] bg-white/50"><td class="px-4 py-3">15h30-16h15</td><td class="px-4 py-3">45'</td><td class="px-4 py-3"><strong>Reporting commercial.</strong> Tableau de bord par vendeur, CA par produit, taux de conversion, prévisionnel commercial, alertes</td></tr>
+              <tr class="border-b border-[#F0F1F3]"><td class="px-4 py-3">16h15-16h45</td><td class="px-4 py-3">30'</td><td class="px-4 py-3"><strong>Cas pratique final</strong> en autonomie</td></tr>
+              <tr class="bg-white/50"><td class="px-4 py-3">16h45-17h00</td><td class="px-4 py-3">15'</td><td class="px-4 py-3">Récap, évaluation, remise attestation</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ce que vous saurez faire -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-6" style="font-family: 'Playfair Display', serif;">Ce que vous saurez faire</h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div>
+            <h3 class="font-semibold text-[#0F2942] mb-2">Gestion commerciale complète</h3>
+            <ul class="space-y-1.5 text-[#1A2332] text-sm">
+              <li>✓ Créer et configurer un pipeline commercial multi-étapes</li>
+              <li>✓ Définir des taux de conversion cibles par étape</li>
+              <li>✓ Attribuer un lead à un commercial automatiquement selon des critères</li>
+              <li>✓ Suivre le taux de conversion global et par vendeur</li>
+              <li>✓ Créer des objectifs mensuels et trimestriels par vendeur</li>
+              <li>✓ Générer un rapport de forecast à 30/60/90 jours</li>
+              <li>✓ Segmenter la base clients par typologie</li>
+              <li>✓ Enrichir une fiche client (historique, notes, tags, tâches, pièces jointes)</li>
+              <li>✓ Programmer une relance manuelle ou automatique</li>
+              <li>✓ Consulter l'historique complet des interactions avec un client</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#0F2942] mb-2">Devis et facturation</h3>
+            <ul class="space-y-1.5 text-[#1A2332] text-sm">
+              <li>✓ Créer un devis structuré avec sections, remises, acomptes échelonnés</li>
+              <li>✓ Configurer plusieurs modèles de devis pour différentes offres</li>
+              <li>✓ Faire signer un devis électroniquement avec notification</li>
+              <li>✓ Convertir un devis en projet ou en facture</li>
+              <li>✓ Émettre des factures d'acompte, de solde, des avoirs</li>
+              <li>✓ Créer une facture récurrente (abonnement)</li>
+              <li>✓ Émettre une facture électronique conforme</li>
+              <li>✓ Configurer plusieurs scénarios de relance selon le type de client</li>
+              <li>✓ Suspendre les relances pour un client en négociation</li>
+              <li>✓ Gérer les conditions de règlement personnalisées</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#0F2942] mb-2">Gestion opérationnelle</h3>
+            <ul class="space-y-1.5 text-[#1A2332] text-sm">
+              <li>✓ Créer et suivre un projet lié à un devis signé</li>
+              <li>✓ Attribuer des tâches à un membre de l'équipe</li>
+              <li>✓ Suivre le temps passé par mission</li>
+              <li>✓ Calculer la rentabilité par projet</li>
+              <li>✓ Gérer une équipe avec droits d'accès différenciés</li>
+              <li>✓ Configurer un workflow d'approbation</li>
+              <li>✓ Gérer un catalogue produits avec variantes et stock léger</li>
+              <li>✓ Traiter les demandes SAV via un module de ticketing</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#0F2942] mb-2">Pilotage et reporting</h3>
+            <ul class="space-y-1.5 text-[#1A2332] text-sm">
+              <li>✓ Consulter le CA du mois, du trimestre, de l'année</li>
+              <li>✓ Comparer la performance vs objectif</li>
+              <li>✓ Identifier les meilleurs clients (top 10 par CA)</li>
+              <li>✓ Identifier les produits/prestations les plus rentables</li>
+              <li>✓ Suivre la marge par devis</li>
+              <li>✓ Analyser le pipeline (montant total, valeur pondérée par probabilité)</li>
+              <li>✓ Suivre la trésorerie et le DSO</li>
+              <li>✓ Exporter les rapports au format Excel ou PDF</li>
+              <li>✓ Recevoir des alertes par email ou notification</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tarifs -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#0F2942] text-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-2xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">Tarifs</h2>
+        <div class="flex flex-wrap justify-center gap-6">
+          <div class="bg-white/10 rounded-2xl p-8 min-w-[16rem]">
+            <p class="text-4xl font-bold mb-2">890 € HT</p>
+            <p class="text-white/70">Formation individuelle</p>
+          </div>
+          <div class="bg-white/10 rounded-2xl p-8 min-w-[16rem]">
+            <p class="text-4xl font-bold mb-2">1 290 € HT</p>
+            <p class="text-white/70">Groupe 2 à 4 personnes</p>
+          </div>
+        </div>
+        <p class="text-white/60 text-sm mt-6">1 journée / 7 heures. Frais de déplacement inclus dans un rayon de 100 km autour d'Ecommoy (72220).</p>
+      </div>
+    </section>
+
+    <!-- Livrables -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FEFCF8]">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-6" style="font-family: 'Playfair Display', serif;">Livrables remis au stagiaire</h2>
+        <ul class="space-y-2 text-[#1A2332]">
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> Livret utilisateur personnalisé (14-18 pages)</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> Fichier catalogue produits/prestations structuré</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> Configuration Axonaut opérationnelle (pipeline, workflows, modèles)</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> 10 vidéos tutorielles workflows clés</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> Accès Notion "Fiches réflexe Axonaut"</li>
+          <li class="flex gap-2"><span class="text-[#A63D40]">▸</span> 30 jours de hotline mail post-formation</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Évaluation finale -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-bold text-[#0F2942] mb-4" style="font-family: 'Playfair Display', serif;">Évaluation finale</h2>
+        <p class="text-[#1A2332]">Cas pratique de 60 minutes : à partir d'un scénario fictif (1 prospect entrant, 1 devis à créer, 1 relance à envoyer, 1 facture à émettre, 1 rapport à générer), le stagiaire réalise l'ensemble en autonomie. <strong>Réussite = 5 tâches sur 5</strong> accomplies dans le temps imparti.</p>
+      </div>
+    </section>
+
+    <!-- Prérequis & Accessibilité -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FEFCF8]">
+      <div class="max-w-4xl mx-auto grid sm:grid-cols-2 gap-8">
+        <div>
+          <h2 class="text-xl font-bold text-[#0F2942] mb-4" style="font-family: 'Playfair Display', serif;">Prérequis techniques</h2>
+          <ul class="space-y-1.5 text-sm text-[#1A2332]">
+            <li>✓ Bonnes bases informatiques (Excel intermédiaire, navigation web fluide)</li>
+            <li>✓ Compréhension d'un pipeline commercial (prospect, opportunité, deal, taux de conversion)</li>
+            <li>✓ Avoir défini un catalogue produits/prestations préalablement (même sommaire)</li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-[#0F2942] mb-4" style="font-family: 'Playfair Display', serif;">Accessibilité handicap</h2>
+          <p class="text-sm text-[#1A2332]">Alliance Digitale s'engage à rendre ses formations accessibles à tous. Référent handicap : David Pierre Olivier — <a href="mailto:contact@alliance-digitale.fr" class="text-[#3b97d3] hover:underline">contact@alliance-digitale.fr</a>. Adaptation possible du format, du rythme et des supports selon le besoin déclaré.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#0F2942] text-white text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4" style="font-family: 'Playfair Display', serif;">Prêt à piloter votre activité commerciale avec Axonaut ?</h2>
+        <p class="text-white/80 mb-8">Passez le diagnostic gratuit en 8 questions et découvrez quelle stack est faite pour vous.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/audit/" class="inline-flex items-center px-8 py-4 bg-[#A63D40] hover:bg-[#9E2114] text-white font-semibold rounded-lg transition text-lg">Passer le diagnostic gratuit →</a>
+          <a href={calendarUrl} target="_blank" rel="noopener" class="inline-flex items-center px-8 py-4 border border-white/30 hover:bg-white/10 text-white font-semibold rounded-lg transition text-lg">Réserver un entretien</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  table th, table td { font-size: 0.875rem; }
+</style>
