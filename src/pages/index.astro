@@ -16,11 +16,67 @@ const resources = await getResources();
 const heroFormations = formations.slice(0, 3);
 const heroStudies = studies.slice(0, 3);
 const heroResources = resources.slice(0, 6);
+
+// Sites démo TPE
+const tpeDemos = [
+  { url: 'https://demo-plombier-ten.vercel.app/', label: 'Plombier', emoji: '🔧', desc: 'Prise de RDV, devis express, suivi chantier' },
+  { url: 'https://demo-paysagiste-one.vercel.app/', label: 'Paysagiste', emoji: '🌿', desc: 'Galerie réalisations, devis en ligne, planning' },
+  { url: 'https://demo-couvreur.vercel.app/', label: 'Couvreur', emoji: '🏠', desc: 'Portfolio toitures, urgence fuite, devis' },
+  { url: 'https://demo-electricien-alpha.vercel.app/', label: 'Électricien', emoji: '⚡', desc: 'Certifications, interventions, devis en ligne' },
+];
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "C'est quoi exactement l'accompagnement Alliance Digitale ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un programme en 3 étapes pour les PME en Sarthe : audit de vos usages IA, formation collective de vos salariés, puis mise en place d'une première automatisation concrète et mesurable. Chaque étape produit un livrable : grille d'audit, bibliothèque de prompts, workflow opérationnel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Je n'y connais rien en IA, c'est un problème ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non, c'est même préférable. Nos formations partent de zéro et sont conçues pour des professionnels non-techniques. Chaque session est appliquée à votre métier : vous repartez avec des outils et méthodes immédiatement utilisables."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ça concerne quelles entreprises ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Toute PME avec salariés en Sarthe et dans les Pays de la Loire : artisans du BTP, commerces, professions libérales, santé, immobilier, restauration, transport… Si vous avez des tâches répétitives, nous pouvons les automatiser."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce que l'AI Act et pourquoi c'est important pour ma PME ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "L'AI Act est le règlement européen sur l'IA, applicable à partir d'août 2026. Il impose des obligations aux entreprises qui utilisent des systèmes d'IA, même via ChatGPT. Nous vous aidons à identifier vos risques et à vous mettre en conformité avant l'échéance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien ça coûte ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "L'audit initial est gratuit (30 min). Les formations sont éligibles aux financements OPCO. L'accompagnement complet est sur devis après l'audit. Le challenge 5 jours et l'outil de sécurité documentaire sont gratuits."
+      }
+    }
+  ]
+};
 ---
 
 <Layout
-  title="Alliance Digitale — Accompagnement IA et automatisation pour PME"
-  description="Alliance Digitale accompagne les PME avec salariés en Sarthe dans la conformité AI Act, l'adoption de l'IA générative et l'automatisation des tâches répétitives."
+  title="Automatisation IA pour PME Sarthe | Alliance Digitale"
+  description="Alliance Digitale accompagne les PME en Sarthe : audit IA, formation salariés, automatisation des processus. 23 sessions, 168 apprenants, 95% de satisfaction."
+  jsonLd={faqLd}
 >
   <Header />
 
@@ -53,15 +109,15 @@ const heroResources = resources.slice(0, 6);
             <div class="mt-12 flex flex-wrap items-center gap-6 text-sm text-white/65" data-hero-anim="stats">
               <span class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-alliance-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <span data-count="23">0</span>&nbsp;sessions animées chez les clients
+                <span data-count="23">23</span>&nbsp;sessions animées chez les clients
               </span>
               <span class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-alliance-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                <span data-count="168">0</span>&nbsp;apprenants formés
+                <span data-count="168">168</span>&nbsp;apprenants formés
               </span>
               <span class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-alliance-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-                <span data-count="95" data-count-suffix=" %">0</span>&nbsp;de satisfaction
+                <span data-count="95" data-count-suffix=" %">95 %</span>&nbsp;de satisfaction
               </span>
             </div>
           </div>
@@ -87,303 +143,564 @@ const heroResources = resources.slice(0, 6);
       </div>
     </section>
 
-    <!-- ACCOMPAGNEMENT -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8">
+    <!-- PRÉSENTATION DES ACTIVITÉS -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center" data-reveal>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white mb-6 leading-tight">
+          Formation, automatisation et conformité IA<br class="hidden sm:block">
+          pour les entreprises de Sarthe et Pays de la Loire
+        </h2>
+        <p class="text-white/70 text-lg leading-relaxed max-w-3xl mx-auto">
+          Alliance Digitale accompagne les dirigeants et salariés de PME et TPE dans leur transformation numérique.
+          Que vous cherchiez à <strong class="text-white">former vos équipes</strong>, <strong class="text-white">automatiser vos processus</strong>
+          ou <strong class="text-white">vous mettre en conformité AI Act</strong>, nous avons la solution adaptée à votre taille et votre métier.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- GROUPE D'ONGLETS 1 : Accompagnement PME / Accompagnement TPE -->
+    <!-- ============================================================ -->
+    <section class="pb-16 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Accompagnement</p>
-            
-            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-6">
-              De la formation au déploiement opérationnel
-            </h2>
-            
-            <p class="text-white/70 text-lg mb-6 leading-relaxed">
-              L'IA ne se résume pas à ChatGPT. Nous auditons vos usages, formons vos équipes et mettons en place
-              des automatisations concrètes pour gagner du temps, réduire les erreurs et améliorer la qualité du service.
-            </p>
-            
-            <ul class="space-y-3 mb-8">
-              <li class="flex items-start gap-3 text-white/70">
-                <span class="w-6 h-6 rounded-full bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-sm shrink-0 mt-0.5">1</span>
-                Audit rapide de vos processus et cas d'usage IA prioritaires
-              </li>
-              <li class="flex items-start gap-3 text-white/70">
-                <span class="w-6 h-6 rounded-full bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-sm shrink-0 mt-0.5">2</span>
-                Formation collective des salariés à la littératie IA
-              </li>
-              <li class="flex items-start gap-3 text-white/70">
-                <span class="w-6 h-6 rounded-full bg-alliance-blue/20 text-alliance-blue flex items-center justify-center text-sm shrink-0 mt-0.5">3</span>
-                Automatisation d'un premier processus clé, mesurable en quelques semaines
-              </li>
-            </ul>
-            
-            <a href="/accompagnement/" class="btn-primary">Voir l'offre d'accompagnement</a>
-          </div>
-          
-          <div class="relief-panel p-8">
-            <blockquote class="text-xl text-white/90 italic leading-relaxed mb-6">
-              « Nous avons gagné l'équivalent d'une demi-journée par semaine sur la rédaction de nos comptes rendus. »
-            </blockquote>
-            <p class="text-sm text-white/65">PME industrielle, 25 salariés — étude de cas anonymisée</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- AUTOMATISATIONS -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-12" data-reveal>
-          <p class="text-alliance-orange text-sm font-bold uppercase tracking-widest mb-3">Automatisations</p>
-
-          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
-            Combien de temps gagnez-vous chaque mois ?
-          </h2>
-
-          <p class="text-white/60 max-w-2xl mx-auto">
-            Découvrez les tâches répétitives de votre métier qui pourraient tourner toutes seules.
-            10 secteurs, 50+ automatisations concrètes — sélectionnez le vôtre et calculez votre gain.
-          </p>
+        <!-- Titre du groupe -->
+        <div class="text-center mb-6">
+          <p class="text-sky-400 text-sm font-bold uppercase tracking-widest mb-2">Accompagnement</p>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Choisissez votre profil</h2>
         </div>
 
-        <!-- Aperçu gains par secteur -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
-          {[
-            { emoji: "🔧", label: "Artisans BTP", hours: "18h/mois" },
-            { emoji: "🌿", label: "Paysagistes", hours: "15h/mois" },
-            { emoji: "🩺", label: "Santé", hours: "21h/mois" },
-            { emoji: "🛍️", label: "Commerces", hours: "24h/mois" },
-            { emoji: "🍽️", label: "Restauration", hours: "19h/mois" },
-            { emoji: "🚗", label: "Garage auto", hours: "18h/mois" },
-            { emoji: "🏠", label: "Immobilier", hours: "24h/mois" },
-            { emoji: "⚖️", label: "Libérales", hours: "23h/mois" },
-            { emoji: "🚛", label: "Transport", hours: "17h/mois" },
-            { emoji: "🏢", label: "PME générale", hours: "19h/mois" },
-          ].map((sec) => (
-            <a
-              href="/automatisations/"
-              data-reveal
-              class="group flex flex-col items-center gap-2 p-5 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-alliance-orange/30 transition text-center"
-            >
-              <span class="text-3xl">{sec.emoji}</span>
-              <span class="text-sm font-semibold text-white group-hover:text-alliance-blue transition-colors">{sec.label}</span>
-              <span class="text-xs text-alliance-orange font-bold">{sec.hours}</span>
-            </a>
-          ))}
+        <!-- Barre d'onglets -->
+        <div class="tab-buttons" id="tabs-accompagnement">
+          <button class="tab-btn active" data-group="accompagnement" data-tab="pme" onclick="switchTabGroup('accompagnement', 'pme')">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21h6"/></svg>
+            Accompagnement PME
+          </button>
+          <button class="tab-btn" data-group="accompagnement" data-tab="tpe" onclick="switchTabGroup('accompagnement', 'tpe')">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.95-8.95a1.5 1.5 0 012.1 0L21.75 12M3 12v7.5A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 19.5V12"/></svg>
+            Accompagnement TPE
+          </button>
         </div>
 
-        <div class="text-center">
-          <a href="/automatisations/" class="btn-primary text-base px-8 py-4 inline-flex items-center gap-2">
-            Voir le catalogue complet
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
+        <!-- Contenu PME -->
+        <div class="tab-content active" data-group="accompagnement" id="tab-accompagnement-pme">
+          <div class="tab-panel tab-panel--pme">
+            <div class="grid lg:grid-cols-2 gap-10 items-start">
+              <div>
+                <div class="flex items-center gap-2 mb-4">
+                  <svg class="w-7 h-7 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21h6"/></svg>
+                  <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">
+                    Accompagnement PME
+                  </h3>
+                </div>
 
-    <!-- PREUVES -->
-    {heroStudies.length > 0 && (
-      <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
-        <div class="max-w-7xl mx-auto">
-          <div class="text-center mb-12" data-reveal>
-            <p class="text-alliance-orange text-sm font-bold uppercase tracking-widest mb-3">Preuves</p>
+                <p class="text-white/80 text-base mb-6 leading-relaxed">
+                  Vous dirigez une PME avec salariés en Sarthe ? Nous vous accompagnons de l'audit initial au déploiement opérationnel.
+                  Notre programme en 3 étapes transforme l'IA d'un sujet abstrait en un levier concret de productivité pour votre entreprise.
+                </p>
 
-            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
-              Réalisations concrètes
-            </h2>
-            
-            <p class="text-white/60 max-w-2xl mx-auto">
-              Des résultats mesurables sur des projets réels. Les études de cas clients sont anonymisées ou publiées avec consentement écrit.
-            </p>
-          </div>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {heroStudies.map((study, i) => (
-              <div data-reveal data-reveal-delay={String(i * 0.08)}>
-                <CaseStudyCard study={study} />
-              </div>
-            ))}
-          </div>
-          
-          <div class="text-center mt-12">
-            <a href="/accompagnement/" class="btn-secondary">Voir toutes les réalisations</a>
-          </div>
-        </div>
-      </section>
-    )}
+                <ul class="space-y-3 mb-8">
+                  <li class="flex items-start gap-3 text-white/80">
+                    <span class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-sm font-bold shrink-0 mt-0.5">1</span>
+                    <div>
+                      <strong class="text-white">Audit de vos processus</strong>
+                      <p class="text-sm text-white/60">Nous analysons vos usages, identifions les tâches répétitives et les cas d'usage IA prioritaires.</p>
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-3 text-white/80">
+                    <span class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-sm font-bold shrink-0 mt-0.5">2</span>
+                    <div>
+                      <strong class="text-white">Formation collective de vos salariés</strong>
+                      <p class="text-sm text-white/60">Sessions pratiques adaptées à votre métier, éligibles aux financements OPCO.</p>
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-3 text-white/80">
+                    <span class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-sm font-bold shrink-0 mt-0.5">3</span>
+                    <div>
+                      <strong class="text-white">Automatisation mesurable</strong>
+                      <p class="text-sm text-white/60">Mise en place d'un premier workflow automatisé avec des résultats chiffrables en quelques semaines.</p>
+                    </div>
+                  </li>
+                </ul>
 
-    <!-- CHALLENGE 5 JOURS -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-5xl mx-auto">
-        <div class="relief-panel p-8 sm:p-10 relative overflow-hidden" data-reveal>
-          <div class="absolute -top-24 -right-24 w-64 h-64 bg-alliance-red/10 rounded-full blur-3xl pointer-events-none"></div>
-          <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-alliance-blue/10 rounded-full blur-3xl pointer-events-none"></div>
-
-          <div class="relative grid lg:grid-cols-[1fr_auto] gap-8 items-center">
-            <div>
-              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-alliance-red/30 bg-alliance-red/10 text-alliance-red text-xs font-semibold uppercase tracking-wider mb-4">
-                Challenge gratuit · 5 jours
+                <a href="/accompagnement/" class="btn-primary inline-flex items-center gap-2">
+                  Voir l'offre d'accompagnement
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
               </div>
 
-              <h2 class="font-display text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
-                Boostez votre productivité avec l'IA en 5 jours
-              </h2>
+              <div class="space-y-4">
+                <div class="relief-panel p-6">
+                  <blockquote class="text-lg text-white/90 italic leading-relaxed mb-4">
+                    « Nous avons gagné l'équivalent d'une demi-journée par semaine sur la rédaction de nos comptes rendus. »
+                  </blockquote>
+                  <p class="text-sm text-white/60">PME industrielle, 25 salariés — étude de cas anonymisée</p>
+                </div>
 
-              <p class="text-white/70 text-base sm:text-lg leading-relaxed max-w-3xl">
-                Un email par jour pendant 5 jours, 30 minutes par jour. Chaque jour,
-                une action concrète à mener dans votre PME avec un outil gratuit —
-                et un livrable pour votre entreprise. À la fin de la semaine, vous avez
-                automatisé votre première tâche.
-              </p>
-            </div>
-
-            <div class="shrink-0">
-              <a href="/challenge/" class="btn-primary text-base px-8 py-4 inline-flex items-center gap-2 whitespace-nowrap">
-                Je m'inscris gratuitement
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- OUTIL SÉCURITÉ IA -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
-      <div class="max-w-5xl mx-auto">
-        <div class="relief-panel p-8 sm:p-10 relative overflow-hidden" data-reveal>
-          <div class="absolute -top-24 -right-24 w-64 h-64 bg-alliance-blue/10 rounded-full blur-3xl pointer-events-none"></div>
-          
-          <div class="relative grid lg:grid-cols-[1fr_auto] gap-8 items-center">
-            <div>
-              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-alliance-blue/30 bg-alliance-blue/10 text-alliance-blue text-xs font-semibold uppercase tracking-wider mb-4">
-                Outil gratuit · En ligne
-              </div>
-
-              <h2 class="font-display text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
-                Vérifiez la sécurité de vos documents avant de les confier à l'IA
-              </h2>
-
-              <p class="text-white/70 text-base sm:text-lg leading-relaxed max-w-3xl mb-4">
-                Avant de déposer un contrat, une facture ou un document client sur ChatGPT, 
-                vérifiez les risques : où vont vos données ? Quel modèle IA utiliser ? 
-                15 secteurs, 80+ types de documents analysés.
-              </p>
-              
-              <ul class="space-y-2 text-white/70">
-                <li class="flex items-center gap-2">
-                  <svg class="w-5 h-5 text-alliance-blue shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                  Classification par niveau de risque (faible, moyen, élevé, critique)
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-5 h-5 text-alliance-blue shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                  Recommandations de modèles IA adaptés (local, EU, US)
-                </li>
-                <li class="flex items-center gap-2">
-                  <svg class="w-5 h-5 text-alliance-blue shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                  Conseils RGPD et conformité AI Act
-                </li>
-              </ul>
-            </div>
-
-            <div class="shrink-0 text-center lg:text-right">
-              <a href="/securite-ia/" 
-                 class="btn-primary text-base px-8 py-4 inline-flex items-center gap-2 whitespace-nowrap">
-                Accéder à l'outil gratuit
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-                </svg>
-              </a>
-              <p class="text-xs text-white/50 mt-2">Aucune inscription requise</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FORMATIONS -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-12" data-reveal>
-          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Formations</p>
-
-          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
-            Des formations appliquées aux usages métier
-          </h2>
-          
-          <p class="text-white/60 max-w-2xl mx-auto">
-            Formations courtes et concrètes pour les salariés et dirigeants de PME. Objectif : repartir avec des outils et méthodes immédiatement utilisables.
-          </p>
-        </div>
-        
-        {heroFormations.length > 0 ? (
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {heroFormations.map((formation, i) => (
-              <div data-reveal data-reveal-delay={String(i * 0.08)}>
-                <FormationCard formation={formation} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div class="text-center py-16 border border-white/10 rounded-2xl bg-white/[0.02]">
-            <p class="text-white/60">Catalogue en cours de construction dans Notion.</p>
-          </div>
-        )}
-        
-        <div class="text-center mt-12">
-          <a href="/formations/" class="btn-secondary">Voir toutes les formations</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- RESSOURCES GRATUITES -->
-    {heroResources.length > 0 && (
-      <section class="py-20 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-          <div class="text-center mb-12" data-reveal>
-            <p class="text-alliance-orange text-sm font-bold uppercase tracking-widest mb-3">Ressources gratuites</p>
-
-            <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
-              Cours gratuits pour démarrer avec l'IA
-            </h2>
-
-            <p class="text-white/60 max-w-2xl mx-auto">
-              Des micro-cours concrets et accessibles pour vous initier à l'IA générative, à l'automatisation
-              et à la sécurité des données. Chaque cours inclut un exercice pratique et un corrigé PDF.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {heroResources.map((resource, i) => (
-              <a
-                href={`/ressources/${resource.slug}/`}
-                data-reveal
-                data-reveal-delay={String(Math.min(i, 5) * 0.06)}
-                class="group block rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] transition overflow-hidden"
-              >
-                {resource.photo && (
-                  <div class="h-36 overflow-hidden">
-                    <img src={resource.photo} alt={resource.title} loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <!-- Mini études de cas -->
+                {heroStudies.length > 0 && (
+                  <div class="space-y-3">
+                    <p class="text-xs font-semibold uppercase tracking-widest text-sky-400/80">Réalisations</p>
+                    {heroStudies.slice(0, 2).map((study) => (
+                      <a href="/accompagnement/" class="block p-4 rounded-lg border border-sky-500/20 bg-sky-900/20 hover:bg-sky-900/30 transition">
+                        <h4 class="font-semibold text-white text-sm mb-1">{study.title}</h4>
+                        <p class="text-xs text-white/60">{study.sector}</p>
+                      </a>
+                    ))}
                   </div>
                 )}
-                <div class="p-5">
-                  <span class="inline-block px-2 py-0.5 rounded bg-alliance-blue/10 text-alliance-blue text-xs font-semibold mb-3">
-                    {resource.module}
-                  </span>
-                  <h3 class="font-display text-lg font-bold text-white mb-2 group-hover:text-alliance-blue transition-colors">{resource.title}</h3>
-                  <p class="text-sm text-white/60 line-clamp-2">{resource.description}</p>
-                </div>
-              </a>
-            ))}
-          </div>
+              </div>
+            </div>
 
-          <div class="text-center mt-12">
-            <a href="/ressources/" class="btn-secondary">Voir toutes les ressources</a>
+            <!-- Secteurs PME -->
+            <div class="mt-10 pt-8 border-t border-sky-500/20">
+              <p class="text-sm font-semibold uppercase tracking-widest text-sky-400/80 mb-4">Secteurs accompagnés</p>
+              <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                {[
+                  { emoji: "🔧", label: "Artisans BTP", hours: "18h/mois" },
+                  { emoji: "🩺", label: "Santé", hours: "21h/mois" },
+                  { emoji: "🛍️", label: "Commerces", hours: "24h/mois" },
+                  { emoji: "🏠", label: "Immobilier", hours: "24h/mois" },
+                  { emoji: "⚖️", label: "Libérales", hours: "23h/mois" },
+                ].map((sec) => (
+                  <a href="/automatisations/" class="group flex flex-col items-center gap-1.5 p-3 rounded-xl border border-sky-500/15 bg-sky-900/15 hover:bg-sky-900/30 hover:border-sky-500/30 transition text-center">
+                    <span class="text-2xl">{sec.emoji}</span>
+                    <span class="text-xs font-semibold text-white/80 group-hover:text-white transition-colors">{sec.label}</span>
+                    <span class="text-xs text-sky-400 font-bold">{sec.hours}</span>
+                  </a>
+                ))}
+              </div>
+              <div class="text-center mt-4">
+                <a href="/automatisations/" class="text-sm text-sky-400 hover:text-sky-300 transition-colors inline-flex items-center gap-1">
+                  Voir tous les secteurs et calculer votre gain
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-    )}
+
+        <!-- Contenu TPE -->
+        <div class="tab-content" data-group="accompagnement" id="tab-accompagnement-tpe">
+          <div class="tab-panel tab-panel--tpe">
+            <div class="grid lg:grid-cols-2 gap-10 items-start">
+              <div>
+                <div class="flex items-center gap-2 mb-4">
+                  <svg class="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.95-8.95a1.5 1.5 0 012.1 0L21.75 12M3 12v7.5A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 19.5V12"/></svg>
+                  <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">
+                    Accompagnement TPE
+                  </h3>
+                </div>
+
+                <p class="text-white/80 text-base mb-6 leading-relaxed">
+                  Vous êtes auto-entrepreneur, artisan, ou dirigez une petite entreprise de moins de 10 salariés ?
+                  Notre offre TPE est conçue pour vous : un <strong class="text-white">site vitrine professionnel</strong> optimisé pour votre métier,
+                  couplé à une <strong class="text-white">stratégie d'automatisation adaptée</strong> à vos moyens.
+                </p>
+
+                <p class="text-white/70 text-sm mb-6 leading-relaxed">
+                  Fini les sites génériques qui ne convertissent pas. Nous créons pour vous un site qui reflète votre savoir-faire,
+                  qui apparaît quand vos clients vous cherchent, et qui intègre les bons outils pour vous faire gagner du temps au quotidien.
+                </p>
+
+                <ul class="space-y-3 mb-8">
+                  <li class="flex items-start gap-3 text-white/80">
+                    <svg class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    <span><strong class="text-white">Site professionnel sur-mesure</strong> adapté à votre métier et votre territoire</span>
+                  </li>
+                  <li class="flex items-start gap-3 text-white/80">
+                    <svg class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    <span><strong class="text-white">SEO local</strong> pour apparaître quand on vous cherche</span>
+                  </li>
+                  <li class="flex items-start gap-3 text-white/80">
+                    <svg class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    <span><strong class="text-white">Prise de rendez-vous</strong> et devis en ligne intégrés</span>
+                  </li>
+                  <li class="flex items-start gap-3 text-white/80">
+                    <svg class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    <span><strong class="text-white">Automatisations</strong> : relances, factures, suivi client</span>
+                  </li>
+                </ul>
+
+                <a href="/contact/" class="btn-primary inline-flex items-center gap-2" style="background: linear-gradient(135deg, #059669, #047857);">
+                  Demander un devis pour ma TPE
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+              </div>
+
+              <!-- Démos TPE -->
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-widest text-emerald-400/80 mb-4">Exemples de sites TPE</p>
+                <div class="grid grid-cols-2 gap-3">
+                  {tpeDemos.map((demo) => (
+                    <a
+                      href={demo.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="group flex flex-col items-center gap-2 p-4 rounded-xl border border-emerald-500/20 bg-emerald-900/20 hover:bg-emerald-900/30 hover:border-emerald-500/40 transition text-center"
+                    >
+                      <span class="text-3xl">{demo.emoji}</span>
+                      <span class="text-sm font-semibold text-white group-hover:text-emerald-300 transition-colors">{demo.label}</span>
+                      <span class="text-xs text-white/50">{demo.desc}</span>
+                      <span class="text-[10px] text-emerald-400/70 flex items-center gap-1">
+                        Voir la démo
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+                      </span>
+                    </a>
+                  ))}
+                </div>
+
+                <div class="mt-4 p-4 rounded-lg border border-emerald-500/15 bg-emerald-900/15">
+                  <p class="text-xs text-white/60 leading-relaxed">
+                    💡 Chaque site est adapté au métier et aux besoins du client. Ces exemples illustrent le type de résultats que nous obtenons pour les TPE et auto-entrepreneurs.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- GROUPE D'ONGLETS 2 : Formations / Automatisations / Challenge -->
+    <!-- ============================================================ -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <!-- Titre du groupe -->
+        <div class="text-center mb-6">
+          <p class="text-red-400 text-sm font-bold uppercase tracking-widest mb-2">Services</p>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Nos services</h2>
+        </div>
+
+        <!-- Barre d'onglets -->
+        <div class="tab-buttons" id="tabs-services">
+          <button class="tab-btn active" data-group="services" data-tab="formations" onclick="switchTabGroup('services', 'formations')">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-14.232 0a51.536 51.536 0 00-3.654 5.53M18.26 10.147a51.536 51.536 0 013.654 5.53M12 2.25c-2.25 0-4.888.83-7.14 2.24m14.28 0A13.86 13.86 0 0012 2.25"/></svg>
+            Formations
+          </button>
+          <button class="tab-btn" data-group="services" data-tab="automatisations" onclick="switchTabGroup('services', 'automatisations')">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Automatisations
+          </button>
+          <button class="tab-btn" data-group="services" data-tab="challenge" onclick="switchTabGroup('services', 'challenge')">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.248m9.324 0a8.25 8.25 0 00-6.038-2.014A8.25 8.25 0 0118.362 5.214m-3.324 0l.076.278a2.25 2.25 0 01-1.357 2.714 2.25 2.25 0 01-2.714-1.357l-.076-.278m3.324 0l-.278.076a2.25 2.25 0 01-2.714-1.357 2.25 2.25 0 011.357-2.714l.278-.076m-3.324 0l-.076-.278a2.25 2.25 0 012.714-1.357 2.25 2.25 0 011.357 2.714l.076.278"/></svg>
+            Challenge
+          </button>
+        </div>
+
+        <!-- Contenu Formations -->
+        <div class="tab-content active" data-group="services" id="tab-services-formations">
+          <div class="tab-panel tab-panel--services">
+            <div class="flex items-center gap-2 mb-6">
+              <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-14.232 0a51.536 51.536 0 00-3.654 5.53M18.26 10.147a51.536 51.536 0 013.654 5.53M12 2.25c-2.25 0-4.888.83-7.14 2.24m14.28 0A13.86 13.86 0 0012 2.25"/></svg>
+              <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">
+                Formations
+              </h3>
+            </div>
+
+            <p class="text-white/80 text-base mb-8 leading-relaxed max-w-3xl">
+              Des formations courtes et concrètes, appliquées aux usages métier. Éligibles OPCO.
+              De l'initiation IA à la conformité RGPD, chaque session laisse vos collaborateurs avec des outils immédiatement utilisables.
+            </p>
+
+            <!-- Formations en vedette -->
+            {heroFormations.length > 0 && (
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-widest text-red-400/80 mb-4">Formations les plus demandées</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {heroFormations.map((formation, i) => (
+                    <div data-reveal data-reveal-delay={String(i * 0.08)}>
+                      <FormationCard formation={formation} />
+                    </div>
+                  ))}
+                </div>
+                <div class="text-center mt-6">
+                  <a href="/formations/" class="text-red-400 hover:text-red-300 text-sm font-semibold inline-flex items-center gap-1 transition-colors">
+                    Voir toutes les formations
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <!-- Contenu Automatisations -->
+        <div class="tab-content" data-group="services" id="tab-services-automatisations">
+          <div class="tab-panel tab-panel--services">
+            <div class="flex items-center gap-2 mb-6">
+              <svg class="w-7 h-7 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">
+                Automatisations
+              </h3>
+            </div>
+
+            <p class="text-white/80 text-base mb-8 leading-relaxed max-w-3xl">
+              10 secteurs, 50+ automatisations concrètes. De la relance client à la facturation, en passant par le suivi de chantier et la gestion des devis.
+              Sélectionnez votre métier et calculez votre gain mensuel.
+            </p>
+
+            <!-- Secteurs automatisations -->
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-8">
+              {[
+                { emoji: "🔧", label: "Artisans BTP", hours: "18h/mois" },
+                { emoji: "🩺", label: "Santé", hours: "21h/mois" },
+                { emoji: "🛍️", label: "Commerces", hours: "24h/mois" },
+                { emoji: "🏠", label: "Immobilier", hours: "24h/mois" },
+                { emoji: "⚖️", label: "Libérales", hours: "23h/mois" },
+              ].map((sec) => (
+                <a href="/automatisations/" class="group flex flex-col items-center gap-1.5 p-4 rounded-xl border border-orange-500/15 bg-orange-900/15 hover:bg-orange-900/30 hover:border-orange-500/30 transition text-center">
+                  <span class="text-2xl">{sec.emoji}</span>
+                  <span class="text-sm font-semibold text-white/80 group-hover:text-white transition-colors">{sec.label}</span>
+                  <span class="text-xs text-orange-400 font-bold">{sec.hours} économisés</span>
+                </a>
+              ))}
+            </div>
+
+            <!-- Études de cas -->
+            {heroStudies.length > 0 && (
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-widest text-orange-400/80 mb-4">Réalisations</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                  {heroStudies.slice(0, 2).map((study) => (
+                    <a href="/automatisations/" class="block p-5 rounded-xl border border-orange-500/20 bg-orange-900/20 hover:bg-orange-900/30 transition">
+                      <h4 class="font-semibold text-white text-base mb-2">{study.title}</h4>
+                      <p class="text-sm text-white/60">{study.sector}</p>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div class="text-center mt-6">
+              <a href="/automatisations/" class="btn-primary inline-flex items-center gap-2" style="background: linear-gradient(135deg, #ea580c, #c2410c);">
+                Voir toutes les automatisations
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contenu Challenge -->
+        <div class="tab-content" data-group="services" id="tab-services-challenge">
+          <div class="tab-panel tab-panel--services">
+            <div class="flex items-center gap-2 mb-6">
+              <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.248m9.324 0a8.25 8.25 0 00-6.038-2.014A8.25 8.25 0 0118.362 5.214m-3.324 0l.076.278a2.25 2.25 0 01-1.357 2.714 2.25 2.25 0 01-2.714-1.357l-.076-.278m3.324 0l-.278.076a2.25 2.25 0 01-2.714-1.357 2.25 2.25 0 011.357-2.714l.278-.076m-3.324 0l-.076-.278a2.25 2.25 0 012.714-1.357 2.25 2.25 0 011.357 2.714l.076.278"/></svg>
+              <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">
+                Challenge 5 jours
+              </h3>
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30">Gratuit</span>
+            </div>
+
+            <p class="text-white/80 text-base mb-8 leading-relaxed max-w-3xl">
+              Un email par jour pendant 5 jours, 30 minutes par jour. Chaque jour, une action concrète avec un outil gratuit.
+              À la fin de la semaine, vous avez automatisé votre première tâche. <strong class="text-white">100% gratuit.</strong>
+            </p>
+
+            <div class="grid sm:grid-cols-5 gap-4 mb-8">
+              {[
+                { day: 'J1', title: 'Diagnostic', desc: 'Identifiez vos tâches répétitives' },
+                { day: 'J2', title: 'Outils', desc: 'Découvrez les IA gratuites adaptées' },
+                { day: 'J3', title: 'Première automatisation', desc: 'Créez votre premier workflow' },
+                { day: 'J4', title: 'Optimisation', desc: 'Affinez et connectez vos outils' },
+                { day: 'J5', title: 'Bilan & prochaines étapes', desc: 'Planifiez votre routine automatisée' },
+              ].map((step) => (
+                <div class="p-4 rounded-xl border border-amber-500/20 bg-amber-950/30 text-center">
+                  <span class="inline-block px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-xs font-bold mb-2">{step.day}</span>
+                  <h4 class="text-white font-semibold text-sm mb-1">{step.title}</h4>
+                  <p class="text-white/60 text-xs">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div class="text-center">
+              <a href="/challenge/" class="btn-primary inline-flex items-center gap-2" style="background: linear-gradient(135deg, #d97706, #b45309);">
+                Je m'inscris gratuitement
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- GROUPE D'ONGLETS 3 : Sécurité des documents / Cours gratuits -->
+    <!-- ============================================================ -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <!-- Titre du groupe -->
+        <div class="text-center mb-6">
+          <p class="text-teal-400 text-sm font-bold uppercase tracking-widest mb-2">Ressources gratuites</p>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Outils & contenus gratuits</h2>
+        </div>
+
+        <!-- Barre d'onglets -->
+        <div class="tab-buttons" id="tabs-outils">
+          <button class="tab-btn active" data-group="outils" data-tab="securite" onclick="switchTabGroup('outils', 'securite')">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+            Sécurité des documents
+          </button>
+          <button class="tab-btn" data-group="outils" data-tab="cours" onclick="switchTabGroup('outils', 'cours')">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+            Cours gratuits
+          </button>
+        </div>
+
+        <!-- Contenu Sécurité des documents -->
+        <div class="tab-content active" data-group="outils" id="tab-outils-securite">
+          <div class="tab-panel tab-panel--outils">
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+              <div>
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 rounded-lg bg-teal-500/20 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+                  </div>
+                  <h3 class="font-display text-2xl font-bold text-white">Sécurité des documents</h3>
+                  <span class="ml-auto px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-teal-500/20 text-teal-300 border border-teal-500/30">Gratuit</span>
+                </div>
+
+                <p class="text-white/80 text-base mb-6 leading-relaxed">
+                  Avant de déposer un contrat, une facture ou un document client sur ChatGPT, vérifiez les risques :
+                  où vont vos données ? Quel modèle IA utiliser ?
+                </p>
+
+                <ul class="space-y-3 text-white/80 text-sm mb-6">
+                  <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-teal-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Classification par niveau de risque (faible, moyen, élevé, critique)
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-teal-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Recommandations de modèles IA adaptés (local, EU, US)
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-teal-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Conseils RGPD et conformité AI Act
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-teal-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    15 secteurs, 80+ types de documents analysés
+                  </li>
+                </ul>
+
+                <a href="/securite-ia/" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-white font-semibold text-sm transition-colors">
+                  Accéder à l'outil gratuit
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+                <p class="text-xs text-white/40 mt-2">Aucune inscription requise</p>
+              </div>
+
+              <div class="rounded-xl border border-teal-500/20 bg-teal-950/30 p-6 text-center">
+                <svg class="w-16 h-16 text-teal-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+                <h4 class="text-white font-semibold text-lg mb-2">Vérifiez vos documents en 2 minutes</h4>
+                <p class="text-white/60 text-sm mb-4">Sélectionnez votre secteur, le type de document et découvrez instantanément le niveau de risque et les recommandations.</p>
+                <a href="/securite-ia/" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-teal-500/30 bg-teal-500/10 text-teal-300 hover:bg-teal-500/20 text-sm font-semibold transition-colors">
+                  Essayer maintenant
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contenu Cours gratuits -->
+        <div class="tab-content" data-group="outils" id="tab-outils-cours">
+          <div class="tab-panel tab-panel--outils">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-lg bg-teal-500/20 flex items-center justify-center">
+                <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+              </div>
+              <h3 class="font-display text-2xl font-bold text-white">Cours gratuits</h3>
+              <span class="ml-auto px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-teal-500/20 text-teal-300 border border-teal-500/30">Gratuit</span>
+            </div>
+
+            <p class="text-white/80 text-base mb-8 leading-relaxed">
+              Des micro-cours concrets et accessibles pour vous initier à l'IA générative, l'automatisation et la sécurité des données.
+              Chaque cours inclut un exercice pratique et un corrigé PDF.
+            </p>
+
+            {heroResources.length > 0 && (
+              <div class="grid sm:grid-cols-2 gap-3 mb-8">
+                {heroResources.slice(0, 6).map((resource) => (
+                  <a
+                    href={`/ressources/${resource.slug}/`}
+                    class="flex items-center justify-between gap-3 p-4 rounded-xl border border-teal-500/15 bg-teal-900/15 hover:bg-teal-900/30 transition group"
+                  >
+                    <div class="flex items-center gap-3 min-w-0">
+                      <span class="px-2 py-1 rounded bg-teal-500/20 text-teal-300 text-xs font-semibold shrink-0">{resource.module}</span>
+                      <span class="text-sm text-white/80 group-hover:text-white transition-colors truncate">{resource.title}</span>
+                    </div>
+                    <svg class="w-4 h-4 text-teal-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </a>
+                ))}
+              </div>
+            )}
+
+            <div class="text-center">
+              <a href="/ressources/" class="text-teal-400 hover:text-teal-300 text-sm font-semibold inline-flex items-center gap-1 transition-colors">
+                Voir tous les cours gratuits
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12" data-reveal>
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Questions fréquentes</p>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+            Vous hésitez encore ?
+          </h2>
+        </div>
+
+        <div class="space-y-4">
+          <details class="group relief-panel p-6 cursor-pointer" open>
+            <summary class="flex items-center justify-between text-white font-semibold text-lg list-none">
+              C'est quoi exactement l'accompagnement Alliance Digitale ?
+              <svg class="w-5 h-5 text-alliance-blue transition-transform group-open:rotate-180 shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-4 text-white/70 leading-relaxed">Un programme en 3 étapes pour les PME en Sarthe : audit de vos usages IA, formation collective de vos salariés, puis mise en place d'une première automatisation concrète et mesurable. Chaque étape produit un livrable : grille d'audit, bibliothèque de prompts, workflow opérationnel.</p>
+          </details>
+
+          <details class="group relief-panel p-6 cursor-pointer">
+            <summary class="flex items-center justify-between text-white font-semibold text-lg list-none">
+              Je n'y connais rien en IA, c'est un problème ?
+              <svg class="w-5 h-5 text-alliance-blue transition-transform group-open:rotate-180 shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-4 text-white/70 leading-relaxed">Non, c'est même préférable. Nos formations partent de zéro et sont conçues pour des professionnels non-techniques. Chaque session est appliquée à votre métier : vous repartez avec des outils et méthodes immédiatement utilisables.</p>
+          </details>
+
+          <details class="group relief-panel p-6 cursor-pointer">
+            <summary class="flex items-center justify-between text-white font-semibold text-lg list-none">
+              Ça concerne quelles entreprises ?
+              <svg class="w-5 h-5 text-alliance-blue transition-transform group-open:rotate-180 shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-4 text-white/70 leading-relaxed">Toute PME avec salariés en Sarthe et dans les Pays de la Loire : artisans du BTP, commerces, professions libérales, santé, immobilier, restauration, transport… Si vous avez des tâches répétitives, nous pouvons les automatiser.</p>
+          </details>
+
+          <details class="group relief-panel p-6 cursor-pointer">
+            <summary class="flex items-center justify-between text-white font-semibold text-lg list-none">
+              Qu'est-ce que l'AI Act et pourquoi c'est important pour ma PME ?
+              <svg class="w-5 h-5 text-alliance-blue transition-transform group-open:rotate-180 shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-4 text-white/70 leading-relaxed">L'AI Act est le règlement européen sur l'IA, applicable à partir d'août 2026. Il impose des obligations aux entreprises qui utilisent des systèmes d'IA, même via ChatGPT. Nous vous aidons à identifier vos risques et à vous mettre en conformité avant l'échéance.</p>
+          </details>
+
+          <details class="group relief-panel p-6 cursor-pointer">
+            <summary class="flex items-center justify-between text-white font-semibold text-lg list-none">
+              Combien ça coûte ?
+              <svg class="w-5 h-5 text-alliance-blue transition-transform group-open:rotate-180 shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-4 text-white/70 leading-relaxed">L'audit initial est gratuit (30 min). Les formations sont éligibles aux financements OPCO. L'accompagnement complet est sur devis après l'audit. Le challenge 5 jours et l'outil de sécurité documentaire sont gratuits.</p>
+          </details>
+        </div>
+      </div>
+    </section>
 
     <!-- CTA FINAL -->
     <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
@@ -402,4 +719,20 @@ const heroResources = resources.slice(0, 6);
   </main>
 
   <Footer />
+
+  <script is:inline>
+    function switchTabGroup(group, tabId) {
+      // Désactiver tous les onglets du même groupe
+      document.querySelectorAll('.tab-btn[data-group="' + group + '"]').forEach(function(btn) {
+        btn.classList.remove('active');
+      });
+      document.querySelectorAll('.tab-content[data-group="' + group + '"]').forEach(function(panel) {
+        panel.classList.remove('active');
+      });
+      
+      // Activer l'onglet sélectionné
+      document.querySelector('.tab-btn[data-group="' + group + '"][data-tab="' + tabId + '"]').classList.add('active');
+      document.getElementById('tab-' + group + '-' + tabId).classList.add('active');
+    }
+  </script>
 </Layout>

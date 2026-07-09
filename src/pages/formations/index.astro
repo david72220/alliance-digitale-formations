@@ -9,8 +9,8 @@ const formations = await getFormations();
 ---
 
 <Layout
-  title="Nos formations — Alliance Digitale"
-  description="Catalogue des formations à l'IA et à l'automatisation pour les PME avec salariés."
+  title="Formations IA et automatisation PME Sarthe | Alliance Digitale"
+  description="Formations courtes et appliquées en IA et automatisation pour PME en Sarthe. Littératie IA, RGPD, n8n, ChatGPT — repartez avec des outils concrets."
 >
   <Header />
 
@@ -40,6 +40,27 @@ const formations = await getFormations();
             <p class="text-white/60 mb-4">Aucune formation active pour le moment. Le catalogue est en cours de construction dans Notion.</p>
           </div>
         )}
+      </div>
+    </section>
+
+    <!-- LIENS INTERNES -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="font-display text-2xl font-bold text-white mb-8 text-center">Vous voulez aller plus loin ?</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <a href="/accompagnement/" class="relief-panel p-6 group">
+            <h3 class="font-display text-lg font-semibold text-white mb-2 group-hover:text-alliance-blue transition">Accompagnement sur mesure</h3>
+            <p class="text-white/60 text-sm">Audit IA, formation collective et automatisation ciblée — un programme en 3 étapes pour votre PME.</p>
+          </a>
+          <a href="/automatisations/" class="relief-panel p-6 group">
+            <h3 class="font-display text-lg font-semibold text-white mb-2 group-hover:text-alliance-blue transition">Automatisations par secteur</h3>
+            <p class="text-white/60 text-sm">BTP, santé, immobilier, commerce… Trouvez les tâches que vous pouvez automatiser dans votre métier.</p>
+          </a>
+          <a href="/securite-ia/" class="relief-panel p-6 group">
+            <h3 class="font-display text-lg font-semibold text-white mb-2 group-hover:text-alliance-blue transition">Sécurité documents IA</h3>
+            <p class="text-white/60 text-sm">Outil gratuit pour vérifier les risques avant de déposer un document sur ChatGPT ou une IA.</p>
+          </a>
+        </div>
       </div>
     </section>
   </main>

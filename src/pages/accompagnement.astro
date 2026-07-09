@@ -9,8 +9,8 @@ const studies = await getCaseStudies();
 ---
 
 <Layout
-  title="Accompagnement IA pour PME — Alliance Digitale"
-  description="Accompagnement sur mesure : audit IA, formation des salariés, automatisation des processus. Des résultats mesurables en quelques semaines."
+  title="Accompagnement IA PME Sarthe | Alliance Digitale"
+  description="Audit IA, formation collective et automatisation pour PME en Sarthe. 30% de temps gagné sur les tâches répétitives — résultats mesurables en quelques semaines."
 >
   <Header />
 
@@ -83,17 +83,17 @@ const studies = await getCaseStudies();
         
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div class="text-center p-6 rounded-xl border border-white/10 bg-white/[0.03]" data-reveal>
-            <p class="text-4xl font-bold text-alliance-orange mb-2">-<span data-count="30" data-count-suffix="%">0</span></p>
+            <p class="text-4xl font-bold text-alliance-orange mb-2"><span data-count="30" data-count-suffix=" %">30 %</span></p>
             <p class="text-white/70">de temps sur la rédaction de documents récurrents</p>
           </div>
 
           <div class="text-center p-6 rounded-xl border border-white/10 bg-white/[0.03]" data-reveal data-reveal-delay="0.1">
-            <p class="text-4xl font-bold text-alliance-orange mb-2"><span data-count="2" data-count-suffix="h">0</span></p>
+            <p class="text-4xl font-bold text-alliance-orange mb-2"><span data-count="2" data-count-suffix="h">2h</span></p>
             <p class="text-white/70">gagnées par semaine sur la gestion administrative</p>
           </div>
 
           <div class="text-center p-6 rounded-xl border border-white/10 bg-white/[0.03]" data-reveal data-reveal-delay="0.2">
-            <p class="text-4xl font-bold text-alliance-orange mb-2"><span data-count="100" data-count-suffix="%">0</span></p>
+            <p class="text-4xl font-bold text-alliance-orange mb-2"><span data-count="100" data-count-suffix=" %">100 %</span></p>
             <p class="text-white/70">des salariés formés repartent avec des outils utilisables</p>
           </div>
         </div>
@@ -120,6 +120,27 @@ const studies = await getCaseStudies();
         </div>
       </section>
     )}
+
+    <!-- LIENS INTERNES -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="font-display text-2xl font-bold text-white mb-8 text-center">Pour aller plus loin</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <a href="/automatisations/" class="relief-panel p-6 group">
+            <h3 class="font-display text-lg font-semibold text-white mb-2 group-hover:text-alliance-blue transition">Automatisations par secteur</h3>
+            <p class="text-white/60 text-sm">Découvrez les tâches que vous pouvez automatiser dans votre métier : BTP, santé, immobilier, commerce…</p>
+          </a>
+          <a href="/formations/" class="relief-panel p-6 group">
+            <h3 class="font-display text-lg font-semibold text-white mb-2 group-hover:text-alliance-blue transition">Formations IA</h3>
+            <p class="text-white/60 text-sm">Formations courtes et appliquées : littératie IA, RGPD, n8n, ChatGPT — finançables par OPCO.</p>
+          </a>
+          <a href="/securite-ia/" class="relief-panel p-6 group">
+            <h3 class="font-display text-lg font-semibold text-white mb-2 group-hover:text-alliance-blue transition">Sécurité documents IA</h3>
+            <p class="text-white/60 text-sm">Vérifiez les risques avant de déposer un document sur une IA — guide gratuit par secteur.</p>
+          </a>
+        </div>
+      </div>
+    </section>
 
     <!-- CTA -->
     <section class="py-20 px-4 sm:px-6 lg:px-8">

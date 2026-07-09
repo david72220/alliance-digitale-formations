@@ -14,6 +14,12 @@ export default {
           'orange-bright': '#9E2114',
           surface: 'rgba(255,255,255,0.05)',
         },
+        tab: {
+          pme: '#1a2a3d',       // bleu foncé teinté — Accompagnement PME
+          tpe: '#1f2a1e',       // vert foncé teinté — Accompagnement TPE
+          services: '#2a1f1a', // orange foncé teinté — Services
+          outils: '#1a2a2a',    // cyan-teinté — Outils gratuits
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

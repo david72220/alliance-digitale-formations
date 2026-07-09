@@ -37,6 +37,69 @@ const organizationLd = {
   "address": { "@type": "PostalAddress", "addressCountry": "FR", "addressRegion": "Pays de la Loire" }
 };
 
+const localBusinessLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${siteUrl}/#business`,
+  "name": "Alliance Digitale",
+  "description": "Accompagnement IA, automatisation et formations pour PME avec salariés en Sarthe. Audit IA, formation littératie IA, mise en place d'automatisations concrètes.",
+  "url": siteUrl,
+  "logo": `${siteUrl}/LOGO%20alliance-Digitale%20blanc.png`,
+  "image": `${siteUrl}/og-image.png`,
+  "telephone": "+33-2-43-00-00-00",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Le Mans",
+    "addressRegion": "Sarthe",
+    "addressCountry": "FR",
+    "postalCode": "72000"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 48.0061,
+    "longitude": 0.1996
+  },
+  "areaServed": [
+    { "@type": "AdministrativeArea", "name": "Sarthe" },
+    { "@type": "AdministrativeArea", "name": "Pays de la Loire" }
+  ],
+  "priceRange": "€€",
+  "openingHours": "Mo-Fr 09:00-18:00",
+  "sameAs": [
+    "https://www.linkedin.com/company/alliance-digitale-sarthe"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Services Alliance Digitale",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Audit IA express",
+          "description": "Identification de vos cas d'usage IA prioritaires, évaluation de la conformité AI Act et estimation du gain de productivité."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Formation collective IA",
+          "description": "Session de littératie IA pour vos salariés : usages responsables, prompts efficaces, sécurité des données."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Automatisation ciblée",
+          "description": "Mise en place d'un premier workflow automatisé : documents, emails, reporting ou tout processus répétitif."
+        }
+      }
+    ]
+  }
+};
+
 const websiteLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -45,7 +108,7 @@ const websiteLd = {
 };
 
 const extraLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
-const allLd = [organizationLd, websiteLd, ...extraLd];
+const allLd = [organizationLd, localBusinessLd, websiteLd, ...extraLd];
 
 // Analytics + SEO verification (env-driven so no rebuild on token change).
 const gscToken = import.meta.env.GSC_VERIFICATION;
@@ -66,6 +129,7 @@ const plausibleDomain = import.meta.env.PLAUSIBLE_DOMAIN;
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={new URL(image, Astro.site).toString()} />
+  <meta property="og:url" content={canonical.toString()} />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="fr_FR" />
   <meta name="twitter:card" content="summary_large_image" />
