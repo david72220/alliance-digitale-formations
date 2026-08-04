@@ -22,6 +22,7 @@ const navItems = [
   },
   { href: '/challenge/', label: 'Challenge' },
   { href: '/contact/', label: 'Contact' },
+  { href: 'https://fichiers.alliance-digitale.fr/', label: 'Accès clients', external: true },
 ];
 ---
 
@@ -62,7 +63,7 @@ const navItems = [
               </div>
             </div>
           ) : (
-            <a href={item.href} class="h-full px-3 rounded-lg text-sm font-medium text-white/75 hover:text-white hover:bg-white/10 transition inline-flex items-center">
+            <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener' : undefined} class="h-full px-3 rounded-lg text-sm font-medium text-white/75 hover:text-white hover:bg-white/10 transition inline-flex items-center">
               {item.label}
             </a>
           )
@@ -117,7 +118,7 @@ const navItems = [
             </div>
           </div>
         ) : (
-          <a href={item.href} class="block px-4 py-3 rounded-lg text-base font-medium text-white/85 hover:text-white hover:bg-white/10 transition">
+          <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener' : undefined} class="block px-4 py-3 rounded-lg text-base font-medium text-white/85 hover:text-white hover:bg-white/10 transition">
             {item.label}
           </a>
         )
