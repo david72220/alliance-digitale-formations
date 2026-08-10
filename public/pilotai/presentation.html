@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PilotAI — Présentation commerciale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#070d18; --bg-1:#0B1120; --bg-2:#0d1626; --bg-3:#111d33;
+    --aurora-violet:#1a6fa3; --aurora-violet-2:#1e9ad7; --aurora-teal:#1a6fa3;
+    --aurora-cyan:#3b97d3; --aurora-sky:#1e9ad7;
+    --ink:#F4F4F5; --ink-2:#C4C4CC; --ink-3:#8E8E99; --ink-4:#5C5C66; --ink-5:#3A3A44;
+    --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.12); --line-3:rgba(255,255,255,.18);
+    --radius-s:10px; --radius:16px; --radius-l:24px; --radius-xl:32px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    background:var(--bg-0); color:var(--ink);
+    letter-spacing:-0.01em;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    print-color-adjust:exact;
+    -webkit-print-color-adjust:exact;
+  }
+  .grad{
+    background:linear-gradient(120deg, #1e9ad7 0%, #3b97d3 70%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  /* ===== Deck shell ===== */
+  #deck{
+    height:100vh; width:100vw;
+    overflow-y:scroll; scroll-snap-type:y mandatory;
+    scrollbar-width:none;
+  }
+  #deck::-webkit-scrollbar{display:none;}
+  .slide{
+    position:relative;
+    height:100vh; width:100vw;
+    scroll-snap-align:start;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    padding:clamp(28px,5vh,60px) 24px;
+    overflow:hidden;
+  }
+  .slide-inner{
+    max-width:1200px; width:100%; max-height:100%;
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    gap:clamp(14px,2.6vh,28px);
+    position:relative; z-index:2;
+  }
+  .slide-inner.left{ align-items:flex-start; text-align:left; }
+
+  /* background grid, discreet */
+  .bg-grid{
+    position:absolute; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size:80px 80px;
+    -webkit-mask-image:radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 80%);
+    mask-image:radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 80%);
+  }
+  .bg-aurora{
+    position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  }
+  .bg-aurora span{
+    position:absolute; border-radius:50%; filter:blur(60px);
+  }
+  .bg-aurora .b1{ width:520px; height:520px; left:-160px; top:-140px; background:rgba(26,111,163,.40); transform:rotate(-15deg);}
+  .bg-aurora .b2{ width:460px; height:460px; right:-140px; top:20%; background:rgba(26,111,163,.28);}
+  .bg-aurora .b3{ width:500px; height:420px; left:30%; bottom:-200px; background:rgba(30,154,215,.20);}
+
+  /* ===== Typography ===== */
+  h1{ font-family:'Space Grotesk', system-ui, sans-serif; font-size:clamp(40px,6.4vw,84px); font-weight:600; letter-spacing:-0.045em; line-height:1.02; }
+  h2{ font-family:'Space Grotesk', system-ui, sans-serif; font-size:clamp(32px,4.2vw,54px); font-weight:600; letter-spacing:-0.035em; line-height:1.08; }
+  h3{ font-family:'Space Grotesk', system-ui, sans-serif; font-size:clamp(20px,2.1vw,28px); font-weight:500; letter-spacing:-0.025em; line-height:1.15; }
+  .kicker{
+    font-size:11px; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
+  }
+  p.lead{ font-size:17px; color:var(--ink-2); line-height:1.55; max-width:720px; }
+  p.body{ font-size:16px; color:var(--ink-2); line-height:1.6; }
+  .baseline{ font-size:clamp(20px,2.4vw,28px); color:var(--ink-2); font-weight:400; max-width:760px; line-height:1.4; }
+
+  /* ===== chip ===== */
+  .chip{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:7px 14px; border-radius:999px;
+    background:rgba(255,255,255,.03); border:1px solid var(--line-2);
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    font-size:13px; font-weight:500; color:var(--ink-2);
+  }
+  .chip .dot{
+    width:6px; height:6px; border-radius:50%; background:#3b97d3;
+    box-shadow:0 0 8px 2px rgba(59,151,211,.7);
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.4;} }
+
+  /* ===== buttons ===== */
+  .btn{
+    position:relative;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 26px; border-radius:999px;
+    font-size:14.5px; font-weight:500; color:var(--ink);
+    background:linear-gradient(180deg,#0B1120,#070d18);
+    border:1px solid var(--line-3);
+    text-decoration:none;
+    isolation:isolate;
+  }
+  .btn::before{
+    content:""; position:absolute; inset:-1px; border-radius:999px; z-index:-1;
+    padding:1px;
+    background:linear-gradient(120deg,#1a6fa3,#3b97d3,#1e9ad7);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude;
+  }
+  .btn.ghost{
+    background:rgba(255,255,255,.02); border:1px solid var(--line-2);
+  }
+
+  /* ===== glass cards ===== */
+  .card{
+    position:relative;
+    background:rgba(255,255,255,.02);
+    border:1px solid var(--line);
+    border-radius:var(--radius-l);
+    padding:28px;
+    text-align:left;
+    overflow:hidden;
+  }
+  .card::before{
+    content:""; position:absolute; top:-40%; left:10%; width:80%; height:80%;
+    background:radial-gradient(ellipse at center, rgba(59,151,211,.16), transparent 70%);
+    pointer-events:none;
+  }
+  .card.teal::before{ background:radial-gradient(ellipse at center, rgba(26,111,163,.16), transparent 70%); }
+  .card.cyan::before{ background:radial-gradient(ellipse at center, rgba(59,151,211,.16), transparent 70%); }
+
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; width:100%; }
+  .grid2{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px; width:100%; }
+  .grid4{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; width:100%; }
+
+  /* ===== hexagon steps ===== */
+  .hexrow{
+    display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:auto;
+    gap:clamp(14px,2.2vh,28px) clamp(10px,1.6vw,20px); width:100%; max-width:920px;
+  }
+  .hexstep{ position:relative; display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .hexstep .hnum{
+    position:absolute; top:-6px; left:calc(50% + clamp(24px,3.4vw,34px));
+    width:20px; height:20px; border-radius:50%;
+    background:var(--bg-0); border:1px solid var(--line-3);
+    color:var(--aurora-cyan); font-family:'Space Grotesk',monospace; font-size:10px; font-weight:500;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hex{
+    width:clamp(56px,7vw,80px); height:clamp(56px,7vw,80px);
+    clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background:linear-gradient(120deg,#1e9ad7,#3b97d3);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hex-inner{
+    width:calc(100% - 10px); height:calc(100% - 10px);
+    clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background:#0d1626;
+    display:flex; align-items:center; justify-content:center;
+    font-size:clamp(18px,2.4vw,24px);
+  }
+  .hexstep .htitle{ font-size:clamp(12px,1.3vw,13px); font-weight:500; background:linear-gradient(120deg,#1e9ad7,#3b97d3); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hexstep .hdesc{ font-size:clamp(11px,1.15vw,12px); color:var(--ink-3); line-height:1.35; max-width:150px; }
+
+  /* ===== mockup: floating recorder over call ===== */
+  .mockup-call{
+    position:relative; width:100%; height:clamp(160px,24vh,210px);
+    border-radius:var(--radius-l); overflow:hidden;
+    background:linear-gradient(180deg,#0d1626,#0B1120); border:1px solid var(--line);
+  }
+  .call-tiles{
+    position:absolute; inset:0; display:grid; grid-template-columns:repeat(3,1fr);
+    gap:8px; padding:16px; filter:blur(3px); opacity:.55;
+  }
+  .call-tiles span{ border-radius:10px; background:linear-gradient(135deg,rgba(59,151,211,.28),rgba(59,151,211,.16)); }
+  .rec-float{
+    position:absolute; bottom:14px; right:14px; width:184px;
+    background:linear-gradient(180deg,#111d33,#0B1120); border:1px solid var(--line-3);
+    border-radius:14px; padding:12px 14px; box-shadow:0 20px 50px -15px rgba(0,0,0,.65);
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .rec-row{ display:flex; align-items:center; gap:8px; }
+  .rec-dot{
+    width:9px; height:9px; border-radius:50%; background:#EF4444;
+    box-shadow:0 0 8px 2px rgba(239,68,68,.7); animation:pulse 1.4s ease-in-out infinite;
+  }
+  .rec-time{ font-family:'Space Grotesk',monospace; font-size:13px; color:var(--ink); }
+  .rec-actions{ display:flex; flex-direction:column; gap:6px; }
+  .rec-btn{
+    font-size:11px; color:var(--ink-2); background:rgba(255,255,255,.04);
+    border:1px solid var(--line-2); border-radius:999px; padding:5px 10px; text-align:center;
+  }
+  .rec-btn.ghost{ color:var(--aurora-cyan); border-color:rgba(59,151,211,.3); }
+
+  /* ===== mockup: synthèse ===== */
+  .mockup-synthese{
+    width:100%; background:linear-gradient(180deg,#0d1626,#0B1120); border:1px solid var(--line);
+    border-radius:var(--radius-l); padding:18px 20px; display:flex; flex-direction:column; gap:10px;
+  }
+  .syn-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .syn-title{ font-size:13.5px; font-weight:500; color:var(--ink); }
+  .syn-badge{
+    flex-shrink:0; font-size:10px; font-weight:600; color:#070d18;
+    background:linear-gradient(120deg,#1e9ad7,#3b97d3); padding:3px 9px; border-radius:999px;
+  }
+  .syn-bar{ height:8px; border-radius:4px; background:rgba(255,255,255,.07); }
+  .syn-bar.w1{ width:92%; } .syn-bar.w2{ width:78%; } .syn-bar.w3{ width:58%; }
+  .syn-guests{ display:flex; gap:6px; margin-top:4px; flex-wrap:wrap; }
+  .syn-pill{
+    font-size:10px; color:var(--ink-3); background:rgba(255,255,255,.03);
+    border:1px solid var(--line-2); border-radius:999px; padding:3px 9px;
+  }
+
+  /* ===== mockup: à valider ===== */
+  .mockup-valid{
+    width:100%; background:linear-gradient(180deg,#0d1626,#0B1120); border:1px solid var(--line);
+    border-radius:var(--radius-l); padding:16px 18px; display:flex; flex-direction:column; gap:10px;
+  }
+  .val-row{
+    display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:10px;
+    background:rgba(255,255,255,.02); border:1px solid var(--line);
+  }
+  .val-icon{ font-size:14px; }
+  .val-text{ flex:1; font-size:12px; color:var(--ink-2); text-align:left; }
+  .val-pilot{
+    flex-shrink:0; width:20px; height:20px; border-radius:50%;
+    background:linear-gradient(120deg,#1e9ad7,#3b97d3); display:flex; align-items:center; justify-content:center;
+    font-size:9px; color:#070d18; font-weight:700;
+  }
+  .val-actions{ flex-shrink:0; display:flex; gap:6px; }
+  .val-btn{ font-size:10px; padding:4px 9px; border-radius:999px; }
+  .val-btn.ok{ background:linear-gradient(120deg,#1e9ad7,#3b97d3); color:#070d18; font-weight:600; }
+  .val-btn.no{ background:rgba(255,255,255,.03); border:1px solid var(--line-2); color:var(--ink-3); }
+
+  /* ===== mockup: mes tâches groupées ===== */
+  .mockup-tasks{ width:100%; display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .task-group{
+    border-radius:var(--radius-s); padding:10px; background:rgba(255,255,255,.02);
+    border:1px solid var(--line); display:flex; flex-direction:column; gap:6px;
+  }
+  .task-group .tg-label{ font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; }
+  .task-group.red .tg-label{ color:#EF4444; }
+  .task-group.blue .tg-label{ color:#1e9ad7; }
+  .task-group.teal .tg-label{ color:#1a6fa3; }
+  .tg-bar{ height:13px; border-radius:6px; }
+  .task-group.red .tg-bar{ background:rgba(239,68,68,.18); border:1px solid rgba(239,68,68,.3); }
+  .task-group.blue .tg-bar{ background:rgba(59,151,211,.18); border:1px solid rgba(59,151,211,.3); }
+  .task-group.teal .tg-bar{ background:rgba(26,111,163,.18); border:1px solid rgba(26,111,163,.3); }
+
+  /* ===== stats ===== */
+  .stat-num{
+    font-family:'Space Grotesk', system-ui, sans-serif;
+    font-size:clamp(40px,5.2vw,64px); font-weight:500;
+    background:linear-gradient(180deg,#fff,#C4C4CC);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .stat-num .unit{
+    background:linear-gradient(120deg,#1e9ad7,#3b97d3); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .stat-label{ font-size:14px; color:var(--ink-3); }
+
+  /* ===== list with check ===== */
+  ul.checklist{ list-style:none; display:flex; flex-direction:column; gap:12px; width:100%; }
+  ul.checklist li{
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:15px; color:var(--ink-2); line-height:1.5;
+  }
+  ul.checklist li::before{
+    content:"✓"; flex-shrink:0; width:20px; height:20px; border-radius:50%;
+    background:linear-gradient(120deg,#1e9ad7,#3b97d3);
+    color:#070d18; font-size:12px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; margin-top:2px;
+  }
+
+  /* ===== problem constat cards ===== */
+  .constat{
+    display:flex; flex-direction:column; gap:14px; align-items:flex-start;
+  }
+  .constat .icon{ font-size:32px; }
+
+  /* ===== pricing cards ===== */
+  .price-card{
+    display:flex; flex-direction:column; gap:16px; height:100%;
+  }
+  .price-card.featured{
+    background:radial-gradient(ellipse at 30% 0%, rgba(59,151,211,.22), transparent 60%),
+               radial-gradient(ellipse at 80% 100%, rgba(59,151,211,.15), transparent 60%),
+               rgba(255,255,255,.03);
+    border:1px solid rgba(59,151,211,.35);
+    box-shadow:0 30px 80px -30px rgba(26,111,163,.5);
+  }
+  .price-card .plan-name{ font-size:18px; font-weight:600; letter-spacing:-0.02em; }
+  .price-card .plan-tag{ font-size:12px; color:var(--ink-3); }
+  .price-badge{
+    align-self:flex-start;
+    font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    padding:4px 10px; border-radius:999px;
+    background:#9E2114; color:#F4F4F5;
+  }
+  .grid4 .price-card:last-child .plan-name{ color:#c9463a; }
+  .grid4 .price-card:last-child{ border-color:rgba(158,33,20,.35); }
+
+  /* ===== CTA card ===== */
+  .cta-card{
+    position:relative;
+    width:100%;
+    background:linear-gradient(180deg,#0B1120,#070d18);
+    border-radius:var(--radius-xl);
+    padding:64px 40px;
+    text-align:center;
+    box-shadow:0 40px 100px -30px rgba(26,111,163,.4);
+    overflow:hidden;
+    display:flex; flex-direction:column; align-items:center; gap:22px;
+  }
+  .cta-card::before{
+    content:""; position:absolute; left:-10%; bottom:-30%; width:60%; height:70%;
+    background:radial-gradient(circle, rgba(26,111,163,.35), transparent 70%); filter:blur(30px);
+  }
+  .cta-card::after{
+    content:""; position:absolute; right:-10%; top:-30%; width:60%; height:70%;
+    background:radial-gradient(circle, rgba(59,151,211,.28), transparent 70%); filter:blur(30px);
+  }
+  .cta-card > *{ position:relative; z-index:1; }
+
+  /* ===== logo ===== */
+  .logo-svg{ width:min(70vw,420px); height:auto; }
+  .logo-svg.sm{ width:180px; }
+
+  /* ===== slide counter / nav ===== */
+  #counter{
+    position:fixed; bottom:20px; right:28px; z-index:50;
+    font-family:'Space Grotesk', monospace; font-size:12px; color:var(--ink-4);
+    letter-spacing:.05em;
+  }
+  #counter b{ color:var(--ink-2); }
+  #navhint{
+    position:fixed; bottom:20px; left:28px; z-index:50;
+    font-size:11px; color:var(--ink-4); letter-spacing:.04em;
+  }
+  .arrows{
+    position:fixed; right:28px; top:50%; transform:translateY(-50%); z-index:50;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .arrow-btn{
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(255,255,255,.03); border:1px solid var(--line-2);
+    color:var(--ink-2); display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:14px; backdrop-filter:blur(8px);
+    transition:background .15s;
+  }
+  .arrow-btn:hover{ background:rgba(255,255,255,.08); }
+
+  .section-num{
+    font-family:'Space Grotesk', monospace; font-size:12px; color:var(--aurora-cyan); letter-spacing:.1em;
+  }
+
+  /* ===== small helpers ===== */
+  .divider{
+    width:100%; height:1px; margin:8px 0;
+    background:linear-gradient(90deg, transparent, var(--line-3), transparent);
+    position:relative;
+  }
+  .mono{ font-family:'Space Grotesk', monospace; }
+
+  @media (max-width:860px){
+    .grid3, .grid2, .grid4{ grid-template-columns:1fr; }
+    .hexrow{ grid-template-columns:repeat(2,1fr); }
+  }
+
+  /* ===== print ===== */
+  @media print{
+    html, body{ height:auto; }
+    #deck{ height:auto; overflow:visible; scroll-snap-type:none; }
+    .slide{
+      height:100vh; width:100vw;
+      page-break-after:always; break-after:page;
+      scroll-snap-align:none;
+    }
+    #counter, #navhint, .arrows{ display:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div id="navhint">↑ ↓ ou clic — navigation</div>
+<div id="counter"><b id="cur">01</b> / 11</div>
+<div class="arrows">
+  <div class="arrow-btn" id="btnUp">↑</div>
+  <div class="arrow-btn" id="btnDown">↓</div>
+</div>
+
+<div id="deck">
+
+  <!-- SLIDE 1 — Titre -->
+  <section class="slide" id="s1">
+    <div class="bg-aurora"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+    <div class="bg-grid"></div>
+    <div class="slide-inner">
+      <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-label="PilotAI">
+        <defs>
+          <linearGradient id="aurora1" x1="0%" y1="0%" x2="100%" y2="70%">
+            <stop offset="0%" stop-color="#1e9ad7"/>
+            <stop offset="100%" stop-color="#3b97d3"/>
+          </linearGradient>
+        </defs>
+        <g transform="translate(80,80)">
+          <polygon points="0,-64 55.4,-32 55.4,32 0,64 -55.4,32 -55.4,-32"
+                   fill="none" stroke="url(#aurora1)" stroke-width="10" stroke-linejoin="round"/>
+          <path d="M -14 34 L -14 -30 Q -14 -38 -6 -38 L 14 -38 Q 34 -38 34 -18 Q 34 2 14 2 L 0 2"
+                fill="none" stroke="url(#aurora1)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="-14" cy="34" r="7" fill="#3b97d3"/>
+        </g>
+        <text x="168" y="102" font-family="Space Grotesk, system-ui, -apple-system, sans-serif"
+              font-size="64" font-weight="600" letter-spacing="-2" fill="#F4F4F5">Pilot<tspan fill="url(#aurora1)">AI</tspan></text>
+      </svg>
+      <h1 class="baseline">Chaque réunion devient des actions. <span class="grad">Automatiquement.</span></h1>
+      <div class="chip"><span class="dot"></span> par Alliance Digitale — L'IA qui fait tourner votre PME</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 — Le problème -->
+  <section class="slide" id="s2">
+    <div class="bg-grid"></div>
+    <div class="slide-inner">
+      <div class="kicker">Le constat</div>
+      <h2>Vos réunions produisent des décisions. <span class="grad">Elles ne produisent pas d'actions.</span></h2>
+      <div class="grid3" style="margin-top:20px;">
+        <div class="card"><div class="constat">
+          <div class="icon">🔴</div>
+          <h3>On oublie d'enregistrer</h3>
+          <p class="body">Personne n'y pense au bon moment. La réunion démarre, l'enregistrement non.</p>
+        </div></div>
+        <div class="card teal"><div class="constat">
+          <div class="icon">🟠</div>
+          <h3>Les décisions se perdent</h3>
+          <p class="body">Prises à l'oral, jamais reformulées en tâches, jamais reprises par personne.</p>
+        </div></div>
+        <div class="card cyan"><div class="constat">
+          <div class="icon">🌐</div>
+          <h3>Vos réunions chez un tiers américain</h3>
+          <p class="body">Les outils IA du marché envoient l'audio de vos clients à l'étranger.</p>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 — La solution en 1 image -->
+  <section class="slide" id="s3">
+    <div class="bg-grid"></div>
+    <div class="slide-inner">
+      <div class="kicker">La solution</div>
+      <h2>Du <span class="grad">clic visio</span> à la <span class="grad">tâche pilotée</span></h2>
+      <div class="hexrow" style="margin-top:clamp(16px,3vh,28px);">
+        <div class="hexstep">
+          <div class="hnum">1</div>
+          <div class="hex"><div class="hex-inner">🔗</div></div>
+          <div class="htitle">Rejoindre la visio</div>
+          <div class="hdesc">Un clic sur le lien de la réunion</div>
+        </div>
+        <div class="hexstep">
+          <div class="hnum">2</div>
+          <div class="hex"><div class="hex-inner">⏺</div></div>
+          <div class="htitle">Enregistrement auto</div>
+          <div class="hdesc">Fenêtre flottante, aucun oubli</div>
+        </div>
+        <div class="hexstep">
+          <div class="hnum">3</div>
+          <div class="hex"><div class="hex-inner">🇫🇷</div></div>
+          <div class="htitle">Transcription souveraine</div>
+          <div class="hdesc">Notre infrastructure, France</div>
+        </div>
+        <div class="hexstep">
+          <div class="hnum">4</div>
+          <div class="hex"><div class="hex-inner">✍️</div></div>
+          <div class="htitle">CR relu et validé</div>
+          <div class="hdesc">Par un humain, toujours</div>
+        </div>
+        <div class="hexstep">
+          <div class="hnum">5</div>
+          <div class="hex"><div class="hex-inner">✅</div></div>
+          <div class="htitle">Tâches proposées</div>
+          <div class="hdesc">Avec pilote, à valider</div>
+        </div>
+        <div class="hexstep">
+          <div class="hnum">6</div>
+          <div class="hex"><div class="hex-inner">📊</div></div>
+          <div class="htitle">Suivi projet</div>
+          <div class="hdesc">Rien ne se perd</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4 — L'enregistrement sans oubli -->
+  <section class="slide" id="s4">
+    <div class="bg-grid"></div>
+    <div class="slide-inner left">
+      <div class="kicker">01 — Enregistrement</div>
+      <h2>L'enregistrement <span class="grad">sans oubli</span></h2>
+      <div class="grid2" style="margin-top:8px; width:100%; align-items:center;">
+        <div class="mockup-call">
+          <div class="call-tiles"><span></span><span></span><span></span></div>
+          <div class="rec-float">
+            <div class="rec-row"><span class="rec-dot"></span><span class="rec-time">12:34</span></div>
+            <div class="rec-actions">
+              <span class="rec-btn">■ Fin de la réunion</span>
+              <span class="rec-btn ghost">＋ capter la visio</span>
+            </div>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li>Démarre automatiquement au clic sur le lien de la visio, reste au premier plan même en partage d'écran.</li>
+          <li>« Prolonger 30 min » si ça déborde.</li>
+          <li>Coupure réseau : 30 secondes perdues au pire, jamais plus.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5 — Le compte rendu -->
+  <section class="slide" id="s5">
+    <div class="bg-grid"></div>
+    <div class="slide-inner left">
+      <div class="kicker">02 — Compte rendu</div>
+      <h2>Un <span class="grad">CR fiable</span>, jamais un audio qui traîne</h2>
+      <div class="grid2" style="margin-top:8px; width:100%; align-items:center;">
+        <div class="mockup-synthese">
+          <div class="syn-head"><span class="syn-title">Point client — Réunion du 12/08</span><span class="syn-badge">✓ Validé</span></div>
+          <div class="syn-bar w1"></div><div class="syn-bar w2"></div><div class="syn-bar w3"></div>
+          <div class="syn-guests">
+            <span class="syn-pill">✉ marie@client.fr</span>
+            <span class="syn-pill">✉ paul@pilotai.fr</span>
+            <span class="syn-pill">✉ awa@client.fr</span>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li>Transcription sur notre infrastructure, en France ; synthèse relue et corrigeable avant validation.</li>
+          <li>Audio détruit après validation : le CR fait foi, partagé en un clic à tous.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6 — L'humain garde la main -->
+  <section class="slide" id="s6">
+    <div class="bg-grid"></div>
+    <div class="slide-inner left">
+      <div class="kicker">03 — Validation</div>
+      <h2>L'humain <span class="grad">garde la main</span></h2>
+      <div class="grid2" style="margin-top:8px; width:100%; align-items:center;">
+        <div class="mockup-valid">
+          <div class="val-row">
+            <span class="val-icon">📋</span>
+            <span class="val-text">Envoyer la proposition tarifaire à Awa</span>
+            <span class="val-pilot">AW</span>
+            <span class="val-actions"><span class="val-btn ok">Valider</span><span class="val-btn no">Rejeter</span></span>
+          </div>
+          <div class="val-row">
+            <span class="val-icon">📅</span>
+            <span class="val-text">Planifier le point de suivi mensuel</span>
+            <span class="val-pilot">DO</span>
+            <span class="val-actions"><span class="val-btn ok">Valider</span><span class="val-btn no">Rejeter</span></span>
+          </div>
+        </div>
+        <ul class="checklist">
+          <li>Rien d'automatique : chaque action extraite se valide, se corrige ou se rejette.</li>
+          <li>Trois destinations — tâche, réunion ou idée — avec un pilote en un clic.</li>
+          <li>Rangée précisément : projet et niveau d'arbre choisis, réservé à l'organisateur.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7 — Vos clients sans friction -->
+  <section class="slide" id="s7">
+    <div class="bg-grid"></div>
+    <div class="slide-inner left">
+      <div class="kicker">04 — Externes</div>
+      <h2>Vos clients, <span class="grad">sans friction</span></h2>
+      <div class="grid2" style="margin-top:12px; width:100%;">
+        <div class="card">
+          <ul class="checklist">
+            <li>Invités par simple email — aucun compte à créer.</li>
+            <li>Le créneau s'ajoute directement à leur agenda (fichier ICS).</li>
+          </ul>
+        </div>
+        <div class="card teal">
+          <ul class="checklist">
+            <li>Lien de réponse (RSVP) sans compte.</li>
+            <li>CR reçu par mail, lien visio généré automatiquement.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 8 — Le socle gestion de projet -->
+  <section class="slide" id="s8">
+    <div class="bg-grid"></div>
+    <div class="slide-inner">
+      <div class="kicker">Le socle</div>
+      <h2>La <span class="grad">gestion de projet</span> derrière</h2>
+      <div class="card" style="margin-top:8px; width:100%;">
+        <h3 style="font-size:15px; margin-bottom:12px;">Mes tâches, groupées par échéance</h3>
+        <div class="mockup-tasks">
+          <div class="task-group red">
+            <span class="tg-label">En retard</span>
+            <div class="tg-bar"></div><div class="tg-bar" style="width:70%"></div>
+          </div>
+          <div class="task-group blue">
+            <span class="tg-label">Aujourd'hui</span>
+            <div class="tg-bar"></div><div class="tg-bar" style="width:85%"></div><div class="tg-bar" style="width:55%"></div>
+          </div>
+          <div class="task-group teal">
+            <span class="tg-label">Cette semaine</span>
+            <div class="tg-bar"></div><div class="tg-bar" style="width:60%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="grid4" style="margin-top:0;">
+        <div class="card"><h3 style="font-size:15px;">Projets illimités</h3><p class="body" style="font-size:13.5px;">Sous-tâches sans limite de profondeur.</p></div>
+        <div class="card teal"><h3 style="font-size:15px;">Assistant vocal</h3><p class="body" style="font-size:13.5px;">Créer, terminer, réassigner à la voix.</p></div>
+        <div class="card cyan"><h3 style="font-size:15px;">Calendrier & email</h3><p class="body" style="font-size:13.5px;">Sync Google/Outlook, notifications réglables.</p></div>
+        <div class="card"><h3 style="font-size:15px;">Badge « à valider »</h3><p class="body" style="font-size:13.5px;">Rien ne se crée sans passer par vous.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 9 — Souveraineté & sécurité -->
+  <section class="slide" id="s9">
+    <div class="bg-grid"></div>
+    <div class="slide-inner left">
+      <div class="kicker">Souveraineté & sécurité</div>
+      <h2>Vos données, <span class="grad">chez vous</span></h2>
+      <div class="grid3" style="margin-top:12px;">
+        <div class="card">
+          <ul class="checklist">
+            <li>IA hébergée en France, sur l'infrastructure Alliance Digitale.</li>
+            <li>Audio jamais transmis à un tiers, détruit après validation.</li>
+          </ul>
+        </div>
+        <div class="card teal">
+          <ul class="checklist">
+            <li>Cloisonnement par entreprise jusqu'à la base de données.</li>
+            <li>Rôles et permissions par projet.</li>
+          </ul>
+        </div>
+        <div class="card cyan">
+          <ul class="checklist">
+            <li>Export RGPD et droit à l'effacement.</li>
+            <li>Authentification à deux facteurs pour les administrateurs.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 10 — Offres -->
+  <section class="slide" id="s10">
+    <div class="bg-grid"></div>
+    <div class="slide-inner">
+      <div class="kicker">Offres</div>
+      <h2>Une offre <span class="grad">qui grandit avec vous</span></h2>
+      <div class="grid4" style="margin-top:16px; align-items:stretch;">
+        <div class="card price-card">
+          <div class="plan-name">Essai gratuit</div>
+          <div class="plan-tag">14 jours · sans engagement</div>
+          <div class="divider"></div>
+          <ul class="checklist">
+            <li>Tâches, projets, calendrier</li>
+            <li>Enregistreur : 5 comptes rendus offerts</li>
+            <li>Assistant vocal, mails → tâches</li>
+          </ul>
+        </div>
+        <div class="card price-card">
+          <div class="plan-name">Base</div>
+          <div class="plan-tag">L'équipe qui enregistre</div>
+          <div class="divider"></div>
+          <ul class="checklist">
+            <li>Enregistreur & CR illimités</li>
+            <li>Invités externes (agenda, RSVP, partage CR)</li>
+            <li>Notifications & calendrier connecté</li>
+          </ul>
+        </div>
+        <div class="card price-card featured">
+          <div class="price-badge">Recommandé</div>
+          <div class="plan-name">Pro</div>
+          <div class="plan-tag">Le pilotage complet</div>
+          <div class="divider"></div>
+          <ul class="checklist">
+            <li>Charge d'équipe, temps, avancement</li>
+            <li>Récurrences, priorités, champs personnalisés</li>
+            <li>Rapport hebdo IA & export entreprise</li>
+          </ul>
+        </div>
+        <div class="card price-card">
+          <div class="plan-name">Sur-mesure</div>
+          <div class="plan-tag">On code VOTRE processus</div>
+          <div class="divider"></div>
+          <ul class="checklist">
+            <li>CRM & facturation (Pennylane…)</li>
+            <li>Workflows métier, relances auto IA</li>
+            <li>Tableaux de bord dédiés, SSO</li>
+          </ul>
+        </div>
+      </div>
+      <p class="body" style="opacity:.7; margin-top:8px;">Sur devis — installation accompagnée, sans surprise.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 11 — Contact / CTA -->
+  <section class="slide" id="s11">
+    <div class="bg-grid"></div>
+    <div class="slide-inner">
+      <div class="cta-card">
+        <svg class="logo-svg sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-label="PilotAI">
+          <defs>
+            <linearGradient id="aurora2" x1="0%" y1="0%" x2="100%" y2="70%">
+              <stop offset="0%" stop-color="#1e9ad7"/>
+              <stop offset="100%" stop-color="#3b97d3"/>
+            </linearGradient>
+          </defs>
+          <g transform="translate(80,80)">
+            <polygon points="0,-64 55.4,-32 55.4,32 0,64 -55.4,32 -55.4,-32"
+                     fill="none" stroke="url(#aurora2)" stroke-width="10" stroke-linejoin="round"/>
+            <path d="M -14 34 L -14 -30 Q -14 -38 -6 -38 L 14 -38 Q 34 -38 34 -18 Q 34 2 14 2 L 0 2"
+                  fill="none" stroke="url(#aurora2)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="-14" cy="34" r="7" fill="#3b97d3"/>
+          </g>
+          <text x="168" y="102" font-family="Space Grotesk, system-ui, -apple-system, sans-serif"
+                font-size="64" font-weight="600" letter-spacing="-2" fill="#F4F4F5">Pilot<tspan fill="url(#aurora2)">AI</tspan></text>
+        </svg>
+        <h2>Diagnostic offert · <span class="grad">Réponse sous 24h</span> · Sans engagement</h2>
+        <a class="btn" href="https://pilotai-landing.vercel.app" target="_blank" rel="noopener">pilotai-landing.vercel.app →</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var deck = document.getElementById('deck');
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var curEl = document.getElementById('cur');
+
+  function pad(n){ return n < 10 ? '0'+n : ''+n; }
+
+  function currentIndex(){
+    var scrollPos = deck.scrollTop;
+    var closest = 0, minDist = Infinity;
+    slides.forEach(function(s, i){
+      var dist = Math.abs(s.offsetTop - scrollPos);
+      if(dist < minDist){ minDist = dist; closest = i; }
+    });
+    return closest;
+  }
+
+  function updateCounter(){
+    curEl.textContent = pad(currentIndex() + 1);
+  }
+
+  function goTo(i){
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    slides[i].scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  deck.addEventListener('scroll', function(){
+    window.requestAnimationFrame(updateCounter);
+  }, {passive:true});
+
+  window.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown'){
+      e.preventDefault();
+      goTo(currentIndex() + 1);
+    } else if(e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp'){
+      e.preventDefault();
+      goTo(currentIndex() - 1);
+    }
+  });
+
+  document.getElementById('btnDown').addEventListener('click', function(){ goTo(currentIndex() + 1); });
+  document.getElementById('btnUp').addEventListener('click', function(){ goTo(currentIndex() - 1); });
+
+  deck.addEventListener('click', function(e){
+    if(e.target.closest('a') || e.target.closest('.arrow-btn')) return;
+    goTo(currentIndex() + 1);
+  });
+
+  updateCounter();
+})();
+</script>
+
+</body>
+</html>
