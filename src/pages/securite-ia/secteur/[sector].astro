@@ -3,7 +3,9 @@ import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import sectorsData from '../../../data/securite-ia/sectors.fr.json';
+import modelsData from '../../../data/securite-ia/models.fr.json';
 
+const lastVerified = new Date(modelsData.last_verified).toLocaleDateString('fr-FR');
 const { sector: sectorId } = Astro.params;
 
 const sector = sectorsData.sectors.find((s: any) => s.id === sectorId);
@@ -206,7 +208,7 @@ export function getStaticPaths() {
     <section class="py-8 px-4 sm:px-6 lg:px-8">
       <div class="max-w-5xl mx-auto">
         <p class="text-center text-sm text-gray-500 italic">
-          ⚠️ Outil informatif — ne constitue pas un conseil juridique. Les politiques des fournisseurs IA peuvent évoluer.
+          ⚠️ Outil informatif — ne constitue pas un conseil juridique. Les politiques des fournisseurs IA peuvent évoluer. Données vérifiées le {lastVerified}.
         </p>
       </div>
     </section>

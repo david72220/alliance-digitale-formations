@@ -6,6 +6,8 @@ import sectorsData from '../../../../data/securite-ia/sectors.fr.json';
 import modelsData from '../../../../data/securite-ia/models.fr.json';
 import recommendationsData from '../../../../data/securite-ia/recommendations.json';
 
+const lastVerified = new Date(modelsData.last_verified).toLocaleDateString('fr-FR');
+
 export function getStaticPaths() {
   const paths: { params: { sector: string; doc: string } }[] = [];
   
@@ -245,7 +247,7 @@ function getModelById(id: string) {
     <section class="py-8 px-4 sm:px-6 lg:px-8">
       <div class="max-w-5xl mx-auto">
         <p class="text-center text-sm text-gray-500 italic">
-          ⚠️ Outil informatif — ne constitue pas un conseil juridique. Les politiques des fournisseurs IA peuvent évoluer.
+          ⚠️ Outil informatif — ne constitue pas un conseil juridique. Les politiques des fournisseurs IA peuvent évoluer. Données vérifiées le {lastVerified}.
         </p>
       </div>
     </section>

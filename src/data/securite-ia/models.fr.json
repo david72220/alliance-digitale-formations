@@ -1,8 +1,9 @@
 {
+  "last_verified": "2026-08-17",
   "models": [
     {
       "id": "chatgpt-free",
-      "label": "ChatGPT (version gratuite)",
+      "label": "ChatGPT (version gratuite, GPT-5.x)",
       "editor": "OpenAI",
       "jurisdiction": "US",
       "jurisdiction_flag": "🇺🇸",
@@ -12,7 +13,7 @@
       "risk_level": "high",
       "risk_description": "Vos données peuvent être utilisées pour entraîner le modèle",
       "gdpr_compliant": "partially",
-      "notes": "Version gratuite = vos conversations entraînent le modèle. Désactivez 'Chat history & training' pour limiter.",
+      "notes": "Version gratuite = vos conversations entraînent le modèle. Désactivez 'Improve the model for everyone' dans Paramètres → Data Controls. Attention : une procédure judiciaire en cours oblige OpenAI à conserver certains logs supprimés au-delà des 30 jours habituels.",
       "safe_for_levels": ["low", "medium"]
     },
     {
@@ -47,22 +48,22 @@
     },
     {
       "id": "claude-sonnet",
-      "label": "Claude (Sonnet / Opus)",
+      "label": "Claude (Sonnet / Opus 5)",
       "editor": "Anthropic",
       "jurisdiction": "US",
       "jurisdiction_flag": "🇺🇸",
-      "data_retention": "0 jour (policy API), 30 jours (chat)",
-      "training_on_data": false,
+      "data_retention": "0 jour (API), jusqu'à 5 ans (chat si entraînement activé)",
+      "training_on_data": true,
       "api_retention": "0 jour",
       "risk_level": "medium",
-      "risk_description": "Policy de non-rétention, mais serveurs US",
+      "risk_description": "Depuis sept. 2025, les chats grand public entraînent le modèle par défaut (opt-out possible)",
       "gdpr_compliant": "partially",
-      "notes": "Anthropic n'utilise pas les données API pour l'entraînement. Version chat peut retenir 30 jours.",
+      "notes": "Changement de politique 2025 : les conversations chat entraînent le modèle sauf opt-out (réglage « You can help improve Claude ») ; rétention portée à 5 ans si activé. L'API et les offres entreprise ne sont pas concernées (pas d'entraînement).",
       "safe_for_levels": ["low", "medium", "high"]
     },
     {
       "id": "gemini-free",
-      "label": "Google Gemini (version gratuite)",
+      "label": "Google Gemini (version gratuite, Gemini 3.x)",
       "editor": "Google",
       "jurisdiction": "US",
       "jurisdiction_flag": "🇺🇸",
@@ -102,7 +103,7 @@
       "risk_level": "low",
       "risk_description": "Hébergement européen, pas d'entraînement sur données API",
       "gdpr_compliant": "yes",
-      "notes": "Société française, données hébergées en UE. API n'utilise pas vos données pour l'entraînement. Conforme RGPD.",
+      "notes": "Société française, données hébergées en UE, non soumise au Cloud Act américain. API n'utilise pas vos données pour l'entraînement. Modèles actuels : famille Mistral 3 (Large 3, Medium 3.5). Conforme RGPD.",
       "safe_for_levels": ["low", "medium", "high"]
     },
     {
@@ -152,7 +153,7 @@
     },
     {
       "id": "kimi",
-      "label": "Kimi / Moonshot",
+      "label": "Kimi / Moonshot (Kimi K3)",
       "editor": "Moonshot AI",
       "jurisdiction": "CN",
       "jurisdiction_flag": "🇨🇳",
@@ -197,7 +198,7 @@
     },
     {
       "id": "grok",
-      "label": "Grok (xAI)",
+      "label": "Grok (xAI, Grok 4.5)",
       "editor": "xAI",
       "jurisdiction": "US",
       "jurisdiction_flag": "🇺🇸",
