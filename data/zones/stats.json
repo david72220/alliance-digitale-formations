@@ -232,5 +232,31 @@
       }
     ],
     "calculeLe": "2026-08-31"
+  },
+  {
+    "slug": "tours",
+    "nomUsage": "Tours",
+    "departement": "37",
+    "codeCommune": "37261",
+    "totalEntreprisesActives": 10000,
+    "totalPME3a49": 2809,
+    "topSecteurs": [
+      {
+        "code": "G",
+        "libelle": "commerce et réparation automobile",
+        "count": 598
+      },
+      {
+        "code": "I",
+        "libelle": "hébergement et restauration",
+        "count": 383
+      },
+      {
+        "code": "M",
+        "libelle": "activités scientifiques et techniques",
+        "count": 363
+      }
+    ],
+    "calculeLe": "2026-08-31"
   }
 ]

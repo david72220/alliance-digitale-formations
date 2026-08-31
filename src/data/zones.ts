@@ -261,6 +261,33 @@ export const ZONES: Zone[] = [
     ],
     published: true,
   },
+  {
+    slug: 'tours',
+    ville: 'Tours',
+    departement: '37',
+    departementNom: 'Indre-et-Loire',
+    tier: 2,
+    distanceLeMans: 'environ 85 km / 1h05 du Mans',
+    modeIntervention: 'Présentiel sur site à Tours (journée dédiée) ou à distance — le distanciel est recommandé pour un suivi régulier compte tenu de la distance.',
+    zoneActivite: 'métropole tourangelle (tourisme, santé, numérique)',
+    accroche: `Tours est, avec Angers, la plus grande agglomération de notre zone d'intervention élargie, avec près de 2 800 PME de 3 à 49 salariés actives sur la seule commune. Le tissu économique y est très diversifié — commerce, tourisme (Val de Loire), santé et services numériques — avec une offre d'accompagnement déjà présente localement, ce qui nous positionne sur un accompagnement pragmatique et abordable plutôt qu'un discours généraliste.`,
+    pitchSecteur: `Le commerce arrive largement en tête, suivi de l'hébergement-restauration (poids du tourisme ligérien) puis des activités scientifiques et techniques. Pour les commerces et l'hôtellerie-restauration tourangelle, l'automatisation porte sur la prise de réservation, les avis clients et les relances ; pour les PME de services et bureaux d'études, sur la rédaction assistée, l'analyse de documents et le reporting client.`,
+    faq: [
+      {
+        question: "Alliance Digitale se déplace-t-elle jusqu'à Tours pour un audit ?",
+        reponse: "Oui, Tours fait partie de notre zone d'intervention élargie. Le déplacement s'organise sur une journée dédiée pour l'audit initial ; le suivi peut ensuite se faire à distance.",
+      },
+      {
+        question: "Le secteur touristique tourangeau (Val de Loire) a-t-il des besoins spécifiques ?",
+        reponse: "Oui : réservation, gestion des avis clients et relances sont les cas les plus fréquents pour les hôtels, restaurants et sites touristiques de la région.",
+      },
+      {
+        question: "Pourquoi choisir Alliance Digitale plutôt qu'un acteur déjà implanté à Tours ?",
+        reponse: "Notre approche reste centrée sur l'accompagnement de terrain pour PME — audit concret, formation Qualiopi, mise en œuvre immédiate — sans les coûts d'un grand cabinet de conseil.",
+      },
+    ],
+    published: true,
+  },
 ];
 
 export function getZoneStats(slug: string): ZoneStats | undefined {
