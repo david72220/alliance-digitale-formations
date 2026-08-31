@@ -283,7 +283,7 @@ export const ZONES: Zone[] = [
       },
       {
         question: "Pourquoi choisir Alliance Digitale plutôt qu'un acteur déjà implanté à Tours ?",
-        reponse: "Notre approche reste centrée sur l'accompagnement de terrain pour PME — audit concret, formation Qualiopi, mise en œuvre immédiate — sans les coûts d'un grand cabinet de conseil.",
+        reponse: "Notre approche reste centrée sur l'accompagnement de terrain pour PME — audit concret, formation, mise en œuvre immédiate — sans les coûts d'un grand cabinet de conseil.",
       },
     ],
     published: true,
