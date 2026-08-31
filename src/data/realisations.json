@@ -1,0 +1,162 @@
+[
+  {
+    "titre": "Client PME — Pipeline de prospection LinkedIn automatisée",
+    "secteur": "Santé / Mobilier ergonomique",
+    "type": "Client PME",
+    "probleme": "Identifier en temps réel les professionnels de santé évoquant des problématiques de dos, posture ou rééducation sur LinkedIn, pour alerter l'équipe commerciale sur les prospects les plus pertinents.",
+    "solution": "Pipeline de veille LinkedIn orchestré par automatisation, avec classification métier et scoring des posts par IA locale, alertes instantanées pour les prospects à score élevé.",
+    "resultat": "Alerte automatique dès qu'un prospect pertinent est identifié, jusqu'à 80 profils et 50 posts analysés par jour."
+  },
+  {
+    "titre": "Agent semi-autonome — Orchestration multi-agents pour un centre de formation",
+    "secteur": "Formation professionnelle / Fibre optique",
+    "type": "Client PME",
+    "probleme": "Un centre de formation avait besoin de générer et suivre ses contenus pédagogiques sans multiplier les outils manuels.",
+    "solution": "Orchestration de plusieurs agents IA spécialisés (génération de contenu, suivi, alertes) coordonnés automatiquement.",
+    "resultat": "Production de contenus pédagogiques accélérée, suivi centralisé sans ressaisie manuelle."
+  },
+  {
+    "titre": "Automatisation des adhésions d'un club automobile",
+    "secteur": "Club automobile / Association",
+    "type": "Client PME",
+    "probleme": "Rapprocher manuellement les adhésions reçues via un formulaire en ligne et les paiements bancaires correspondants.",
+    "solution": "Automatisation du rapprochement adhésion ↔ paiement, avec mise à jour automatique du statut membre.",
+    "resultat": "Fin de la ressaisie manuelle, statut des adhérents toujours à jour."
+  },
+  {
+    "titre": "Intranet d'un club automobile — annuaire et actualités",
+    "secteur": "Club automobile / Association",
+    "type": "Client PME",
+    "probleme": "Aucun espace centralisé pour que les adhérents retrouvent l'annuaire des membres et les actualités du club.",
+    "solution": "Intranet dédié avec annuaire et fil d'actualités, alimenté automatiquement.",
+    "resultat": "Un seul point d'accès pour les adhérents, mise à jour sans intervention manuelle répétée."
+  },
+  {
+    "titre": "Calcul automatisé des indicateurs de satisfaction étudiants",
+    "secteur": "Formation professionnelle",
+    "type": "Client PME",
+    "probleme": "Calculer à la main les indicateurs de satisfaction exigés par les organismes de certification qualité.",
+    "solution": "Automatisation du calcul des indicateurs à partir des réponses collectées, génération du rapport.",
+    "resultat": "Indicateurs disponibles en continu, sans reprise manuelle avant chaque audit qualité."
+  },
+  {
+    "titre": "Marketing d'un client auto-entrepreneur — Dashboard et automatisation de contenu",
+    "secteur": "Psychologie / Formation en ligne",
+    "type": "Client PME",
+    "probleme": "Un indépendant devait suivre et publier son contenu marketing sans y passer ses journées.",
+    "solution": "Tableau de bord de suivi et automatisation d'une partie de la publication de contenu.",
+    "resultat": "Temps de gestion marketing réduit, visibilité continue sur les performances."
+  },
+  {
+    "titre": "Automation Notion → site web — publication de formations en un clic",
+    "secteur": "Formation professionnelle",
+    "type": "Client PME",
+    "probleme": "Chaque nouvelle formation nécessitait une mise à jour manuelle du site web depuis la base de données interne.",
+    "solution": "Publication automatique du site dès qu'une formation est validée dans l'outil de gestion interne.",
+    "resultat": "Mise en ligne d'une nouvelle formation en quelques minutes au lieu d'une intervention technique."
+  },
+  {
+    "titre": "SEO automatisé hebdomadaire",
+    "secteur": "Formation professionnelle",
+    "type": "Client PME",
+    "probleme": "Le suivi et l'optimisation SEO d'un site nécessitaient une intervention technique récurrente.",
+    "solution": "Analyse et génération de contenu SEO automatisées, exécutées chaque semaine sans intervention.",
+    "resultat": "Suivi SEO continu sans charge de travail récurrente pour le client."
+  },
+  {
+    "titre": "Site web pour un centre de formation fibre optique & photovoltaïque",
+    "secteur": "Formation professionnelle / Télécoms",
+    "type": "Client PME",
+    "probleme": "Le centre n'avait pas de présence web à la hauteur de son activité de formation.",
+    "solution": "Création d'un site vitrine moderne, rapide, avec mise à jour automatisée du catalogue de formations.",
+    "resultat": "Présence web professionnelle avec catalogue de formations toujours à jour."
+  },
+  {
+    "titre": "Génération automatisée de formations — pipeline de production de contenu",
+    "secteur": "EdTech / Formation",
+    "type": "Client PME",
+    "probleme": "Produire le contenu pédagogique détaillé d'une formation (modules, cours, exercices) demandait un travail de rédaction très long.",
+    "solution": "Chaîne d'automatisation en plusieurs étapes qui structure et rédige le contenu pédagogique à partir d'un simple sommaire.",
+    "resultat": "Temps de production d'une formation complète réduit de plusieurs jours à quelques heures."
+  },
+  {
+    "titre": "Pipeline de prospection LinkedIn — enrichissement de base de prospects",
+    "secteur": "Santé / E-commerce DTC",
+    "type": "Client PME",
+    "probleme": "Enrichir manuellement une base de prospects avec des informations utiles à la prospection commerciale.",
+    "solution": "Automatisation de la collecte et de l'enrichissement des fiches prospects.",
+    "resultat": "Base de prospects enrichie en continu, sans saisie manuelle."
+  },
+  {
+    "titre": "Briefings quotidiens et hebdomadaires automatisés",
+    "secteur": "Productivité dirigeant",
+    "type": "Projet interne",
+    "probleme": "Un dirigeant devait rassembler manuellement chaque matin ses rendez-vous, tâches et emails prioritaires.",
+    "solution": "Briefing automatique envoyé chaque jour et chaque semaine, agrégeant agenda, tâches et messages importants.",
+    "resultat": "Un point de situation prêt à l'ouverture, sans compilation manuelle."
+  },
+  {
+    "titre": "Audit et maintenance globale d'une infrastructure d'automatisation",
+    "secteur": "Infrastructure IT / Automatisation",
+    "type": "Projet interne",
+    "probleme": "Une infrastructure d'automatisation vieillissante accumulait des failles de sécurité et des workflows cassés.",
+    "solution": "Audit complet, sécurisation des accès, nettoyage et remise à niveau des automatisations existantes.",
+    "resultat": "Infrastructure sécurisée et fiabilisée, sans interruption de service."
+  },
+  {
+    "titre": "Sauvegarde complète d'un serveur — système de backup automatisé",
+    "secteur": "Infrastructure IT / Cybersécurité",
+    "type": "Projet interne",
+    "probleme": "Aucune sauvegarde automatisée et testée n'existait sur un serveur hébergeant des services métier critiques.",
+    "solution": "Mise en place d'un système de sauvegarde automatisé, chiffré, avec test de restauration régulier.",
+    "resultat": "Sauvegardes fiables et vérifiées, capacité de restauration prouvée en cas d'incident."
+  },
+  {
+    "titre": "Sécurisation d'une infrastructure IA — fermeture d'un accès exposé",
+    "secteur": "DevOps / Sécurité",
+    "type": "Projet interne",
+    "probleme": "Un serveur d'intelligence artificielle était accessible depuis internet sans protection, exposé à un usage détourné.",
+    "solution": "Fermeture de l'accès public, mise en place d'une authentification et d'un accès restreint.",
+    "resultat": "Élimination du risque d'usage non autorisé, sans interruption pour les usages légitimes."
+  },
+  {
+    "titre": "Sécurisation d'un tableau de bord interne",
+    "secteur": "Infrastructure IT / Hébergement",
+    "type": "Projet interne",
+    "probleme": "Un tableau de bord de suivi était exposé en HTTP non sécurisé, sans authentification, sur un serveur.",
+    "solution": "Mise en place d'un accès HTTPS avec certificat automatiquement renouvelé et authentification, fermeture de l'accès direct.",
+    "resultat": "Tableau de bord sécurisé, certificat renouvelé automatiquement, plus aucun accès direct non protégé."
+  },
+  {
+    "titre": "Plateforme d'intelligence collective multi-IA",
+    "secteur": "Aide à la décision / Intelligence artificielle",
+    "type": "Projet interne / R&D",
+    "probleme": "Une décision stratégique gagne à être challengée sous plusieurs angles avant d'être prise.",
+    "solution": "Plateforme faisant délibérer plusieurs IA aux rôles complémentaires (stratégie, risques, finance...) sur une même question, avec synthèse finale.",
+    "resultat": "Aide à la décision enrichie de plusieurs points de vue avant tranchage humain."
+  },
+  {
+    "titre": "Délibération stratégique multi-agents IA — version avancée",
+    "secteur": "Conseil stratégique / IA",
+    "type": "Projet interne / R&D",
+    "probleme": "Approfondir la démarche de délibération multi-IA avec des rôles plus contradictoires et davantage de recherche.",
+    "solution": "Système de délibération à 8 rôles antagonistes avec boucles de réflexion itératives et recherche documentaire, synthèse finale structurée.",
+    "resultat": "Analyse stratégique plus robuste, confrontée à des angles contradictoires avant décision."
+  },
+  {
+    "titre": "Centralisation de calendriers et tâches multi-sources",
+    "secteur": "Productivité personnelle / Gestion du temps",
+    "type": "Projet interne",
+    "probleme": "Rendez-vous et tâches dispersés sur plusieurs outils, sans vue d'ensemble.",
+    "solution": "Centralisation automatique des rendez-vous et tâches issus de plusieurs sources dans un seul espace.",
+    "resultat": "Vue unique et à jour de l'agenda et des tâches, sans ressaisie."
+  },
+  {
+    "titre": "Application de dictée vocale privée",
+    "secteur": "Productivité personnelle / Accessibilité",
+    "type": "Projet interne / R&D",
+    "probleme": "Besoin d'un outil de dictée vocale rapide et respectueux de la confidentialité, sans envoyer la voix à un service tiers.",
+    "solution": "Application de transcription vocale fonctionnant entièrement en local, sans transmission des données à l'extérieur.",
+    "resultat": "Dictée vocale fonctionnelle sans qu'aucune donnée audio ne quitte l'appareil."
+  }
+]

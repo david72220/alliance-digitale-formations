@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import realisations from '../data/realisations.json';
+
+const siteUrl = Astro.site!.toString().replace(/\/$/, '');
+
+const itemListLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Réalisations Alliance Digitale',
+  itemListElement: realisations.map((r, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'CreativeWork',
+      name: r.titre,
+      about: r.secteur,
+    },
+  })),
+};
+
+const typeOrder = ['Client PME', 'Projet interne', 'Projet interne / R&D'];
+const grouped = typeOrder.map((t) => ({ type: t, items: realisations.filter((r) => r.type === t) })).filter((g) => g.items.length > 0);
+
+const typeLabel: Record<string, string> = {
+  'Client PME': '🤝 Missions clients PME',
+  'Projet interne': '⚙️ Projets internes / infrastructure',
+  'Projet interne / R&D': '🔬 R&D et expérimentation',
+};
+---
+
+<Layout
+  title="Réalisations — Automatisation & IA | Alliance Digitale"
+  description="Automatisations, agents IA et sites livrés par Alliance Digitale pour des PME de Sarthe et Pays de la Loire : prospection, gestion des adhérents, formation, infrastructure."
+  jsonLd={itemListLd}
+>
+  <Header />
+
+  <main class="flex-1">
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-14" data-reveal>
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Réalisations</p>
+          <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">Ce qu'on a livré</h1>
+          <p class="text-white/60 max-w-2xl mx-auto">
+            Missions client et projets internes, classés par nature. Par transparence : les projets internes ne sont pas des prestations vendues, mais montrent le niveau technique appliqué à chaque mission.
+          </p>
+        </div>
+
+        {grouped.map((group) => (
+          <div class="mb-14">
+            <h2 class="text-xl font-bold text-white mb-6">{typeLabel[group.type]}</h2>
+            <div class="grid sm:grid-cols-2 gap-5">
+              {group.items.map((r) => (
+                <div class="relief-panel p-6 flex flex-col gap-3">
+                  <div>
+                    <p class="text-xs uppercase tracking-wider text-alliance-blue font-semibold mb-1">{r.secteur}</p>
+                    <h3 class="text-white font-bold text-lg leading-snug">{r.titre}</h3>
+                  </div>
+                  <p class="text-white/60 text-sm"><span class="text-white/80 font-medium">Problème :</span> {r.probleme}</p>
+                  <p class="text-white/60 text-sm"><span class="text-white/80 font-medium">Solution :</span> {r.solution}</p>
+                  <p class="text-white/70 text-sm border-t border-white/10 pt-3 mt-1"><span class="text-alliance-blue font-medium">Résultat :</span> {r.resultat}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        <div class="text-center mt-4" data-reveal>
+          <a href="/contact/" class="btn-primary text-base px-8 py-4 inline-block">Discuter de votre projet</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

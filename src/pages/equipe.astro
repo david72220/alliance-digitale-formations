@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import photo from '../assets/david-ollivier.jpg';
+
+const siteUrl = Astro.site!.toString().replace(/\/$/, '');
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'David Ollivier',
+  jobTitle: 'Fondateur, Alliance Digitale',
+  worksFor: { '@type': 'Organization', name: 'Alliance Digitale', url: siteUrl },
+  url: `${siteUrl}/equipe/`,
+  image: `${siteUrl}${photo.src}`,
+  address: { '@type': 'PostalAddress', addressLocality: 'Le Mans', addressRegion: 'Sarthe', addressCountry: 'FR' },
+};
+---
+
+<Layout
+  title="David Ollivier, fondateur — Alliance Digitale"
+  description="David Ollivier, fondateur d'Alliance Digitale : accompagnement IA et automatisation pour PME en Sarthe, fondateur du centre de formation KMC (fibre optique & photovoltaïque)."
+  jsonLd={personLd}
+>
+  <Header />
+
+  <main class="flex-1">
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12" data-reveal>
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Équipe</p>
+          <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">David Ollivier</h1>
+        </div>
+
+        <div class="relief-panel p-6 sm:p-10" data-reveal data-reveal-delay="0.1">
+          <div class="flex flex-col sm:flex-row gap-8 items-center sm:items-start">
+            <Image
+              src={photo}
+              alt="David Ollivier, fondateur d'Alliance Digitale"
+              width={220}
+              height={220}
+              class="rounded-2xl object-cover w-48 h-48 sm:w-56 sm:h-56 shrink-0"
+              loading="eager"
+              fetchpriority="high"
+            />
+            <div class="prose prose-invert">
+              <p class="text-white/80 text-lg">
+                Fondateur d'Alliance Digitale, à Le Mans (Sarthe). J'accompagne les PME avec salariés dans l'adoption concrète de l'intelligence artificielle : automatisation de processus, formation des équipes, mise en conformité (RGPD, AI Act).
+              </p>
+              <p class="text-white/70">
+                Avant Alliance Digitale, j'ai fondé <a href="https://kmc.ci" target="_blank" rel="noopener noreferrer" class="text-alliance-blue underline">KMC</a>, un centre de formation professionnelle en fibre optique et photovoltaïque basé à Abidjan (Côte d'Ivoire), certifiant des dizaines de techniciens chaque année.
+              </p>
+              <p class="text-white/70">
+                Ce double terrain — dirigeant de centre de formation d'un côté, développeur d'automatisations et d'agents IA de l'autre — est ce qui distingue Alliance Digitale : je ne vends pas un discours sur l'IA, je conçois et j'exploite moi-même les automatisations que je recommande. Le détail des réalisations est sur la page <a href="/realisations/" class="text-alliance-blue underline">Réalisations</a>.
+              </p>
+              <p class="text-white/70">
+                Approche technique : priorité aux modèles d'IA hébergés localement quand la donnée est sensible, routage vers des modèles externes seulement avec le consentement explicite du client — cohérent avec le conseil en conformité AI Act qu'Alliance Digitale propose par ailleurs.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-10" data-reveal>
+          <a href="/contact/" class="btn-primary text-base px-8 py-4 inline-block">Prendre rendez-vous</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
