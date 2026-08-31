@@ -59,7 +59,7 @@ function getModelById(id: string) {
 }
 ---
 
-<Layout title={`${doc.label} - Sécurité IA - Alliance Digitale`} description={`Quelles IA utiliser pour ${doc.label.toLowerCase()} ? Niveau de sensibilité ${sensitivityInfo.label.toLowerCase()}.`}>
+<Layout title={`${doc.label} - Sécurité IA - Alliance Digitale`} description={`Quelles IA utiliser pour ${doc.label.toLowerCase()} ? Niveau de sensibilité ${sensitivityInfo.label.toLowerCase()}.`} noindex={true}>
   <Header />
   
   <main class="min-h-screen bg-gradient-to-b from-alliance-dark via-alliance-dark-2 to-alliance-dark">
@@ -67,11 +67,11 @@ function getModelById(id: string) {
     <nav class="pt-24 pb-4 px-4 sm:px-6 lg:px-8">
       <div class="max-w-5xl mx-auto">
         <div class="flex items-center gap-2 text-sm text-gray-400">
-          <a href="/securite-ia" class="hover:text-alliance-accent transition-colors">Sécurité IA</a>
+          <a href="/securite-ia/" class="hover:text-alliance-accent transition-colors">Sécurité IA</a>
           <span>/</span>
-          <a href="/securite-ia" class="hover:text-alliance-accent transition-colors">Secteurs</a>
+          <a href="/securite-ia/" class="hover:text-alliance-accent transition-colors">Secteurs</a>
           <span>/</span>
-          <a href={`/securite-ia/secteur/${sector.id}`} class="hover:text-alliance-accent transition-colors">{sector.label}</a>
+          <a href={`/securite-ia/secteur/${sector.id}/`} class="hover:text-alliance-accent transition-colors">{sector.label}</a>
           <span>/</span>
           <span class="text-white">{doc.label}</span>
         </div>
@@ -227,7 +227,7 @@ function getModelById(id: string) {
         <h2 class="text-2xl font-bold text-white mb-6">Autres documents dans ce secteur</h2>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {sector.documents.filter((d: any) => d.id !== doc.id).slice(0, 6).map((otherDoc: any) => (
-            <a href={`/securite-ia/secteur/${sector.id}/${otherDoc.id}`} class="relief-panel p-4 hover:border-alliance-accent/50 transition-colors">
+            <a href={`/securite-ia/secteur/${sector.id}/${otherDoc.id}/`} class="relief-panel p-4 hover:border-alliance-accent/50 transition-colors">
               <h4 class="text-white font-semibold mb-2">{otherDoc.label}</h4>
               <span class={`text-xs px-2 py-1 rounded ${sensitivityLabels[otherDoc.sensitivity].bg} ${sensitivityLabels[otherDoc.sensitivity].color}`}>
                 {sensitivityLabels[otherDoc.sensitivity].label}
@@ -236,7 +236,7 @@ function getModelById(id: string) {
           ))}
         </div>
         {sector.documents.length > 7 && (
-          <a href={`/securite-ia/secteur/${sector.id}`} class="block mt-4 text-alliance-accent hover:underline">
+          <a href={`/securite-ia/secteur/${sector.id}/`} class="block mt-4 text-alliance-accent hover:underline">
             Voir les {sector.documents.length - 1} documents de ce secteur →
           </a>
         )}

@@ -14,11 +14,14 @@ export async function getStaticPaths() {
 
 const { formation } = Astro.props;
 
+// Titre Notion souvent préfixé d'un numéro d'ordre interne ("9. IA Express") — jamais afficher ce préfixe.
+const cleanTitle = formation.title.replace(/^\d+\.\s*/, '');
+
 const courseLd = {
   "@context": "https://schema.org",
   "@type": "Course",
-  "name": formation.title,
-  "description": formation.generalObjective || `Formation ${formation.title} par Alliance Digitale`,
+  "name": cleanTitle,
+  "description": formation.generalObjective || `Formation ${cleanTitle} par Alliance Digitale`,
   "provider": {
     "@type": "Organization",
     "name": "Alliance Digitale",
@@ -38,8 +41,8 @@ const courseLd = {
 ---
 
 <Layout
-  title={`${formation.title} — Alliance Digitale`}
-  description={formation.generalObjective || `Formation ${formation.title} — Alliance Digitale, accompagnement IA et automatisation pour PME en Sarthe. Financement OPCO sur demande.`}
+  title={`${cleanTitle} — Alliance Digitale Sarthe`}
+  description={formation.generalObjective || `Formation ${cleanTitle} — Alliance Digitale, accompagnement IA et automatisation pour PME en Sarthe. Financement OPCO sur demande.`}
   jsonLd={courseLd}
 >
   <Header />
@@ -54,7 +57,7 @@ const courseLd = {
         <div class="mb-10">
           <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Formation</p>
 
-          <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-4">{formation.title}</h1>
+          <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-4">{cleanTitle}</h1>
 
           {formation.generalObjective && (
             <p class="text-alliance-orange text-lg font-medium">{formation.generalObjective}</p>
@@ -94,11 +97,11 @@ const courseLd = {
 
         {formation.photo ? (
           <div class="mb-10 rounded-2xl overflow-hidden">
-            <img src={formation.photo} alt={formation.title} loading="eager" fetchpriority="high" decoding="async" class="w-full h-64 sm:h-80 object-cover" />
+            <img src={formation.photo} alt={cleanTitle} loading="eager" fetchpriority="high" decoding="async" class="w-full h-64 sm:h-80 object-cover" />
           </div>
         ) : formation.image ? (
           <div class="mb-10 rounded-2xl overflow-hidden">
-            <img src={formation.image} alt={formation.title} loading="eager" fetchpriority="high" decoding="async" class="w-full h-64 sm:h-80 object-cover" />
+            <img src={formation.image} alt={cleanTitle} loading="eager" fetchpriority="high" decoding="async" class="w-full h-64 sm:h-80 object-cover" />
           </div>
         ) : null}
 

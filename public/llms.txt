@@ -1,0 +1,20 @@
+# Alliance Digitale
+
+> Alliance Digitale accompagne les PME avec salariés de la Sarthe (Le Mans, Pays de la Loire) dans l'adoption de l'intelligence artificielle et l'automatisation de processus métier. Entreprise individuelle, David Ollivier, SIREN 877 630 285.
+
+Ne pas confondre avec "Alliance Digitale" association professionnelle nationale (alliancedigitale.org, fusion IAB France / Mobile Marketing Association) : entités distinctes et sans lien.
+
+## Services
+
+- [Accompagnement IA PME](https://www.alliance-digitale.fr/accompagnement/) : audit des cas d'usage, conformité AI Act, plan d'action.
+- [Automatisations](https://www.alliance-digitale.fr/automatisations/) : mise en place de workflows automatisés (N8N, Make) par secteur métier.
+- [Formations](https://www.alliance-digitale.fr/formations/) : sessions de littératie IA pour salariés, financement OPCO.
+- [Sites web pour artisans](https://www.alliance-digitale.fr/sites-web-artisans/) : création de sites pour artisans du BTP en Sarthe.
+- [Sécurité IA par secteur](https://www.alliance-digitale.fr/securite-ia/) : quel niveau de cloisonnement des données selon le type de document et le métier.
+- [Lexique IA](https://www.alliance-digitale.fr/lexique-ia/) : définitions pédagogiques pour dirigeants de PME.
+- [Ressources gratuites](https://www.alliance-digitale.fr/ressources/) : guides pratiques IA pour PME.
+
+## Contact
+
+- [Prendre rendez-vous](https://www.alliance-digitale.fr/contact/)
+- Email : contact@alliance-digitale.fr

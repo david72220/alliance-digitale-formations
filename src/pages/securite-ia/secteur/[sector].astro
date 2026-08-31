@@ -56,7 +56,7 @@ export function getStaticPaths() {
     <nav class="pt-24 pb-4 px-4 sm:px-6 lg:px-8">
       <div class="max-w-5xl mx-auto">
         <div class="flex items-center gap-2 text-sm text-gray-400">
-          <a href="/securite-ia" class="hover:text-alliance-accent transition-colors">Sécurité IA</a>
+          <a href="/securite-ia/" class="hover:text-alliance-accent transition-colors">Sécurité IA</a>
           <span>/</span>
           <span class="text-white">{sector.label}</span>
         </div>
@@ -96,7 +96,7 @@ export function getStaticPaths() {
           </p>
           <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {groupedDocs.critical.map((doc: any) => (
-              <a href={`/securite-ia/secteur/${sector.id}/${doc.id}`} class="relief-panel p-4 hover:border-red-500/50 transition-colors">
+              <a href={`/securite-ia/secteur/${sector.id}/${doc.id}/`} class="relief-panel p-4 hover:border-red-500/50 transition-colors">
                 <h3 class="text-white font-semibold mb-2">{doc.label}</h3>
                 <p class="text-gray-400 text-sm mb-3">{doc.description}</p>
                 <div class="flex items-center justify-between">
@@ -126,7 +126,7 @@ export function getStaticPaths() {
           </p>
           <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {groupedDocs.high.map((doc: any) => (
-              <a href={`/securite-ia/secteur/${sector.id}/${doc.id}`} class="relief-panel p-4 hover:border-orange-500/50 transition-colors">
+              <a href={`/securite-ia/secteur/${sector.id}/${doc.id}/`} class="relief-panel p-4 hover:border-orange-500/50 transition-colors">
                 <h3 class="text-white font-semibold mb-2">{doc.label}</h3>
                 <p class="text-gray-400 text-sm mb-3">{doc.description}</p>
                 <div class="flex items-center justify-between">
@@ -156,7 +156,7 @@ export function getStaticPaths() {
           </p>
           <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {groupedDocs.medium.map((doc: any) => (
-              <a href={`/securite-ia/secteur/${sector.id}/${doc.id}`} class="relief-panel p-4 hover:border-yellow-500/50 transition-colors">
+              <a href={`/securite-ia/secteur/${sector.id}/${doc.id}/`} class="relief-panel p-4 hover:border-yellow-500/50 transition-colors">
                 <h3 class="text-white font-semibold mb-2">{doc.label}</h3>
                 <p class="text-gray-400 text-sm mb-3">{doc.description}</p>
                 <div class="flex items-center justify-between">
@@ -186,7 +186,7 @@ export function getStaticPaths() {
           </p>
           <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {groupedDocs.low.map((doc: any) => (
-              <a href={`/securite-ia/secteur/${sector.id}/${doc.id}`} class="relief-panel p-4 hover:border-green-500/50 transition-colors">
+              <a href={`/securite-ia/secteur/${sector.id}/${doc.id}/`} class="relief-panel p-4 hover:border-green-500/50 transition-colors">
                 <h3 class="text-white font-semibold mb-2">{doc.label}</h3>
                 <p class="text-gray-400 text-sm mb-3">{doc.description}</p>
                 <div class="flex items-center justify-between">
@@ -216,7 +216,7 @@ export function getStaticPaths() {
     <!-- Back link -->
     <section class="py-8 px-4 sm:px-6 lg:px-8">
       <div class="max-w-5xl mx-auto">
-        <a href="/securite-ia" class="text-alliance-accent hover:underline flex items-center gap-2">
+        <a href="/securite-ia/" class="text-alliance-accent hover:underline flex items-center gap-2">
           <span>←</span> Retour aux secteurs
         </a>
       </div>

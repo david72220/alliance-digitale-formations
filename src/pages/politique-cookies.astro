@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Politique de cookies — Alliance Digitale"
+  description="Cookies et traceurs utilisés sur le site Alliance Digitale : mesure d'audience, prise de rendez-vous, assistant IA."
+  noindex={false}
+>
+  <Header />
+
+  <main class="flex-1">
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto prose prose-invert">
+        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-8">Politique de cookies et traceurs</h1>
+
+        <p class="text-white/70">Ce site limite volontairement l'usage de cookies. Voici l'ensemble des traceurs déposés, leur finalité et s'ils nécessitent votre consentement (recommandation CNIL).</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">Mesure d'audience — Plausible Analytics</h2>
+        <p class="text-white/70">Le site utilise Plausible Analytics pour mesurer la fréquentation. Cet outil ne dépose <strong>aucun cookie</strong> et ne collecte aucune donnée personnelle identifiante (pas d'adresse IP stockée, pas d'identifiant persistant). Il est exempté de consentement au sens des recommandations CNIL.</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">Prise de rendez-vous — Cal.eu</h2>
+        <p class="text-white/70">Le calendrier de prise de rendez-vous (page <a href="/contact/" class="text-alliance-blue underline">Contact</a>) est un service tiers (Cal.eu) chargé uniquement lorsque vous cliquez sur le bouton d'affichage du calendrier. Son chargement dépose des cookies tiers nécessaires à son fonctionnement (gestion de session, anti-fraude). En cliquant sur « Afficher le calendrier », vous consentez à ce dépôt. Consultez la politique de confidentialité de <a href="https://cal.eu" target="_blank" rel="noopener noreferrer" class="text-alliance-blue underline">Cal.eu</a>.</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">Assistant IA (chatbot)</h2>
+        <p class="text-white/70">Le chatbot « Assistant Alliance Digitale » utilise le stockage local de votre navigateur (localStorage, pas un cookie au sens strict) pour retenir votre session de conversation pendant 7 jours. Les messages que vous saisissez sont transmis à un serveur d'intelligence artificielle exploité par Alliance Digitale pour générer une réponse automatique. Aucune donnée n'est transmise à un tiers publicitaire. Voir la <a href="/politique-de-confidentialite/" class="text-alliance-blue underline">politique de confidentialité</a> pour le détail du traitement.</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">Gérer vos préférences</h2>
+        <p class="text-white/70">Vous pouvez à tout moment supprimer les cookies et données locales via les réglages de votre navigateur. La suppression du stockage local du chatbot réinitialise votre conversation.</p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

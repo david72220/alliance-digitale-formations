@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Conditions générales de vente — Alliance Digitale"
+  description="Conditions générales de vente des prestations de conseil, formation et automatisation IA proposées par Alliance Digitale."
+  noindex={false}
+>
+  <Header />
+
+  <main class="flex-1">
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto prose prose-invert">
+        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-8">Conditions générales de vente</h1>
+
+        <p class="text-white/70">Les présentes conditions générales de vente (CGV) régissent les relations contractuelles entre Alliance Digitale, entreprise individuelle exploitée par David Ollivier (SIREN 877 630 285, voir <a href="/mentions-legales/" class="text-alliance-blue underline">mentions légales</a>) — et tout client professionnel souscrivant à une prestation de conseil, de formation ou d'automatisation IA.</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">1. Objet</h2>
+        <p class="text-white/70">Alliance Digitale propose des prestations d'accompagnement à l'intelligence artificielle et à l'automatisation pour les PME : audit IA, formation des équipes, mise en place d'automatisations (notamment via des outils tiers comme N8N ou Make), et suivi de conformité réglementaire (RGPD, règlement européen sur l'intelligence artificielle dit « AI Act »). Toute commande implique l'acceptation sans réserve des présentes CGV.</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">2. Devis et commande</h2>
+        <p class="text-white/70">Chaque prestation fait l'objet d'un devis écrit détaillant le périmètre, le calendrier et le prix. Le devis est valable 30 jours. La commande est ferme à réception du devis signé ou de tout accord écrit équivalent (email de confirmation).</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">3. Prix et paiement</h2>
+        <p class="text-white/70">Les prix sont exprimés en euros. Sauf mention contraire au devis, un acompte peut être demandé à la commande, le solde étant facturé à la livraison ou selon un échéancier convenu. Les factures sont payables sous 30 jours à compter de leur émission (article L441-10 du Code de commerce). Tout retard de paiement entraîne l'application de pénalités au taux légal en vigueur, majoré, ainsi qu'une indemnité forfaitaire de 40 € pour frais de recouvrement (article L441-6 et D441-5 du Code de commerce).</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">4. Durée et résiliation</h2>
+        <p class="text-white/70">Les prestations ponctuelles (audit, formation) prennent fin à leur livraison. Les prestations d'accompagnement ou de maintenance mensuelle sont conclues pour la durée précisée au devis, renouvelable par tacite reconduction sauf résiliation notifiée par écrit avec un préavis d'un mois.</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">5. Nature des prestations et automatisations IA</h2>
+        <p class="text-white/70">Les automatisations et agents mis en place s'appuient sur des modèles d'intelligence artificielle tiers ou hébergés (selon le niveau de cloisonnement des données retenu avec le client : clé API standard, serveur privé européen, ou serveur dédié on-premises). Le client est informé que toute sortie générée par un système d'IA (texte, recommandation, classification) peut comporter des erreurs et doit faire l'objet d'une validation humaine avant tout usage à conséquence commerciale, juridique ou financière. Alliance Digitale s'engage à documenter, pour chaque automatisation livrée, le ou les modèles utilisés et le circuit de traitement des données.</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">6. Obligations du client</h2>
+        <p class="text-white/70">Le client s'engage à fournir les informations, accès et données nécessaires à la réalisation de la prestation, et reste seul responsable de la licéité des données personnelles ou confidentielles qu'il transmet à Alliance Digitale ou aux outils mis en place (obligations RGPD de responsable de traitement).</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">7. Propriété intellectuelle</h2>
+        <p class="text-white/70">Sauf accord contraire écrit, les livrables spécifiquement développés pour le client (workflows d'automatisation, supports de formation personnalisés) lui sont cédés à réception du solde de la facture correspondante. Les méthodes, gabarits et outils internes d'Alliance Digitale restent sa propriété.</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">8. Responsabilité</h2>
+        <p class="text-white/70">Alliance Digitale est tenue à une obligation de moyens. Sa responsabilité ne saurait être engagée en cas de dommage indirect, de perte d'exploitation, ou de décision prise par le client sur la seule base d'une sortie générée par un système d'IA sans validation humaine. La responsabilité totale d'Alliance Digitale est plafonnée au montant hors taxes payé par le client pour la prestation concernée.</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">9. Données personnelles</h2>
+        <p class="text-white/70">Le traitement des données personnelles dans le cadre de la relation commerciale est décrit dans la <a href="/politique-de-confidentialite/" class="text-alliance-blue underline">politique de confidentialité</a>.</p>
+
+        <h2 class="text-xl font-bold text-white mt-8 mb-4">10. Droit applicable et litiges</h2>
+        <p class="text-white/70">Les présentes CGV sont soumises au droit français. À défaut de résolution amiable, tout litige relève de la compétence des tribunaux du ressort du siège social d'Alliance Digitale.</p>
+
+        <p class="text-white/50 text-sm mt-10">Version du {new Date().toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' })}. Document indicatif — à faire valider par un professionnel du droit avant usage contractuel opposable.</p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
