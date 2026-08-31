@@ -12,7 +12,9 @@
     "import:resource": "npx dotenv-cli -- node scripts/import_resource.mjs",
     "import:all": "npx dotenv-cli -- node scripts/import_all_resources.mjs",
     "build:pdf": "npx dotenv-cli -- node scripts/build_pdf.mjs",
-    "notion:diagnose": "npx dotenv-cli -- node scripts/diagnose_notion.mjs"
+    "notion:diagnose": "npx dotenv-cli -- node scripts/diagnose_notion.mjs",
+    "zones:stats": "npx dotenv-cli -- node scripts/fetch_zone_stats.mjs",
+    "zones:sync": "npx dotenv-cli -- node scripts/sync_zones_db.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.0",

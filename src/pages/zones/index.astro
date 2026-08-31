@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getZones } from '../../data/zones.ts';
+
+const zones = getZones();
+const parSarthe = zones.filter((z) => z.departement === '72');
+const parLimitrophe = zones.filter((z) => z.departement !== '72');
+
+const SITE = Astro.site ?? new URL('https://www.alliance-digitale.fr/');
+const homeUrl = new URL('/', SITE).toString();
+const canonicalUrl = new URL('/zones/', SITE).toString();
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: homeUrl },
+    { '@type': 'ListItem', position: 2, name: "Zones d'intervention", item: canonicalUrl },
+  ],
+};
+---
+
+<Layout
+  title="Zones d'intervention — Alliance Digitale en Sarthe et région"
+  description="Alliance Digitale accompagne les PME en IA et automatisation en Sarthe et dans les départements limitrophes : Mayenne, Orne, Maine-et-Loire."
+  jsonLd={breadcrumbJsonLd}
+>
+  <Header />
+
+  <main class="flex-1">
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Zones d'intervention</p>
+        <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">
+          Formation et automatisation IA pour PME, en Sarthe et au-delà
+        </h1>
+        <p class="text-white/75 text-lg leading-relaxed max-w-3xl mb-14">
+          Alliance Digitale se déplace dans toute la Sarthe et dans les grandes villes des départements
+          limitrophes des Pays de la Loire. Chaque page ci-dessous présente le tissu économique local
+          et les cas d'usage d'automatisation les plus pertinents pour les PME de la zone.
+        </p>
+
+        <h2 class="text-2xl font-bold text-white mb-6">Sarthe</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
+          {parSarthe.map((z) => (
+            <a href={`/zones/${z.slug}/`} class="relief-panel relief-1 p-5 block hover:translate-y-[-2px] transition-transform">
+              <h3 class="font-display text-lg font-bold text-white mb-1">{z.ville}</h3>
+              <p class="text-xs text-white/65 mb-2">{z.distanceLeMans}</p>
+              {z.stats && (
+                <p class="text-sm text-white/70">{z.stats.totalPME3a49.toLocaleString('fr-FR')} PME (3-49 sal.)</p>
+              )}
+            </a>
+          ))}
+        </div>
+
+        <h2 class="text-2xl font-bold text-white mb-6">Départements limitrophes</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {parLimitrophe.map((z) => (
+            <a href={`/zones/${z.slug}/`} class="relief-panel relief-1 p-5 block hover:translate-y-[-2px] transition-transform">
+              <h3 class="font-display text-lg font-bold text-white mb-1">{z.ville}</h3>
+              <p class="text-xs text-white/65 mb-2">{z.departementNom} · {z.distanceLeMans}</p>
+              {z.stats && (
+                <p class="text-sm text-white/70">{z.stats.totalPME3a49.toLocaleString('fr-FR')} PME (3-49 sal.)</p>
+              )}
+            </a>
+          ))}
+        </div>
+
+        <div class="mt-14">
+          <a href="/contact/" class="btn-primary text-base px-8 py-4">Prendre RDV</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

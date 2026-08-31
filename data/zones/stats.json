@@ -1,0 +1,236 @@
+[
+  {
+    "slug": "le-mans",
+    "nomUsage": "Le Mans",
+    "departement": "72",
+    "codeCommune": "72181",
+    "totalEntreprisesActives": 10000,
+    "totalPME3a49": 2427,
+    "topSecteurs": [
+      {
+        "code": "G",
+        "libelle": "commerce et réparation automobile",
+        "count": 525
+      },
+      {
+        "code": "M",
+        "libelle": "activités scientifiques et techniques",
+        "count": 277
+      },
+      {
+        "code": "I",
+        "libelle": "hébergement et restauration",
+        "count": 228
+      }
+    ],
+    "calculeLe": "2026-08-31"
+  },
+  {
+    "slug": "sable-sur-sarthe",
+    "nomUsage": "Sablé-sur-Sarthe",
+    "departement": "72",
+    "codeCommune": "72264",
+    "totalEntreprisesActives": 2215,
+    "totalPME3a49": 287,
+    "topSecteurs": [
+      {
+        "code": "G",
+        "libelle": "commerce et réparation automobile",
+        "count": 76
+      },
+      {
+        "code": "F",
+        "libelle": "construction et BTP",
+        "count": 33
+      },
+      {
+        "code": "C",
+        "libelle": "industrie manufacturière",
+        "count": 31
+      }
+    ],
+    "calculeLe": "2026-08-31"
+  },
+  {
+    "slug": "la-ferte-bernard",
+    "nomUsage": "La Ferté-Bernard",
+    "departement": "72",
+    "codeCommune": "72132",
+    "totalEntreprisesActives": 1843,
+    "totalPME3a49": 239,
+    "topSecteurs": [
+      {
+        "code": "G",
+        "libelle": "commerce et réparation automobile",
+        "count": 59
+      },
+      {
+        "code": "C",
+        "libelle": "industrie manufacturière",
+        "count": 30
+      },
+      {
+        "code": "M",
+        "libelle": "activités scientifiques et techniques",
+        "count": 22
+      }
+    ],
+    "calculeLe": "2026-08-31"
+  },
+  {
+    "slug": "la-fleche",
+    "nomUsage": "La Flèche",
+    "departement": "72",
+    "codeCommune": "72154",
+    "totalEntreprisesActives": 2922,
+    "totalPME3a49": 301,
+    "topSecteurs": [
+      {
+        "code": "G",
+        "libelle": "commerce et réparation automobile",
+        "count": 93
+      },
+      {
+        "code": "F",
+        "libelle": "construction et BTP",
+        "count": 38
+      },
+      {
+        "code": "C",
+        "libelle": "industrie manufacturière",
+        "count": 33
+      }
+    ],
+    "calculeLe": "2026-08-31"
+  },
+  {
+    "slug": "mamers",
+    "nomUsage": "Mamers",
+    "departement": "72",
+    "codeCommune": "72180",
+    "totalEntreprisesActives": 1001,
+    "totalPME3a49": 119,
+    "topSecteurs": [
+      {
+        "code": "G",
+        "libelle": "commerce et réparation automobile",
+        "count": 25
+      },
+      {
+        "code": "C",
+        "libelle": "industrie manufacturière",
+        "count": 13
+      },
+      {
+        "code": "F",
+        "libelle": "construction et BTP",
+        "count": 13
+      }
+    ],
+    "calculeLe": "2026-08-31"
+  },
+  {
+    "slug": "chateau-du-loir",
+    "nomUsage": "Château-du-Loir",
+    "departement": "72",
+    "codeCommune": "72071",
+    "totalEntreprisesActives": 1111,
+    "totalPME3a49": 105,
+    "topSecteurs": [
+      {
+        "code": "G",
+        "libelle": "commerce et réparation automobile",
+        "count": 25
+      },
+      {
+        "code": "I",
+        "libelle": "hébergement et restauration",
+        "count": 15
+      },
+      {
+        "code": "C",
+        "libelle": "industrie manufacturière",
+        "count": 11
+      }
+    ],
+    "calculeLe": "2026-08-31"
+  },
+  {
+    "slug": "laval",
+    "nomUsage": "Laval",
+    "departement": "53",
+    "codeCommune": "53130",
+    "totalEntreprisesActives": 10000,
+    "totalPME3a49": 1345,
+    "topSecteurs": [
+      {
+        "code": "N",
+        "libelle": "services administratifs et de soutien aux entreprises",
+        "count": 290
+      },
+      {
+        "code": "G",
+        "libelle": "commerce et réparation automobile",
+        "count": 258
+      },
+      {
+        "code": "M",
+        "libelle": "activités scientifiques et techniques",
+        "count": 138
+      }
+    ],
+    "calculeLe": "2026-08-31"
+  },
+  {
+    "slug": "alencon",
+    "nomUsage": "Alençon",
+    "departement": "61",
+    "codeCommune": "61001",
+    "totalEntreprisesActives": 6203,
+    "totalPME3a49": 600,
+    "topSecteurs": [
+      {
+        "code": "G",
+        "libelle": "commerce et réparation automobile",
+        "count": 148
+      },
+      {
+        "code": "F",
+        "libelle": "construction et BTP",
+        "count": 63
+      },
+      {
+        "code": "M",
+        "libelle": "activités scientifiques et techniques",
+        "count": 53
+      }
+    ],
+    "calculeLe": "2026-08-31"
+  },
+  {
+    "slug": "angers",
+    "nomUsage": "Angers",
+    "departement": "49",
+    "codeCommune": "49007",
+    "totalEntreprisesActives": 10000,
+    "totalPME3a49": 2950,
+    "topSecteurs": [
+      {
+        "code": "G",
+        "libelle": "commerce et réparation automobile",
+        "count": 561
+      },
+      {
+        "code": "I",
+        "libelle": "hébergement et restauration",
+        "count": 383
+      },
+      {
+        "code": "M",
+        "libelle": "activités scientifiques et techniques",
+        "count": 358
+      }
+    ],
+    "calculeLe": "2026-08-31"
+  }
+]

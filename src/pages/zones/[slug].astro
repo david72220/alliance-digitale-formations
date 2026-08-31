@@ -1,0 +1,205 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import { getZones } from '../../data/zones.ts';
+import { getCaseStudies } from '../../lib/notion.ts';
+
+export async function getStaticPaths() {
+  const zones = getZones();
+  return zones.map((zone) => ({
+    params: { slug: zone.slug },
+    props: { zone },
+  }));
+}
+
+const { zone } = Astro.props;
+const stats = zone.stats;
+
+const caseStudies = await getCaseStudies();
+const featuredStudy = zone.etudeCasSlug ? caseStudies.find((c) => c.slug === zone.etudeCasSlug) : undefined;
+
+const SITE = Astro.site ?? new URL('https://www.alliance-digitale.fr/');
+const homeUrl = new URL('/', SITE).toString();
+const zonesUrl = new URL('/zones/', SITE).toString();
+const canonicalUrl = new URL(`/zones/${zone.slug}/`, SITE).toString();
+
+const nbPmeFormatted = stats ? stats.totalPME3a49.toLocaleString('fr-FR') : null;
+const secteur1 = stats?.topSecteurs?.[0];
+const secteur2 = stats?.topSecteurs?.[1];
+const secteur3 = stats?.topSecteurs?.[2];
+
+const pageTitle = `Automatisation & formation IA pour PME à ${zone.ville} (${zone.departementNom}) — Alliance Digitale`;
+const pageDescription = `Accompagnement en IA et automatisation pour les PME de ${zone.ville} et sa région : audit, formation Qualiopi, automatisation de vos tâches répétitives. ${nbPmeFormatted ? `${nbPmeFormatted} PME de 3 à 49 salariés` : 'PME'} identifiées localement.`;
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: homeUrl },
+    { '@type': 'ListItem', position: 2, name: 'Zones d\'intervention', item: zonesUrl },
+    { '@type': 'ListItem', position: 3, name: zone.ville, item: canonicalUrl },
+  ],
+};
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `Formation et automatisation IA pour PME à ${zone.ville}`,
+  serviceType: 'Formation professionnelle IA et automatisation',
+  provider: {
+    '@type': 'Organization',
+    name: 'Alliance Digitale',
+    sameAs: SITE.toString().replace(/\/$/, ''),
+  },
+  areaServed: {
+    '@type': 'City',
+    name: zone.ville,
+    containedInPlace: {
+      '@type': 'AdministrativeArea',
+      name: zone.departementNom,
+    },
+  },
+  audience: {
+    '@type': 'BusinessAudience',
+    audienceType: 'PME avec salariés',
+  },
+  url: canonicalUrl,
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: zone.faq.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.reponse },
+  })),
+};
+---
+
+<Layout title={pageTitle} description={pageDescription} jsonLd={[breadcrumbJsonLd, serviceJsonLd, faqJsonLd]}>
+  <Header />
+
+  <main class="flex-1">
+    <section class="pt-36 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <nav class="mb-8 text-sm text-white/65">
+          <a href="/" class="hover:text-alliance-blue transition">Accueil</a>
+          <span class="mx-2">/</span>
+          <a href="/zones/" class="hover:text-alliance-blue transition">Zones d'intervention</a>
+          <span class="mx-2">/</span>
+          <span class="text-white">{zone.ville}</span>
+        </nav>
+
+        <div class="mb-10">
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">
+            {zone.departementNom} · {zone.distanceLeMans}
+          </p>
+          <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-4">
+            Automatisation & formation IA pour PME à {zone.ville}
+          </h1>
+          <p class="text-white/75 text-lg leading-relaxed">
+            {zone.accroche}
+          </p>
+        </div>
+
+        {stats && (
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+            <div class="p-4 rounded-xl border border-white/10 bg-white/[0.03]">
+              <p class="text-xs text-white/70 uppercase tracking-wider mb-1">PME locales (3-49 salariés)</p>
+              <p class="text-white font-semibold text-2xl">{nbPmeFormatted}</p>
+              <p class="text-xs text-white/50 mt-1">Données du {new Date(stats.calculeLe).toLocaleDateString('fr-FR')}</p>
+            </div>
+            <div class="p-4 rounded-xl border border-white/10 bg-white/[0.03]">
+              <p class="text-xs text-white/70 uppercase tracking-wider mb-1">Secteur dominant</p>
+              <p class="text-white font-semibold capitalize">{secteur1?.libelle || '—'}</p>
+            </div>
+            <div class="p-4 rounded-xl border border-white/10 bg-white/[0.03]">
+              <p class="text-xs text-white/70 uppercase tracking-wider mb-1">Mode d'intervention</p>
+              <p class="text-white font-semibold leading-snug text-sm">{zone.modeIntervention}</p>
+            </div>
+          </div>
+        )}
+
+        <div class="prose prose-invert max-w-none space-y-8 mb-12">
+          <div>
+            <h2 class="text-2xl font-bold text-white mb-3">Pourquoi l'IA et l'automatisation pour les PME de {zone.ville} ?</h2>
+            <p class="text-white/75 leading-relaxed">{zone.pitchSecteur}</p>
+            {secteur1 && secteur2 && secteur3 && (
+              <p class="text-white/60 text-sm mt-3">
+                Répartition locale parmi les PME de 3 à 49 salariés : {secteur1.libelle} ({secteur1.count} entreprises),
+                {' '}{secteur2.libelle} ({secteur2.count}), {secteur3.libelle} ({secteur3.count}).
+              </p>
+            )}
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-bold text-white mb-3">Notre offre à {zone.ville}</h2>
+            <p class="text-white/75 leading-relaxed">
+              Un accompagnement en trois temps, identique à notre méthode déployée dans toute la région :
+              <a href="/accompagnement/" class="text-alliance-blue hover:text-white transition"> audit de vos processus</a>,
+              <a href="/formations/" class="text-alliance-blue hover:text-white transition"> formation Qualiopi</a> de vos équipes,
+              puis mise en place concrète d'automatisations (n8n, IA générative, connecteurs métier). {zone.modeIntervention}
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-bold text-white mb-3">Zone d'activité et bassin économique</h2>
+            <p class="text-white/75 leading-relaxed">
+              Nos interventions à {zone.ville} couvrent notamment le secteur de la {zone.zoneActivite}.
+              {stats && ` Sur les ${stats.totalEntreprisesActives >= 10000 ? 'plus de 10 000' : stats.totalEntreprisesActives.toLocaleString('fr-FR')} entreprises actives recensées sur la commune, environ ${nbPmeFormatted} correspondent au profil PME de 3 à 49 salariés que nous accompagnons en priorité.`}
+            </p>
+          </div>
+        </div>
+
+        {featuredStudy && (
+          <div class="mb-12">
+            <h2 class="text-2xl font-bold text-white mb-4">Étude de cas</h2>
+            <CaseStudyCard study={featuredStudy} />
+          </div>
+        )}
+
+        <div class="mb-12">
+          <h2 class="text-2xl font-bold text-white mb-6">Questions fréquentes — {zone.ville}</h2>
+          <div class="space-y-4">
+            {zone.faq.map((f) => (
+              <details class="relief-panel relief-1 p-5 group">
+                <summary class="cursor-pointer text-white font-semibold list-none flex items-center justify-between gap-4">
+                  {f.question}
+                  <svg class="w-4 h-4 text-alliance-blue shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+                </summary>
+                <p class="text-white/70 mt-3 leading-relaxed">{f.reponse}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-10 p-6 rounded-xl border border-alliance-blue/30 bg-alliance-blue/10">
+          <p class="text-sm text-alliance-blue font-semibold mb-2 flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Financement OPCO sur demande
+          </p>
+          <p class="text-white/80">
+            Nos formations peuvent être prises en charge par votre OPCO, y compris pour les PME de {zone.ville}
+            et de {zone.departementNom}. Contactez-nous pour étudier votre éligibilité.
+          </p>
+        </div>
+
+        <div class="mt-12 flex flex-col sm:flex-row gap-4">
+          <a href="/contact/" class="btn-primary text-base px-8 py-4">Prendre RDV — {zone.ville}</a>
+          <a href="/zones/" class="inline-flex items-center text-sm text-white/65 hover:text-alliance-blue transition self-center">
+            Voir toutes nos zones d'intervention →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
