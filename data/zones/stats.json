@@ -258,5 +258,57 @@
       }
     ],
     "calculeLe": "2026-08-31"
+  },
+  {
+    "slug": "blois",
+    "nomUsage": "Blois",
+    "departement": "41",
+    "codeCommune": "41018",
+    "totalEntreprisesActives": 10000,
+    "totalPME3a49": 1057,
+    "topSecteurs": [
+      {
+        "code": "G",
+        "libelle": "commerce et réparation automobile",
+        "count": 208
+      },
+      {
+        "code": "I",
+        "libelle": "hébergement et restauration",
+        "count": 125
+      },
+      {
+        "code": "M",
+        "libelle": "activités scientifiques et techniques",
+        "count": 109
+      }
+    ],
+    "calculeLe": "2026-08-31"
+  },
+  {
+    "slug": "chartres",
+    "nomUsage": "Chartres",
+    "departement": "28",
+    "codeCommune": "28085",
+    "totalEntreprisesActives": 10000,
+    "totalPME3a49": 996,
+    "topSecteurs": [
+      {
+        "code": "G",
+        "libelle": "commerce et réparation automobile",
+        "count": 202
+      },
+      {
+        "code": "M",
+        "libelle": "activités scientifiques et techniques",
+        "count": 127
+      },
+      {
+        "code": "I",
+        "libelle": "hébergement et restauration",
+        "count": 121
+      }
+    ],
+    "calculeLe": "2026-08-31"
   }
 ]

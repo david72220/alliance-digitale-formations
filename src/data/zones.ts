@@ -288,6 +288,52 @@ export const ZONES: Zone[] = [
     ],
     published: true,
   },
+  {
+    slug: 'blois',
+    ville: 'Blois',
+    departement: '41',
+    departementNom: 'Loir-et-Cher',
+    tier: 2,
+    distanceLeMans: 'environ 100 km / 1h15 du Mans',
+    modeIntervention: 'Présentiel sur site à Blois (journée dédiée) ou à distance.',
+    zoneActivite: 'bassin économique blésois (Val de Loire, tourisme, industrie légère)',
+    accroche: `Blois compte un peu plus de 1 000 PME de 3 à 49 salariés, un tissu économique de taille moyenne moins dense que Tours ou Angers mais avec une offre d'accompagnement numérique locale limitée. Le commerce et le tourisme du Val de Loire structurent l'essentiel de l'activité, complétés par des activités scientifiques et techniques.`,
+    pitchSecteur: `Le commerce domine largement, suivi de l'hébergement-restauration (poids du tourisme ligérien, châteaux de la Loire) puis des activités scientifiques et techniques. Pour les commerces et l'hôtellerie-restauration blésoise, l'automatisation porte sur la prise de réservation et les relances clients ; pour les PME de services, sur la gestion administrative et la relation client.`,
+    faq: [
+      {
+        question: "Alliance Digitale intervient-elle à Blois malgré la distance depuis Le Mans ?",
+        reponse: "Oui, Blois fait partie de notre zone d'intervention élargie. Le déplacement s'organise sur une journée dédiée ; le suivi peut se faire ensuite à distance.",
+      },
+      {
+        question: "Le secteur touristique du Val de Loire (châteaux, hébergement) est-il couvert ?",
+        reponse: "Oui : réservation, avis clients et relances sont des cas fréquents pour l'hôtellerie-restauration et les sites touristiques de la région blésoise.",
+      },
+    ],
+    published: true,
+  },
+  {
+    slug: 'chartres',
+    ville: 'Chartres',
+    departement: '28',
+    departementNom: 'Eure-et-Loir',
+    tier: 2,
+    distanceLeMans: 'environ 130 km / 1h30 du Mans (axe Le Mans-Paris)',
+    modeIntervention: 'Présentiel sur site à Chartres (journée dédiée) ou à distance — le distanciel est recommandé pour un suivi régulier compte tenu de la distance.',
+    zoneActivite: 'bassin chartrain et Cosmetic Valley',
+    accroche: `Chartres compte environ 1 000 PME de 3 à 49 salariés, avec une spécificité notable : la présence de la Cosmetic Valley, pôle de compétitivité cosmétique et pharmaceutique qui structure une partie du tissu industriel local, en complément du commerce et des services scientifiques et techniques. Sur l'axe Le Mans-Paris, un déplacement reste pertinent pour un audit initial malgré la distance.`,
+    pitchSecteur: `Le commerce arrive en tête, suivi des activités scientifiques et techniques (poids de la Cosmetic Valley) puis de l'hébergement-restauration. Pour les PME du secteur cosmétique/pharma et leurs sous-traitants, l'automatisation porte souvent sur la gestion documentaire, la traçabilité et le reporting qualité ; pour le commerce local, sur la prise de rendez-vous et les relances.`,
+    faq: [
+      {
+        question: "Vos formations sont-elles adaptées aux PME de la Cosmetic Valley chartraine ?",
+        reponse: "Oui. La gestion documentaire, la traçabilité et le reporting qualité sont des enjeux centraux pour les sous-traitants du secteur cosmétique/pharma, que nous intégrons aux ateliers pratiques.",
+      },
+      {
+        question: "Chartres est loin du Mans : comment s'organise l'accompagnement dans la durée ?",
+        reponse: "L'audit initial se fait sur site lors d'une journée dédiée ; le suivi et les sessions de formation suivantes peuvent ensuite se dérouler en visioconférence pour limiter les déplacements.",
+      },
+    ],
+    published: true,
+  },
 ];
 
 export function getZoneStats(slug: string): ZoneStats | undefined {

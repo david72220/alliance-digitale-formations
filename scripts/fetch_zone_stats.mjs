@@ -48,6 +48,8 @@ const VILLES = [
   { slug: 'alencon', nomUsage: 'Alençon', codeCommune: '61001', departement: '61' },
   { slug: 'angers', nomUsage: 'Angers', codeCommune: '49007', departement: '49' },
   { slug: 'tours', nomUsage: 'Tours', codeCommune: '37261', departement: '37' },
+  { slug: 'blois', nomUsage: 'Blois', codeCommune: '41018', departement: '41' },
+  { slug: 'chartres', nomUsage: 'Chartres', codeCommune: '28085', departement: '28' },
 ];
 
 async function fetchJson(url, attempt = 1) {

@@ -33,6 +33,8 @@ const META = [
   { slug: 'alencon', tier: 'Tier 2 — limitrophe fort', etudeCas: '' },
   { slug: 'angers', tier: 'Tier 2 — limitrophe fort', etudeCas: '' },
   { slug: 'tours', tier: 'Tier 2 — limitrophe fort', etudeCas: '' },
+  { slug: 'blois', tier: 'Tier 2 — limitrophe fort', etudeCas: '' },
+  { slug: 'chartres', tier: 'Tier 2 — limitrophe fort', etudeCas: '' },
 ];
 
 const notion = new Client({ auth: TOKEN });
