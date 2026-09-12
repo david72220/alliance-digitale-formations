@@ -1,0 +1,214 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SolutionCard, { type Solution } from '../components/SolutionCard.astro';
+
+const CAL_URL = import.meta.env.CAL_URL ?? 'https://cal.eu/alliance-digitale/decouverte-30-min';
+
+const solutions: Solution[] = [
+  {
+    slug: 'compte-perso',
+    nom: 'Compte Perso',
+    tagline: 'Vos comptes personnels tenus à la photo de ticket près : scannez vos achats, importez vos relevés, tout est rapproché et vos enveloppes budgétaires restent sous contrôle.',
+    prix: '9,90 €',
+    periode: '/mois',
+    href: '/compte-perso/',
+    badge: 'nouveau',
+    image: '/images/solutions/compte-perso.webp',
+    alt: 'Une personne photographie un ticket de caisse, ses enveloppes budgétaires visibles sur tablette',
+  },
+  {
+    slug: 'site-vitrine',
+    nom: 'Site Vitrine',
+    tagline: 'Un site rapide et propre sur téléphone, avec votre zone d\'intervention bien référencée. Un paiement unique, le site est à vous.',
+    prix: '690 €',
+    href: '/sites-web-artisans/',
+    image: '/images/solutions/site-vitrine.webp',
+    alt: 'Artisan en atelier consultant un site professionnel sur tablette',
+  },
+  {
+    slug: 'site-capture',
+    nom: 'Site Capture',
+    tagline: 'Vos clients réservent seuls leur créneau pendant que vous êtes sur chantier. Rappels automatiques, demandes centralisées.',
+    prix: '990 €',
+    periode: '+ 39 €/mois',
+    href: '/sites-web-artisans/',
+    image: '/images/solutions/site-capture.webp',
+    alt: 'Couvreur sur un toit consultant son agenda de rendez-vous sur smartphone',
+  },
+  {
+    slug: 'standardiste-ia',
+    nom: 'Standardiste IA',
+    tagline: 'Un assistant répond 24 h/24 sur votre site : il filtre les demandes, détecte les urgences et vous transmet les vrais clients.',
+    prix: '1 490 €',
+    periode: '+ 79 €/mois',
+    href: '/sites-web-artisans/',
+    image: '/images/solutions/standardiste-ia.webp',
+    alt: 'Gérante de commerce consultant un assistant conversationnel sur son smartphone',
+  },
+  {
+    slug: 'formations-ia',
+    nom: 'Formations IA',
+    tagline: 'Vos équipes utilisent déjà l\'IA — correctement, et sans mettre vos données en danger. Demi-journées appliquées à votre métier.',
+    prix: 'Sur devis',
+    href: '/formations/',
+    image: '/images/solutions/formations-ia.webp',
+    alt: 'Participants d\'une formation IA travaillant chacun sur leur ordinateur portable',
+  },
+  {
+    slug: 'second-souffle',
+    nom: 'Second Souffle',
+    tagline: 'Vos anciens clients ne sont pas revenus par mécontentement, mais par oubli. On leur écrit, à votre nom. La première campagne est offerte.',
+    prix: '1re campagne offerte',
+    href: '/contact/',
+    image: '/images/solutions/second-souffle.webp',
+    alt: 'Gérante de café préparant une campagne d\'emails pour ses anciens clients',
+  },
+  {
+    slug: 'presentia',
+    nom: 'Présentia',
+    tagline: 'Moins de rendez-vous manqués : confirmations, rappels SMS et remplacement automatique des créneaux libérés.',
+    prix: '59 €',
+    periode: '/mois',
+    badge: 'bientot',
+    href: '/contact/',
+    image: '/images/solutions/presentia.webp',
+    alt: 'Gérante de salon de coiffure consultant un rappel de rendez-vous sur son téléphone',
+  },
+  {
+    slug: 'reputia',
+    nom: 'Réputia',
+    tagline: 'Chaque client satisfait devient un avis Google : demande automatique après prestation, réponses suivies, tableau de bord.',
+    prix: '49 €',
+    periode: '/mois',
+    badge: 'bientot',
+    href: '/contact/',
+    image: '/images/solutions/reputia.webp',
+    alt: 'Restaurateur consultant les avis de ses clients sur son téléphone',
+  },
+];
+
+const featured = solutions.find((s) => s.badge === 'nouveau')!;
+const grid = solutions.filter((s) => s !== featured);
+
+const itemListLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Solutions Alliance Digitale',
+  description: 'Produits et services vendables en ligne par Alliance Digitale : application de comptabilité personnelle, sites web pour artisans, formations IA et services d\'avis clients.',
+  itemListElement: solutions.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Product',
+      name: s.nom,
+      description: s.tagline,
+      image: new URL(s.image, Astro.site).toString(),
+      brand: { '@type': 'Brand', name: 'Alliance Digitale' },
+      ...(s.badge === 'nouveau'
+        ? {
+            offers: {
+              '@type': 'Offer',
+              price: '9.90',
+              priceCurrency: 'EUR',
+              description: 'Abonnement mensuel sans engagement',
+              availability: 'https://schema.org/InStock',
+            },
+          }
+        : {}),
+    },
+  })),
+};
+---
+
+<Layout
+  title="Nos solutions — sites web, formations, comptabilité | Alliance Digitale"
+  description="Application de comptabilité personnelle, sites web pour artisans avec prise de rendez-vous, standardiste IA, formations. Des solutions concrètes, des prix clairs."
+  image="/images/solutions/compte-perso.webp"
+  jsonLd={itemListLd}
+>
+  <Header />
+
+  <main class="flex-1">
+    <!-- Hero -->
+    <section class="relative mx-auto max-w-7xl px-4 pt-16 pb-10">
+      <p class="text-sm font-semibold uppercase tracking-widest text-alliance-blue" data-hero-anim>Catalogue</p>
+      <h1 class="mt-3 font-display text-4xl md:text-5xl font-bold text-white max-w-3xl" data-hero-anim>
+        Des outils concrets pour votre entreprise
+      </h1>
+      <p class="mt-4 text-lg text-white/70 max-w-2xl" data-hero-anim>
+        Chaque solution part d'un vrai problème rencontré chez un client : perdre des appels, mal tenir ses comptes,
+        rater des rendez-vous. Choisissez une carte, on s'occupe du reste.
+      </p>
+    </section>
+
+    <!-- Carte vedette Compte Perso -->
+    <section class="mx-auto max-w-7xl px-4 py-6" data-reveal aria-label="Nouveauté">
+      <SolutionCard solution={featured} featured />
+    </section>
+
+    <!-- Grille des autres solutions -->
+    <section class="mx-auto max-w-7xl px-4 py-8">
+      <h2 class="sr-only">Toutes les solutions</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-reveal>
+        {grid.map((s, i) => (
+          <div style={`--reveal-delay:${i * 0.08}s`} data-reveal-delay>
+            <SolutionCard solution={s} />
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Comment ça se passe -->
+    <section class="mx-auto max-w-7xl px-4 py-16">
+      <h2 class="font-display text-3xl font-bold text-white" data-reveal>Comment ça se passe</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {
+          [
+            {
+              n: '1',
+              t: '30 minutes pour cadrer',
+              d: 'Un rendez-vous pour comprendre votre besoin et vérifier que la solution vous convient. Sans engagement.',
+            },
+            {
+              n: '2',
+              t: 'On met en place',
+              d: 'Nous installons et configurons tout pour vous, avec vos informations. Vous n\'avez rien à installer.',
+            },
+            {
+              n: '3',
+              t: 'Vous utilisez, on suit',
+              d: 'Vous êtes autonome, avec un support réactif si besoin. Vous restez propriétaire de vos données.',
+            },
+          ].map((etape, i) => (
+            <div class="rounded-2xl bg-alliance-dark-2 border border-white/10 p-6" data-reveal>
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-alliance-blue/15 text-alliance-blue font-display font-bold text-lg">
+                {etape.n}
+              </span>
+              <h3 class="mt-4 font-semibold text-white text-lg">{etape.t}</h3>
+              <p class="mt-2 text-sm text-white/70 leading-relaxed">{etape.d}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- CTA final -->
+    <section class="mx-auto max-w-7xl px-4 pb-20">
+      <div class="rounded-3xl border border-alliance-blue/30 bg-gradient-to-br from-alliance-dark-2 to-alliance-dark p-8 md:p-12 text-center" data-reveal>
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-white">Une question avant de choisir ?</h2>
+        <p class="mt-3 text-white/70 max-w-xl mx-auto">
+          30 minutes suffisent pour voir si une de ces solutions vous fait gagner du temps. Sans engagement.
+        </p>
+        <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={CAL_URL} class="btn-primary px-8 py-3 rounded-lg font-semibold">Prendre rendez-vous</a>
+          <a href="/contact/" class="px-8 py-3 rounded-lg font-semibold border border-white/20 text-white/80 hover:text-white hover:border-white/40 transition">Nous écrire</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

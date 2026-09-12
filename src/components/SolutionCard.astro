@@ -1,0 +1,97 @@
+---
+/**
+ * Carte d'un produit du catalogue /nos-solutions (style Minobia).
+ * Visuel au-dessus, nom + tagline + prix en dessous (texte HTML net, SEO).
+ * Props typées — aucune logique métier ici.
+ * NB: images = chemins public/ → <img> natif avec dimensions explicites (pas <Image>).
+ */
+export interface Solution {
+  slug: string;
+  nom: string;
+  tagline: string;
+  prix: string;
+  periode?: string;
+  href?: string;
+  badge?: 'nouveau' | 'bientot';
+  image: string;
+  alt: string;
+  width?: number;
+  height?: number;
+}
+
+interface Props {
+  solution: Solution;
+  featured?: boolean;
+}
+
+const { solution, featured = false } = Astro.props;
+const href = solution.href ?? '/contact/';
+const estBientot = solution.badge === 'bientot';
+const w = solution.width ?? 1024;
+const h = solution.height ?? 768;
+---
+
+<a
+  href={href}
+  class={`group block rounded-2xl overflow-hidden bg-alliance-dark-2 border border-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:border-alliance-blue/50 hover:shadow-2xl hover:shadow-alliance-blue/10 ${
+    featured ? 'md:col-span-2' : ''
+  }`}
+  aria-label={`${solution.nom} — ${solution.tagline}`}
+>
+  <div class="relative overflow-hidden">
+    <img
+      src={solution.image}
+      alt={solution.alt}
+      width={w}
+      height={h}
+      loading="lazy"
+      decoding="async"
+      class={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${featured ? 'aspect-[2/1]' : 'aspect-[4/3]'}`}
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-alliance-dark/90 via-alliance-dark/20 to-transparent pointer-events-none"></div>
+    {
+      solution.badge && (
+        <span
+          class={`absolute top-3 left-3 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
+            solution.badge === 'nouveau'
+              ? 'bg-alliance-orange text-white shadow-lg'
+              : 'bg-white/10 text-white/90 backdrop-blur-sm border border-white/20'
+          }`}
+        >
+          {solution.badge === 'nouveau' ? 'Nouveau' : 'Bientôt'}
+        </span>
+      )
+    }
+  </div>
+
+  <div class="p-5">
+    <div class="flex items-baseline justify-between gap-3">
+      <h3 class={`font-display text-xl font-semibold text-white ${featured ? 'md:text-2xl' : ''}`}>{solution.nom}</h3>
+      <span class={`shrink-0 text-sm font-bold ${estBientot ? 'text-white/50' : 'text-alliance-blue'}`}>
+        {solution.prix}
+        {solution.periode && <span class="font-medium text-white/60"> {solution.periode}</span>}
+      </span>
+    </div>
+    <p class={`mt-2 text-sm leading-relaxed text-white/70 ${featured ? 'md:text-base' : ''}`}>{solution.tagline}</p>
+
+    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-alliance-blue group-hover:text-white transition-colors">
+      {
+        estBientot ? (
+          <>
+            Me prévenir à la sortie
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </>
+        ) : (
+          <>
+            Découvrir
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </>
+        )
+      }
+    </span>
+  </div>
+</a>
