@@ -87,7 +87,7 @@ export const ZONES: Zone[] = [
       },
       {
         question: "Proposez-vous un financement OPCO pour les PME de Sablé ?",
-        reponse: "Oui, comme pour l'ensemble de nos formations, une prise en charge OPCO peut être étudiée — contactez-nous pour vérifier votre éligibilité.",
+        reponse: "Un financement OPCO est possible : comme pour l'ensemble de nos formations, une prise en charge peut être étudiée — contactez-nous pour vérifier votre éligibilité.",
       },
     ],
     published: true,

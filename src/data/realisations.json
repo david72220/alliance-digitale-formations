@@ -158,5 +158,93 @@
     "probleme": "Besoin d'un outil de dictée vocale rapide et respectueux de la confidentialité, sans envoyer la voix à un service tiers.",
     "solution": "Application de transcription vocale fonctionnant entièrement en local, sans transmission des données à l'extérieur.",
     "resultat": "Dictée vocale fonctionnelle sans qu'aucune donnée audio ne quitte l'appareil."
+  },
+  {
+    "titre": "Application de prospection par thème et zone géographique",
+    "secteur": "Prospection B2B / Commerce",
+    "type": "Client PME",
+    "probleme": "Constituer une liste de prospects qualifiés sur un métier et un territoire donnés demandait des heures de recherche manuelle dans des annuaires dispersés.",
+    "solution": "Application de recherche par métier et zone, enrichissement automatique des fiches entreprise, base de prospects dédoublonnée avec suivi des relances et export tableur.",
+    "resultat": "Une liste de prospects exploitable en quelques minutes, sans ressaisie et sans doublon d'une recherche à l'autre."
+  },
+  {
+    "titre": "Outil de gestion commerciale sur mesure — devis et bons de commande",
+    "secteur": "Courtage de données / Services B2B",
+    "type": "Client PME",
+    "probleme": "Devis et bons de commande étaient produits à la main à partir d'un référentiel d'articles incohérent, avec des risques d'erreur de prix sur les documents envoyés aux clients.",
+    "solution": "Outil de gestion commerciale sur mesure : référentiel d'articles assaini, saisie guidée, calculs verrouillés et impression de documents clients normalisés.",
+    "resultat": "Documents commerciaux fiables et uniformes, produits en quelques minutes au lieu d'une saisie complète à chaque affaire."
+  },
+  {
+    "titre": "Application de suivi de patientèle pour une praticienne libérale",
+    "secteur": "Santé / Profession libérale",
+    "type": "Client PME",
+    "probleme": "Les notes de séance étaient prises sur papier puis ressaisies, sans dossier patient centralisé ni archivage fiable.",
+    "solution": "Application de bureau avec dictée vocale, dossier patient structuré, génération de comptes rendus et archivage automatique des documents.",
+    "resultat": "Fin de la double saisie : le compte rendu est prêt et classé à la fin de la séance."
+  },
+  {
+    "titre": "Application de gestion des comptes et du budget",
+    "secteur": "Gestion financière / Indépendant",
+    "type": "Client PME",
+    "probleme": "Le suivi des dépenses et du prévisionnel se faisait dans des tableurs éparpillés, sans vision consolidée ni alerte en cas de dérive.",
+    "solution": "Application sécurisée de suivi budgétaire : lecture automatique des justificatifs, tableaux de bord, alertes et récapitulatif hebdomadaire.",
+    "resultat": "Situation financière consultable en continu et écarts signalés automatiquement, sans tenue manuelle de tableurs."
+  },
+  {
+    "titre": "Génération automatique des feuilles d'émargement",
+    "secteur": "Formation professionnelle",
+    "type": "Client PME",
+    "probleme": "Chaque session de formation exigeait la préparation manuelle d'une feuille d'émargement à partir d'un modèle et de la liste des inscrits.",
+    "solution": "Génération automatique de la feuille d'émargement dès la création de la séance, pré-remplie et classée dans le dossier de la classe.",
+    "resultat": "Feuilles prêtes sans intervention, retrouvables immédiatement en cas de contrôle qualité."
+  },
+  {
+    "titre": "Automatisation des fiches qualité (QSE)",
+    "secteur": "Formation professionnelle / Qualité",
+    "type": "Client PME",
+    "probleme": "Les fiches qualité exigées par la démarche QSE étaient rédigées et rattachées manuellement aux dossiers concernés.",
+    "solution": "Chaîne automatisée de création et de rattachement des fiches qualité aux données concernées.",
+    "resultat": "Traçabilité qualité maintenue en continu, sans travail de compilation avant audit."
+  },
+  {
+    "titre": "Plateforme de rapports d'intervention pour techniciens terrain",
+    "secteur": "Télécoms / Fibre optique",
+    "type": "Client PME",
+    "probleme": "Les comptes rendus de chantier étaient faits de photos envoyées en vrac et d'un rapport ressaisi le soir, souvent incomplet et jamais uniforme — alors que les donneurs d'ordre conditionnent le paiement à la qualité du dossier de recette.",
+    "solution": "Application terrain fonctionnant hors connexion (photos annotées, dictée vocale, signatures) et espace responsable pour les modèles de rapport, la validation et la diffusion du PDF normé.",
+    "resultat": "Rapport d'intervention normé produit sur le chantier et diffusé automatiquement, au lieu d'une rédaction en fin de journée."
+  },
+  {
+    "titre": "Outil public d'évaluation du risque avant dépôt d'un document sur une IA",
+    "secteur": "Sécurité / Conformité",
+    "type": "Projet interne",
+    "probleme": "Les dirigeants de TPE déposent des documents sensibles sur des IA grand public sans savoir où partent leurs données ni quel outil convient.",
+    "solution": "Outil en ligne gratuit et bilingue : choix du secteur et du type de document, niveau de risque, destination des données et modèles d'IA recommandés — y compris les solutions locales pour les cas critiques.",
+    "resultat": "Réponse claire en quelques clics sur ce qui peut être confié à une IA, et ce qui doit rester local."
+  },
+  {
+    "titre": "Production de voix off en local pour supports pédagogiques",
+    "secteur": "Formation / Production de contenu",
+    "type": "Projet interne / R&D",
+    "probleme": "La voix off des modules de formation reposait sur un service en ligne payant, avec envoi des données vocales à un tiers.",
+    "solution": "Chaîne de synthèse vocale exécutée entièrement sur poste local, pilotable par lots pour traiter un module complet.",
+    "resultat": "Voix off produite sans abonnement ni transmission de données à un prestataire externe."
+  },
+  {
+    "titre": "Plateforme de gestion de projet avec assistant IA",
+    "secteur": "Logiciel / Gestion de projet",
+    "type": "Projet interne / R&D",
+    "probleme": "Les outils de gestion de projet du marché imposent la saisie manuelle des tâches et hébergent les données hors du contrôle de l'entreprise.",
+    "solution": "Plateforme multi-utilisateurs cloisonnée par client, avec assistant IA (création de tâches à la voix, exploitation des comptes rendus de réunion), briefings automatiques et journal d'audit.",
+    "resultat": "Les tâches naissent des échanges réels de l'équipe au lieu d'être ressaisies, dans un environnement où les données restent maîtrisées."
+  },
+  {
+    "titre": "Agent de développement assisté par IA — automatisation interne",
+    "secteur": "R&D / Outillage interne",
+    "type": "Projet interne / R&D",
+    "probleme": "La surveillance et la maintenance des automatisations réparties sur plusieurs machines demandaient des vérifications manuelles récurrentes.",
+    "solution": "Agent interne capable de surveiller les systèmes d'automatisation, de détecter les pannes et de préparer les correctifs, en s'appuyant sur plusieurs moteurs d'IA avec repli automatique.",
+    "resultat": "Pannes détectées et documentées automatiquement, avec bascule sur un moteur de secours en cas d'indisponibilité."
   }
 ]
