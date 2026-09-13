@@ -1,0 +1,384 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const CAL_URL = import.meta.env.CAL_URL ?? 'https://cal.eu/alliance-digitale/decouverte-30-min';
+
+const offres = [
+  {
+    nom: 'Essai',
+    prix: 'Gratuit',
+    periode: '14 jours',
+    setup: null,
+    desc: 'Testez le socle et l\'enregistreur de réunions.',
+    inclus: [
+      'Tâches, Kanban, listes, calendrier',
+      'Indicateur de retard',
+      'Enregistreur de réunions (5 comptes rendus offerts)',
+      'Aucune carte bancaire requise',
+    ],
+    cta: 'Démarrer l\'essai',
+    href: '#offres',
+    highlight: false,
+  },
+  {
+    nom: 'Base',
+    prix: '20 €',
+    periode: '/utilisateur/mois',
+    setup: '180 € (offre de lancement)',
+    desc: 'La gestion de projet complète, sans IA.',
+    inclus: [
+      'Tout l\'essai, sans limite',
+      'Commentaires, mentions, pièces jointes',
+      'Notifications e-mail configurables',
+      'Recherche et filtres avancés',
+    ],
+    cta: 'Choisir Base',
+    href: CAL_URL,
+    highlight: false,
+  },
+  {
+    nom: 'Base+',
+    badge: 'Recommandé',
+    prix: '25 €',
+    periode: '/utilisateur/mois',
+    setup: '490 € (offre de lancement)',
+    desc: 'La gestion améliorée : réunions assistées par l\'IA et pilotage par la voix.',
+    inclus: [
+      'Tout Base',
+      'Enregistreur de réunions natif — transcription en France, audio détruit',
+      'Compte rendu généré, actions extraites à valider une par une',
+      'Assistant vocal (créer, terminer, reporter)',
+      'Externes sans compte (email, invitation, partage)',
+    ],
+    cta: 'Choisir Base+',
+    href: CAL_URL,
+    highlight: true,
+  },
+];
+
+const modules = [
+  {
+    slug: 'commercial',
+    nom: 'Commercial',
+    etat: 'disponible',
+    prix: '+ 59 €',
+    periode: '/utilisateur/mois',
+    desc: 'Votre pipeline commercial dans PilotAI : affaires, relances et chiffre d\'affaires au même endroit que vos projets.',
+    points: [
+      'Pipeline d\'affaires par étapes',
+      'Suivi des relances clients',
+      'Tableau de bord du chiffre d\'affaires',
+    ],
+  },
+  {
+    slug: 'social',
+    nom: 'Social',
+    etat: 'bientot',
+    desc: 'Planifiez et suivez vos publications réseaux sociaux depuis PilotAI.',
+    points: [
+      'Calendrier éditorial intégré',
+      'Suivi des publications et de l\'engagement',
+      'Plusieurs versions en préparation',
+    ],
+  },
+  {
+    slug: 'marketing',
+    nom: 'Marketing',
+    etat: 'bientot',
+    desc: 'Vos campagnes marketing pilotées comme des projets.',
+    points: [
+      'Campagnes avec objectifs et budgets',
+      'Suivi des résultats',
+      'Plusieurs versions en préparation',
+    ],
+  },
+];
+
+const appLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'PilotAI',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  description: 'Gestion de projet avec IA souveraine : réunions transformées en actions validées, pilotage par la voix, modules Commercial, Social et Marketing.',
+  offers: [
+    { '@type': 'Offer', name: 'Essai', price: '0', priceCurrency: 'EUR', description: 'Essai gratuit 14 jours' },
+    { '@type': 'Offer', name: 'Base', price: '20', priceCurrency: 'EUR', description: 'Par utilisateur et par mois' },
+    { '@type': 'Offer', name: 'Base+', price: '25', priceCurrency: 'EUR', description: 'Par utilisateur et par mois' },
+  ],
+  publisher: { '@type': 'Organization', name: 'Alliance Digitale' },
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'Mes données sortent-elles de France ?', acceptedAnswer: { '@type': 'Answer', text: 'Non. L\'IA tourne par défaut sur nos serveurs situés en France : vos contenus ne partent pas vers un service américain. Les données sont hébergées en Europe et vous pouvez les exporter ou les faire effacer à tout moment (RGPD natif).' } },
+    { '@type': 'Question', name: 'En quoi PilotAI est différent d\'Asana ou Monday ?', acceptedAnswer: { '@type': 'Answer', text: 'Trois différences : l\'IA est incluse sans compteur et reste chez nous, vos réunions deviennent des comptes rendus avec des actions à valider, et vous pilotez l\'outil par la voix. Les concurrents demandent souvent un supplément mensuel pour un assistant moins intégré.' } },
+    { '@type': 'Question', name: 'L\'IA décide-t-elle toute seule ?', acceptedAnswer: { '@type': 'Answer', text: 'Non. L\'IA prépare : transcription, compte rendu, actions proposées. Chaque action est validée par un humain avant d\'exister dans le projet. Le contrôle reste à votre équipe.' } },
+    { '@type': 'Question', name: 'Y a-t-il un engagement ?', acceptedAnswer: { '@type': 'Answer', text: 'L\'essai de 14 jours est gratuit et sans installation. Ensuite, les offres sont mensuelles : Base à 20 € et Base+ à 25 € par utilisateur et par mois, module Commercial à +59 € par utilisateur et par mois. Chaque offre payante inclut une mise en place accompagnée, facturée une seule fois au départ (180 € ou 490 € selon l\'offre).' } },
+    { '@type': 'Question', name: 'Faut-il beaucoup de formation ?', acceptedAnswer: { '@type': 'Answer', text: 'Non. La mise en place est faite avec vous : vos projets, vos collaborateurs, vos intégrations. Vous repartez avec un outil prêt à l\'emploi et une prise en main guidée.' } },
+  ],
+};
+---
+
+<Layout
+  title="PilotAI — gestion de projet avec IA souveraine | Alliance Digitale"
+  description="Gérez vos projets, transformez vos réunions en actions validées et pilotez par la voix. Modules Commercial, Social et Marketing. Dès 20 €/utilisateur/mois."
+  image="/images/solutions/pilotai-hero.webp"
+  jsonLd={[appLd, faqLd]}
+>
+  <Header />
+
+  <main class="flex-1">
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-alliance-dark-2">
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-alliance-blue/10 via-transparent to-transparent"></div>
+      <div class="relative mx-auto max-w-7xl px-4 pt-16 pb-14 grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <p class="inline-flex items-center px-3 py-1 rounded-full bg-alliance-blue/15 text-alliance-blue text-xs font-bold uppercase tracking-widest" data-hero-anim>Produit phare</p>
+          <h1 class="mt-4 font-display text-4xl md:text-5xl font-bold text-white" data-hero-anim>PilotAI</h1>
+          <p class="mt-3 text-xl text-white/80 font-medium" data-hero-anim>Chaque réunion devient des actions. Automatiquement.</p>
+          <p class="mt-4 text-white/65 leading-relaxed" data-hero-anim>
+            La gestion de projet de votre PME, avec une IA qui reste chez vous : vos réunions
+            deviennent des comptes rendus et des actions à valider, et vous pilotez par la voix.
+            Ajoutez les modules Commercial, Social ou Marketing selon vos besoins.
+          </p>
+          <div class="mt-6 flex flex-wrap items-baseline gap-3" data-hero-anim>
+            <span class="text-white/60 text-sm">À partir de</span>
+            <span class="font-display text-3xl font-bold text-alliance-blue">20 €</span>
+            <span class="text-white/60">/utilisateur/mois · essai gratuit de 14 jours</span>
+          </div>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4" data-hero-anim>
+            <a href={CAL_URL} class="btn-primary px-8 py-3 rounded-lg font-semibold text-center">Voir PilotAI en démo</a>
+            <a href="#offres" class="px-8 py-3 rounded-lg font-semibold border border-white/20 text-white/80 hover:text-white hover:border-white/40 transition text-center">Voir les offres</a>
+          </div>
+        </div>
+        <div class="relative" data-reveal>
+          <div class="absolute -inset-4 bg-gradient-to-br from-alliance-blue/20 to-alliance-orange/20 rounded-3xl blur-2xl"></div>
+          <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+            <img
+              src="/images/solutions/pilotai-hero.webp"
+              alt="Vue du tableau Kanban de PilotAI avec des cartes de tâches et une barre de progression"
+              width="1024"
+              height="768"
+              loading="eager"
+              decoding="async"
+              class="w-full aspect-[4/3] object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Le socle -->
+    <section class="mx-auto max-w-7xl px-4 py-16">
+      <div class="max-w-3xl" data-reveal>
+        <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Le socle</p>
+        <h2 class="font-display text-3xl font-bold text-white">Une gestion de projet complète, sans IA</h2>
+        <p class="mt-3 text-white/70 leading-relaxed">
+          PilotAI part d'une base solide : vos projets en Kanban ou en liste, un calendrier clair,
+          des notifications qui arrivent au bon moment, et un indicateur de retard sur chaque tâche en dérive.
+        </p>
+      </div>
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        {
+          [
+            { t: 'Kanban, listes, calendrier', d: 'Organisez vos projets comme vous préférez, chacun a sa vue.' },
+            { t: 'Commentaires et mentions', t2: 'Discutez autour des tâches, alertez un collègue, joignez un fichier.' },
+            { t: 'Retards visibles', t2: 'Chaque tâche en retard est marquée — plus personne ne découvre le retard à la fin.' },
+          ].map((b) => (
+            <div class="rounded-2xl bg-alliance-dark-2 border border-white/10 p-6" data-reveal>
+              <h3 class="font-semibold text-white">{b.t}</h3>
+              <p class="mt-2 text-sm text-white/70 leading-relaxed">{b.t2}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Base+ : l'IA qui assiste -->
+    <section class="bg-alliance-dark-2 py-16">
+      <div class="mx-auto max-w-7xl px-4">
+        <div class="max-w-3xl" data-reveal>
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Base+ — l'IA qui assiste</p>
+          <h2 class="font-display text-3xl font-bold text-white">Vos réunions, transformées en actions validées</h2>
+        </div>
+        <div class="mt-8 grid gap-6 md:grid-cols-4">
+          {
+            [
+              { n: '1', t: 'Vous enregistrez', d: 'Lancez l\'enregistrement depuis la réunion — fenêtre flottante, rien à brancher.' },
+              { n: '2', t: 'La transcription se fait en France', d: 'Aucun audio ne part à l\'étranger. L\'audio est détruit après validation.' },
+              { n: '3', t: 'Le compte rendu arrive', d: 'Un CR fiable et éditable, prêt à partager avec les absents.' },
+              { n: '4', t: 'Vous validez les actions', d: 'L\'IA propose les tâches ; vous validez une par une. L\'humain garde la main.' },
+            ].map((etape) => (
+              <div class="rounded-2xl border border-white/10 p-6" data-reveal>
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-alliance-blue/15 text-alliance-blue font-display font-bold text-lg">{etape.n}</span>
+                <h3 class="mt-4 font-semibold text-white text-lg">{etape.t}</h3>
+                <p class="mt-2 text-sm text-white/70 leading-relaxed">{etape.d}</p>
+              </div>
+            ))
+          }
+        </div>
+        <div class="mt-8 rounded-2xl border border-alliance-blue/30 bg-gradient-to-br from-alliance-dark-2 to-alliance-dark p-6 md:flex items-center justify-between gap-6" data-reveal>
+          <div>
+            <h3 class="font-semibold text-white text-lg">Et vous pilotez par la voix</h3>
+            <p class="mt-2 text-sm text-white/70">« Crée une tâche : relancer le devis Dupont vendredi. » — l'assistant le fait, partout où vous êtes.</p>
+          </div>
+          <a href={CAL_URL} class="btn-primary px-6 py-3 rounded-lg font-semibold mt-4 md:mt-0 inline-block shrink-0">Réserver une démo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Les modules -->
+    <section class="mx-auto max-w-7xl px-4 py-16">
+      <div class="max-w-3xl" data-reveal>
+        <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Les modules</p>
+        <h2 class="font-display text-3xl font-bold text-white">Ajoutez ce dont vous avez besoin</h2>
+        <p class="mt-3 text-white/70 leading-relaxed">
+          Chaque module s'ajoute à Base ou Base+. Vos projets, vos clients, vos campagnes et vos réseaux
+          vivent au même endroit — et l'IA les relie.
+        </p>
+      </div>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {
+          modules.map((m) => (
+            <div class={`rounded-2xl overflow-hidden bg-alliance-dark-2 border transition-all duration-300 hover:-translate-y-1 ${m.etat === 'disponible' ? 'border-alliance-blue/40 hover:border-alliance-blue' : 'border-white/10 hover:border-white/25'}`} data-reveal>
+              <div class="relative">
+                <img src={`/images/solutions/${m.slug === 'commercial' ? 'pilotai-commercial' : m.slug === 'social' ? 'pilotai-social' : 'pilotai-marketing'}.webp`} alt={`Module ${m.nom} de PilotAI`} width="1024" height="768" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-alliance-dark/90 via-transparent to-transparent pointer-events-none"></div>
+                {
+                  m.etat === 'bientot' && (
+                    <span class="absolute top-3 left-3 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-white/90 backdrop-blur-sm border border-white/20">Bientôt</span>
+                  )
+                }
+              </div>
+              <div class="p-5">
+                <div class="flex items-baseline justify-between gap-2">
+                  <h3 class="font-display text-xl font-semibold text-white">{m.nom}</h3>
+                  {
+                    m.prix && (
+                      <span class="shrink-0 text-sm font-bold text-alliance-blue">
+                        {m.prix} <span class="font-medium text-white/60">{m.periode}</span>
+                      </span>
+                    )
+                  }
+                </div>
+                <p class="mt-2 text-sm text-white/70 leading-relaxed">{m.desc}</p>
+                <ul class="mt-3 space-y-1.5">
+                  {
+                    m.points.map((p) => (
+                      <li class="flex items-start gap-2 text-sm text-white/65"><span class="text-alliance-blue mt-0.5">✓</span>{p}</li>
+                    ))
+                  }
+                </ul>
+                {
+                  m.etat === 'bientot' && (
+                    <a href="/contact/" class="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-white/60 hover:text-white transition">Me prévenir à la sortie →</a>
+                  )
+                }
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Offres -->
+    <section id="offres" class="mx-auto max-w-7xl px-4 py-16">
+      <div class="text-center max-w-2xl mx-auto" data-reveal>
+        <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Offres</p>
+        <h2 class="font-display text-3xl font-bold text-white">Choisissez votre formule</h2>
+        <p class="mt-3 text-white/70">Chaque offre payante inclut la mise en place avec vous : vos projets, votre équipe, vos intégrations.</p>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {
+          offres.map((o) => (
+            <div class={`relative rounded-3xl p-7 flex flex-col ${o.highlight ? 'bg-alliance-dark-2 ring-2 ring-alliance-blue/50' : 'bg-alliance-dark-2 border border-white/10'}`} data-reveal>
+              {
+                o.badge && (
+                  <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-alliance-blue text-white text-xs font-bold uppercase tracking-wider whitespace-nowrap">{o.badge}</span>
+                )
+              }
+              <h3 class="font-display text-lg font-bold text-white">{o.nom}</h3>
+              <p class="text-white/50 text-xs mt-1">{o.desc}</p>
+              <div class="mt-4 flex items-baseline gap-2">
+                <span class={`font-display text-3xl font-bold ${o.highlight ? 'text-alliance-blue' : 'text-white'}`}>{o.prix}</span>
+                <span class="text-white/60 text-sm">{o.periode}</span>
+              </div>
+              {
+                o.setup && <p class="mt-1 text-xs text-white/50">Mise en place : {o.setup}</p>
+              }
+              <ul class="mt-5 space-y-2.5 text-sm text-white/70 mb-6 flex-1">
+                {
+                  o.inclus.map((i) => (
+                    <li class="flex items-start gap-2"><span class="text-alliance-blue shrink-0 mt-0.5">✓</span>{i}</li>
+                  ))
+                }
+              </ul>
+              <a href={o.href} class={`text-center text-sm py-3 rounded-lg font-semibold ${o.highlight ? 'btn-primary' : 'btn-secondary'}`}>{o.cta}</a>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-6 text-center text-sm text-white/50" data-reveal>
+        Équipe de 3 en Base+ avec le module Commercial : 192 € par mois + 490 € de mise en place. Sans engagement.
+      </p>
+    </section>
+
+    <!-- Souveraineté -->
+    <section class="bg-alliance-dark-2 py-16">
+      <div class="mx-auto max-w-7xl px-4">
+        <div class="max-w-3xl" data-reveal>
+          <h2 class="font-display text-3xl font-bold text-white">Vos données, chez vous</h2>
+          <p class="mt-3 text-white/70 leading-relaxed">La différence PilotAI n'est pas que fonctionnelle : c'est là où vivent vos données.</p>
+        </div>
+        <div class="mt-8 grid gap-5 md:grid-cols-3">
+          {
+            [
+              { t: 'IA hébergée en France', d: 'L\'intelligence tourne sur nos serveurs en France, pas sur un cloud américain.' },
+              { t: 'RGPD natif', d: 'Export et effacement à tout moment, journal des accès, cloisonnement strict entre clients.' },
+              { t: 'Contrôle humain', d: 'Rien n\'est publié ni créé sans validation de votre équipe. L\'IA assiste, elle ne décide pas.' },
+            ].map((s) => (
+              <div class="rounded-2xl border border-white/10 p-6" data-reveal>
+                <h3 class="font-semibold text-white">{s.t}</h3>
+                <p class="mt-2 text-sm text-white/70 leading-relaxed">{s.d}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mx-auto max-w-3xl px-4 py-16">
+      <h2 class="font-display text-3xl font-bold text-white" data-reveal>Questions fréquentes</h2>
+      <div class="mt-8 space-y-4">
+        {
+          faqLd.mainEntity.map((f) => (
+            <details class="group rounded-2xl bg-alliance-dark-2 border border-white/10 p-5" data-reveal>
+              <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+                {f.name}
+                <svg class="w-5 h-5 shrink-0 text-alliance-blue transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <p class="mt-3 text-sm text-white/70 leading-relaxed">{f.acceptedAnswer.text}</p>
+            </details>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- CTA final -->
+    <section class="mx-auto max-w-7xl px-4 pb-20">
+      <div class="rounded-3xl border border-alliance-blue/30 bg-gradient-to-br from-alliance-dark-2 to-alliance-dark p-8 md:p-12 text-center" data-reveal>
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-white">Prêt à essayer PilotAI ?</h2>
+        <p class="mt-3 text-white/70 max-w-xl mx-auto">Une démo de 30 minutes : on configure votre espace et vous démarrez le jour même.</p>
+        <a href={CAL_URL} class="btn-primary mt-6 inline-block px-8 py-3 rounded-lg font-semibold">Réserver ma démo</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
