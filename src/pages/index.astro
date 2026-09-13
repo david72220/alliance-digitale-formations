@@ -143,6 +143,94 @@ const faqLd = {
       </div>
     </section>
 
+    <!-- PRODUIT PHARE : PilotAI -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="rounded-3xl border border-alliance-blue/40 bg-gradient-to-br from-alliance-dark-2 to-alliance-dark p-6 md:p-10" data-reveal>
+          <div class="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+            <div>
+              <p class="inline-flex items-center px-3 py-1 rounded-full bg-alliance-blue text-white text-xs font-bold uppercase tracking-wider mb-4">Produit phare</p>
+              <h2 class="font-display text-2xl md:text-3xl font-bold text-white">PilotAI — le copilote de gestion de votre PME</h2>
+              <p class="mt-3 text-white/70 leading-relaxed">
+                Gestion de projet complète, réunions transformées en actions validées, pilotage par la voix.
+                Ajoutez les modules <strong class="text-white">Commercial</strong>, Social ou Marketing selon vos besoins.
+              </p>
+              <div class="mt-4 flex flex-wrap items-baseline gap-3">
+                <span class="text-white/60 text-sm">À partir de</span>
+                <span class="font-display text-2xl font-bold text-alliance-blue">20 €</span>
+                <span class="text-white/60 text-sm">/utilisateur/mois · essai gratuit de 14 jours</span>
+              </div>
+              <div class="mt-5 flex flex-col sm:flex-row gap-3">
+                <a href="/pilotai/" class="btn-primary px-6 py-3 rounded-lg font-semibold text-center">Découvrir PilotAI</a>
+                <a href="/nos-solutions/" class="px-6 py-3 rounded-lg font-semibold border border-white/20 text-white/80 hover:text-white hover:border-white/40 transition text-center">Voir toutes les solutions</a>
+              </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-white/10">
+              <img
+                src="/images/solutions/pilotai-hero.webp"
+                alt="Tableau Kanban de PilotAI avec des cartes de tâches et une barre de progression"
+                width="1024"
+                height="768"
+                loading="lazy"
+                decoding="async"
+                class="w-full aspect-[4/3] object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANDEAU SOLUTIONS -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-end justify-between gap-4 mb-6" data-reveal>
+          <div>
+            <p class="text-sky-400 text-sm font-bold uppercase tracking-widest mb-2">Nos solutions</p>
+            <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Des outils concrets, des prix clairs</h2>
+          </div>
+          <a href="/nos-solutions/" class="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-alliance-blue hover:text-white transition shrink-0">
+            Tout voir
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" data-reveal>
+          {
+            [
+              { nom: 'Compte Perso', tag: 'Nouveau', desc: 'Vos comptes tenus à la photo de ticket près.', prix: '9,90 €/mois', href: '/compte-perso/', img: '/images/solutions/compte-perso.webp' },
+              { nom: 'Site Vitrine', desc: 'Un site rapide et propre sur téléphone, à vous pour toujours.', prix: '690 €', href: '/sites-web-artisans/', img: '/images/solutions/site-vitrine.webp' },
+              { nom: 'Site Capture', desc: 'Vos clients réservent seuls pendant que vous êtes sur chantier.', prix: '990 € + 39 €/mois', href: '/sites-web-artisans/', img: '/images/solutions/site-capture.webp' },
+              { nom: 'Standardiste IA', desc: 'Un assistant qui répond 24 h/24 et filtre les demandes.', prix: '1 490 € + 79 €/mois', href: '/sites-web-artisans/', img: '/images/solutions/standardiste-ia.webp' },
+              { nom: 'Second Souffle', desc: 'Vos anciens clients reviennent : on leur écrit à votre nom.', prix: '1re campagne offerte', href: '/second-souffle/', img: '/images/solutions/second-souffle.webp' },
+              { nom: 'Formations IA', desc: 'Vos équipes utilisent l\'IA — correctement, et sans fuite de données.', prix: 'Sur devis', href: '/formations/', img: '/images/solutions/formations-ia.webp' },
+            ].map((s) => (
+              <a href={s.href} class="group block rounded-2xl overflow-hidden bg-alliance-dark-2 border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:border-alliance-blue/50">
+                <div class="relative">
+                  <img src={s.img} alt={`Illustration ${s.nom}`} width="1024" height="768" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-alliance-dark/80 to-transparent pointer-events-none"></div>
+                  {
+                    s.tag && (
+                      <span class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-alliance-orange text-white text-[11px] font-bold uppercase tracking-wider">{s.tag}</span>
+                    )
+                  }
+                </div>
+                <div class="p-4">
+                  <div class="flex items-baseline justify-between gap-2">
+                    <h3 class="font-display text-lg font-semibold text-white">{s.nom}</h3>
+                    <span class="shrink-0 text-xs font-bold text-alliance-blue">{s.prix}</span>
+                  </div>
+                  <p class="mt-1 text-sm text-white/65 leading-snug">{s.desc}</p>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+        <div class="mt-5 sm:hidden text-center">
+          <a href="/nos-solutions/" class="inline-flex items-center gap-1.5 text-sm font-medium text-alliance-blue">Tout voir →</a>
+        </div>
+      </div>
+    </section>
+
     <!-- PRÉSENTATION DES ACTIVITÉS -->
     <section class="py-16 px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto text-center" data-reveal>
