@@ -1,0 +1,189 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const CAL_URL = import.meta.env.CAL_URL ?? 'https://cal.eu/alliance-digitale/decouverte-30-min';
+
+const faq = [
+  {
+    q: 'Mes clients vont-ils recevoir un message publicitaire visible ?',
+    a: 'Non. Le message est envoyé depuis votre adresse, à votre nom, avec votre ton. Il ressemble à ce que vous écririez vous-même — parce que c\'est le but : le client croit que c\'est vous qui avez pensé à lui.',
+  },
+  {
+    q: 'À qui écrit-on exactement ?',
+    a: 'À vos anciens clients ayant déjà acheté chez vous, et uniquement à ceux qui ont accepté d\'être contactés (les mentions légales imposent ce consentement). Le tri de votre liste de contacts fait partie de la prestation : une liste sans consentement n\'est pas utilisable, et nous ne l\'utilisons pas.',
+  },
+  {
+    q: 'Et si un client ne veut plus recevoir de messages ?',
+    a: 'Chaque message contient un lien de désinscription en un clic. La demande est appliquée immédiatement et de façon définitive.',
+  },
+  {
+    q: 'Que se passe-t-il après la première campagne gratuite ?',
+    a: 'Vous recevez un bilan simple : nombre de messages délivrés, réponses, désinscriptions. Si vous jugez les résultats, vous décidez de continuer (campagne suivante à 290 € en lancement, puis 390 €) et éventuellement de passer au rythme continu à 49 €/mois.',
+  },
+  {
+    q: 'Qu\'ai-je à fournir ?',
+    a: 'Votre liste de clients (fichier export, carnet, tableur) et quelques éléments de ton : ce que vous vendez, ce que vous diriez à un client que vous avez apprécié. On fait le reste, vous validez le message avant l\'envoi.',
+  },
+];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Second Souffle',
+  description: 'Réactivation des anciens clients par email personnalisé : tri des contacts avec consentement, message rédigé à votre nom, envoi, désinscription en un clic, bilan.',
+  provider: { '@type': 'Organization', name: 'Alliance Digitale' },
+  areaServed: { '@type': 'AdministrativeArea', name: 'France' },
+};
+---
+
+<Layout
+  title="Second Souffle — réactivez vos anciens clients | Alliance Digitale"
+  description="Vos anciens clients ne sont pas revenus par mécontentement, mais par oubli. On leur écrit, à votre nom. Première campagne offerte (20 clients)."
+  image="/images/solutions/second-souffle.webp"
+  jsonLd={[serviceLd, faqLd]}
+>
+  <Header />
+
+  <main class="flex-1">
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-alliance-dark-2">
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-alliance-blue/10 via-transparent to-transparent"></div>
+      <div class="relative mx-auto max-w-7xl px-4 pt-16 pb-14 grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <p class="inline-flex items-center px-3 py-1 rounded-full bg-alliance-blue/15 text-alliance-blue text-xs font-bold uppercase tracking-widest" data-hero-anim>Service clé en main</p>
+          <h1 class="mt-4 font-display text-4xl md:text-5xl font-bold text-white" data-hero-anim>Second Souffle</h1>
+          <p class="mt-3 text-xl text-white/80" data-hero-anim>Vos anciens clients reviennent : on leur écrit, à votre nom.</p>
+          <p class="mt-4 text-white/65 leading-relaxed" data-hero-anim>
+            Ils ne sont pas revenus par mécontentement, mais par oubli. On leur envoie un message
+            personnalisé depuis votre adresse — vous validez le texte avant l'envoi, et vous recevez le bilan.
+          </p>
+          <div class="mt-6 rounded-2xl border border-alliance-blue/30 bg-alliance-dark p-5" data-hero-anim>
+            <p class="text-white/80 font-semibold">Première campagne offerte — 20 clients</p>
+            <p class="mt-1 text-sm text-white/60">Vous jugez sur vos propres chiffres avant de payer quoi que ce soit.</p>
+          </div>
+          <div class="mt-6 flex flex-col sm:flex-row gap-4" data-hero-anim>
+            <a href={CAL_URL} class="btn-primary px-8 py-3 rounded-lg font-semibold text-center">Démarrer ma campagne offerte</a>
+            <a href="#comment" class="px-8 py-3 rounded-lg font-semibold border border-white/20 text-white/80 hover:text-white hover:border-white/40 transition text-center">Comment ça marche</a>
+          </div>
+        </div>
+        <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl" data-reveal>
+          <img
+            src="/images/solutions/second-souffle.webp"
+            alt="Gérante de café préparant une campagne d'emails pour ses anciens clients"
+            width="1024"
+            height="768"
+            loading="eager"
+            decoding="async"
+            class="w-full aspect-[4/3] object-cover"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Comment ça marche -->
+    <section id="comment" class="mx-auto max-w-7xl px-4 py-16">
+      <h2 class="font-display text-3xl font-bold text-white" data-reveal>Comment ça marche</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-4">
+        {
+          [
+            { n: '1', t: 'Vous donnez vos contacts', d: 'Votre carnet d\'adresses ou export client. On tri : consentement vérifié, doublons écartés.' },
+            { n: '2', t: 'On rédige le message', d: 'À votre nom, dans votre ton. Vous relisez et corrigez avant tout envoi.' },
+            { n: '3', t: 'On envoie pour vous', d: 'Envoi échelonné depuis votre adresse, avec désinscription en un clic.' },
+            { n: '4', t: 'Vous recevez le bilan', d: 'Délivrés, réponses et désinscriptions — simple et honnête, sans promesse gonflée.' },
+          ].map((etape) => (
+            <div class="rounded-2xl bg-alliance-dark-2 border border-white/10 p-6" data-reveal>
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-alliance-blue/15 text-alliance-blue font-display font-bold text-lg">{etape.n}</span>
+              <h3 class="mt-4 font-semibold text-white text-lg">{etape.t}</h3>
+              <p class="mt-2 text-sm text-white/70 leading-relaxed">{etape.d}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Tarifs -->
+    <section class="bg-alliance-dark-2 py-16">
+      <div class="mx-auto max-w-7xl px-4">
+        <div class="max-w-2xl" data-reveal>
+          <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Tarifs</p>
+          <h2 class="font-display text-3xl font-bold text-white">Simple, sans abonnement caché</h2>
+        </div>
+        <div class="mt-8 grid gap-6 md:grid-cols-3">
+          <div class="rounded-3xl p-7 bg-alliance-dark border border-alliance-blue/40" data-reveal>
+            <p class="inline-flex px-3 py-1 rounded-full bg-alliance-blue text-white text-xs font-bold uppercase tracking-wider mb-4">Pour commencer</p>
+            <h3 class="font-display text-lg font-bold text-white">Première campagne</h3>
+            <p class="mt-2 font-display text-3xl font-bold text-alliance-blue">Offerte</p>
+            <p class="text-white/50 text-xs mt-1">20 clients · sans engagement</p>
+            <ul class="mt-5 space-y-2.5 text-sm text-white/70">
+              <li class="flex items-start gap-2"><span class="text-alliance-blue mt-0.5">✓</span> Tri de votre liste de contacts</li>
+              <li class="flex items-start gap-2"><span class="text-alliance-blue mt-0.5">✓</span> Message rédigé à votre nom</li>
+              <li class="flex items-start gap-2"><span class="text-alliance-blue mt-0.5">✓</span> Envoi + désinscription 1 clic</li>
+              <li class="flex items-start gap-2"><span class="text-alliance-blue mt-0.5">✓</span> Bilan après la campagne</li>
+            </ul>
+          </div>
+          <div class="rounded-3xl p-7 bg-alliance-dark-2 border border-white/10" data-reveal>
+            <h3 class="font-display text-lg font-bold text-white">Campagne ponctuelle</h3>
+            <p class="mt-2 font-display text-3xl font-bold text-white">290 €</p>
+            <p class="text-white/50 text-xs mt-1">prix de lancement · puis 390 € la campagne</p>
+            <ul class="mt-5 space-y-2.5 text-sm text-white/70">
+              <li class="flex items-start gap-2"><span class="text-alliance-blue mt-0.5">✓</span> Jusqu'à 500 clients par campagne</li>
+              <li class="flex items-start gap-2"><span class="text-alliance-blue mt-0.5">✓</span> Deux relances incluses</li>
+              <li class="flex items-start gap-2"><span class="text-alliance-blue mt-0.5">✓</span> Bilan détaillé</li>
+            </ul>
+          </div>
+          <div class="rounded-3xl p-7 bg-alliance-dark-2 border border-white/10" data-reveal>
+            <h3 class="font-display text-lg font-bold text-white">Rythme continu</h3>
+            <p class="mt-2 font-display text-3xl font-bold text-white">49 €</p>
+            <p class="text-white/50 text-xs mt-1">par mois · option, à tout moment</p>
+            <ul class="mt-5 space-y-2.5 text-sm text-white/70">
+              <li class="flex items-start gap-2"><span class="text-alliance-blue mt-0.5">✓</span> Une campagne chaque mois</li>
+              <li class="flex items-start gap-2"><span class="text-alliance-blue mt-0.5">✓</span> Vos nouveaux clients intégrés automatiquement</li>
+              <li class="flex items-start gap-2"><span class="text-alliance-blue mt-0.5">✓</span> Sans engagement, résiliable en un mot</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mx-auto max-w-3xl px-4 py-16">
+      <h2 class="font-display text-3xl font-bold text-white" data-reveal>Questions fréquentes</h2>
+      <div class="mt-8 space-y-4">
+        {
+          faq.map((f) => (
+            <details class="group rounded-2xl bg-alliance-dark-2 border border-white/10 p-5" data-reveal>
+              <summary class="flex cursor-pointer items-center justify-between font-semibold text-white list-none">
+                {f.q}
+                <svg class="w-5 h-5 shrink-0 text-alliance-blue transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <p class="mt-3 text-sm text-white/70 leading-relaxed">{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mx-auto max-w-7xl px-4 pb-20">
+      <div class="rounded-3xl border border-alliance-blue/30 bg-gradient-to-br from-alliance-dark-2 to-alliance-dark p-8 md:p-12 text-center" data-reveal>
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-white">Essayez sur 20 clients, gratuitement</h2>
+        <p class="mt-3 text-white/70 max-w-xl mx-auto">30 minutes pour lancer la campagne : vous validez le message, on s'occupe du reste.</p>
+        <a href={CAL_URL} class="btn-primary mt-6 inline-block px-8 py-3 rounded-lg font-semibold">Lancer ma première campagne</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
