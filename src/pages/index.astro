@@ -3,17 +3,14 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import FormationCard from '../components/FormationCard.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import FiberFrame from '../components/FiberFrame.astro';
 import heroImage from '../assets/hero-formation-ia.png';
-import { getFormations, getCaseStudies, getResources } from '../lib/notion.ts';
+import { getCaseStudies, getResources } from '../lib/notion.ts';
 
-const formations = await getFormations();
 const studies = await getCaseStudies();
 const resources = await getResources();
 
-const heroFormations = formations.slice(0, 3);
 const heroStudies = studies.slice(0, 3);
 const heroResources = resources.slice(0, 6);
 
@@ -201,8 +198,7 @@ const faqLd = {
               { nom: 'Site Vitrine', desc: 'Un site rapide et propre sur téléphone, à vous pour toujours.', prix: '690 €', href: '/sites-web-artisans/', img: '/images/solutions/site-vitrine.webp' },
               { nom: 'Site Capture', desc: 'Vos clients réservent seuls pendant que vous êtes sur chantier.', prix: '990 € + 39 €/mois', href: '/sites-web-artisans/', img: '/images/solutions/site-capture.webp' },
               { nom: 'Standardiste IA', desc: 'Un assistant qui répond 24 h/24 et filtre les demandes.', prix: '1 490 € + 79 €/mois', href: '/sites-web-artisans/', img: '/images/solutions/standardiste-ia.webp' },
-              { nom: 'Second Souffle', desc: 'Vos anciens clients reviennent : on leur écrit à votre nom.', prix: '1re campagne offerte', href: '/second-souffle/', img: '/images/solutions/second-souffle.webp' },
-              { nom: 'Formations IA', desc: 'Vos équipes utilisent l\'IA — correctement, et sans fuite de données.', prix: 'Sur devis', href: '/formations/', img: '/images/solutions/formations-ia.webp' },
+              { nom: 'Second Souffle', desc: 'Vos anciens clients reviennent : on leur écrit à votre nom.', prix: 'À partir de 290 €', href: '/second-souffle/', img: '/images/solutions/second-souffle.webp' },
             ].map((s) => (
               <a href={s.href} class="group block rounded-2xl overflow-hidden bg-alliance-dark-2 border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:border-alliance-blue/50">
                 <div class="relative">
@@ -462,11 +458,7 @@ const faqLd = {
 
         <!-- Barre d'onglets -->
         <div class="tab-buttons" id="tabs-services">
-          <button class="tab-btn active" data-group="services" data-tab="formations" onclick="switchTabGroup('services', 'formations')">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-14.232 0a51.536 51.536 0 00-3.654 5.53M18.26 10.147a51.536 51.536 0 013.654 5.53M12 2.25c-2.25 0-4.888.83-7.14 2.24m14.28 0A13.86 13.86 0 0012 2.25"/></svg>
-            Formations
-          </button>
-          <button class="tab-btn" data-group="services" data-tab="automatisations" onclick="switchTabGroup('services', 'automatisations')">
+          <button class="tab-btn active" data-group="services" data-tab="automatisations" onclick="switchTabGroup('services', 'automatisations')">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             Automatisations
           </button>
@@ -476,45 +468,8 @@ const faqLd = {
           </button>
         </div>
 
-        <!-- Contenu Formations -->
-        <div class="tab-content active" data-group="services" id="tab-services-formations">
-          <div class="tab-panel tab-panel--services">
-            <div class="flex items-center gap-2 mb-6">
-              <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-14.232 0a51.536 51.536 0 00-3.654 5.53M18.26 10.147a51.536 51.536 0 013.654 5.53M12 2.25c-2.25 0-4.888.83-7.14 2.24m14.28 0A13.86 13.86 0 0012 2.25"/></svg>
-              <h3 class="font-display text-2xl sm:text-3xl font-bold text-white">
-                Formations
-              </h3>
-            </div>
-
-            <p class="text-white/80 text-base mb-8 leading-relaxed max-w-3xl">
-              Des formations courtes et concrètes, appliquées aux usages métier. Financement OPCO possible.
-              De l'initiation IA à la conformité RGPD, chaque session laisse vos collaborateurs avec des outils immédiatement utilisables.
-            </p>
-
-            <!-- Formations en vedette -->
-            {heroFormations.length > 0 && (
-              <div>
-                <p class="text-xs font-semibold uppercase tracking-widest text-red-400/80 mb-4">Formations les plus demandées</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {heroFormations.map((formation, i) => (
-                    <div data-reveal data-reveal-delay={String(i * 0.08)}>
-                      <FormationCard formation={formation} />
-                    </div>
-                  ))}
-                </div>
-                <div class="text-center mt-6">
-                  <a href="/formations/" class="text-red-400 hover:text-red-300 text-sm font-semibold inline-flex items-center gap-1 transition-colors">
-                    Voir toutes les formations
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                  </a>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
         <!-- Contenu Automatisations -->
-        <div class="tab-content" data-group="services" id="tab-services-automatisations">
+        <div class="tab-content active" data-group="services" id="tab-services-automatisations">
           <div class="tab-panel tab-panel--services">
             <div class="flex items-center gap-2 mb-6">
               <svg class="w-7 h-7 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>

@@ -49,19 +49,10 @@ const solutions: Solution[] = [
     alt: 'Gérante de commerce consultant un assistant conversationnel sur son smartphone',
   },
   {
-    slug: 'formations-ia',
-    nom: 'Formations IA',
-    tagline: 'Vos équipes utilisent déjà l\'IA — correctement, et sans mettre vos données en danger. Demi-journées appliquées à votre métier.',
-    prix: 'Sur devis',
-    href: '/formations/',
-    image: '/images/solutions/formations-ia.webp',
-    alt: 'Participants d\'une formation IA travaillant chacun sur leur ordinateur portable',
-  },
-  {
     slug: 'second-souffle',
     nom: 'Second Souffle',
     tagline: 'Vos anciens clients ne sont pas revenus par mécontentement, mais par oubli. On leur écrit, à votre nom.',
-    prix: '1re campagne offerte',
+    prix: 'À partir de 290 €',
     href: '/second-souffle/',
     image: '/images/solutions/second-souffle.webp',
     alt: 'Gérante de café préparant une campagne d\'emails pour ses anciens clients',
@@ -97,7 +88,7 @@ const itemListLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Solutions Alliance Digitale',
-  description: 'Produits et services vendables en ligne par Alliance Digitale : application de comptabilité personnelle, sites web pour artisans, formations IA et services d\'avis clients.',
+  description: 'Produits et services vendables en ligne par Alliance Digitale : application de comptabilité personnelle, sites web pour artisans et services d\'avis clients.',
   itemListElement: solutions.map((s, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -124,8 +115,8 @@ const itemListLd = {
 ---
 
 <Layout
-  title="Nos solutions — sites web, formations, comptabilité | Alliance Digitale"
-  description="Application de comptabilité personnelle, sites web pour artisans avec prise de rendez-vous, standardiste IA, formations. Des solutions concrètes, des prix clairs."
+  title="Nos solutions — sites web, comptabilité, standardiste IA | Alliance Digitale"
+  description="Application de comptabilité personnelle, sites web pour artisans avec prise de rendez-vous, standardiste IA. Des solutions concrètes, des prix clairs."
   image="/images/solutions/compte-perso.webp"
   jsonLd={itemListLd}
 >
