@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Comment un second cerveau travaille pour votre entreprise : le pilotage d'un projet IA, scène par scène. Présentation animée par Alliance Digitale.">
+<title>Le second cerveau, animé | Alliance Digitale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style is:global>
+  :root{
+    --turq:#3b97d3; --wire:#1e5a86; --nodebg:rgba(7,13,24,.78);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:#070d18; overflow:hidden;
+    font-family:Inter,system-ui,-apple-system,sans-serif;
+  }
+  .stage{position:fixed;inset:0;background:#070d18}
+  .frame{
+    width:540px;height:960px;position:absolute;left:50%;top:50%;
+    transform-origin:center center; overflow:hidden;
+    background:linear-gradient(180deg,#070d18 0%,#0b1120 55%,#10314f 100%);
+  }
+  /* décor : parallélogrammes translucides */
+  .pgram{position:absolute;pointer-events:none}
+  .p1{
+    width:420px;height:560px;left:-190px;top:230px;
+    background:linear-gradient(135deg,rgba(59,151,211,.22),rgba(10,60,100,.05));
+    transform:skewY(-16deg) skewX(-8deg);border-radius:40px;
+  }
+  .p2{
+    width:360px;height:520px;right:-200px;top:-160px;
+    background:linear-gradient(315deg,rgba(59,151,211,.20),rgba(10,40,70,.04));
+    transform:skewY(-14deg) skewX(10deg);border-radius:40px;
+  }
+  .p3{
+    width:380px;height:420px;right:-160px;bottom:-180px;
+    background:linear-gradient(315deg,rgba(158,33,20,.20),rgba(40,10,6,.04));
+    transform:skewY(12deg) skewX(-6deg);border-radius:40px;
+  }
+  .dots{
+    position:absolute;inset:0;pointer-events:none;
+    background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1.6px);
+    background-size:26px 26px;
+  }
+  .inner{
+    position:absolute;inset:0;padding:26px 0 14px;display:flex;flex-direction:column;
+  }
+  /* ligne de marque */
+  .brand{
+    display:flex;align-items:center;gap:8px;margin:0 24px;
+    color:rgba(255,255,255,.92);font-size:14px;font-weight:600;letter-spacing:.04em;
+  }
+  .brand .sq{width:10px;height:10px;background:var(--turq);border-radius:2px;display:inline-block;flex:none}
+  /* pastilles de scènes */
+  .pills{display:flex;gap:6px;margin:12px 24px 0}
+  .pill{
+    font-family:Inter,system-ui,sans-serif;font-size:12px;font-weight:600;line-height:1.2;
+    color:rgba(255,255,255,.8);background:rgba(7,13,24,.55);
+    border:1px solid var(--wire);border-radius:999px;padding:4px 2px;cursor:pointer;
+    flex:1;text-align:center;transition:background .2s,color .2s,border-color .2s;
+  }
+  .pill.cur{background:var(--turq);border-color:var(--turq);color:#04121f}
+  /* titre de scène */
+  .shead{margin:14px 24px 0;transition:opacity .2s ease}
+  .st1{
+    font-family:Poppins,system-ui,sans-serif;font-weight:700;
+    font-size:34px;line-height:1.08;color:#fff;letter-spacing:-.01em;
+  }
+  .st2{margin-top:3px;color:var(--turq);font-weight:600;font-size:16px;line-height:1.3}
+  /* carte d'étape */
+  .card{
+    margin:16px 24px 0;display:flex;align-items:center;gap:12px;
+    border:1px solid rgba(59,151,211,.75);background:rgba(10,25,42,.6);
+    border-radius:14px;padding:12px 14px;min-height:74px;transition:opacity .2s ease;
+  }
+  .card.in{animation:cardIn .2s ease-out}
+  @keyframes cardIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+  .badge{
+    flex:none;width:38px;height:38px;border-radius:8px;background:var(--turq);
+    color:#04121f;font-family:Poppins,system-ui,sans-serif;font-weight:700;font-size:17px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ct-t{color:#fff;font-weight:600;font-size:16px;line-height:1.25}
+  .ct-e{color:rgba(255,255,255,.78);font-weight:400;font-size:13px;line-height:1.35;margin-top:3px}
+  .faded{opacity:0}
+  /* barre de progression */
+  .prog{display:flex;gap:6px;margin:14px 24px 0}
+  .seg{
+    flex:1;height:7px;border-radius:4px;background:rgba(59,151,211,.3);
+    transition:background .3s,box-shadow .3s;
+  }
+  .seg.past{background:var(--turq)}
+  .seg.cur{background:var(--turq);box-shadow:0 0 8px rgba(59,151,211,.55);animation:breathe 1.2s infinite}
+  @keyframes breathe{0%,100%{opacity:1}50%{opacity:.7}}
+  /* schéma */
+  .schema{position:relative;margin-top:26px;height:500px;flex:none;transition:opacity .2s ease}
+  #wires{position:absolute;inset:0;width:100%;height:100%}
+  .wire{stroke:var(--wire);stroke-width:1.5;fill:none;transition:stroke .3s,filter .3s}
+  .wire.lit{stroke:var(--turq);filter:drop-shadow(0 0 3px rgba(59,151,211,.7))}
+  .pulse-dot{fill:var(--turq);filter:drop-shadow(0 0 5px rgba(59,151,211,.95))}
+  /* nœuds */
+  .node{
+    position:absolute;width:150px;height:50px;border-radius:10px;
+    background:var(--nodebg);border:1px solid var(--wire);
+    display:flex;align-items:center;gap:6px;padding:0 6px;
+    opacity:.5;transition:opacity .3s,border-color .3s,box-shadow .3s;
+    min-width:0;overflow:hidden;
+  }
+  .node .ic{
+    flex:none;width:20px;height:20px;border-radius:6px;color:var(--c,var(--turq));
+    background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;
+    transition:background .3s,color .3s;
+  }
+  .node .ic svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .nt{
+    min-width:0;color:#fff;font-family:Poppins,system-ui,sans-serif;font-weight:600;
+    font-size:12.5px;line-height:15px;white-space:nowrap;overflow:hidden;
+  }
+  .ns{
+    min-width:0;color:rgba(255,255,255,.7);font-size:10px;line-height:12px;
+    max-height:24px;overflow:hidden;
+  }
+  .ntx{min-width:0;display:flex;flex-direction:column;gap:1px;flex:1;padding-right:8px}
+  .nstate{
+    position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;
+    z-index:2;flex:none;
+  }
+  .node.done{opacity:1;border-width:1.5px;border-color:var(--c,var(--turq))}
+  .node.on{
+    opacity:1;border-width:1.5px;border-color:var(--turq);
+    box-shadow:0 0 18px rgba(59,151,211,.45),0 0 6px rgba(59,151,211,.6);
+  }
+  .node.on .ic{background:var(--c,var(--turq));color:#04121f}
+  .node.prevu{border-style:dashed}
+  /* légende */
+  .legend{
+    display:flex;justify-content:center;gap:14px;margin:auto 24px 0;
+    font-size:11px;color:rgba(255,255,255,.65);white-space:nowrap;
+  }
+  .legend span{display:flex;align-items:center;gap:5px}
+  .legend i{width:7px;height:7px;border-radius:50%;display:inline-block;flex:none}
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="frame" id="frame">
+    <div class="pgram p1"></div>
+    <div class="pgram p2"></div>
+    <div class="pgram p3"></div>
+    <div class="dots"></div>
+    <div class="inner">
+      <div class="brand"><span class="sq"></span>Alliance Digitale · Le second cerveau, animé</div>
+      <div class="pills" id="pills"></div>
+      <div class="shead" id="shead">
+        <div class="st1" id="scTitle"></div>
+        <div class="st2" id="scSub"></div>
+      </div>
+      <div class="card" id="card">
+        <div class="badge" id="badge"></div>
+        <div class="ntx">
+          <div class="ct-t" id="cardT"></div>
+          <div class="ct-e" id="cardE"></div>
+        </div>
+      </div>
+      <div class="prog" id="prog"></div>
+      <div class="schema" id="schemaBox">
+        <svg id="wires" viewBox="0 0 540 500" preserveAspectRatio="none">
+          <g id="lines"></g>
+        </svg>
+        <div id="nodesHolder" style="position:absolute;inset:0"></div>
+      </div>
+      <div class="legend">
+        <span><i style="background:#3ddc84"></i>en service</span>
+        <span><i style="background:#ffb347"></i>codé, pas en prod</span>
+        <span><i style="background:#8a84b0"></i>prévu · état au 09/11/2026</span>
+      </div>
+    </div>
+  </div>
+</div>
+<script is:inline>
+(function(){
+"use strict";
+var NS="http://www.w3.org/2000/svg";
+var TQ="#3b97d3";
+var COL={L:24,C:195,R:366},NWD=150,NH=50,PITCH=82,TOPY=8;
+var STATEC={ok:"#3ddc84",code:"#ffb347",prevu:"#8a84b0"};
+var STEP_MS=2600,FINAL_MS=1800,FADE_MS=200,PULSE_GAP=150,PULSE_MS=800;
+
+var DATA=[
+ {"id":"jour","pastille":"1 Jour","titre":"Le jour : cadrer","sous_titre":"avant d'écrire une seule ligne",
+  "noeuds":[
+   {"id":"david","t":"Le dirigeant","s":"demande au chat ou au téléphone","col":"C","r":1,"ic":"user","etat":"ok","cle":true},
+   {"id":"hook","t":"Ouverture","s":"niveau du dossier, S0 à S4","col":"L","r":2,"ic":"door","etat":"ok"},
+   {"id":"session","t":"Session Opus","s":"orchestre, ne produit pas","col":"C","r":2,"ic":"brain","etat":"ok"},
+   {"id":"conflits","t":"Conflits","s":"branches, worktrees, sessions","col":"R","r":2,"ic":"branch","etat":"ok"},
+   {"id":"hub","t":"Second cerveau","s":"état, décisions, pièges connus","col":"L","r":3,"ic":"book","etat":"ok"},
+   {"id":"mem","t":"claude-mem","s":"mémoire des sessions passées","col":"C","r":3,"ic":"memory","etat":"ok"},
+   {"id":"quota","t":"Quotas","s":"Claude et Ollama, relevés à jour","col":"R","r":3,"ic":"gauge","etat":"ok"},
+   {"id":"questions","t":"Questions","s":"10 au plus, défaut et impact","col":"L","r":4,"ic":"question","etat":"ok"},
+   {"id":"critique","t":"Critique CTO","s":"propose plus simple, dit non","col":"C","r":4,"ic":"bulb","etat":"ok"},
+   {"id":"routage","t":"Routage","s":"qui a le droit, selon le niveau","col":"R","r":4,"ic":"route","etat":"ok"},
+   {"id":"fiche","t":"Fiche de cadrage","s":"contrat figé par empreinte","col":"C","r":5,"ic":"doc","etat":"ok"},
+   {"id":"validateur","t":"Validateur","s":"script, refuse toute faille","col":"R","r":5,"ic":"check","etat":"ok"},
+   {"id":"go","t":"GO","s":"Le dirigeant tape GO, seul","col":"C","r":6,"ic":"flag","etat":"ok","cle":true},
+   {"id":"gojson","t":"Accord scellé","s":"écrit par le hook, jamais par l'IA","col":"R","r":6,"ic":"lock","etat":"ok"}
+  ],
+  "liens":[["david","session"],["hook","session"],["conflits","session"],["session","hub"],["session","mem"],["session","quota"],["hub","questions"],["mem","critique"],["quota","routage"],["questions","fiche"],["critique","fiche"],["routage","fiche"],["fiche","validateur"],["fiche","go"],["go","gojson"]],
+  "etapes":[
+   {"n":"01","t":"Une demande ouvre la session.","e":"Le hook lit le niveau du dossier.","noeuds":["david","hook","session"]},
+   {"n":"02","t":"Branches et contexte.","e":"Conflits, second cerveau, mémoire, quotas.","noeuds":["conflits","hub","mem","quota"]},
+   {"n":"03","t":"Questions et critique.","e":"10 questions au plus, alternative plus simple.","noeuds":["questions","critique","routage"]},
+   {"n":"04","t":"Une fiche, un contrat.","e":"Empreinte figée, validateur sans pitié.","noeuds":["fiche","validateur"]},
+   {"n":"05","t":"GO humain.","e":"Le dirigeant tape GO : seul le hook l'enregistre.","noeuds":["go","gojson"]}
+  ],
+  "final":"Rien ne s'écrit avant le GO."},
+
+ {"id":"exec","pastille":"2 Exécution","titre":"Exécuter sous garde","sous_titre":"chaque appel est filtré",
+  "noeuds":[
+   {"id":"plan","t":"Plan approuvé","s":"périmètre et exécutants","col":"C","r":1,"ic":"doc","etat":"ok"},
+   {"id":"garde","t":"Garde","s":"refuse hors périmètre","col":"L","r":2,"ic":"shield","etat":"ok","couleur":"#e05543"},
+   {"id":"routage2","t":"Table de routage","s":"S0 public → S4 interdit à l'IA","col":"C","r":2,"ic":"route","etat":"ok"},
+   {"id":"main","t":"main protégée","s":"main se fusionne, ne se code pas","col":"R","r":2,"ic":"lock","etat":"ok","couleur":"#e05543"},
+   {"id":"delegate","t":"claude-delegate","s":"abonnement Claude","col":"L","r":3,"ic":"robot","etat":"ok","couleur":"#66b3e8"},
+   {"id":"hermesmac","t":"Hermes Mac","s":"Sonnet, Haiku, GLM, Nemotron","col":"C","r":3,"ic":"bot","etat":"ok","couleur":"#66b3e8"},
+   {"id":"local","t":"Ollama du Mac","s":"modèles locaux, données sensibles","col":"R","r":3,"ic":"chip","etat":"ok","couleur":"#66b3e8"},
+   {"id":"sousag","t":"Sous-agents","s":"en parallèle, chacun sa part","col":"L","r":4,"ic":"users","etat":"ok","couleur":"#66b3e8"},
+   {"id":"tests","t":"Tests","s":"écrits avant le code","col":"C","r":4,"ic":"flask","etat":"ok","couleur":"#1e9ad7"},
+   {"id":"verif","t":"Vérificateur","s":"Haiku, relit à l'aveugle","col":"R","r":4,"ic":"eye","etat":"ok","couleur":"#1e9ad7"},
+   {"id":"journal","t":"Journal","s":"chaîné par empreintes","col":"L","r":5,"ic":"link","etat":"ok"},
+   {"id":"commit","t":"Commit","s":"seulement après vérification","col":"C","r":5,"ic":"commit","etat":"ok"},
+   {"id":"boucle","t":"Boucle de reprise","s":"3 essais, puis on remonte","col":"R","r":5,"ic":"loop","etat":"ok"},
+   {"id":"livraison","t":"Livraison","s":"push, déploiement : un GO par ligne","col":"C","r":6,"ic":"rocket","etat":"ok","cle":true}
+  ],
+  "liens":[["plan","garde"],["plan","routage2"],["plan","main"],["garde","delegate"],["routage2","hermesmac"],["routage2","local"],["delegate","sousag"],["hermesmac","tests"],["local","verif"],["sousag","journal"],["tests","commit"],["verif","boucle"],["journal","commit"],["boucle","commit"],["commit","livraison"]],
+  "etapes":[
+   {"n":"01","t":"Le plan fixe le terrain.","e":"Fichiers permis, exécutants choisis.","noeuds":["plan"]},
+   {"n":"02","t":"La garde filtre chaque appel.","e":"Selon la sensibilité ; main intouchable.","noeuds":["garde","routage2","main"]},
+   {"n":"03","t":"Les exécutants produisent.","e":"Opus réfléchit, les délégués écrivent.","noeuds":["delegate","hermesmac","local","sousag"]},
+   {"n":"04","t":"Vérifier sans croire.","e":"Tests d'abord, relecture à l'aveugle.","noeuds":["tests","verif","boucle"]},
+   {"n":"05","t":"Une trace, puis la livraison.","e":"Journal chaîné, commit, un GO par ligne.","noeuds":["journal","commit","livraison"]}
+  ],
+  "final":"L'IA produit, la garde tient."},
+
+ {"id":"memoire","pastille":"3 Mémoire","titre":"Le second cerveau","sous_titre":"un hub, deux agents, une vérité",
+  "noeuds":[
+   {"id":"cloture","t":"Clôture","s":"leçons, rétro, état à jour","col":"C","r":1,"ic":"seal","etat":"ok"},
+   {"id":"antisec","t":"Anti-secrets","s":"aucune clé ne passe","col":"C","r":2,"ic":"key","etat":"ok","couleur":"#e05543"},
+   {"id":"obsidian","t":"Obsidian","s":"fenêtre humaine, mêmes fichiers","col":"L","r":3,"ic":"eye","etat":"prevu"},
+   {"id":"hubc","t":"Second cerveau","s":"hub Git privé","col":"C","r":3,"ic":"vault","etat":"ok"},
+   {"id":"github","t":"GitHub privé","s":"versionné ; le privé reste local","col":"R","r":3,"ic":"github","etat":"ok"},
+   {"id":"skills","t":"Skills communs","s":"Claude et Hermes, un seul fichier","col":"L","r":4,"ic":"tools","etat":"ok"},
+   {"id":"projets","t":"Mémoire projets","s":"état, décisions, journal","col":"C","r":4,"ic":"book","etat":"ok"},
+   {"id":"gotchas","t":"Pièges connus","s":"634, rangés par domaine","col":"R","r":4,"ic":"bug","etat":"ok"},
+   {"id":"curateur","t":"Curateur Hermes","s":"07 h 45 : tri, contrôle, Telegram","col":"L","r":5,"ic":"broom","etat":"ok","couleur":"#66b3e8"},
+   {"id":"sync","t":"Vers l'appli","s":"08 h 15, chaque jour","col":"C","r":5,"ic":"sync","etat":"ok"},
+   {"id":"sauvegarde","t":"Sauvegarde","s":"13 h, chiffrée, NAS et Drive","col":"R","r":5,"ic":"save","etat":"ok"},
+   {"id":"agents","t":"Agents","s":"reçoivent leçons et procédures","col":"C","r":6,"ic":"robot","etat":"ok","couleur":"#66b3e8"}
+  ],
+  "liens":[["cloture","antisec"],["antisec","hubc"],["hubc","obsidian"],["hubc","github"],["hubc","skills"],["hubc","projets"],["hubc","gotchas"],["skills","curateur"],["projets","sync"],["gotchas","sauvegarde"],["sync","agents"]],
+  "etapes":[
+   {"n":"01","t":"Chaque chantier se clôt.","e":"Leçons, pièges et état écrits au hub.","noeuds":["cloture"]},
+   {"n":"02","t":"Aucun secret ne passe.","e":"Le contrôle avant commit bloque toute clé.","noeuds":["antisec","hubc","github"]},
+   {"n":"03","t":"Obsidian pour lire.","e":"Une fenêtre sur les mêmes fichiers.","noeuds":["obsidian"]},
+   {"n":"04","t":"Une mémoire partagée.","e":"Skills, projets, pièges : Claude et Hermes.","noeuds":["skills","projets","gotchas"]},
+   {"n":"05","t":"Le hub vit seul.","e":"Curateur 07 h 45, appli 08 h 15, sauvegarde 13 h.","noeuds":["curateur","sync","sauvegarde"]},
+   {"n":"06","t":"Les agents en profitent.","e":"Leçons injectées à chaque tâche.","noeuds":["agents"]}
+  ],
+  "final":"On n'apprend qu'une fois."},
+
+ {"id":"cockpit","pastille":"4 Cockpit","titre":"Le cockpit","sous_titre":"tout voir, même depuis le téléphone",
+  "noeuds":[
+   {"id":"fiches","t":"Fiches","s":"sur le Mac, seule vérité","col":"L","r":1,"ic":"doc","etat":"ok"},
+   {"id":"releve","t":"Relevé","s":"toutes les 5 min, jeton dédié","col":"C","r":1,"ic":"send","etat":"code"},
+   {"id":"filtre","t":"Filtre","s":"sensible : des comptes, pas de texte","col":"R","r":1,"ic":"filter","etat":"code","couleur":"#e05543"},
+   {"id":"api","t":"API de l'appli","s":"VPS, événements en ajout seul","col":"C","r":2,"ic":"server","etat":"code"},
+   {"id":"arbre","t":"Arbre","s":"état de chaque dossier","col":"L","r":3,"ic":"tree","etat":"code"},
+   {"id":"questionsv","t":"Questions","s":"triées par impact","col":"C","r":3,"ic":"question","etat":"code"},
+   {"id":"horssession","t":"Agents hors session","s":"Hermes, tâches planifiées","col":"R","r":3,"ic":"bot","etat":"code"},
+   {"id":"applis","t":"Applications","s":"état et lien, jamais de démarrage","col":"L","r":4,"ic":"grid","etat":"code"},
+   {"id":"equip","t":"Équipement","s":"skills, modèles, coûts réels","col":"C","r":4,"ic":"tools","etat":"prevu"},
+   {"id":"process","t":"Process","s":"par maillon, régime A/I/D/N","col":"R","r":4,"ic":"list","etat":"prevu"},
+   {"id":"n8n","t":"N8N planifié","s":"sans webhook ouvert","col":"L","r":5,"ic":"clock","etat":"prevu"},
+   {"id":"telegram","t":"Telegram","s":"résumé 8 h, 13 h, 18 h","col":"C","r":5,"ic":"send","etat":"prevu"},
+   {"id":"remote","t":"Remote Control","s":"répondre depuis le téléphone","col":"R","r":5,"ic":"phone","etat":"ok"},
+   {"id":"david4","t":"Le dirigeant","s":"décide, d'où qu'il soit","col":"C","r":6,"ic":"user","etat":"ok","cle":true}
+  ],
+  "liens":[["fiches","releve"],["releve","filtre"],["releve","api"],["api","arbre"],["api","questionsv"],["api","horssession"],["arbre","applis"],["questionsv","equip"],["horssession","process"],["applis","n8n"],["n8n","telegram"],["telegram","david4"],["remote","david4"]],
+  "etapes":[
+   {"n":"01","t":"Le Mac relève.","e":"Toutes les 5 min, filtré selon le niveau.","noeuds":["fiches","releve","filtre"]},
+   {"n":"02","t":"L'API garde tout.","e":"En ajout seul : rien ne s'efface.","noeuds":["api"]},
+   {"n":"03","t":"Tout voir d'un coup.","e":"Arbre, questions, agents hors session.","noeuds":["arbre","questionsv","horssession"]},
+   {"n":"04","t":"L'équipement en clair.","e":"Applications, skills, modèles, process.","noeuds":["applis","equip","process"]},
+   {"n":"05","t":"Où que soit le dirigeant.","e":"Résumé Telegram, réponse par Remote Control.","noeuds":["n8n","telegram","remote","david4"]}
+  ],
+  "final":"Le cockpit montre, il ne décide pas."},
+
+ {"id":"nuit","pastille":"5 Nuit","titre":"La nuit : Hermes VPS","sous_titre":"exécute, ne décide pas",
+  "noeuds":[
+   {"id":"fichenuit","t":"Fiche de nuit","s":"peu sensible, sans prod, 4 fichiers","col":"L","r":1,"ic":"moon","etat":"code"},
+   {"id":"gonuit","t":"GO","s":"chat, Remote Control ou Telegram","col":"C","r":1,"ic":"flag","etat":"prevu","cle":true},
+   {"id":"signe","t":"Signature","s":"clé de nuit, gardée sur le Mac","col":"R","r":1,"ic":"key","etat":"code"},
+   {"id":"minuteur","t":"Minuteur","s":"00 h 30 → 06 h 00","col":"C","r":2,"ic":"clock","etat":"prevu"},
+   {"id":"bouclen","t":"Boucle de nuit","s":"script déterministe, sans droits","col":"L","r":3,"ic":"loop","etat":"prevu"},
+   {"id":"plafonds","t":"Plafonds","s":"Ollama 50 %, 2 € par nuit","col":"C","r":3,"ic":"gauge","etat":"prevu"},
+   {"id":"stop","t":"STOP","s":"arrêt d'urgence depuis le Mac","col":"R","r":3,"ic":"stop","etat":"prevu","couleur":"#e05543"},
+   {"id":"hermesvps","t":"Hermes VPS","s":"exécute avec ses sous-agents","col":"L","r":4,"ic":"bot","etat":"prevu","couleur":"#66b3e8"},
+   {"id":"bac","t":"Bac à sable","s":"copie jetable, sans réseau","col":"C","r":4,"ic":"box","etat":"prevu","couleur":"#e05543"},
+   {"id":"sonnet","t":"Vérificateur","s":"Sonnet, par l'API","col":"R","r":4,"ic":"eye","etat":"prevu","couleur":"#1e9ad7"},
+   {"id":"testsn","t":"Tests","s":"rejoués dans le bac à sable","col":"L","r":5,"ic":"flask","etat":"prevu","couleur":"#1e9ad7"},
+   {"id":"brnuit","t":"Branche de nuit","s":"commit local, jamais de push","col":"C","r":5,"ic":"commit","etat":"prevu"},
+   {"id":"bilan","t":"Bilan 06 h","s":"avancées de la nuit","col":"R","r":5,"ic":"list","etat":"prevu"},
+   {"id":"matin","t":"Revue du matin","s":"08 h : Telegram, cockpit, diff","col":"C","r":6,"ic":"sun","etat":"prevu","cle":true},
+   {"id":"fusion","t":"Fusion","s":"en session, fiche ouverte","col":"R","r":6,"ic":"merge","etat":"prevu","cle":true}
+  ],
+  "liens":[["fichenuit","gonuit"],["gonuit","signe"],["gonuit","minuteur"],["minuteur","bouclen"],["minuteur","plafonds"],["minuteur","stop"],["bouclen","hermesvps"],["plafonds","bac"],["stop","sonnet"],["hermesvps","bac"],["bac","sonnet"],["hermesvps","testsn"],["bac","brnuit"],["sonnet","bilan"],["testsn","brnuit"],["brnuit","matin"],["bilan","matin"],["matin","fusion"]],
+  "etapes":[
+   {"n":"01","t":"Cadrée le jour.","e":"Fiche de nuit, GO du dirigeant, plan signé.","noeuds":["fichenuit","gonuit","signe"]},
+   {"n":"02","t":"00 h 30, le VPS démarre.","e":"Signature revérifiée, plafonds posés.","noeuds":["minuteur","bouclen","plafonds","stop"]},
+   {"n":"03","t":"Hermes exécute.","e":"Sur une copie jetable, sans réseau.","noeuds":["hermesvps","bac"]},
+   {"n":"04","t":"Sonnet vérifie.","e":"Tests rejoués, 3 essais au plus.","noeuds":["sonnet","testsn"]},
+   {"n":"05","t":"Rien ne sort.","e":"Commit local, jamais de push.","noeuds":["brnuit","bilan"]},
+   {"n":"06","t":"Le matin, le dirigeant tranche.","e":"Revue du diff, fusion en session.","noeuds":["matin","fusion"]}
+  ],
+  "final":"La nuit exécute, le jour décide."}
+];
+
+var ICONS={
+ user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+ door:'<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M14.5 12h.01"/>',
+ branch:'<path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/>',
+ brain:'<path d="M9.5 3a2.5 2.5 0 0 0-2.5 2.5v.4A2.6 2.6 0 0 0 5 8.2c0 .9.4 1.6 1 2.1a2.8 2.8 0 0 0-.6 4.6A2.6 2.6 0 0 0 8 19h.5a2.5 2.5 0 0 0 3.5-2.3V4.3c0-.8-.9-1.3-2.5-1.3z"/><path d="M14.5 3a2.5 2.5 0 0 1 2.5 2.5v.4a2.6 2.6 0 0 1 2 2.3c0 .9-.4 1.6-1 2.1a2.8 2.8 0 0 1 .6 4.6A2.6 2.6 0 0 1 16 19h-.5a2.5 2.5 0 0 1-3.5-2.3V4.3c0-.8.9-1.3 2.5-1.3z"/>',
+ book:'<path d="M4 4h7v16H6a2 2 0 0 1-2-2z"/><path d="M12 4h8v14a2 2 0 0 1-2 2h-6"/>',
+ memory:'<ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v13c0 1.7 3.6 3 8 3s8-1.3 8-3v-13"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
+ gauge:'<path d="M5.5 19a9 9 0 1 1 13 0"/><path d="M12 13l3.5-3.5"/><circle cx="12" cy="13" r="1"/>',
+ question:'<path d="M9.5 9a2.5 2.5 0 1 1 3.9 2.1c-.9.5-1.4 1-1.4 2.2"/><path d="M12 17.2v.1"/>',
+ bulb:'<path d="M9 18.5h6M10.5 21h3"/><path d="M12 3a6 6 0 0 0-3.9 10.6c.8.7.9 1.4.9 2.4h6c0-1 .1-1.7.9-2.4A6 6 0 0 0 12 3z"/>',
+ route:'<circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="5.5" r="2.5"/><path d="M8 18.5h7.5a3 3 0 0 0 0-6h-6a3 3 0 0 1 0-6H16"/>',
+ doc:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8.5 13h7M8.5 16.5h4"/>',
+ check:'<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>',
+ flag:'<path d="M6 21V4"/><path d="M6 5h11l-2.5 3.5L17 12H6"/>',
+ lock:'<rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>',
+ shield:'<path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6z"/>',
+ code:'<path d="M8 6l-5 6 5 6M16 6l5 6-5 6"/>',
+ robot:'<rect x="4.5" y="9" width="15" height="9.5" rx="2"/><path d="M12 9V6"/><circle cx="12" cy="5" r="1"/><path d="M9 13.5h.01M15 13.5h.01"/><path d="M9.5 16h5"/>',
+ chip:'<rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 2.5V5M15 2.5V5M9 19v2.5M15 19v2.5M2.5 9H5M2.5 15H5M19 9h2.5M19 15h2.5"/>',
+ users:'<circle cx="9" cy="8.5" r="3.5"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5.6a3.5 3.5 0 0 1 0 6.3"/><path d="M17.5 14.6A6 6 0 0 1 21 20"/>',
+ flask:'<path d="M10 3h4M11 3v5L5.5 17a3 3 0 0 0 2.7 4h7.6a3 3 0 0 0 2.7-4L13 8V3"/>',
+ eye:'<path d="M2.5 12S6 6.5 12 6.5 21.5 12 21.5 12 18 17.5 12 17.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>',
+ link:'<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
+ commit:'<circle cx="12" cy="12" r="3.5"/><path d="M2.5 12H8M16 12h5.5"/>',
+ loop:'<path d="M17 2.5l4 4-4 4"/><path d="M3 11.5V9.5a3 3 0 0 1 3-3h15"/><path d="M7 21.5l-4-4 4-4"/><path d="M21 12.5v2a3 3 0 0 1-3 3H3"/>',
+ rocket:'<path d="M12 2.5c3 2 4.5 5.5 4.5 9L12 14.5 7.5 11.5c0-3.5 1.5-7 4.5-9z"/><circle cx="12" cy="9" r="1.3"/><path d="M7.5 11.5L5 15l3.5-.5M16.5 11.5L19 15l-3.5-.5"/><path d="M12 14.5V19"/>',
+ seal:'<path d="M6 3h12v18l-6-4-6 4z"/>',
+ key:'<circle cx="7.5" cy="15.5" r="4"/><path d="M10.5 12.5L20 3M14.5 6l3 3"/>',
+ vault:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M12 8v1.5M12 14.5V16M8 12h1.5M14.5 12H16"/>',
+ github:'<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.5 4.5 0 0 0-1.3-3.1 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.5 4.5 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>',
+ tools:'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+ bug:'<path d="M8 7a4 4 0 0 1 8 0"/><rect x="8" y="7" width="8" height="11" rx="4"/><path d="M12 7V4.5M9.5 4.5l-2-2M14.5 4.5l2-2"/><path d="M8 11H4.5M8 15H5M16 11h3.5M16 15h3"/>',
+ broom:'<path d="M20 4l-6.5 6.5"/><path d="M13.5 10.5l-6 6a2.47 2.47 0 1 0 3.5 3.5l6-6"/><path d="M12 14l2.5 2.5M9.5 16.5l1 1"/>',
+ sync:'<path d="M21.5 2.5v6h-6"/><path d="M2.5 21.5v-6h6"/><path d="M21.1 8.5A9 9 0 0 0 5.6 5.6L2.5 8.5"/><path d="M2.9 15.5a9 9 0 0 0 15.5 2.9l3.1-2.9"/>',
+ save:'<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/>',
+ send:'<path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/>',
+ server:'<rect x="3" y="4" width="18" height="6.5" rx="1.5"/><rect x="3" y="13.5" width="18" height="6.5" rx="1.5"/><path d="M7 7.2h.01M7 16.7h.01"/>',
+ filter:'<path d="M3.5 5h17l-6.5 7.5V19l-4 2v-8.5z"/>',
+ tree:'<rect x="9" y="2.5" width="6" height="5" rx="1"/><rect x="2.5" y="16.5" width="7" height="5" rx="1"/><rect x="14.5" y="16.5" width="7" height="5" rx="1"/><path d="M12 7.5V10M6 16.5V12h12v4.5"/>',
+ grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+ list:'<path d="M8.5 6h12M8.5 12h12M8.5 18h12"/><path d="M3.5 6h.01M3.5 12h.01M3.5 18h.01"/>',
+ bot:'<rect x="4.5" y="9" width="15" height="9.5" rx="2"/><path d="M12 9V5.5"/><circle cx="12" cy="4.5" r="1"/><path d="M8.5 13h.01M15.5 13h.01"/><path d="M9 15.5h6"/>',
+ phone:'<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>',
+ moon:'<path d="M20.5 13.5A8.5 8.5 0 1 1 10.5 3.5a7 7 0 0 0 10 10z"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',
+ stop:'<rect x="6.5" y="6.5" width="11" height="11" rx="1.5"/>',
+ box:'<path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/>',
+ sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.4 1.4M17.6 17.6L19 19M5 19l1.4-1.4M17.6 6.4L19 5"/>',
+ merge:'<circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/>'
+};
+
+var frame=document.getElementById("frame");
+var shead=document.getElementById("shead");
+var scTitle=document.getElementById("scTitle");
+var scSub=document.getElementById("scSub");
+var card=document.getElementById("card");
+var badge=document.getElementById("badge");
+var cardT=document.getElementById("cardT");
+var cardE=document.getElementById("cardE");
+var wires=document.getElementById("wires");
+var linesG=document.getElementById("lines");
+var nodesHolder=document.getElementById("nodesHolder");
+var prog=document.getElementById("prog");
+var pillsEl=document.getElementById("pills");
+var schemaBox=document.getElementById("schemaBox");
+
+var RM=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var timer=null,current=0;
+var curNodes={},curLinks=[],curSegs=[],curText=[],prevLit={},scNodes={};
+
+function fit(){
+  var s=Math.min(window.innerWidth/560,window.innerHeight/980);
+  frame.style.transform="translate(-50%,-50%) scale("+s+")";
+}
+window.addEventListener("resize",fit);
+fit();
+
+function mk(tag,attrs){var el=document.createElementNS(NS,tag);for(var k in attrs)el.setAttribute(k,attrs[k]);return el;}
+function schedule(ms,fn){clearTimeout(timer);timer=setTimeout(fn,ms);}
+
+/* trace d'une liaison : cible plus bas -> descente / palier / descente ; même rangée -> horizontale */
+function pathFor(a,b){
+  if(!a||!b)return"";
+  var y=a.y+NH/2;
+  if(b.y===a.y){
+    return b.x>a.x?"M"+(a.x+NWD)+" "+y+" H"+b.x:"M"+a.x+" "+y+" H"+(b.x+NWD);
+  }
+  var sx=a.x+NWD/2,sy=a.y+NH,tx=b.x+NWD/2,ty=b.y;
+  if(sx===tx)return"M"+sx+" "+sy+" V"+ty;
+  var my=sy+(ty-sy)/2;
+  return"M"+sx+" "+sy+" V"+my+" H"+tx+" V"+ty;
+}
+
+/* pastilles */
+var pills=[];
+DATA.forEach(function(sc,i){
+  var b=document.createElement("button");
+  b.type="button";b.className="pill";b.textContent=sc.pastille;
+  b.addEventListener("click",function(){goTo(i);});
+  pillsEl.appendChild(b);pills.push(b);
+});
+function updatePills(){pills.forEach(function(p,i){p.classList.toggle("cur",i===current);});}
+
+/* ajustement du texte : jamais coupé hors du nœud, taille réduite si besoin */
+function fitText(el,max,min){
+  el.style.fontSize="";
+  var s=max,guard=0;
+  while(guard++<24&&((el.scrollWidth>el.clientWidth+1)||(el.scrollHeight>el.clientHeight+1))&&s>min){
+    s-=0.5;el.style.fontSize=s+"px";
+  }
+}
+function fitAll(){curText.forEach(function(a){fitText(a[0],a[1],a[2]);});}
+
+function renderScene(sc){
+  nodesHolder.innerHTML="";linesG.innerHTML="";prog.innerHTML="";
+  curNodes={};curLinks=[];curSegs=[];curText=[];prevLit={};scNodes={};
+  var pos={};
+  sc.noeuds.forEach(function(n){
+    pos[n.id]={x:COL[n.col],y:TOPY+(n.r-1)*PITCH};
+    scNodes[n.id]=n;
+  });
+  sc.liens.forEach(function(pr){
+    var p=mk("path",{d:pathFor(pos[pr[0]],pos[pr[1]]),"class":"wire"});
+    linesG.appendChild(p);curLinks.push({el:p,src:pr[0],tgt:pr[1]});
+  });
+  sc.noeuds.forEach(function(n){
+    var el=document.createElement("div");
+    el.className="node"+(n.etat==="prevu"?" prevu":"");
+    el.style.left=pos[n.id].x+"px";el.style.top=pos[n.id].y+"px";
+    el.style.setProperty("--c",n.cle?"#ffd447":(n.couleur||TQ));
+    var d=document.createElement("span");d.className="nstate";d.style.background=STATEC[n.etat];
+    var ic=document.createElement("div");ic.className="ic";
+    ic.innerHTML='<svg viewBox="0 0 24 24">'+(ICONS[n.ic]||"")+"</svg>";
+    var tx=document.createElement("div");tx.className="ntx";
+    var t=document.createElement("div");t.className="nt";t.textContent=n.t;
+    var s=document.createElement("div");s.className="ns";s.textContent=n.s;
+    tx.appendChild(t);tx.appendChild(s);
+    el.appendChild(d);el.appendChild(ic);el.appendChild(tx);
+    nodesHolder.appendChild(el);curNodes[n.id]=el;
+    curText.push([t,12.5,9.5],[s,10,8]);
+  });
+  sc.etapes.forEach(function(){
+    var sg=document.createElement("div");sg.className="seg";
+    prog.appendChild(sg);curSegs.push(sg);
+  });
+  fitAll();
+}
+
+function setCard(b,t,e){
+  badge.textContent=b;cardT.textContent=t;cardE.textContent=e||"";
+  if(!RM){card.classList.remove("in");void card.offsetWidth;card.classList.add("in");}
+}
+
+function pulse(path,delay){
+  if(RM)return;
+  var L=path.getTotalLength();
+  var p0=path.getPointAtLength(0);
+  var dot=mk("circle",{r:"3","class":"pulse-dot",cx:p0.x,cy:p0.y,opacity:"0"});
+  linesG.appendChild(dot);
+  var t0=performance.now();
+  function fr(t){
+    var e=t-t0-delay;
+    if(e<0){requestAnimationFrame(fr);return;}
+    dot.setAttribute("opacity","1");
+    if(e>=PULSE_MS){dot.remove();return;}
+    var p=path.getPointAtLength(L*(e/PULSE_MS));
+    dot.setAttribute("cx",p.x);dot.setAttribute("cy",p.y);
+    requestAnimationFrame(fr);
+  }
+  requestAnimationFrame(fr);
+}
+
+/* peinture : on = étape courante, done = étapes passées, sinon terne */
+function paint(sc,seen,freshIds,isFinal,stepIdx){
+  var st=isFinal?null:sc.etapes[stepIdx];
+  setCard(isFinal?"\u21bb":st.n,isFinal?sc.final:st.t,isFinal?"":st.e);
+  var freshLinks=[];
+  curLinks.forEach(function(o,i){
+    var lit=isFinal||!!(seen[o.src]&&seen[o.tgt]);
+    o.el.classList.toggle("lit",lit);
+    if(lit&&!prevLit[i])freshLinks.push(o.el);
+    prevLit[i]=lit;
+  });
+  freshLinks.forEach(function(p,i){pulse(p,i*PULSE_GAP);});
+  for(var id in curNodes){
+    var n=scNodes[id];
+    var cls="node"+(n.etat==="prevu"?" prevu":"");
+    if(isFinal||(freshIds&&freshIds.indexOf(id)>=0))cls+=" on";
+    else if(seen[id])cls+=" done";
+    curNodes[id].className=cls;
+  }
+  curSegs.forEach(function(sg,j){
+    sg.className="seg"+(isFinal||j<stepIdx?" past":(j===stepIdx?" cur":""));
+  });
+}
+
+function startScene(i){
+  current=i;updatePills();
+  var sc=DATA[i];
+  scTitle.textContent=sc.titre;scSub.textContent=sc.sous_titre;
+  renderScene(sc);
+  var seen={},idx=0;
+  schedule(0,function step(){
+    if(idx<sc.etapes.length){
+      var stp=sc.etapes[idx];
+      stp.noeuds.forEach(function(id){seen[id]=1;});
+      paint(sc,seen,stp.noeuds,false,idx);
+      idx++;
+      schedule(STEP_MS,step);
+    }else{
+      paint(sc,seen,null,true,idx);
+      schedule(FINAL_MS,function(){fadeTo(idx===0?0:(i+1)%DATA.length);});
+    }
+  });
+}
+
+function fadeTo(next){
+  shead.classList.add("faded");card.classList.add("faded");schemaBox.classList.add("faded");
+  schedule(FADE_MS,function(){
+    shead.classList.remove("faded");card.classList.remove("faded");schemaBox.classList.remove("faded");
+    startScene(next);
+  });
+}
+
+function goTo(i){
+  if(RM){showStatic(i);return;}
+  shead.classList.add("faded");card.classList.add("faded");schemaBox.classList.add("faded");
+  schedule(FADE_MS,function(){
+    shead.classList.remove("faded");card.classList.remove("faded");schemaBox.classList.remove("faded");
+    startScene(i);
+  });
+}
+
+/* prefers-reduced-motion : chaque scène en état final, aucune animation */
+function showStatic(i){
+  current=i;updatePills();
+  var sc=DATA[i];
+  scTitle.textContent=sc.titre;scSub.textContent=sc.sous_titre;
+  renderScene(sc);
+  var seen={};
+  sc.noeuds.forEach(function(n){seen[n.id]=1;});
+  paint(sc,seen,null,true,sc.etapes.length);
+}
+
+document.addEventListener("keydown",function(e){
+  if(e.key==="ArrowLeft")goTo((current+DATA.length-1)%DATA.length);
+  else if(e.key==="ArrowRight")goTo((current+1)%DATA.length);
+});
+
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitAll);
+if(RM)showStatic(0);else startScene(0);
+})();
+</script>
+  <h1 style="position:absolute;left:-9999px;top:0;width:1px;height:1px;overflow:hidden">Le second cerveau, animé — pilotage d'un projet IA, présentation animée par Alliance Digitale</h1>
+  <a href="/" style="position:fixed;right:18px;bottom:16px;z-index:40;color:rgba(255,255,255,.55);font-size:12px;font-weight:600;text-decoration:none;font-family:Inter,sans-serif">← Alliance Digitale</a>
+</body>
+</html>
