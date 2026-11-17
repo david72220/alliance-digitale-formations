@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import CaseStudyCard from '../components/CaseStudyCard.astro';
 import FiberFrame from '../components/FiberFrame.astro';
 import heroImage from '../assets/hero-formation-ia.png';
 import { getCaseStudies, getResources } from '../lib/notion.ts';
@@ -22,6 +21,34 @@ const tpeDemos = [
   { url: 'https://demo-electricien-alpha.vercel.app/', label: 'Électricien', emoji: '⚡', desc: 'Certifications, interventions, devis en ligne' },
 ];
 
+// Parcours d'intégration IA — 4 phases, 4 livrables (affiché dans le hero)
+const parcoursSteps = [
+  {
+    num: 'C1',
+    titre: 'Diagnostic rapide',
+    texte: "Audit IA express sur le cas d'usage que vous choisissez : validez la valeur de l'IA sur une situation réelle de votre entreprise, en quelques semaines.",
+    livrable: 'Prototype fonctionnel + rapport d\'opportunités',
+  },
+  {
+    num: 'C2',
+    titre: 'Montée en compétence & analyse',
+    texte: 'Formation de vos équipes et audit complet de vos processus existants.',
+    livrable: 'Équipes formées + cartographie des processus',
+  },
+  {
+    num: 'C3',
+    titre: 'Déploiement sur mesure',
+    texte: 'Second cerveau sécurisé (architecture RAG), accès stricts selon vos habilitations.',
+    livrable: 'Second cerveau RAG opérationnel',
+  },
+  {
+    num: 'C4',
+    titre: 'Pérennisation',
+    texte: 'Formation avancée, veille technologique, améliorations continues.',
+    livrable: "Plan d'évolution + veille mensuelle",
+  },
+];
+
 const faqLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -31,7 +58,23 @@ const faqLd = {
       "name": "C'est quoi exactement l'accompagnement Alliance Digitale ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Un programme en 3 étapes pour les PME en Sarthe : audit de vos usages IA, formation collective de vos salariés, puis mise en place d'une première automatisation concrète et mesurable. Chaque étape produit un livrable : grille d'audit, bibliothèque de prompts, workflow opérationnel."
+        "text": "Un parcours balisé en 4 phases pour votre PME : diagnostic express (C1), montée en compétence et analyse (C2), déploiement sur mesure type second cerveau (C3), puis pérennisation (C4). Chaque phase produit un livrable concret et se décide indépendamment des suivantes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien de temps dure un diagnostic ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Quelques semaines. L'audit express C1 démarre sur un cas d'usage que vous choisissez et se conclut par un prototype fonctionnel et un rapport d'opportunités — sans engagement sur la suite."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Faut-il des compétences en IA en interne ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non, aucune. Les formations repartent de zéro et sont appliquées à votre métier. Chaque livrable est pensé pour être utilisé par vos équipes sans bagage technique."
       }
     },
     {
@@ -71,15 +114,17 @@ const faqLd = {
 ---
 
 <Layout
-  title="Automatisation IA pour PME Sarthe | Alliance Digitale"
-  description="Alliance Digitale accompagne les PME en Sarthe : audit IA, formation salariés, automatisation des processus. 23 sessions, 168 apprenants, 95% de satisfaction."
+  title="Parcours IA PME : de l'audit au second cerveau"
+  description="Un parcours IA balisé pour votre PME : diagnostic express, montée en compétence, second cerveau sécurisé, pérennisation. Chaque phase livre un livrable concret."
   jsonLd={faqLd}
 >
   <Header />
 
   <main class="flex-1">
-    <!-- HERO -->
-    <section class="relative overflow-hidden bg-alliance-dark-2 pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+    <!-- ============================================================ -->
+    <!-- 1 · HERO + PARCOURS FUSIONNÉS (badge, H1, stepper C1→C4, vidéo, encart, chips) -->
+    <!-- ============================================================ -->
+    <section class="relative overflow-hidden bg-alliance-dark-2 pt-24 pb-16 px-4 sm:px-6 lg:px-8">
       <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-alliance-blue/10 via-transparent to-transparent"></div>
       <div class="relative max-w-7xl mx-auto">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -102,7 +147,7 @@ const faqLd = {
               <a href="/accompagnement/" class="btn-primary text-base px-8 py-4">Découvrir l'accompagnement</a>
               <a href="/contact/" class="btn-secondary text-base px-8 py-4">Prendre rendez-vous</a>
             </div>
-            
+
             <div class="mt-12 flex flex-wrap items-center gap-6 text-sm text-white/65" data-hero-anim="stats">
               <span class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-alliance-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -137,115 +182,184 @@ const faqLd = {
             </FiberFrame>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- PRODUIT PHARE : PilotAI -->
-    <section class="py-8 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-7xl mx-auto">
-        <div class="rounded-3xl border border-alliance-blue/40 bg-gradient-to-br from-alliance-dark-2 to-alliance-dark p-6 md:p-10" data-reveal>
-          <div class="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-            <div>
-              <p class="inline-flex items-center px-3 py-1 rounded-full bg-alliance-blue text-white text-xs font-bold uppercase tracking-wider mb-4">Produit phare</p>
-              <h2 class="font-display text-2xl md:text-3xl font-bold text-white">PilotAI — le copilote de gestion de votre PME</h2>
-              <p class="mt-3 text-white/70 leading-relaxed">
-                Gestion de projet complète, réunions transformées en actions validées, pilotage par la voix.
-                Ajoutez les modules <strong class="text-white">Commercial</strong>, Social ou Marketing selon vos besoins.
-              </p>
-              <div class="mt-4 flex flex-wrap items-baseline gap-3">
-                <span class="text-white/60 text-sm">À partir de</span>
-                <span class="font-display text-2xl font-bold text-alliance-blue">20 €</span>
-                <span class="text-white/60 text-sm">/utilisateur/mois · essai gratuit de 14 jours</span>
+        <!-- PARCOURS C1→C4 fusionné dans le hero -->
+        <div id="parcours" class="mt-14 scroll-mt-28">
+          <p class="text-sky-400 text-xs font-bold uppercase tracking-widest mb-4" data-reveal>Le parcours — 4 phases balisées, 4 livrables concrets</p>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-0" data-reveal>
+            {parcoursSteps.map((step, i) => (
+              <div class={i < parcoursSteps.length - 1 ? 'relative md:mr-6' : 'relative'}>
+                {i < parcoursSteps.length - 1 && (
+                  <span class="hidden md:flex absolute top-1/2 -translate-y-1/2 -right-[18px] z-10 w-6 h-6 items-center justify-center text-alliance-blue" aria-hidden="true">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                  </span>
+                )}
+                <div class="h-full rounded-xl border border-alliance-blue/30 bg-white/5 p-5 hover:border-alliance-blue/60 transition-colors">
+                  <div class="font-display text-sm font-bold text-sky-300 tracking-widest">{step.num}</div>
+                  <p class="font-display text-lg font-bold text-white mt-1.5 mb-2 leading-snug">{step.titre}</p>
+                  <p class="text-sm text-white/65 leading-relaxed mb-3">{step.texte}</p>
+                  <span class="block text-xs text-sky-300 bg-sky-500/10 border border-sky-500/25 rounded-lg px-2.5 py-1.5">
+                    <strong class="text-white font-semibold">Livrable :</strong> {step.livrable}
+                  </span>
+                </div>
               </div>
-              <div class="mt-5 flex flex-col sm:flex-row gap-3">
-                <a href="/pilotai/" class="btn-primary px-6 py-3 rounded-lg font-semibold text-center">Découvrir PilotAI</a>
-                <a href="/nos-solutions/" class="px-6 py-3 rounded-lg font-semibold border border-white/20 text-white/80 hover:text-white hover:border-white/40 transition text-center">Voir toutes les solutions</a>
+            ))}
+          </div>
+
+          <!-- Vidéo + encart « Par où commencer ? » -->
+          <div class="grid lg:grid-cols-5 gap-4 mt-6" data-reveal>
+            <div class="lg:col-span-3">
+              <div
+                id="video-parcours"
+                data-video-id=""
+                class="relative w-full overflow-hidden rounded-2xl border border-dashed border-sky-400/50 bg-gradient-to-br from-alliance-blue/10 via-alliance-dark-2 to-alliance-orange/10"
+                style="aspect-ratio: 16 / 9;"
+              >
+                <button
+                  type="button"
+                  id="video-facade-btn"
+                  class="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 cursor-pointer group"
+                  aria-label="Charger la vidéo de présentation du parcours"
+                >
+                  <span class="w-14 h-14 rounded-full bg-alliance-blue text-alliance-dark flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                    <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5.14v13.72c0 .81.87 1.3 1.55.86l10.4-6.86a1 1 0 000-1.72L9.55 4.28A1 1 0 008 5.14z"/></svg>
+                  </span>
+                  <span class="font-semibold text-white">Le parcours en vidéo</span>
+                  <span class="text-xs text-white/60 max-w-sm text-center px-4">Vidéo à venir — emplacement réservé. Rien ne se charge avant votre clic.</span>
+                </button>
+                <div id="video-note" class="hidden absolute inset-0 flex items-center justify-center text-center px-6 text-sm text-white/80">
+                  La vidéo arrive bientôt — demandez une démonstration personnalisée avec vos propres documents.
+                </div>
               </div>
             </div>
-            <div class="rounded-2xl overflow-hidden border border-white/10">
-              <img
-                src="/images/solutions/pilotai-hero.webp"
-                alt="Tableau Kanban de PilotAI avec des cartes de tâches et une barre de progression"
-                width="1024"
-                height="768"
-                loading="lazy"
-                decoding="async"
-                class="w-full aspect-[4/3] object-cover"
-              />
+            <div class="lg:col-span-2 rounded-2xl border border-white/10 bg-white/5 p-6">
+              <p class="font-display text-lg font-bold text-white mb-3">Par où commencer ?</p>
+              <ul class="space-y-2.5 text-sm text-white/70 leading-relaxed">
+                <li><strong class="text-white">C1 sans engagement</strong> : l'audit express démarre sur le cas d'usage que vous choisissez.</li>
+                <li><strong class="text-white">Vous validez la valeur</strong> de l'IA sur un cas réel avant de décider de la suite.</li>
+                <li><strong class="text-white">Chaque phase se facture seule</strong> — aucun forfait imposé.</li>
+              </ul>
+              <a href="/accompagnement/" class="btn-primary mt-5 text-sm px-5 py-2.5">Démarrer C1 — l'audit express</a>
             </div>
+          </div>
+
+          <!-- Chips outils gratuits -->
+          <div class="mt-8 flex flex-wrap gap-3" data-reveal>
+            <a href="/securite-ia/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 text-sm text-sky-300 hover:bg-white/10 hover:text-white transition">
+              🛡️ <strong class="text-white font-semibold">Sécurité des documents</strong> — testez (gratuit)
+            </a>
+            <a href="/challenge/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 text-sm text-sky-300 hover:bg-white/10 hover:text-white transition">
+              ⏱️ Challenge IA <strong class="text-white font-semibold">5 jours</strong> (gratuit)
+            </a>
+            <a href="/ressources/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 text-sm text-sky-300 hover:bg-white/10 hover:text-white transition">
+              📚 <strong class="text-white font-semibold">Micro-cours</strong> IA & cybersécurité
+            </a>
+            <a href="/pilotai/" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 text-sm text-sky-300 hover:bg-white/10 hover:text-white transition">
+              🚀 Découvrez <strong class="text-white font-semibold">PilotAI</strong>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- BANDEAU SOLUTIONS -->
-    <section class="py-8 px-4 sm:px-6 lg:px-8">
+    <!-- ============================================================ -->
+    <!-- 2 · RÉALISATIONS COMPACTES — bande 3+3 -->
+    <!-- ============================================================ -->
+    <section data-cv class="py-16 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto">
-        <div class="flex items-end justify-between gap-4 mb-6" data-reveal>
-          <div>
-            <p class="text-sky-400 text-sm font-bold uppercase tracking-widest mb-2">Nos solutions</p>
-            <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Des outils concrets, des prix clairs</h2>
+        <div data-reveal>
+          <p class="text-sky-400 text-sm font-bold uppercase tracking-widest mb-2">Ce que nous avons déjà construit</p>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Des outils en production, pas des slides</h2>
+          <p class="text-white/70 max-w-2xl mt-3 leading-relaxed">
+            Chaque brique du parcours existe déjà chez un client réel : CRM d'organisme de formation, application macOS,
+            second cerveau animé, maquette 3D, RAG d'entreprise en développement.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-8" data-reveal>
+          <!-- CRM organisme de formation — carte textuelle (anonymisé, chiffres clés) -->
+          <div class="rounded-2xl overflow-hidden bg-alliance-dark-2 border border-white/10 hover:border-alliance-blue/50 transition-all duration-300 flex flex-col">
+            <div class="border-b border-white/10 bg-white/3 px-5 pt-5 pb-4">
+              <div class="flex items-baseline gap-3">
+                <span class="font-display text-4xl font-bold text-alliance-blue">9</span>
+                <span class="text-xs uppercase tracking-widest text-white/60">modules en production</span>
+              </div>
+              <p class="mt-2 text-xs text-white/50">Pipeline · Facturation · Documents · Quiz · Drive</p>
+            </div>
+            <div class="p-5 flex flex-col flex-1">
+              <h3 class="font-display text-lg font-semibold text-white">CRM d'un organisme de formation</h3>
+              <p class="mt-1.5 text-sm text-white/65 leading-snug">Le quotidien administratif d'un centre de formation géré de bout en bout : pipeline, facturation, documents, quiz WhatsApp, drive par tâche.</p>
+              <span class="mt-4 text-sm text-sky-400/90 font-medium">→ démonstration dans la vidéo</span>
+            </div>
           </div>
-          <a href="/nos-solutions/" class="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-alliance-blue hover:text-white transition shrink-0">
-            Tout voir
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+
+          <!-- Odeon — second cerveau animé -->
+          <a href="/second-cerveau/" class="group rounded-2xl overflow-hidden bg-alliance-dark-2 border border-white/10 hover:border-alliance-blue/50 transition-all duration-300 hover:-translate-y-1 flex flex-col">
+            <div class="relative border-b border-white/10">
+              <img src="/images/realisations/odeon-second-cerveau.webp" alt="Écran de présentation animée du second cerveau avec schéma de flux" width="1200" height="750" loading="lazy" decoding="async" class="w-full aspect-[21/9] object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-alliance-dark/80 to-transparent pointer-events-none"></div>
+              <span class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold uppercase tracking-widest">Page créée</span>
+            </div>
+            <div class="p-5 flex flex-col flex-1">
+              <h3 class="font-display text-lg font-semibold text-white">Le second cerveau, animé</h3>
+              <p class="mt-1.5 text-sm text-white/65 leading-snug">Comment un second cerveau travaille pour votre entreprise : présentation animée sur le site.</p>
+              <span class="mt-4 text-sm text-sky-400 group-hover:text-white font-medium transition-colors">→ /second-cerveau/</span>
+            </div>
+          </a>
+
+          <!-- Cockpit Mac -->
+          <div class="rounded-2xl overflow-hidden bg-alliance-dark-2 border border-white/10 hover:border-alliance-blue/50 transition-all duration-300 flex flex-col">
+            <div class="relative border-b border-white/10">
+              <img src="/images/realisations/cockpit-mac.webp" alt="Interface du cockpit macOS avec vue d'ensemble du pilotage" width="984" height="620" loading="lazy" decoding="async" class="w-full aspect-[21/9] object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-alliance-dark/80 to-transparent pointer-events-none"></div>
+            </div>
+            <div class="p-5 flex flex-col flex-1">
+              <h3 class="font-display text-lg font-semibold text-white">Cockpit Mac</h3>
+              <p class="mt-1.5 text-sm text-white/65 leading-snug">Application native menu-bar : le dirigeant pilote son activité en temps réel, en un clic.</p>
+              <span class="mt-4 text-sm text-sky-400/90 font-medium">→ démonstration dans la vidéo</span>
+            </div>
+          </div>
+
+          <!-- RAG d'entreprise — en cours -->
+          <a href="/second-cerveau/" class="group rounded-2xl overflow-hidden bg-alliance-dark-2 border border-white/10 hover:border-alliance-blue/50 transition-all duration-300 hover:-translate-y-1 flex flex-col">
+            <div class="relative border-b border-white/10">
+              <img src="/images/realisations/rag-entreprise.webp" alt="Architecture du RAG d'entreprise avec diagramme de flux et habilitations" width="1200" height="750" loading="lazy" decoding="async" class="w-full aspect-[21/9] object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-alliance-dark/80 to-transparent pointer-events-none"></div>
+              <span class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold uppercase tracking-widest">En cours</span>
+            </div>
+            <div class="p-5 flex flex-col flex-1">
+              <h3 class="font-display text-lg font-semibold text-white">RAG d'entreprise</h3>
+              <p class="mt-1.5 text-sm text-white/65 leading-snug">Développement en cours pour une entreprise : recherche intelligente, accès par habilitations, architecture & droits.</p>
+              <span class="mt-4 text-sm text-sky-400 group-hover:text-white font-medium transition-colors">→ architecture sur /second-cerveau/</span>
+            </div>
+          </a>
+
+          <!-- Maquette 3D du centre -->
+          <div class="rounded-2xl overflow-hidden bg-alliance-dark-2 border border-white/10 hover:border-alliance-blue/50 transition-all duration-300 flex flex-col">
+            <div class="relative border-b border-white/10">
+              <img src="/images/realisations/centre-3d.webp" alt="Maquette 3D interactive du centre avec salles et planning" width="1200" height="750" loading="lazy" decoding="async" class="w-full aspect-[21/9] object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-alliance-dark/80 to-transparent pointer-events-none"></div>
+            </div>
+            <div class="p-5 flex flex-col flex-1">
+              <h3 class="font-display text-lg font-semibold text-white">Maquette 3D du centre</h3>
+              <p class="mt-1.5 text-sm text-white/65 leading-snug">Le centre client rejoué en 3D : salles, planning des sessions, occupation en direct.</p>
+              <span class="mt-4 text-sm text-sky-400/90 font-medium">→ démonstration dans la vidéo</span>
+            </div>
+          </div>
+
+          <!-- La prochaine réalisation : vous -->
+          <a href="/accompagnement/" class="group rounded-2xl bg-alliance-dark-2 border border-dashed border-sky-400/40 hover:border-sky-400/80 transition-all duration-300 flex flex-col justify-center p-6">
+            <h3 class="font-display text-lg font-semibold text-white">La prochaine réalisation</h3>
+            <p class="mt-2 text-sm text-white/65 leading-snug">Vous avez des documents, des processus, des équipes : vérifions-le en C1, en une semaine.</p>
+            <span class="mt-4 text-sm text-sky-400 group-hover:text-white font-medium transition-colors">→ démarrer C1</span>
           </a>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" data-reveal>
-          {
-            [
-              { nom: 'Compte Perso', tag: 'Nouveau', desc: 'Vos comptes tenus à la photo de ticket près.', prix: '9,90 €/mois', href: '/compte-perso/', img: '/images/solutions/compte-perso.webp' },
-              { nom: 'Site Vitrine', desc: 'Un site rapide et propre sur téléphone, à vous pour toujours.', prix: '690 €', href: '/sites-web-artisans/', img: '/images/solutions/site-vitrine.webp' },
-              { nom: 'Site Capture', desc: 'Vos clients réservent seuls pendant que vous êtes sur chantier.', prix: '990 € + 39 €/mois', href: '/sites-web-artisans/', img: '/images/solutions/site-capture.webp' },
-              { nom: 'Standardiste IA', desc: 'Un assistant qui répond 24 h/24 et filtre les demandes.', prix: '1 490 € + 79 €/mois', href: '/sites-web-artisans/', img: '/images/solutions/standardiste-ia.webp' },
-              { nom: 'Second Souffle', desc: 'Vos anciens clients reviennent : on leur écrit à votre nom.', prix: 'À partir de 290 €', href: '/second-souffle/', img: '/images/solutions/second-souffle.webp' },
-            ].map((s) => (
-              <a href={s.href} class="group block rounded-2xl overflow-hidden bg-alliance-dark-2 border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:border-alliance-blue/50">
-                <div class="relative">
-                  <img src={s.img} alt={`Illustration ${s.nom}`} width="1024" height="768" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-alliance-dark/80 to-transparent pointer-events-none"></div>
-                  {
-                    s.tag && (
-                      <span class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-alliance-orange text-white text-[11px] font-bold uppercase tracking-wider">{s.tag}</span>
-                    )
-                  }
-                </div>
-                <div class="p-4">
-                  <div class="flex items-baseline justify-between gap-2">
-                    <h3 class="font-display text-lg font-semibold text-white">{s.nom}</h3>
-                    <span class="shrink-0 text-xs font-bold text-alliance-blue">{s.prix}</span>
-                  </div>
-                  <p class="mt-1 text-sm text-white/65 leading-snug">{s.desc}</p>
-                </div>
-              </a>
-            ))
-          }
-        </div>
-        <div class="mt-5 sm:hidden text-center">
-          <a href="/nos-solutions/" class="inline-flex items-center gap-1.5 text-sm font-medium text-alliance-blue">Tout voir →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRÉSENTATION DES ACTIVITÉS -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto text-center" data-reveal>
-        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white mb-6 leading-tight">
-          Formation, automatisation et conformité IA<br class="hidden sm:block">
-          pour les entreprises de Sarthe et Pays de la Loire
-        </h2>
-        <p class="text-white/70 text-lg leading-relaxed max-w-3xl mx-auto">
-          Alliance Digitale accompagne les dirigeants et salariés de PME et TPE dans leur transformation numérique.
-          Que vous cherchiez à <strong class="text-white">former vos équipes</strong>, <strong class="text-white">automatiser vos processus</strong>
-          ou <strong class="text-white">vous mettre en conformité AI Act</strong>, nous avons la solution adaptée à votre taille et votre métier.
-        </p>
-      </div>
     </section>
 
     <!-- ============================================================ -->
-    <!-- GROUPE D'ONGLETS 1 : Accompagnement PME / Accompagnement TPE -->
+    <!-- 3 · PROFILS — PME renvoie au parcours · TPE conservé -->
     <!-- ============================================================ -->
-    <section class="pb-16 px-4 sm:px-6 lg:px-8">
+    <section data-cv class="pb-16 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto">
         <!-- Titre du groupe -->
         <div class="text-center mb-6">
@@ -265,7 +379,7 @@ const faqLd = {
           </button>
         </div>
 
-        <!-- Contenu PME -->
+        <!-- Contenu PME : renvoi au parcours C1→C4 (fin du doublon) -->
         <div class="tab-content active" data-group="accompagnement" id="tab-accompagnement-pme">
           <div class="tab-panel tab-panel--pme">
             <div class="grid lg:grid-cols-2 gap-10 items-start">
@@ -278,86 +392,35 @@ const faqLd = {
                 </div>
 
                 <p class="text-white/80 text-base mb-6 leading-relaxed">
-                  Vous dirigez une PME avec salariés en Sarthe ? Nous vous accompagnons de l'audit initial au déploiement opérationnel.
-                  Notre programme en 3 étapes transforme l'IA d'un sujet abstrait en un levier concret de productivité pour votre entreprise.
+                  Vous dirigez une PME avec salariés en Sarthe ? Toute la démarche est décrite en haut de cette page :
+                  quatre phases balisées — diagnostic, montée en compétence, déploiement, pérennisation — et vous décidez
+                  de la suite après chaque livrable.
                 </p>
 
-                <ul class="space-y-3 mb-8">
-                  <li class="flex items-start gap-3 text-white/80">
-                    <span class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-sm font-bold shrink-0 mt-0.5">1</span>
-                    <div>
-                      <strong class="text-white">Audit de vos processus</strong>
-                      <p class="text-sm text-white/60">Nous analysons vos usages, identifions les tâches répétitives et les cas d'usage IA prioritaires.</p>
-                    </div>
-                  </li>
-                  <li class="flex items-start gap-3 text-white/80">
-                    <span class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-sm font-bold shrink-0 mt-0.5">2</span>
-                    <div>
-                      <strong class="text-white">Formation collective de vos salariés</strong>
-                      <p class="text-sm text-white/60">Sessions pratiques adaptées à votre métier, financement OPCO possible.</p>
-                    </div>
-                  </li>
-                  <li class="flex items-start gap-3 text-white/80">
-                    <span class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-sm font-bold shrink-0 mt-0.5">3</span>
-                    <div>
-                      <strong class="text-white">Automatisation mesurable</strong>
-                      <p class="text-sm text-white/60">Mise en place d'un premier workflow automatisé avec des résultats chiffrables en quelques semaines.</p>
-                    </div>
-                  </li>
-                </ul>
-
-                <a href="/accompagnement/" class="btn-primary inline-flex items-center gap-2">
-                  Voir l'offre d'accompagnement
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
-              </div>
-
-              <div class="space-y-4">
-                <div class="relief-panel p-6">
-                  <blockquote class="text-lg text-white/90 italic leading-relaxed mb-4">
-                    « Nous avons gagné l'équivalent d'une demi-journée par semaine sur la rédaction de nos comptes rendus. »
-                  </blockquote>
-                  <p class="text-sm text-white/60">PME industrielle, 25 salariés — étude de cas anonymisée</p>
-                </div>
-
-                <!-- Mini études de cas -->
-                {heroStudies.length > 0 && (
-                  <div class="space-y-3">
-                    <p class="text-xs font-semibold uppercase tracking-widest text-sky-400/80">Réalisations</p>
-                    {heroStudies.slice(0, 2).map((study) => (
-                      <a href="/accompagnement/" class="block p-4 rounded-lg border border-sky-500/20 bg-sky-900/20 hover:bg-sky-900/30 transition">
-                        <h4 class="font-semibold text-white text-sm mb-1">{study.title}</h4>
-                        <p class="text-xs text-white/60">{study.sector}</p>
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <!-- Secteurs PME -->
-            <div class="mt-10 pt-8 border-t border-sky-500/20">
-              <p class="text-sm font-semibold uppercase tracking-widest text-sky-400/80 mb-4">Secteurs accompagnés</p>
-              <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                {[
-                  { emoji: "🔧", label: "Artisans BTP", hours: "18h/mois" },
-                  { emoji: "🩺", label: "Santé", hours: "21h/mois" },
-                  { emoji: "🛍️", label: "Commerces", hours: "24h/mois" },
-                  { emoji: "🏠", label: "Immobilier", hours: "24h/mois" },
-                  { emoji: "⚖️", label: "Libérales", hours: "23h/mois" },
-                ].map((sec) => (
-                  <a href="/automatisations/" class="group flex flex-col items-center gap-1.5 p-3 rounded-xl border border-sky-500/15 bg-sky-900/15 hover:bg-sky-900/30 hover:border-sky-500/30 transition text-center">
-                    <span class="text-2xl">{sec.emoji}</span>
-                    <span class="text-xs font-semibold text-white/80 group-hover:text-white transition-colors">{sec.label}</span>
-                    <span class="text-xs text-sky-400 font-bold">{sec.hours}</span>
+                <div class="flex flex-wrap gap-3">
+                  <a href="#parcours" class="btn-primary inline-flex items-center gap-2">
+                    Voir le parcours en haut de page
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
                   </a>
-                ))}
+                  <a href="/accompagnement/" class="btn-secondary inline-flex items-center gap-2">
+                    Détail de l'offre d'accompagnement
+                  </a>
+                </div>
               </div>
-              <div class="text-center mt-4">
-                <a href="/automatisations/" class="text-sm text-sky-400 hover:text-sky-300 transition-colors inline-flex items-center gap-1">
-                  Voir tous les secteurs et calculer votre gain
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
+
+              <div class="space-y-3">
+                {parcoursSteps.map((step) => (
+                  <div class="flex items-start gap-3 p-3.5 rounded-lg border border-sky-500/20 bg-sky-900/20">
+                    <span class="font-display text-xs font-bold text-sky-300 tracking-widest mt-1 shrink-0">{step.num}</span>
+                    <div>
+                      <h4 class="font-semibold text-white text-sm">{step.titre}</h4>
+                      <p class="text-xs text-white/60 mt-0.5">Livrable : {step.livrable}</p>
+                    </div>
+                  </div>
+                ))}
+                <p class="text-xs text-white/50">
+                  Déjà convaincu ? <a href="/accompagnement/" class="text-sky-400 hover:text-white transition-colors">Voir l'offre d'accompagnement</a>.
+                </p>
               </div>
             </div>
           </div>
@@ -446,9 +509,96 @@ const faqLd = {
     </section>
 
     <!-- ============================================================ -->
-    <!-- GROUPE D'ONGLETS 2 : Formations / Automatisations / Challenge -->
+    <!-- 4 · NOS SOLUTIONS & PRIX — PilotAI en tête de gondole -->
     <!-- ============================================================ -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8">
+    <section data-cv class="pb-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-end justify-between gap-4 mb-6" data-reveal>
+          <div>
+            <p class="text-sky-400 text-sm font-bold uppercase tracking-widest mb-2">Nos solutions</p>
+            <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Des outils concrets, des prix clairs</h2>
+          </div>
+          <a href="/nos-solutions/" class="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-alliance-blue hover:text-white transition shrink-0">
+            Tout voir
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </a>
+        </div>
+
+        <!-- PilotAI — en tête de gondole -->
+        <a href="/pilotai/" class="group relative block rounded-3xl overflow-hidden mb-6 border border-alliance-blue/50 bg-gradient-to-br from-alliance-dark-2 to-alliance-dark shadow-xl hover:shadow-2xl hover:border-alliance-blue/80 transition-all duration-300" data-reveal>
+          <span class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-alliance-blue text-white text-xs font-bold uppercase tracking-wider">Produit phare</span>
+          <div class="grid md:grid-cols-[1.15fr_1fr] items-center gap-6">
+            <div class="p-6 md:p-10">
+              <h3 class="font-display text-2xl md:text-3xl font-bold text-white leading-snug">PilotAI — le copilote de gestion de votre PME</h3>
+              <p class="mt-3 text-white/70 leading-relaxed">
+                Gestion de projet complète, réunions transformées en actions validées, pilotage par la voix.
+                Ajoutez les modules <strong class="text-white">Commercial</strong>, Social ou Marketing selon vos besoins.
+              </p>
+              <div class="mt-4 flex flex-wrap items-baseline gap-3">
+                <span class="text-white/60 text-sm">À partir de</span>
+                <span class="font-display text-3xl font-bold text-alliance-blue">20 €</span>
+                <span class="text-white/60 text-sm">/utilisateur/mois · essai gratuit de 14 jours</span>
+              </div>
+              <p class="mt-5 inline-flex items-center gap-2 text-alliance-blue font-semibold group-hover:text-white transition">
+                Découvrir PilotAI
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </p>
+            </div>
+            <div class="relative h-full min-h-[220px]">
+              <img
+                src="/images/solutions/pilotai-hero.webp"
+                alt="Tableau Kanban de PilotAI avec des cartes de tâches et une barre de progression"
+                width="1024"
+                height="768"
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </a>
+
+        <!-- 5 solutions -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" data-reveal>
+          {
+            [
+              { nom: 'Compte Perso', tag: 'Nouveau', desc: 'Vos comptes tenus à la photo de ticket près.', prix: '9,90 €/mois', href: '/compte-perso/', img: '/images/solutions/compte-perso.webp' },
+              { nom: 'Site Vitrine', desc: 'Un site rapide et propre sur téléphone, à vous pour toujours.', prix: '690 €', href: '/sites-web-artisans/', img: '/images/solutions/site-vitrine.webp' },
+              { nom: 'Site Capture', desc: 'Vos clients réservent seuls pendant que vous êtes sur chantier.', prix: '990 € + 39 €/mois', href: '/sites-web-artisans/', img: '/images/solutions/site-capture.webp' },
+              { nom: 'Standardiste IA', desc: 'Un assistant qui répond 24 h/24 et filtre les demandes.', prix: '1 490 € + 79 €/mois', href: '/sites-web-artisans/', img: '/images/solutions/standardiste-ia.webp' },
+              { nom: 'Second Souffle', desc: 'Vos anciens clients reviennent : on leur écrit à votre nom.', prix: 'À partir de 290 €', href: '/second-souffle/', img: '/images/solutions/second-souffle.webp' },
+            ].map((s) => (
+              <a href={s.href} class="group block rounded-2xl overflow-hidden bg-alliance-dark-2 border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:border-alliance-blue/50">
+                <div class="relative">
+                  <img src={s.img} alt={`Illustration ${s.nom}`} width="1024" height="768" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-alliance-dark/80 to-transparent pointer-events-none"></div>
+                  {
+                    s.tag && (
+                      <span class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-alliance-orange text-white text-[11px] font-bold uppercase tracking-wider">{s.tag}</span>
+                    )
+                  }
+                </div>
+                <div class="p-4">
+                  <div class="flex items-baseline justify-between gap-2">
+                    <h3 class="font-display text-lg font-semibold text-white">{s.nom}</h3>
+                    <span class="shrink-0 text-xs font-bold text-alliance-blue">{s.prix}</span>
+                  </div>
+                  <p class="mt-1 text-sm text-white/65 leading-snug">{s.desc}</p>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+        <div class="mt-5 sm:hidden text-center">
+          <a href="/nos-solutions/" class="inline-flex items-center gap-1.5 text-sm font-medium text-alliance-blue">Tout voir →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 5 · SERVICES (conservé) -->
+    <!-- ============================================================ -->
+    <section data-cv class="pb-16 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto">
         <!-- Titre du groupe -->
         <div class="text-center mb-6">
@@ -561,6 +711,9 @@ const faqLd = {
                 Je m'inscris gratuitement
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
               </a>
+              <p class="mt-4 text-sm text-white/60">
+                Déjà à l'aise avec les outils gratuits ? <a href="#parcours" class="text-sky-400 hover:text-white font-semibold transition-colors">Le parcours C1→C4 prend le relais</a> avec un cas d'usage réel de votre entreprise.
+              </p>
             </div>
           </div>
         </div>
@@ -568,9 +721,9 @@ const faqLd = {
     </section>
 
     <!-- ============================================================ -->
-    <!-- GROUPE D'ONGLETS 3 : Sécurité des documents / Cours gratuits -->
+    <!-- 6 · OUTILS & CONTENUS GRATUITS (conservé) -->
     <!-- ============================================================ -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8">
+    <section data-cv class="pb-16 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto">
         <!-- Titre du groupe -->
         <div class="text-center mb-6">
@@ -631,7 +784,7 @@ const faqLd = {
                   Accéder à l'outil gratuit
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                 </a>
-                <p class="text-xs text-white/40 mt-2">Aucune inscription requise</p>
+                <p class="text-xs text-white/65 mt-2">Aucune inscription requise</p>
               </div>
 
               <div class="rounded-xl border border-teal-500/20 bg-teal-950/30 p-6 text-center">
@@ -691,8 +844,10 @@ const faqLd = {
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8">
+    <!-- ============================================================ -->
+    <!-- 7 · FAQ (+2 questions parcours) -->
+    <!-- ============================================================ -->
+    <section data-cv class="py-20 px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-12" data-reveal>
           <p class="text-alliance-blue text-sm font-bold uppercase tracking-widest mb-3">Questions fréquentes</p>
@@ -707,7 +862,23 @@ const faqLd = {
               C'est quoi exactement l'accompagnement Alliance Digitale ?
               <svg class="w-5 h-5 text-alliance-blue transition-transform group-open:rotate-180 shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
             </summary>
-            <p class="mt-4 text-white/70 leading-relaxed">Un programme en 3 étapes pour les PME en Sarthe : audit de vos usages IA, formation collective de vos salariés, puis mise en place d'une première automatisation concrète et mesurable. Chaque étape produit un livrable : grille d'audit, bibliothèque de prompts, workflow opérationnel.</p>
+            <p class="mt-4 text-white/70 leading-relaxed">Un parcours balisé en 4 phases pour votre PME : diagnostic express (C1), montée en compétence et analyse (C2), déploiement sur mesure type second cerveau (C3), puis pérennisation (C4). Chaque phase produit un livrable concret et se décide indépendamment des suivantes.</p>
+          </details>
+
+          <details class="group relief-panel p-6 cursor-pointer">
+            <summary class="flex items-center justify-between text-white font-semibold text-lg list-none">
+              Combien de temps dure un diagnostic ?
+              <svg class="w-5 h-5 text-alliance-blue transition-transform group-open:rotate-180 shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-4 text-white/70 leading-relaxed">Quelques semaines. L'audit express C1 démarre sur un cas d'usage que vous choisissez et se conclut par un prototype fonctionnel et un rapport d'opportunités — sans engagement sur la suite.</p>
+          </details>
+
+          <details class="group relief-panel p-6 cursor-pointer">
+            <summary class="flex items-center justify-between text-white font-semibold text-lg list-none">
+              Faut-il des compétences en IA en interne ?
+              <svg class="w-5 h-5 text-alliance-blue transition-transform group-open:rotate-180 shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-4 text-white/70 leading-relaxed">Non, aucune. Les formations repartent de zéro et sont appliquées à votre métier. Chaque livrable est pensé pour être utilisé par vos équipes sans bagage technique.</p>
           </details>
 
           <details class="group relief-panel p-6 cursor-pointer">
@@ -745,17 +916,19 @@ const faqLd = {
       </div>
     </section>
 
-    <!-- CTA FINAL -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
+    <!-- ============================================================ -->
+    <!-- 8 · CTA FINAL (conservé) -->
+    <!-- ============================================================ -->
+    <section data-cv class="py-20 px-4 sm:px-6 lg:px-8 bg-alliance-dark-2">
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-6">
           Prêt à faire de l'IA un levier concret pour votre PME ?
         </h2>
-        
+
         <p class="text-white/70 text-lg mb-8">
           Échangeons 30 minutes pour identifier vos premiers cas d'usage et évaluer la conformité AI Act de votre entreprise.
         </p>
-        
+
         <a href="/contact/" class="btn-primary text-base px-8 py-4">Prendre rendez-vous</a>
       </div>
     </section>
@@ -763,6 +936,13 @@ const faqLd = {
 
   <Footer />
 
+  <style>
+    /* Perf : le navigateur saute le rendu des sections hors écran jusqu'au scroll */
+    section[data-cv] {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 700px;
+    }
+  </style>
   <script is:inline>
     function switchTabGroup(group, tabId) {
       // Désactiver tous les onglets du même groupe
@@ -772,10 +952,36 @@ const faqLd = {
       document.querySelectorAll('.tab-content[data-group="' + group + '"]').forEach(function(panel) {
         panel.classList.remove('active');
       });
-      
+
       // Activer l'onglet sélectionné
       document.querySelector('.tab-btn[data-group="' + group + '"][data-tab="' + tabId + '"]').classList.add('active');
       document.getElementById('tab-' + group + '-' + tabId).classList.add('active');
     }
+
+    // Vidéo « click-to-load » : rien ne se charge avant le clic
+    (function () {
+      var videoBox = document.getElementById('video-parcours');
+      var facadeBtn = document.getElementById('video-facade-btn');
+      var note = document.getElementById('video-note');
+      if (!videoBox || !facadeBtn) return;
+      facadeBtn.addEventListener('click', function () {
+        if (videoBox.dataset.loaded) return;
+        videoBox.dataset.loaded = '1';
+        var id = (videoBox.getAttribute('data-video-id') || '').trim();
+        if (id) {
+          var iframe = document.createElement('iframe');
+          iframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+          iframe.title = 'Présentation du parcours IA — Alliance Digitale';
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+          iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+          iframe.allowFullscreen = true;
+          iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
+          videoBox.replaceChild(iframe, facadeBtn);
+        } else if (note) {
+          facadeBtn.classList.add('hidden');
+          note.classList.remove('hidden');
+        }
+      });
+    })();
   </script>
 </Layout>
