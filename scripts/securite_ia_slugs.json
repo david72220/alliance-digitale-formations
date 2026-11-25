@@ -1,0 +1,17 @@
+{
+  "direction": ["statuts-pv", "organigramme", "budgets-strategiques", "comptes-rendus-comex", "cartographie-risques"],
+  "juridique": ["contrats-clients", "cgv-cgu", "contentieux", "consultations-juridiques", "registre-rgpd", "registres-conformite", "propriete-intellectuelle"],
+  "rh": ["cv-lettres", "contrats-travail", "dossiers-salaries", "bulletins-paie", "entretiens-annuels", "registres-personnel", "medicaux-sociaux"],
+  "finance": ["factures", "devis-bons", "releves-bancaires", "grand-livre", "bilans-comptes", "previsionnels", "declarations-fiscales", "rapports-audit"],
+  "commercial": ["propositions-commerciales", "presentations-commerciales", "fiches-prospects", "fiches-clients", "contrats-signes", "reclamations", "grilles-tarifaires"],
+  "marketing": ["plans-marketing", "etudes-marche", "brand-book", "campagnes-emailing", "contenus-sociaux", "communiques-presse", "rapports-performance", "partenariats"],
+  "achats": ["appels-offres", "contrats-fournisseurs", "comparatifs-offres", "commandes-fournisseurs", "suivi-qualite-fournisseur", "homologation-fournisseurs", "conformite-fournisseurs"],
+  "operations": ["procedures-operatoires", "instructions-travail", "plans-production", "rapports-activite", "controles-qualite", "maintenance", "hse-securite", "tracabilite"],
+  "it": ["comptes-utilisateurs", "politiques-securite", "logs-incidents", "sauvegardes-pra", "inventaire-si", "schemas-reseau", "tickets-support", "secrets-credentials"],
+  "projets": ["cahiers-charges", "roadmaps", "comptes-rendus-projet", "specifications", "tests-recettes", "raci", "suivi-delais"],
+  "support": ["tickets-sav", "scripts-faq", "comptes-rendus-intervention", "garanties-retours", "historique-incidents", "satisfaction-nps"],
+  "immobilier": ["baux", "plans-diagnostics", "assurances-sinistres", "entretien-travaux", "actes-proprietes", "securite-locaux"],
+  "donnees-sensibles": ["donnees-personnelles", "pieces-identite", "donnees-bancaires", "dossiers-clients-sensibles", "registres-legaux", "secret-affaires"],
+  "archives": ["dossiers-clos", "documents-historiques", "archives-legales", "preuves-conservation", "archives-reference"],
+  "sante": ["dossier-patient", "ordonnance", "compte-rendu-medical", "protocole-soin", "consentement-eclaire"]
+}
